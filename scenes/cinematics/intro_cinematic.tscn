@@ -22,6 +22,22 @@ offset_left = 100.0
 offset_top = 150.0
 offset_right = 100.0
 offset_bottom = 150.0
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 6
+theme_override_font_sizes/normal_font_size = 28
+theme_override_font_sizes/bold_font_size = 40
+bbcode_enabled = true
+text = "[center][b]UN MUNDO QUE PERDIÓ LA FE[/b]
+
+Todos los días pasan cosas malas.
+La gente empezó a perder la esperanza
+y ya no confía como antes.
+
+El mundo necesita algo bueno.[/center]"
+fit_content = true
+scroll_active = false
+horizontal_alignment = 1
 
 [node name="Panel1Button" type="Button" parent="Panel1" unique_id=124133479]
 custom_minimum_size = Vector2(200, 50)
@@ -49,6 +65,23 @@ offset_left = 126.0
 offset_top = 100.0
 offset_right = 126.0
 offset_bottom = 100.0
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 6
+theme_override_font_sizes/normal_font_size = 28
+theme_override_font_sizes/bold_font_size = 40
+bbcode_enabled = true
+text = "[center][b]HASTA DIEGO LO SINTIÓ[/b]
+
+Diego, el dueño de Luke,
+también empezó a perder esa fe.
+Ya casi no sonreía.
+
+Pero había alguien que no había
+perdido las ganas de ayudar...[/center]"
+fit_content = true
+scroll_active = false
+horizontal_alignment = 1
 
 [node name="Panel2Button" type="Button" parent="Panel2" unique_id=518476680]
 custom_minimum_size = Vector2(200, 50)
@@ -76,6 +109,24 @@ offset_left = 176.0
 offset_top = 50.0
 offset_right = 176.0
 offset_bottom = 50.0
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 6
+theme_override_font_sizes/normal_font_size = 28
+theme_override_font_sizes/bold_font_size = 40
+bbcode_enabled = true
+text = "[center][b]LUKE SALE A AYUDAR[/b]
+
+Luke decidió emprender una aventura
+para ayudar a la humanidad
+y demostrar que todavía
+existen cosas buenas.
+
+¡Es hora de convertirse en
+EL PERRO MÁS BUENO DEL MUNDO![/center]"
+fit_content = true
+scroll_active = false
+horizontal_alignment = 1
 
 [node name="Panel3Button" type="Button" parent="Panel3" unique_id=1789127924]
 custom_minimum_size = Vector2(200, 50)
