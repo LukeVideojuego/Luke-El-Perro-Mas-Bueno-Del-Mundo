@@ -6,6 +6,7 @@ signal aura_changed(is_active: bool)
 signal checkpoint_changed(checkpoint_id: String)
 signal level_begun(level_id: String)
 signal level_completed(level_id: String)
+signal coins_changed(total_coins: int)
 
 const DEFAULT_LIVES := 3
 
@@ -15,22 +16,37 @@ var checkpoint_position := Vector2.ZERO
 var checkpoint_id := ""
 var current_level_id := ""
 var is_level_complete := false
+var coins := 0
+var has_seen_intro := false
+
+## Cuando true, el próximo nivel que arranque debe reubicar a Luke en
+## checkpoint_position en vez de en su SpawnPoint (usado por "Cargar partida").
+var resume_at_checkpoint := false
 
 func begin_level(level_id: String, spawn_position: Vector2) -> void:
 	var entering_new_level := current_level_id != level_id
 	current_level_id = level_id
 	is_level_complete = false
-	if entering_new_level or checkpoint_position == Vector2.ZERO:
+	if (entering_new_level or checkpoint_position == Vector2.ZERO) and not resume_at_checkpoint:
 		checkpoint_position = spawn_position
 		checkpoint_id = "start"
 	lives_changed.emit(lives)
 	aura_changed.emit(aura_active)
+	coins_changed.emit(coins)
 	level_begun.emit(level_id)
+
+## Debe llamarse desde el _ready() de cada nivel, después de begin_level(),
+## para saber si hay que reubicar a Luke en el checkpoint guardado.
+func consume_resume_flag() -> bool:
+	var was_resuming := resume_at_checkpoint
+	resume_at_checkpoint = false
+	return was_resuming
 
 func set_checkpoint(id: String, position: Vector2) -> void:
 	checkpoint_id = id
 	checkpoint_position = position
 	checkpoint_changed.emit(checkpoint_id)
+	SaveManager.save_game()
 
 func set_aura(active: bool) -> void:
 	if aura_active == active:
@@ -38,9 +54,15 @@ func set_aura(active: bool) -> void:
 	aura_active = active
 	aura_changed.emit(aura_active)
 
+func add_coins(amount: int = 1) -> void:
+	coins += amount
+	coins_changed.emit(coins)
+	SaveManager.save_game()
+
 func lose_life() -> bool:
 	lives = maxi(lives - 1, 0)
 	lives_changed.emit(lives)
+	SaveManager.save_game()
 	return lives > 0
 
 func reset_level_state(spawn_position: Vector2) -> void:
@@ -56,6 +78,7 @@ func complete_current_level() -> void:
 		return
 	is_level_complete = true
 	level_completed.emit(current_level_id)
+	SaveManager.save_game()
 
 func prepare_next_level() -> void:
 	checkpoint_position = Vector2.ZERO
@@ -63,3 +86,15 @@ func prepare_next_level() -> void:
 	aura_active = false
 	lives_changed.emit(lives)
 	aura_changed.emit(aura_active)
+
+## Reinicia todo el progreso para una partida nueva desde cero.
+## has_seen_intro NO se toca: es permanente una vez visto.
+func reset_for_new_game() -> void:
+	lives = DEFAULT_LIVES
+	aura_active = false
+	checkpoint_position = Vector2.ZERO
+	checkpoint_id = ""
+	current_level_id = ""
+	is_level_complete = false
+	coins = 0
+	resume_at_checkpoint = false

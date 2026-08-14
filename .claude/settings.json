@@ -1,0 +1,27 @@
+{
+  "permissions": {
+    "allow": [
+      "Read",
+      "Write",
+      "Edit",
+      "Bash(git status*)",
+      "Bash(git add *)",
+      "Bash(git commit *)",
+      "Bash(git log*)",
+      "Bash(git diff*)",
+      "Bash(cd \"/c/LUKE_GAME/Proyecto/luke---el-perro-más-bueno-del-mundo\" && GODOT=*)",
+      "Bash(\"/c/Users/dbarr/Downloads/Godot_v4.7.1-stable_win64.exe/Godot_v4.7.1-stable_win64_console.exe\" *)",
+      "Bash(timeout * \"$GODOT\" --headless *)",
+      "Bash(timeout * \"$GODOT\" --headless --path . --import*)"
+    ],
+    "ask": [
+      "Bash(rm *)",
+      "Bash(rmdir *)",
+      "Bash(del *)",
+      "Bash(git push*)",
+      "Bash(git reset*)",
+      "Bash(git checkout*)",
+      "Bash(git clean*)"
+    ]
+  }
+}

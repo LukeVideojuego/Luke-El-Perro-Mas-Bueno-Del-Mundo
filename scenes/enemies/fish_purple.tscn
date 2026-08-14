@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3]
 
 [ext_resource type="Script" path="res://scripts/enemies/enemy_base.gd" id="1_script"]
-[ext_resource type="Texture2D" path="res://assets/Enemies/Default/fish_purple_rest.png" id="2_texture"]
+[ext_resource type="Texture2D" path="res://assets/Enemies/Reference/medusa.png" id="2_texture"]
 
 [sub_resource type="RectangleShape2D" id="BodyShape"]
 size = Vector2(34, 44)
@@ -19,7 +19,7 @@ bob_frequency = 1.2
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_texture")
-scale = Vector2(1.5, 1.5)
+scale = Vector2(1.1, 1.1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 4)

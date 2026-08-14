@@ -30,10 +30,12 @@ mission_text = "¡Derrota al jefe de los ladrones!"
 [node name="Sky" type="Sprite2D" parent="."]
 position = Vector2(1000, 540)
 texture = ExtResource("7_sky")
+modulate = Color(0.14, 0.13, 0.26, 1)
 
 [node name="Trees" type="Sprite2D" parent="."]
 position = Vector2(500, 540)
 texture = ExtResource("8_trees")
+modulate = Color(0.25, 0.25, 0.35, 1)
 
 [node name="Ground" type="StaticBody2D" parent="."]
 

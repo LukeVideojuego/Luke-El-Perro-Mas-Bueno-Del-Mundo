@@ -14,6 +14,8 @@ extends Node2D
 
 func _ready() -> void:
 	GameState.begin_level(level_id, spawn_point.global_position)
+	if GameState.consume_resume_flag():
+		luke.global_position = GameState.checkpoint_position
 	luke.set_protective_aura(GameState.aura_active)
 	luke.defeated.connect(_on_luke_defeated)
 	if mission_sign != null and not mission_text.is_empty():

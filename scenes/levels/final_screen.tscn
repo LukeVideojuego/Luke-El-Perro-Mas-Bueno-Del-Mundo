@@ -27,6 +27,7 @@ mission_text = "Acércate a tu gente para completar la aventura."
 [node name="Sky" type="Sprite2D" parent="."]
 position = Vector2(1000, 540)
 texture = ExtResource("5_sky")
+modulate = Color(0.6, 0.82, 1, 1)
 
 [node name="Trees" type="Sprite2D" parent="."]
 position = Vector2(1000, 540)

@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" path="res://scenes/objects/mission_sign.tscn" id="7_sign"]
 [ext_resource type="PackedScene" path="res://scenes/objects/damage_zone.tscn" id="8_hazard"]
 [ext_resource type="PackedScene" path="res://scenes/objects/breakable_box.tscn" id="9_box"]
+[ext_resource type="PackedScene" path="res://scenes/objects/coin.tscn" id="20_coin"]
 [ext_resource type="Texture2D" path="res://assets/backgrounds/Default/background_solid_sky.png" id="10_sky"]
 [ext_resource type="Texture2D" path="res://assets/backgrounds/Default/background_color_trees.png" id="11_trees"]
 [ext_resource type="Texture2D" path="res://assets/Tiles/Default/bricks_grey.png" id="12_street"]
@@ -195,6 +196,15 @@ texture = ExtResource("15_fence")
 
 [node name="Finish" parent="." instance=ExtResource("5_finish")]
 position = Vector2(4000, 850)
+
+[node name="CoinA" parent="." instance=ExtResource("20_coin")]
+position = Vector2(700, 780)
+[node name="CoinB" parent="." instance=ExtResource("20_coin")]
+position = Vector2(1600, 780)
+[node name="CoinC" parent="." instance=ExtResource("20_coin")]
+position = Vector2(2900, 780)
+[node name="CoinD" parent="." instance=ExtResource("20_coin")]
+position = Vector2(3600, 780)
 
 [node name="CompletionLabel" type="Label" parent="."]
 visible = false

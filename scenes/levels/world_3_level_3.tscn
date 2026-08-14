@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scripts/levels/level_base.gd" id="1_level"]
 [ext_resource type="PackedScene" path="res://scenes/player/player.tscn" id="2_luke"]
-[ext_resource type="PackedScene" path="res://scenes/enemies/thief.tscn" id="3_thief"]
+[ext_resource type="PackedScene" path="res://scenes/enemies/corrupt_politician.tscn" id="3_thief"]
 [ext_resource type="PackedScene" path="res://scenes/objects/checkpoint.tscn" id="4_checkpoint"]
 [ext_resource type="PackedScene" path="res://scenes/objects/level_finish.tscn" id="5_finish"]
 [ext_resource type="PackedScene" path="res://scenes/objects/meat_power_up.tscn" id="6_meat"]
@@ -38,10 +38,12 @@ mission_text = "Recupera el documento del pueblo en la Casa Rosada."
 [node name="Sky" type="Sprite2D" parent="."]
 position = Vector2(2300, 540)
 texture = ExtResource("10_sky")
+modulate = Color(0.7, 0.85, 1, 1)
 
 [node name="Trees" type="Sprite2D" parent="."]
 position = Vector2(1500, 540)
 texture = ExtResource("11_trees")
+modulate = Color(0.85, 0.9, 0.8, 1)
 
 [node name="Ground" type="StaticBody2D" parent="."]
 

@@ -11,20 +11,56 @@ var final_cinematic: Node = null
 
 func _ready() -> void:
 	GameState.level_completed.connect(_on_level_completed)
+	GameState.has_seen_intro = SaveManager.peek_has_seen_intro()
 	var menu := get_node_or_null("MainMenu")
 	if menu != null:
-		menu.start_requested.connect(start_game)
+		menu.new_game_requested.connect(start_game)
+		menu.continue_requested.connect(_on_continue_requested)
+		menu.password_requested.connect(_on_password_requested)
 	else:
 		start_game()
 
+## Punto de entrada de "COMENZAR JUEGO" (partida nueva desde cero).
+## Se mantiene con este nombre porque la suite de tests automatizados
+## del proyecto (tests/integration_*_test.gd) lo llama directamente.
 func start_game() -> void:
 	if game_started:
 		return
 	game_started = true
+	GameState.reset_for_new_game()
+	_free_menu()
+	if GameState.has_seen_intro:
+		GameState.current_level_id = "world_1_level_1"
+		GameState.level_begun.emit("world_1_level_1")
+		load_level("world_1_level_1")
+	else:
+		show_intro_cinematic()
+
+func _on_continue_requested() -> void:
+	if game_started:
+		return
+	game_started = true
+	_free_menu()
+	if not SaveManager.load_game():
+		GameState.reset_for_new_game()
+		show_intro_cinematic()
+		return
+	load_level(GameState.current_level_id)
+
+func _on_password_requested(level_id: String) -> void:
+	if game_started:
+		return
+	game_started = true
+	GameState.reset_for_new_game()
+	_free_menu()
+	GameState.current_level_id = level_id
+	GameState.level_begun.emit(level_id)
+	load_level(level_id)
+
+func _free_menu() -> void:
 	var menu := get_node_or_null("MainMenu")
 	if menu != null:
 		menu.queue_free()
-	show_intro_cinematic()
 
 func show_intro_cinematic() -> void:
 	var intro_scene := load("res://scenes/cinematics/intro_cinematic.tscn") as PackedScene
@@ -36,7 +72,9 @@ func _on_intro_finished() -> void:
 	if intro_cinematic != null:
 		intro_cinematic.queue_free()
 		intro_cinematic = null
+	GameState.has_seen_intro = true
 	GameState.current_level_id = "world_1_level_1"
+	SaveManager.save_game()
 	GameState.level_begun.emit("world_1_level_1")
 	load_level("world_1_level_1")
 

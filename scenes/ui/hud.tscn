@@ -1,58 +1,132 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene load_steps=7 format=3]
 
 [ext_resource type="Script" path="res://scripts/ui/hud.gd" id="1_script"]
+[ext_resource type="Texture2D" path="res://assets/ui/icon_luke_face.png" id="2_face"]
+[ext_resource type="Texture2D" path="res://assets/ui/icon_corazon.png" id="3_heart"]
+[ext_resource type="Texture2D" path="res://assets/ui/icon_carne.png" id="4_meat"]
+[ext_resource type="Texture2D" path="res://assets/ui/icon_moneda.png" id="5_coin"]
+[ext_resource type="Texture2D" path="res://assets/ui/icon_reloj.png" id="6_clock"]
 
 [node name="HUD" type="CanvasLayer"]
 layer = 10
 script = ExtResource("1_script")
 
 [node name="Panel" type="ColorRect" parent="."]
-offset_left = 24.0
-offset_top = 20.0
-offset_right = 360.0
-offset_bottom = 145.0
+offset_left = 20.0
+offset_top = 16.0
+offset_right = 560.0
+offset_bottom = 96.0
 color = Color(0.04, 0.1, 0.18, 0.78)
 mouse_filter = 2
 
-[node name="LevelLabel" type="Label" parent="Panel"]
-offset_left = 16.0
-offset_top = 10.0
-offset_right = 320.0
-offset_bottom = 34.0
+[node name="LevelLabel" type="Label" parent="."]
+offset_left = 20.0
+offset_top = 100.0
+offset_right = 560.0
+offset_bottom = 126.0
 theme_override_colors/font_color = Color(1, 0.88, 0.34, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
 theme_override_font_sizes/font_size = 18
-text = "MUNDO 1 · EL BARRIO"
+text = "MUNDO 1 · NIVEL 1"
+
+[node name="FaceIcon" type="TextureRect" parent="Panel"]
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 56.0
+offset_bottom = 56.0
+texture = ExtResource("2_face")
+expand_mode = 1
+stretch_mode = 5
 
 [node name="LivesLabel" type="Label" parent="Panel"]
-offset_left = 16.0
-offset_top = 42.0
-offset_right = 180.0
-offset_bottom = 66.0
-theme_override_font_sizes/font_size = 17
-text = "VIDAS: 3"
+offset_left = 10.0
+offset_top = 56.0
+offset_right = 60.0
+offset_bottom = 78.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 16
+horizontal_alignment = 1
+text = "x03"
+
+[node name="Heart1" type="TextureRect" parent="Panel"]
+offset_left = 68.0
+offset_top = 10.0
+offset_right = 96.0
+offset_bottom = 38.0
+texture = ExtResource("3_heart")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Heart2" type="TextureRect" parent="Panel"]
+offset_left = 98.0
+offset_top = 10.0
+offset_right = 126.0
+offset_bottom = 38.0
+texture = ExtResource("3_heart")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Heart3" type="TextureRect" parent="Panel"]
+offset_left = 128.0
+offset_top = 10.0
+offset_right = 156.0
+offset_bottom = 38.0
+texture = ExtResource("3_heart")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="MeatIcon" type="TextureRect" parent="Panel"]
+offset_left = 190.0
+offset_top = 6.0
+offset_right = 228.0
+offset_bottom = 44.0
+texture = ExtResource("4_meat")
+expand_mode = 1
+stretch_mode = 5
 
 [node name="AuraLabel" type="Label" parent="Panel"]
-offset_left = 16.0
-offset_top = 68.0
-offset_right = 210.0
-offset_bottom = 92.0
-theme_override_font_sizes/font_size = 17
+offset_left = 176.0
+offset_top = 48.0
+offset_right = 246.0
+offset_bottom = 70.0
+theme_override_colors/font_color = Color(0.7, 0.85, 1, 1)
+theme_override_font_sizes/font_size = 14
+horizontal_alignment = 1
 text = "AURA: --"
 
-[node name="ProgressLabel" type="Label" parent="Panel"]
-offset_left = 16.0
-offset_top = 94.0
-offset_right = 315.0
-offset_bottom = 118.0
-theme_override_font_sizes/font_size = 17
-text = "BARRIO: INICIO"
+[node name="CoinIcon" type="TextureRect" parent="Panel"]
+offset_left = 260.0
+offset_top = 8.0
+offset_right = 296.0
+offset_bottom = 44.0
+texture = ExtResource("5_coin")
+expand_mode = 1
+stretch_mode = 5
 
-[node name="TimeLabel" type="Label" parent="."]
-offset_left = 1660.0
-offset_top = 28.0
-offset_right = 1888.0
-offset_bottom = 58.0
+[node name="CoinsLabel" type="Label" parent="Panel"]
+offset_left = 300.0
+offset_top = 18.0
+offset_right = 380.0
+offset_bottom = 44.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 20
+text = "x0"
+
+[node name="ClockIcon" type="TextureRect" parent="Panel"]
+offset_left = 410.0
+offset_top = 12.0
+offset_right = 440.0
+offset_bottom = 42.0
+texture = ExtResource("6_clock")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="TimeLabel" type="Label" parent="Panel"]
+offset_left = 446.0
+offset_top = 18.0
+offset_right = 545.0
+offset_bottom = 44.0
 theme_override_colors/font_color = Color(1, 1, 1, 0.9)
 theme_override_font_sizes/font_size = 18
-horizontal_alignment = 2
-text = "TIEMPO: --:--"
+text = "00:00"

@@ -1,6 +1,16 @@
-[gd_scene format=3 uid="uid://ty4an5ouwduv"]
+[gd_scene load_steps=12 format=3]
 
 [ext_resource type="Script" path="res://scripts/ui/intro_cinematic.gd" id="1_intro_script"]
+[ext_resource type="Texture2D" path="res://assets/backgrounds/Default/background_solid_sky.png" id="2_sky"]
+[ext_resource type="Texture2D" path="res://assets/Tiles/Default/terrain_stone_block.png" id="3_stone"]
+[ext_resource type="Texture2D" path="res://assets/Tiles/Default/window.png" id="4_window"]
+[ext_resource type="Texture2D" path="res://assets/characters/Diego/diego.png" id="5_diego"]
+[ext_resource type="Texture2D" path="res://assets/characters/Kids/lara.png" id="6_lara"]
+[ext_resource type="Texture2D" path="res://assets/characters/Kids/bauti.png" id="7_bauti"]
+[ext_resource type="Texture2D" path="res://assets/characters/Kids/zoe.png" id="8_zoe"]
+[ext_resource type="Texture2D" path="res://assets/characters/Kids/roma.png" id="9_roma"]
+[ext_resource type="Texture2D" path="res://assets/characters/Kids/mathi.png" id="10_mathi"]
+[ext_resource type="Texture2D" path="res://assets/characters/Luke/luke_idle.png" id="11_luke"]
 
 [node name="CinematicIntro" type="CanvasLayer" unique_id=839210552]
 script = ExtResource("1_intro_script")
@@ -10,31 +20,63 @@ custom_minimum_size = Vector2(1152, 648)
 layout_mode = 3
 anchors_preset = 0
 
-[node name="Panel1Background" type="ColorRect" parent="Panel1" unique_id=1764683299]
-custom_minimum_size = Vector2(1152, 648)
-layout_mode = 0
-color = Color(0.5, 0.5, 0.5, 1)
+[node name="Sky1" type="Sprite2D" parent="Panel1"]
+position = Vector2(576, 324)
+scale = Vector2(9, 5.4)
+texture = ExtResource("2_sky")
+modulate = Color(0.12, 0.11, 0.22, 1)
+
+[node name="Building1A" type="Sprite2D" parent="Panel1"]
+position = Vector2(150, 470)
+scale = Vector2(2.4, 3.6)
+texture = ExtResource("3_stone")
+modulate = Color(0.08, 0.08, 0.14, 1)
+[node name="Building1B" type="Sprite2D" parent="Panel1"]
+position = Vector2(420, 430)
+scale = Vector2(2.8, 4.6)
+texture = ExtResource("3_stone")
+modulate = Color(0.1, 0.1, 0.17, 1)
+[node name="Building1C" type="Sprite2D" parent="Panel1"]
+position = Vector2(760, 450)
+scale = Vector2(2.6, 4.2)
+texture = ExtResource("3_stone")
+modulate = Color(0.08, 0.08, 0.14, 1)
+[node name="Building1D" type="Sprite2D" parent="Panel1"]
+position = Vector2(1020, 470)
+scale = Vector2(2.4, 3.6)
+texture = ExtResource("3_stone")
+modulate = Color(0.1, 0.1, 0.17, 1)
+[node name="Window1A" type="Sprite2D" parent="Panel1"]
+position = Vector2(420, 380)
+texture = ExtResource("4_window")
+modulate = Color(1, 0.85, 0.4, 0.7)
+[node name="Window1B" type="Sprite2D" parent="Panel1"]
+position = Vector2(760, 400)
+texture = ExtResource("4_window")
+modulate = Color(1, 0.85, 0.4, 0.55)
+
+[node name="Ground1" type="ColorRect" parent="Panel1"]
+offset_left = 0.0
+offset_top = 560.0
+offset_right = 1152.0
+offset_bottom = 648.0
+color = Color(0.05, 0.05, 0.08, 1)
 
 [node name="Panel1Text" type="RichTextLabel" parent="Panel1" unique_id=697865172]
-custom_minimum_size = Vector2(952, 300)
+custom_minimum_size = Vector2(1000, 190)
 layout_mode = 0
-offset_left = 100.0
-offset_top = 150.0
-offset_right = 100.0
-offset_bottom = 150.0
+offset_left = 76.0
+offset_top = 40.0
+offset_right = 76.0
+offset_bottom = 40.0
 theme_override_colors/default_color = Color(1, 1, 1, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 6
-theme_override_font_sizes/normal_font_size = 28
-theme_override_font_sizes/bold_font_size = 40
+theme_override_font_sizes/normal_font_size = 26
 bbcode_enabled = true
-text = "[center][b]UN MUNDO QUE PERDIÓ LA FE[/b]
+text = "[center]Había una vez un mundo que había perdido la alegría.
 
-Todos los días pasan cosas malas.
-La gente empezó a perder la esperanza
-y ya no confía como antes.
-
-El mundo necesita algo bueno.[/center]"
+El mundo estaba triste, lleno de injusticias, egoísmo y maldad.[/center]"
 fit_content = true
 scroll_active = false
 horizontal_alignment = 1
@@ -43,9 +85,10 @@ horizontal_alignment = 1
 custom_minimum_size = Vector2(200, 50)
 layout_mode = 0
 offset_left = 476.0
-offset_top = 400.0
+offset_top = 580.0
 offset_right = 476.0
-offset_bottom = 400.0
+offset_bottom = 580.0
+z_index = 5
 text = "SIGUIENTE"
 
 [node name="Panel2" type="Control" parent="." unique_id=1535115337]
@@ -53,32 +96,64 @@ custom_minimum_size = Vector2(1152, 648)
 layout_mode = 3
 anchors_preset = 0
 
-[node name="Panel2Background" type="ColorRect" parent="Panel2" unique_id=2034464358]
-custom_minimum_size = Vector2(1152, 648)
-layout_mode = 0
-color = Color(0.6, 0.8, 0.9, 1)
+[node name="Sky2" type="Sprite2D" parent="Panel2"]
+position = Vector2(576, 324)
+scale = Vector2(9, 5.4)
+texture = ExtResource("2_sky")
+modulate = Color(0.14, 0.13, 0.24, 1)
+
+[node name="Ground2" type="ColorRect" parent="Panel2"]
+offset_left = 0.0
+offset_top = 560.0
+offset_right = 1152.0
+offset_bottom = 648.0
+color = Color(0.07, 0.09, 0.1, 1)
+
+[node name="Diego" type="Sprite2D" parent="Panel2"]
+position = Vector2(120, 500)
+scale = Vector2(2.8, 2.8)
+texture = ExtResource("5_diego")
+modulate = Color(0.55, 0.58, 0.68, 1)
+[node name="Lara" type="Sprite2D" parent="Panel2"]
+position = Vector2(310, 505)
+scale = Vector2(2.8, 2.8)
+texture = ExtResource("6_lara")
+modulate = Color(0.55, 0.58, 0.68, 1)
+[node name="Bauti" type="Sprite2D" parent="Panel2"]
+position = Vector2(500, 505)
+scale = Vector2(2.8, 2.8)
+texture = ExtResource("7_bauti")
+modulate = Color(0.55, 0.58, 0.68, 1)
+[node name="Zoe" type="Sprite2D" parent="Panel2"]
+position = Vector2(690, 505)
+scale = Vector2(2.8, 2.8)
+texture = ExtResource("8_zoe")
+modulate = Color(0.55, 0.58, 0.68, 1)
+[node name="Roma" type="Sprite2D" parent="Panel2"]
+position = Vector2(880, 505)
+scale = Vector2(2.8, 2.8)
+texture = ExtResource("9_roma")
+modulate = Color(0.55, 0.58, 0.68, 1)
+[node name="Mathi" type="Sprite2D" parent="Panel2"]
+position = Vector2(1050, 505)
+scale = Vector2(2.8, 2.8)
+texture = ExtResource("10_mathi")
+modulate = Color(0.55, 0.58, 0.68, 1)
 
 [node name="Panel2Text" type="RichTextLabel" parent="Panel2" unique_id=1047301220]
-custom_minimum_size = Vector2(900, 400)
+custom_minimum_size = Vector2(1000, 190)
 layout_mode = 0
-offset_left = 126.0
-offset_top = 100.0
-offset_right = 126.0
-offset_bottom = 100.0
+offset_left = 76.0
+offset_top = 30.0
+offset_right = 76.0
+offset_bottom = 30.0
 theme_override_colors/default_color = Color(1, 1, 1, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 6
-theme_override_font_sizes/normal_font_size = 28
-theme_override_font_sizes/bold_font_size = 40
+theme_override_font_sizes/normal_font_size = 26
 bbcode_enabled = true
-text = "[center][b]HASTA DIEGO LO SINTIÓ[/b]
-
-Diego, el dueño de Luke,
-también empezó a perder esa fe.
-Ya casi no sonreía.
-
-Pero había alguien que no había
-perdido las ganas de ayudar...[/center]"
+text = "[center]Diego, su mejor amigo, y los niños que tanto quería
+—Lara, Bauti, Zoe, Roma y Mathi— ya no sonreían.[/center]"
 fit_content = true
 scroll_active = false
 horizontal_alignment = 1
@@ -87,9 +162,10 @@ horizontal_alignment = 1
 custom_minimum_size = Vector2(200, 50)
 layout_mode = 0
 offset_left = 476.0
-offset_top = 400.0
+offset_top = 580.0
 offset_right = 476.0
-offset_bottom = 400.0
+offset_bottom = 580.0
+z_index = 5
 text = "SIGUIENTE"
 
 [node name="Panel3" type="Control" parent="." unique_id=51249399]
@@ -97,33 +173,41 @@ custom_minimum_size = Vector2(1152, 648)
 layout_mode = 3
 anchors_preset = 0
 
-[node name="Panel3Background" type="ColorRect" parent="Panel3" unique_id=859209043]
-custom_minimum_size = Vector2(1152, 648)
-layout_mode = 0
-color = Color(1, 0.6, 0.4, 1)
+[node name="Sky3" type="Sprite2D" parent="Panel3"]
+position = Vector2(576, 324)
+scale = Vector2(9, 5.4)
+texture = ExtResource("2_sky")
+modulate = Color(0.55, 0.42, 0.5, 1)
+
+[node name="Ground3" type="ColorRect" parent="Panel3"]
+offset_left = 0.0
+offset_top = 560.0
+offset_right = 1152.0
+offset_bottom = 648.0
+color = Color(0.2, 0.16, 0.22, 1)
+
+[node name="LukeHero" type="Sprite2D" parent="Panel3"]
+position = Vector2(576, 470)
+scale = Vector2(4.6, 4.6)
+texture = ExtResource("11_luke")
 
 [node name="Panel3Text" type="RichTextLabel" parent="Panel3" unique_id=1117633452]
-custom_minimum_size = Vector2(800, 500)
+custom_minimum_size = Vector2(1000, 170)
 layout_mode = 0
-offset_left = 176.0
-offset_top = 50.0
-offset_right = 176.0
-offset_bottom = 50.0
+offset_left = 76.0
+offset_top = 20.0
+offset_right = 76.0
+offset_bottom = 20.0
 theme_override_colors/default_color = Color(1, 1, 1, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 6
-theme_override_font_sizes/normal_font_size = 28
-theme_override_font_sizes/bold_font_size = 40
+theme_override_font_sizes/normal_font_size = 24
 bbcode_enabled = true
-text = "[center][b]LUKE SALE A AYUDAR[/b]
+text = "[center]Pero Luke, el perro más bueno del mundo, vio que aún había esperanza.
+Él decidió ayudar a todos y comenzó su aventura
+para devolver la felicidad a cada rincón del mundo.
 
-Luke decidió emprender una aventura
-para ayudar a la humanidad
-y demostrar que todavía
-existen cosas buenas.
-
-¡Es hora de convertirse en
-EL PERRO MÁS BUENO DEL MUNDO![/center]"
+[color=#ffd93d]Luke no está solo... ¡vos lo vas a acompañar![/color][/center]"
 fit_content = true
 scroll_active = false
 horizontal_alignment = 1
@@ -132,7 +216,8 @@ horizontal_alignment = 1
 custom_minimum_size = Vector2(200, 50)
 layout_mode = 0
 offset_left = 476.0
-offset_top = 500.0
+offset_top = 580.0
 offset_right = 476.0
-offset_bottom = 500.0
+offset_bottom = 580.0
+z_index = 5
 text = "JUGAR"

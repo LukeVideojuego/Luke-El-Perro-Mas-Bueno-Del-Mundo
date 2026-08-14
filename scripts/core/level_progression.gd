@@ -34,3 +34,31 @@ static func get_world(level_id: String) -> int:
 
 static func get_order(level_id: String) -> int:
 	return int(LEVELS.get(level_id, {}).get("order", 0))
+
+## Contraseñas simples y ampliables: "LUKE" + número de orden global de dos
+## dígitos (01..16). Pensadas para que un jugador pueda saltar directo a
+## cualquier nivel sin tener que jugar los anteriores.
+const PASSWORDS := {
+	"LUKE01": "world_1_level_1",
+	"LUKE02": "world_1_level_2",
+	"LUKE03": "world_1_level_3",
+	"LUKE04": "world_1_boss",
+	"LUKE05": "world_2_level_1",
+	"LUKE06": "world_2_level_2",
+	"LUKE07": "world_2_level_3",
+	"LUKE08": "world_2_boss",
+	"LUKE09": "world_3_level_1",
+	"LUKE10": "world_3_level_2",
+	"LUKE11": "world_3_level_3",
+	"LUKE12": "world_3_boss",
+	"LUKE13": "world_4_level_1",
+	"LUKE14": "world_4_level_2",
+	"LUKE15": "world_4_level_3",
+	"LUKE16": "world_4_boss",
+}
+
+## Devuelve el level_id asociado a una contraseña, o "" si no es válida.
+## No distingue mayúsculas/minúsculas ni espacios alrededor.
+static func get_level_id_from_password(code: String) -> String:
+	var normalized := code.strip_edges().to_upper()
+	return String(PASSWORDS.get(normalized, ""))

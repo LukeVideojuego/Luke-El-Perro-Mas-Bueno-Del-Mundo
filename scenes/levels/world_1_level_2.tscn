@@ -44,17 +44,19 @@ texture = ExtResource("7_sky")
 position = Vector2(2100, 540)
 scale = Vector2(17, 5)
 z_index = -10
+modulate = Color(0.14, 0.13, 0.26, 1)
 [node name="Trees" type="Sprite2D" parent="."]
 texture = ExtResource("8_trees")
 position = Vector2(2100, 700)
 scale = Vector2(17, 2.7)
 z_index = -9
+modulate = Color(0.25, 0.25, 0.35, 1)
 
 [node name="BuildingLeft" type="Sprite2D" parent="."]
 texture = ExtResource("10_stone")
 position = Vector2(650, 740)
 scale = Vector2(5, 4.8)
-modulate = Color(0.75, 0.77, 0.88, 1)
+modulate = Color(0.13, 0.13, 0.2, 1)
 z_index = -5
 [node name="WindowA1" type="Sprite2D" parent="."]
 texture = ExtResource("17_window")
@@ -72,7 +74,7 @@ z_index = -5
 texture = ExtResource("10_stone")
 position = Vector2(3300, 730)
 scale = Vector2(5.6, 5.1)
-modulate = Color(0.75, 0.77, 0.88, 1)
+modulate = Color(0.13, 0.13, 0.2, 1)
 z_index = -5
 [node name="WindowB1" type="Sprite2D" parent="."]
 texture = ExtResource("17_window")

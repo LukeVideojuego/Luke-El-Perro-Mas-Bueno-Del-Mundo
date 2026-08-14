@@ -16,6 +16,7 @@
 [ext_resource type="Texture2D" path="res://assets/Tiles/Default/door_closed.png" id="14_door"]
 [ext_resource type="Texture2D" path="res://assets/Tiles/Default/fence.png" id="15_fence"]
 [ext_resource type="Texture2D" path="res://assets/Tiles/Default/sign_exit.png" id="16_exit_sign"]
+[ext_resource type="PackedScene" path="res://scenes/objects/coin.tscn" id="17_coin"]
 
 [sub_resource type="RectangleShape2D" id="GroundShape"]
 size = Vector2(6400, 120)
@@ -40,16 +41,18 @@ texture = ExtResource("9_sky")
 position = Vector2(3200, 540)
 scale = Vector2(25, 5)
 z_index = -10
+modulate = Color(0.14, 0.13, 0.26, 1)
 
 [node name="Hills" type="Sprite2D" parent="."]
 texture = ExtResource("10_hills")
 position = Vector2(3200, 690)
 scale = Vector2(25, 2.5)
 z_index = -9
+modulate = Color(0.3, 0.3, 0.4, 1)
 
 [node name="CityBackdrop" type="Node2D" parent="."]
 z_index = -5
-modulate = Color(0.78, 0.84, 0.93, 1)
+modulate = Color(0.16, 0.16, 0.24, 1)
 
 [node name="BuildingA" type="Sprite2D" parent="CityBackdrop"]
 texture = ExtResource("12_stone")
@@ -183,6 +186,19 @@ position = Vector2(1570, 550)
 contents = ExtResource("3_meat")
 [node name="Hazard" parent="." instance=ExtResource("8_hazard")]
 position = Vector2(2750, 925)
+
+[node name="CoinA" parent="." instance=ExtResource("17_coin")]
+position = Vector2(920, 700)
+[node name="CoinB" parent="." instance=ExtResource("17_coin")]
+position = Vector2(1570, 570)
+[node name="CoinC" parent="." instance=ExtResource("17_coin")]
+position = Vector2(2260, 680)
+[node name="CoinD" parent="." instance=ExtResource("17_coin")]
+position = Vector2(3180, 580)
+[node name="CoinE" parent="." instance=ExtResource("17_coin")]
+position = Vector2(4050, 660)
+[node name="CoinF" parent="." instance=ExtResource("17_coin")]
+position = Vector2(4900, 800)
 
 [node name="CompletionLabel" type="Label" parent="."]
 visible = false

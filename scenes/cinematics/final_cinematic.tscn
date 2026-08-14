@@ -1,9 +1,15 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=11 format=3]
 
 [ext_resource type="Script" path="res://scripts/ui/final_cinematic.gd" id="1_final_script"]
 [ext_resource type="Texture2D" path="res://assets/backgrounds/Default/background_solid_sky.png" id="2_sky"]
-[ext_resource type="Texture2D" path="res://assets/characters/Luke/luke_idle.png" id="3_luke"]
-[ext_resource type="Texture2D" path="res://assets/Tiles/Default/terrain_grass_block_top.png" id="4_grass"]
+[ext_resource type="Texture2D" path="res://assets/Tiles/Default/terrain_grass_block_top.png" id="3_grass"]
+[ext_resource type="Texture2D" path="res://assets/characters/Diego/diego.png" id="4_diego"]
+[ext_resource type="Texture2D" path="res://assets/characters/Kids/lara.png" id="5_lara"]
+[ext_resource type="Texture2D" path="res://assets/characters/Kids/bauti.png" id="6_bauti"]
+[ext_resource type="Texture2D" path="res://assets/characters/Kids/zoe.png" id="7_zoe"]
+[ext_resource type="Texture2D" path="res://assets/characters/Kids/roma.png" id="8_roma"]
+[ext_resource type="Texture2D" path="res://assets/characters/Kids/mathi.png" id="9_mathi"]
+[ext_resource type="Texture2D" path="res://assets/characters/Luke/luke_idle.png" id="10_luke"]
 
 [node name="CinematicFinal" type="CanvasLayer"]
 script = ExtResource("1_final_script")
@@ -14,20 +20,38 @@ layout_mode = 3
 anchors_preset = 0
 
 [node name="Background1" type="Sprite2D" parent="Panel1"]
-position = Vector2(0, 0)
+position = Vector2(576, 324)
+scale = Vector2(9, 5.4)
 texture = ExtResource("2_sky")
-modulate = Color(0.1, 0.1, 0.1, 1)
+modulate = Color(0.55, 0.78, 1, 1)
 
-[node name="Text1" type="Label" parent="Panel1"]
-position = Vector2(20, 20)
-theme_override_colors/font_color = Color(1, 1, 1, 1)
+[node name="Ground1" type="ColorRect" parent="Panel1"]
+offset_left = 0.0
+offset_top = 560.0
+offset_right = 1152.0
+offset_bottom = 648.0
+color = Color(0.25, 0.55, 0.2, 1)
+
+[node name="Text1" type="RichTextLabel" parent="Panel1"]
+custom_minimum_size = Vector2(1000, 220)
+layout_mode = 0
+offset_left = 76.0
+offset_top = 40.0
+offset_right = 76.0
+offset_bottom = 40.0
+theme_override_colors/default_color = Color(1, 1, 1, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 2
-theme_override_font_sizes/font_size = 24
-text = "EL MUNDO CAMBIÓ"
-text += "\nEl mundo que antes estaba triste"
-text += "\nahora aparece lleno de luz."
-text += "\nCiudades, barrios, plazas y personas felices."
+theme_override_constants/outline_size = 6
+theme_override_font_sizes/normal_font_size = 25
+bbcode_enabled = true
+text = "[center]Gracias al coraje, la bondad y la determinación de Luke,
+el mundo volvió a florecer.
+
+Las ciudades volvieron a brillar, las personas se ayudaron
+y el amor volvió a cada corazón.[/center]"
+fit_content = true
+scroll_active = false
+horizontal_alignment = 1
 
 [node name="Panel2" type="Control" parent="."]
 custom_minimum_size = Vector2(1152, 648)
@@ -35,21 +59,60 @@ layout_mode = 3
 anchors_preset = 0
 
 [node name="Background2" type="Sprite2D" parent="Panel2"]
-position = Vector2(0, 0)
-texture = ExtResource("3_luke")
-modulate = Color(1, 1, 1, 1)
+position = Vector2(576, 324)
+scale = Vector2(9, 5.4)
+texture = ExtResource("2_sky")
+modulate = Color(0.6, 0.82, 1, 1)
 
-[node name="Text2" type="Label" parent="Panel2"]
-position = Vector2(20, 20)
-theme_override_colors/font_color = Color(1, 1, 1, 1)
+[node name="Ground2" type="ColorRect" parent="Panel2"]
+offset_left = 0.0
+offset_top = 560.0
+offset_right = 1152.0
+offset_bottom = 648.0
+color = Color(0.3, 0.6, 0.24, 1)
+
+[node name="Diego" type="Sprite2D" parent="Panel2"]
+position = Vector2(120, 500)
+scale = Vector2(2.8, 2.8)
+texture = ExtResource("4_diego")
+[node name="Lara" type="Sprite2D" parent="Panel2"]
+position = Vector2(310, 505)
+scale = Vector2(2.8, 2.8)
+texture = ExtResource("5_lara")
+[node name="Bauti" type="Sprite2D" parent="Panel2"]
+position = Vector2(500, 505)
+scale = Vector2(2.8, 2.8)
+texture = ExtResource("6_bauti")
+[node name="Zoe" type="Sprite2D" parent="Panel2"]
+position = Vector2(690, 505)
+scale = Vector2(2.8, 2.8)
+texture = ExtResource("7_zoe")
+[node name="Roma" type="Sprite2D" parent="Panel2"]
+position = Vector2(880, 505)
+scale = Vector2(2.8, 2.8)
+texture = ExtResource("8_roma")
+[node name="Mathi" type="Sprite2D" parent="Panel2"]
+position = Vector2(1050, 505)
+scale = Vector2(2.8, 2.8)
+texture = ExtResource("9_mathi")
+
+[node name="Text2" type="RichTextLabel" parent="Panel2"]
+custom_minimum_size = Vector2(1000, 190)
+layout_mode = 0
+offset_left = 76.0
+offset_top = 30.0
+offset_right = 76.0
+offset_bottom = 30.0
+theme_override_colors/default_color = Color(1, 1, 1, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 2
-theme_override_font_sizes/font_size = 24
-text = "DIEGO Y LOS NIÑOS"
-text += "\nDiego volvió a sonreír."
-text += "\nLara, Bauti, Zoe, Roma y Mathi."
-text += "\ntodos estaban felices, abrazando"
-text += "\na Luke."
+theme_override_constants/outline_size = 6
+theme_override_font_sizes/normal_font_size = 26
+bbcode_enabled = true
+text = "[center]Diego y sus amigos —Lara, Bauti, Zoe, Roma y Mathi—
+recuperaron la alegría, la esperanza y la fe.[/center]"
+fit_content = true
+scroll_active = false
+horizontal_alignment = 1
 
 [node name="Panel3" type="Control" parent="."]
 custom_minimum_size = Vector2(1152, 648)
@@ -57,26 +120,54 @@ layout_mode = 3
 anchors_preset = 0
 
 [node name="Background3" type="Sprite2D" parent="Panel3"]
-position = Vector2(0, 0)
-texture = ExtResource("4_grass")
-modulate = Color(0.2, 0.7, 0.3, 1)
+position = Vector2(576, 324)
+scale = Vector2(9, 5.4)
+texture = ExtResource("2_sky")
+modulate = Color(0.65, 0.85, 1, 1)
 
-[node name="Text3" type="Label" parent="Panel3"]
-position = Vector2(20, 20)
-theme_override_colors/font_color = Color(1, 1, 1, 1)
+[node name="Ground3" type="ColorRect" parent="Panel3"]
+offset_left = 0.0
+offset_top = 560.0
+offset_right = 1152.0
+offset_bottom = 648.0
+color = Color(0.3, 0.6, 0.24, 1)
+
+[node name="LukeHero" type="Sprite2D" parent="Panel3"]
+position = Vector2(576, 490)
+scale = Vector2(4.6, 4.6)
+texture = ExtResource("10_luke")
+
+[node name="Banner" type="Label" parent="Panel3"]
+offset_left = 76.0
+offset_top = 30.0
+offset_right = 1076.0
+offset_bottom = 90.0
+theme_override_colors/font_color = Color(1, 0.85, 0.2, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 2
-theme_override_font_sizes/font_size = 24
-text = "EL HÉROE MUNDIAL"
-text += "\nLuke había conseguido algo que parecía imposible."
-text += "\nEl mundo entero había recuperado"
-text += "\nla esperanza."
-text += "\nHabía más amor."
-text += "\nMás solidaridad."
-text += "\nMás alegría."
-text += "\nLuke había conseguido que el mundo"
-text += "\nvolviera a ser un lugar mejor."
-text += "\n\nLUKE"
-text += "\nEL PERRO MÁS BUENO"
-text += "\nDEL MUNDO"
-text += "\nGRACIAS POR JUGAR"
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 48
+text = "¡GRACIAS LUKE!"
+horizontal_alignment = 1
+
+[node name="Text3" type="RichTextLabel" parent="Panel3"]
+custom_minimum_size = Vector2(1000, 190)
+layout_mode = 0
+offset_left = 76.0
+offset_top = 100.0
+offset_right = 76.0
+offset_bottom = 100.0
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 6
+theme_override_font_sizes/normal_font_size = 24
+bbcode_enabled = true
+text = "[center]Luke se convirtió en un héroe admirado por todos,
+pero él sabe que lo más importante no es la fama...
+[color=#ffd93d]Es ver a todos felices.[/color]
+
+El mundo es un lugar mejor porque Luke está aquí.
+
+🐾 FIN 🐾[/center]"
+fit_content = true
+scroll_active = false
+horizontal_alignment = 1
