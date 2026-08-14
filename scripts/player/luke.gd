@@ -121,7 +121,9 @@ func respawn(respawn_position: Vector2) -> void:
 
 func _update_animation() -> void:
 	animated_sprite.flip_h = facing_direction < 0
-	if not is_on_floor():
+	if is_attacking:
+		animated_sprite.play("attack")
+	elif not is_on_floor():
 		animated_sprite.play("jump")
 	elif absf(velocity.x) > 25.0:
 		animated_sprite.play("walk")
