@@ -1,0 +1,215 @@
+[gd_scene load_steps=21 format=3]
+
+[ext_resource type="Script" path="res://scripts/levels/level_base.gd" id="1_level"]
+[ext_resource type="PackedScene" path="res://scenes/player/player.tscn" id="2_luke"]
+[ext_resource type="PackedScene" path="res://scenes/enemies/thief.tscn" id="3_thief"]
+[ext_resource type="PackedScene" path="res://scenes/objects/checkpoint.tscn" id="4_checkpoint"]
+[ext_resource type="PackedScene" path="res://scenes/objects/level_finish.tscn" id="5_finish"]
+[ext_resource type="PackedScene" path="res://scenes/objects/meat_power_up.tscn" id="6_meat"]
+[ext_resource type="PackedScene" path="res://scenes/objects/mission_sign.tscn" id="7_sign"]
+[ext_resource type="PackedScene" path="res://scenes/objects/damage_zone.tscn" id="8_hazard"]
+[ext_resource type="PackedScene" path="res://scenes/objects/breakable_box.tscn" id="9_box"]
+[ext_resource type="Texture2D" path="res://assets/backgrounds/Default/background_solid_sky.png" id="10_sky"]
+[ext_resource type="Texture2D" path="res://assets/backgrounds/Default/background_color_trees.png" id="11_trees"]
+[ext_resource type="Texture2D" path="res://assets/Tiles/Default/terrain_grass_block_top.png" id="12_grass"]
+[ext_resource type="Texture2D" path="res://assets/Tiles/Default/terrain_stone_block.png" id="13_stone"]
+[ext_resource type="Texture2D" path="res://assets/Tiles/Default/spikes.png" id="14_spikes"]
+[ext_resource type="Texture2D" path="res://assets/Tiles/Default/fence.png" id="15_fence"]
+
+[sub_resource type="RectangleShape2D" id="GroundShape"]
+size = Vector2(4400, 110)
+
+[sub_resource type="RectangleShape2D" id="PlatformShape"]
+size = Vector2(420, 52)
+
+[sub_resource type="RectangleShape2D" id="PlatformSmall"]
+size = Vector2(260, 40)
+
+[sub_resource type="RectangleShape2D" id="BoundaryShape"]
+size = Vector2(70, 900)
+
+[sub_resource type="RectangleShape2D" id="HazardShape"]
+size = Vector2(150, 30)
+
+[node name="world_1_level_3" type="Node2D"]
+script = ExtResource("1_level")
+level_id = "world_1_level_3"
+mission_text = "Cruza las azoteas del barrio y detén a los ladrones."
+
+[node name="Sky" type="Sprite2D" parent="."]
+position = Vector2(2200, 540)
+texture = ExtResource("10_sky")
+
+[node name="Trees" type="Sprite2D" parent="."]
+position = Vector2(1500, 540)
+texture = ExtResource("11_trees")
+
+[node name="Ground" type="StaticBody2D" parent="."]
+
+[node name="BlockTop" type="Sprite2D" parent="Ground"]
+position = Vector2(2200, 960)
+texture = ExtResource("12_grass")
+
+[node name="BlockBody" type="Sprite2D" parent="Ground"]
+position = Vector2(2200, 1010)
+texture = ExtResource("13_stone")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ground"]
+position = Vector2(2200, 960)
+shape = SubResource("GroundShape")
+
+[node name="PlatformOne" type="StaticBody2D" parent="."]
+position = Vector2(620, 820)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlatformOne"]
+shape = SubResource("PlatformShape")
+
+[node name="PlatformTwo" type="StaticBody2D" parent="."]
+position = Vector2(1350, 710)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlatformTwo"]
+shape = SubResource("PlatformShape")
+
+[node name="PlatformThree" type="StaticBody2D" parent="."]
+position = Vector2(2300, 800)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlatformThree"]
+shape = SubResource("PlatformShape")
+
+[node name="PlatformFour" type="StaticBody2D" parent="."]
+position = Vector2(3150, 710)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlatformFour"]
+shape = SubResource("PlatformShape")
+
+[node name="PlatformFive" type="StaticBody2D" parent="."]
+position = Vector2(3900, 820)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlatformFive"]
+shape = SubResource("PlatformSmall")
+
+[node name="LeftBoundary" type="StaticBody2D" parent="."]
+position = Vector2(-35, 500)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LeftBoundary"]
+shape = SubResource("BoundaryShape")
+
+[node name="RightBoundary" type="StaticBody2D" parent="."]
+position = Vector2(4435, 500)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RightBoundary"]
+shape = SubResource("BoundaryShape")
+
+[node name="SpawnPoint" type="Marker2D" parent="."]
+position = Vector2(180, 850)
+
+[node name="MissionSign" parent="." instance=ExtResource("7_sign")]
+position = Vector2(520, 880)
+interaction_text = "Cruza las azoteas del barrio y detén a los ladrones."
+
+[node name="Luke" parent="." instance=ExtResource("2_luke")]
+position = Vector2(180, 850)
+
+[node name="Checkpoint" parent="." instance=ExtResource("4_checkpoint")]
+position = Vector2(1800, 860)
+
+[node name="CheckpointTwo" parent="." instance=ExtResource("4_checkpoint")]
+position = Vector2(3300, 860)
+
+[node name="SpikeHazardOne" parent="." instance=ExtResource("8_hazard")]
+position = Vector2(1050, 920)
+
+[node name="SpikeHazardTwo" parent="." instance=ExtResource("8_hazard")]
+position = Vector2(2600, 920)
+
+[node name="SpikeHazardThree" parent="." instance=ExtResource("8_hazard")]
+position = Vector2(3850, 920)
+
+[node name="SpikeVisualsOne" type="Node2D" parent="."]
+
+[node name="SpikeA" type="Sprite2D" parent="SpikeVisualsOne"]
+position = Vector2(1000, 928)
+scale = Vector2(1.5, 1)
+texture = ExtResource("14_spikes")
+
+[node name="SpikeB" type="Sprite2D" parent="SpikeVisualsOne"]
+position = Vector2(1050, 928)
+scale = Vector2(1.5, 1)
+texture = ExtResource("14_spikes")
+
+[node name="SpikeC" type="Sprite2D" parent="SpikeVisualsOne"]
+position = Vector2(1100, 928)
+scale = Vector2(1.5, 1)
+texture = ExtResource("14_spikes")
+
+[node name="SpikeVisualsTwo" type="Node2D" parent="."]
+
+[node name="SpikeA" type="Sprite2D" parent="SpikeVisualsTwo"]
+position = Vector2(2550, 928)
+scale = Vector2(1.5, 1)
+texture = ExtResource("14_spikes")
+
+[node name="SpikeB" type="Sprite2D" parent="SpikeVisualsTwo"]
+position = Vector2(2600, 928)
+scale = Vector2(1.5, 1)
+texture = ExtResource("14_spikes")
+
+[node name="SpikeC" type="Sprite2D" parent="SpikeVisualsTwo"]
+position = Vector2(2650, 928)
+scale = Vector2(1.5, 1)
+texture = ExtResource("14_spikes")
+
+[node name="SpikeVisualsThree" type="Node2D" parent="."]
+
+[node name="SpikeA" type="Sprite2D" parent="SpikeVisualsThree"]
+position = Vector2(3800, 928)
+scale = Vector2(1.5, 1)
+texture = ExtResource("14_spikes")
+
+[node name="SpikeB" type="Sprite2D" parent="SpikeVisualsThree"]
+position = Vector2(3850, 928)
+scale = Vector2(1.5, 1)
+texture = ExtResource("14_spikes")
+
+[node name="SpikeC" type="Sprite2D" parent="SpikeVisualsThree"]
+position = Vector2(3900, 928)
+scale = Vector2(1.5, 1)
+texture = ExtResource("14_spikes")
+
+[node name="ThiefOne" parent="." instance=ExtResource("3_thief")]
+position = Vector2(950, 850)
+patrol_distance = 130.0
+
+[node name="ThiefTwo" parent="." instance=ExtResource("3_thief")]
+position = Vector2(2800, 850)
+patrol_distance = 150.0
+
+[node name="BoxA" parent="." instance=ExtResource("9_box")]
+position = Vector2(1500, 929)
+
+[node name="Meat" parent="." instance=ExtResource("6_meat")]
+position = Vector2(700, 655)
+
+[node name="MeatFour" parent="." instance=ExtResource("6_meat")]
+position = Vector2(3000, 655)
+
+[node name="FenceA" type="Sprite2D" parent="."]
+position = Vector2(300, 915)
+texture = ExtResource("15_fence")
+
+[node name="FenceB" type="Sprite2D" parent="."]
+position = Vector2(3730, 915)
+texture = ExtResource("15_fence")
+
+[node name="Finish" parent="." instance=ExtResource("5_finish")]
+position = Vector2(4100, 850)
+
+[node name="CompletionLabel" type="Label" parent="."]
+visible = false
+position = Vector2(1450, 380)
+text = "¡AZOTEAS A SALVO!"
+horizontal_alignment = 1
+add_theme_font_size_override("font_size", 56)
+add_theme_color_override("font_color", Color(0.1, 0.65, 0.15, 1))
+add_theme_color_override("font_outline_color", Color(1, 1, 1, 1))
+add_theme_constant_override("outline_size", 8)

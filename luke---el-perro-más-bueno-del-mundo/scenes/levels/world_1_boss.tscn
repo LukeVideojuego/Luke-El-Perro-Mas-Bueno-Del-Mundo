@@ -1,0 +1,118 @@
+[gd_scene load_steps=16 format=3]
+
+[ext_resource type="Script" path="res://scripts/levels/level_base.gd" id="1_level"]
+[ext_resource type="PackedScene" path="res://scenes/player/player.tscn" id="2_luke"]
+[ext_resource type="PackedScene" path="res://scenes/enemies/thief_boss.tscn" id="3_boss"]
+[ext_resource type="PackedScene" path="res://scenes/objects/meat_power_up.tscn" id="4_meat"]
+[ext_resource type="PackedScene" path="res://scenes/objects/mission_sign.tscn" id="5_sign"]
+[ext_resource type="PackedScene" path="res://scenes/objects/breakable_box.tscn" id="6_box"]
+[ext_resource type="Texture2D" path="res://assets/backgrounds/Default/background_solid_sky.png" id="7_sky"]
+[ext_resource type="Texture2D" path="res://assets/backgrounds/Default/background_color_trees.png" id="8_trees"]
+[ext_resource type="Texture2D" path="res://assets/Tiles/Default/terrain_grass_block_top.png" id="9_grass"]
+[ext_resource type="Texture2D" path="res://assets/Tiles/Default/terrain_stone_block.png" id="10_stone"]
+[ext_resource type="Texture2D" path="res://assets/Tiles/Default/fence.png" id="11_fence"]
+[ext_resource type="Texture2D" path="res://assets/Tiles/Default/door_closed.png" id="12_door"]
+
+[sub_resource type="RectangleShape2D" id="GroundShape"]
+size = Vector2(2000, 110)
+
+[sub_resource type="RectangleShape2D" id="PlatformShape"]
+size = Vector2(420, 52)
+
+[sub_resource type="RectangleShape2D" id="BoundaryShape"]
+size = Vector2(70, 900)
+
+[node name="world_1_boss" type="Node2D"]
+script = ExtResource("1_level")
+level_id = "world_1_boss"
+mission_text = "¡Derrota al jefe de los ladrones!"
+
+[node name="Sky" type="Sprite2D" parent="."]
+position = Vector2(1000, 540)
+texture = ExtResource("7_sky")
+
+[node name="Trees" type="Sprite2D" parent="."]
+position = Vector2(500, 540)
+texture = ExtResource("8_trees")
+
+[node name="Ground" type="StaticBody2D" parent="."]
+
+[node name="BlockTop" type="Sprite2D" parent="Ground"]
+position = Vector2(1000, 960)
+texture = ExtResource("9_grass")
+
+[node name="BlockBody" type="Sprite2D" parent="Ground"]
+position = Vector2(1000, 1010)
+texture = ExtResource("10_stone")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ground"]
+position = Vector2(1000, 960)
+shape = SubResource("GroundShape")
+
+[node name="PlatformOne" type="StaticBody2D" parent="."]
+position = Vector2(600, 790)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlatformOne"]
+shape = SubResource("PlatformShape")
+
+[node name="PlatformTwo" type="StaticBody2D" parent="."]
+position = Vector2(1400, 790)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlatformTwo"]
+shape = SubResource("PlatformShape")
+
+[node name="LeftBoundary" type="StaticBody2D" parent="."]
+position = Vector2(-35, 500)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LeftBoundary"]
+shape = SubResource("BoundaryShape")
+
+[node name="RightBoundary" type="StaticBody2D" parent="."]
+position = Vector2(2035, 500)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RightBoundary"]
+shape = SubResource("BoundaryShape")
+
+[node name="SpawnPoint" type="Marker2D" parent="."]
+position = Vector2(180, 850)
+
+[node name="MissionSign" parent="." instance=ExtResource("5_sign")]
+position = Vector2(280, 880)
+interaction_text = "¡Derrota al jefe de los ladrones!"
+
+[node name="Luke" parent="." instance=ExtResource("2_luke")]
+position = Vector2(180, 850)
+
+[node name="ThiefBoss" parent="." instance=ExtResource("3_boss")]
+position = Vector2(1000, 780)
+
+[node name="BoxA" parent="." instance=ExtResource("6_box")]
+position = Vector2(300, 929)
+
+[node name="BoxB" parent="." instance=ExtResource("6_box")]
+position = Vector2(1700, 929)
+
+[node name="Meat" parent="." instance=ExtResource("4_meat")]
+position = Vector2(1000, 650)
+
+[node name="Door" type="Sprite2D" parent="."]
+position = Vector2(250, 915)
+texture = ExtResource("12_door")
+
+[node name="FenceA" type="Sprite2D" parent="."]
+position = Vector2(500, 915)
+texture = ExtResource("11_fence")
+
+[node name="FenceB" type="Sprite2D" parent="."]
+position = Vector2(1500, 915)
+texture = ExtResource("11_fence")
+
+[node name="CompletionLabel" type="Label" parent="."]
+visible = false
+position = Vector2(500, 380)
+text = "¡MUNDO 1 SUPERADO!"
+horizontal_alignment = 1
+add_theme_font_size_override("font_size", 56)
+add_theme_color_override("font_color", Color(0.95, 0.7, 0.1, 1))
+add_theme_color_override("font_outline_color", Color(1, 1, 1, 1))
+add_theme_constant_override("outline_size", 8)

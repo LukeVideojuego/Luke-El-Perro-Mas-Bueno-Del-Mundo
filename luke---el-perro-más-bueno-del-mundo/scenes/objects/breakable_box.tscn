@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://scripts/world/breakable_box.gd" id="1_script"]
+[ext_resource type="Texture2D" path="res://assets/Tiles/Default/block_coin.png" id="2_texture"]
+
+[sub_resource type="RectangleShape2D" id="BoxShape"]
+size = Vector2(62, 62)
+
+[node name="BreakableBox" type="StaticBody2D"]
+collision_layer = 5
+script = ExtResource("1_script")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_texture")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("BoxShape")

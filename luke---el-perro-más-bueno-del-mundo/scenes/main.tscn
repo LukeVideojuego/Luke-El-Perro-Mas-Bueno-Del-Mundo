@@ -1,3 +1,18 @@
-[gd_scene format=3 uid="uid://du5pb1ohspgod"]
+[gd_scene load_steps=5 format=3]
 
-[node name="Main" type="Node2D" unique_id=1506913941]
+[ext_resource type="Script" path="res://scripts/core/main.gd" id="1_main"]
+[ext_resource type="PackedScene" path="res://scenes/ui/hud.tscn" id="2_hud"]
+[ext_resource type="PackedScene" path="res://scenes/ui/level_transition.tscn" id="3_transition"]
+[ext_resource type="PackedScene" path="res://scenes/ui/main_menu.tscn" id="4_menu"]
+
+[node name="Main" type="Node"]
+process_mode = 3
+script = ExtResource("1_main")
+
+[node name="LevelContainer" type="Node" parent="."]
+
+[node name="HUD" parent="." instance=ExtResource("2_hud")]
+
+[node name="LevelTransition" parent="." instance=ExtResource("3_transition")]
+
+[node name="MainMenu" parent="." instance=ExtResource("4_menu")]

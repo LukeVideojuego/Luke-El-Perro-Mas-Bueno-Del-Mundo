@@ -1,0 +1,37 @@
+[gd_scene load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://scripts/enemies/enemy_base.gd" id="1_script"]
+[ext_resource type="Texture2D" path="res://assets/Enemies/Default/slime_spike_walk_a.png" id="2_texture"]
+
+[sub_resource type="RectangleShape2D" id="BodyShape"]
+size = Vector2(30, 22)
+
+[sub_resource type="RectangleShape2D" id="DamageShape"]
+size = Vector2(40, 28)
+
+[node name="Slime" type="CharacterBody2D"]
+collision_layer = 4
+collision_mask = 1
+script = ExtResource("1_script")
+movement_mode = 0
+patrol_speed = 70.0
+patrol_distance = 130.0
+max_health = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_texture")
+scale = Vector2(1.5, 1.5)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 4)
+shape = SubResource("BodyShape")
+
+[node name="DamageArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 1
+monitoring = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DamageArea"]
+shape = SubResource("DamageShape")
+
+[connection signal="body_entered" from="DamageArea" to="." method="_on_damage_area_body_entered"]

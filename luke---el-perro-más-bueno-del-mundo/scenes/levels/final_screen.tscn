@@ -1,0 +1,102 @@
+[gd_scene load_steps=15 format=3]
+
+[ext_resource type="Script" path="res://scripts/levels/level_base.gd" id="1_level"]
+[ext_resource type="PackedScene" path="res://scenes/player/player.tscn" id="2_luke"]
+[ext_resource type="PackedScene" path="res://scenes/objects/level_finish.tscn" id="3_finish"]
+[ext_resource type="PackedScene" path="res://scenes/objects/mission_sign.tscn" id="4_sign"]
+[ext_resource type="Texture2D" path="res://assets/backgrounds/Default/background_solid_sky.png" id="5_sky"]
+[ext_resource type="Texture2D" path="res://assets/backgrounds/Default/background_color_trees.png" id="6_trees"]
+[ext_resource type="Texture2D" path="res://assets/Tiles/Default/terrain_grass_block_top.png" id="7_grass"]
+[ext_resource type="Texture2D" path="res://assets/Tiles/Default/terrain_stone_block.png" id="8_stone"]
+[ext_resource type="Texture2D" path="res://assets/characters/Default/character_green_idle.png" id="9_npc1"]
+[ext_resource type="Texture2D" path="res://assets/characters/Default/character_pink_idle.png" id="10_npc2"]
+[ext_resource type="Texture2D" path="res://assets/characters/Default/character_yellow_idle.png" id="11_npc3"]
+[ext_resource type="Texture2D" path="res://assets/characters/Default/character_purple_idle.png" id="12_npc4"]
+
+[sub_resource type="RectangleShape2D" id="GroundShape"]
+size = Vector2(2000, 110)
+
+[sub_resource type="RectangleShape2D" id="BoundaryShape"]
+size = Vector2(70, 900)
+
+[node name="final_screen" type="Node2D"]
+script = ExtResource("1_level")
+level_id = "final_screen"
+mission_text = "Acércate a tu gente para completar la aventura."
+
+[node name="Sky" type="Sprite2D" parent="."]
+position = Vector2(1000, 540)
+texture = ExtResource("5_sky")
+
+[node name="Trees" type="Sprite2D" parent="."]
+position = Vector2(1000, 540)
+texture = ExtResource("6_trees")
+
+[node name="Ground" type="StaticBody2D" parent="."]
+
+[node name="BlockTop" type="Sprite2D" parent="Ground"]
+position = Vector2(1000, 960)
+texture = ExtResource("7_grass")
+
+[node name="BlockBody" type="Sprite2D" parent="Ground"]
+position = Vector2(1000, 1010)
+texture = ExtResource("8_stone")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ground"]
+position = Vector2(1000, 960)
+shape = SubResource("GroundShape")
+
+[node name="LeftBoundary" type="StaticBody2D" parent="."]
+position = Vector2(-35, 500)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LeftBoundary"]
+shape = SubResource("BoundaryShape")
+
+[node name="RightBoundary" type="StaticBody2D" parent="."]
+position = Vector2(2035, 500)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RightBoundary"]
+shape = SubResource("BoundaryShape")
+
+[node name="SpawnPoint" type="Marker2D" parent="."]
+position = Vector2(200, 850)
+
+[node name="MissionSign" parent="." instance=ExtResource("4_sign")]
+position = Vector2(400, 880)
+interaction_text = "Acércate a tu gente para completar la aventura."
+
+[node name="Luke" parent="." instance=ExtResource("2_luke")]
+position = Vector2(200, 850)
+
+[node name="PersonGreen" type="Sprite2D" parent="."]
+position = Vector2(650, 880)
+texture = ExtResource("9_npc1")
+scale = Vector2(0.78, 0.78)
+
+[node name="PersonYellow" type="Sprite2D" parent="."]
+position = Vector2(800, 880)
+texture = ExtResource("11_npc3")
+scale = Vector2(0.78, 0.78)
+
+[node name="PersonPurple" type="Sprite2D" parent="."]
+position = Vector2(1200, 880)
+texture = ExtResource("12_npc4")
+scale = Vector2(0.78, 0.78)
+
+[node name="PersonPink" type="Sprite2D" parent="."]
+position = Vector2(1350, 880)
+texture = ExtResource("10_npc2")
+scale = Vector2(0.78, 0.78)
+
+[node name="Finish" parent="." instance=ExtResource("3_finish")]
+position = Vector2(1000, 850)
+
+[node name="CompletionLabel" type="Label" parent="."]
+visible = false
+position = Vector2(300, 360)
+text = "¡GRACIAS POR JUGAR!"
+horizontal_alignment = 1
+add_theme_font_size_override("font_size", 72)
+add_theme_color_override("font_color", Color(0.95, 0.7, 0.1, 1))
+add_theme_color_override("font_outline_color", Color(1, 1, 1, 1))
+add_theme_constant_override("outline_size", 10)

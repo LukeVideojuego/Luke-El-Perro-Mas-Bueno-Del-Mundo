@@ -1,0 +1,286 @@
+[gd_scene load_steps=22 format=3]
+
+[ext_resource type="Script" path="res://scripts/levels/level_base.gd" id="1_level"]
+[ext_resource type="PackedScene" path="res://scenes/player/player.tscn" id="2_luke"]
+[ext_resource type="PackedScene" path="res://scenes/enemies/fish_blue.tscn" id="3_fish_blue"]
+[ext_resource type="PackedScene" path="res://scenes/enemies/fish_yellow.tscn" id="4_fish_yellow"]
+[ext_resource type="PackedScene" path="res://scenes/enemies/fish_purple.tscn" id="5_fish_purple"]
+[ext_resource type="PackedScene" path="res://scenes/objects/checkpoint.tscn" id="6_checkpoint"]
+[ext_resource type="PackedScene" path="res://scenes/objects/level_finish.tscn" id="7_finish"]
+[ext_resource type="PackedScene" path="res://scenes/objects/meat_power_up.tscn" id="8_meat"]
+[ext_resource type="PackedScene" path="res://scenes/objects/mission_sign.tscn" id="9_sign"]
+[ext_resource type="PackedScene" path="res://scenes/objects/breakable_box.tscn" id="10_box"]
+[ext_resource type="Texture2D" path="res://assets/backgrounds/Default/background_solid_sky.png" id="11_sky"]
+[ext_resource type="Texture2D" path="res://assets/backgrounds/Default/background_color_trees.png" id="12_trees"]
+[ext_resource type="Script" path="res://scripts/world/damage_zone.gd" id="13_damage_script"]
+[ext_resource type="Texture2D" path="res://assets/Tiles/Default/water_top.png" id="14_water_top"]
+[ext_resource type="Texture2D" path="res://assets/Tiles/Default/terrain_grass_block_top.png" id="15_grass"]
+[ext_resource type="Texture2D" path="res://assets/Tiles/Default/terrain_stone_block.png" id="16_stone"]
+
+[sub_resource type="RectangleShape2D" id="StartPadShape"]
+size = Vector2(300, 110)
+
+[sub_resource type="RectangleShape2D" id="StoneShape"]
+size = Vector2(80, 20)
+
+[sub_resource type="RectangleShape2D" id="BoundaryShape"]
+size = Vector2(70, 900)
+
+[sub_resource type="RectangleShape2D" id="WaterShape"]
+size = Vector2(4600, 120)
+
+[sub_resource type="RectangleShape2D" id="SeaFloorShape"]
+size = Vector2(4600, 50)
+
+[node name="world_4_level_2" type="Node2D"]
+script = ExtResource("1_level")
+level_id = "world_4_level_2"
+mission_text = "Cruza el mar saltando de isla en isla."
+
+[node name="Sky" type="Sprite2D" parent="."]
+position = Vector2(2300, 540)
+texture = ExtResource("11_sky")
+
+[node name="Trees" type="Sprite2D" parent="."]
+position = Vector2(1500, 540)
+texture = ExtResource("12_trees")
+
+[node name="StartPad" type="StaticBody2D" parent="."]
+position = Vector2(400, 960)
+
+[node name="BlockTop" type="Sprite2D" parent="StartPad"]
+position = Vector2(0, 0)
+texture = ExtResource("15_grass")
+
+[node name="BlockBody" type="Sprite2D" parent="StartPad"]
+position = Vector2(0, 50)
+texture = ExtResource("16_stone")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StartPad"]
+shape = SubResource("StartPadShape")
+
+[node name="StoneOne" type="StaticBody2D" parent="."]
+position = Vector2(800, 870)
+
+[node name="Sprite2D" type="Sprite2D" parent="StoneOne"]
+position = Vector2(0, 2)
+scale = Vector2(1.3, 1)
+texture = ExtResource("15_grass")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StoneOne"]
+shape = SubResource("StoneShape")
+
+[node name="StoneTwo" type="StaticBody2D" parent="."]
+position = Vector2(1250, 820)
+
+[node name="Sprite2D" type="Sprite2D" parent="StoneTwo"]
+position = Vector2(0, 2)
+scale = Vector2(1.3, 1)
+texture = ExtResource("15_grass")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StoneTwo"]
+shape = SubResource("StoneShape")
+
+[node name="StoneThree" type="StaticBody2D" parent="."]
+position = Vector2(1700, 870)
+
+[node name="Sprite2D" type="Sprite2D" parent="StoneThree"]
+position = Vector2(0, 2)
+scale = Vector2(1.3, 1)
+texture = ExtResource("15_grass")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StoneThree"]
+shape = SubResource("StoneShape")
+
+[node name="StoneFour" type="StaticBody2D" parent="."]
+position = Vector2(2150, 820)
+
+[node name="Sprite2D" type="Sprite2D" parent="StoneFour"]
+position = Vector2(0, 2)
+scale = Vector2(1.3, 1)
+texture = ExtResource("15_grass")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StoneFour"]
+shape = SubResource("StoneShape")
+
+[node name="StoneFive" type="StaticBody2D" parent="."]
+position = Vector2(2600, 870)
+
+[node name="Sprite2D" type="Sprite2D" parent="StoneFive"]
+position = Vector2(0, 2)
+scale = Vector2(1.3, 1)
+texture = ExtResource("15_grass")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StoneFive"]
+shape = SubResource("StoneShape")
+
+[node name="StoneSix" type="StaticBody2D" parent="."]
+position = Vector2(3050, 820)
+
+[node name="Sprite2D" type="Sprite2D" parent="StoneSix"]
+position = Vector2(0, 2)
+scale = Vector2(1.3, 1)
+texture = ExtResource("15_grass")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StoneSix"]
+shape = SubResource("StoneShape")
+
+[node name="StoneSeven" type="StaticBody2D" parent="."]
+position = Vector2(3500, 870)
+
+[node name="Sprite2D" type="Sprite2D" parent="StoneSeven"]
+position = Vector2(0, 2)
+scale = Vector2(1.3, 1)
+texture = ExtResource("15_grass")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StoneSeven"]
+shape = SubResource("StoneShape")
+
+[node name="StoneEight" type="StaticBody2D" parent="."]
+position = Vector2(3950, 820)
+
+[node name="Sprite2D" type="Sprite2D" parent="StoneEight"]
+position = Vector2(0, 2)
+scale = Vector2(1.3, 1)
+texture = ExtResource("15_grass")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StoneEight"]
+shape = SubResource("StoneShape")
+
+[node name="LeftBoundary" type="StaticBody2D" parent="."]
+position = Vector2(-35, 500)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LeftBoundary"]
+shape = SubResource("BoundaryShape")
+
+[node name="RightBoundary" type="StaticBody2D" parent="."]
+position = Vector2(4635, 500)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RightBoundary"]
+shape = SubResource("BoundaryShape")
+
+[node name="WaterVisual" type="ColorRect" parent="."]
+position = Vector2(2300, 1060)
+size = Vector2(4600, 160)
+color = Color(0.2, 0.55, 0.85, 1)
+
+[node name="WaterTop1" type="Sprite2D" parent="."]
+position = Vector2(300, 1008)
+texture = ExtResource("14_water_top")
+
+[node name="WaterTop2" type="Sprite2D" parent="."]
+position = Vector2(700, 1008)
+texture = ExtResource("14_water_top")
+
+[node name="WaterTop3" type="Sprite2D" parent="."]
+position = Vector2(1100, 1008)
+texture = ExtResource("14_water_top")
+
+[node name="WaterTop4" type="Sprite2D" parent="."]
+position = Vector2(1500, 1008)
+texture = ExtResource("14_water_top")
+
+[node name="WaterTop5" type="Sprite2D" parent="."]
+position = Vector2(1900, 1008)
+texture = ExtResource("14_water_top")
+
+[node name="WaterTop6" type="Sprite2D" parent="."]
+position = Vector2(2300, 1008)
+texture = ExtResource("14_water_top")
+
+[node name="WaterTop7" type="Sprite2D" parent="."]
+position = Vector2(2700, 1008)
+texture = ExtResource("14_water_top")
+
+[node name="WaterTop8" type="Sprite2D" parent="."]
+position = Vector2(3100, 1008)
+texture = ExtResource("14_water_top")
+
+[node name="WaterTop9" type="Sprite2D" parent="."]
+position = Vector2(3500, 1008)
+texture = ExtResource("14_water_top")
+
+[node name="WaterTop10" type="Sprite2D" parent="."]
+position = Vector2(3900, 1008)
+texture = ExtResource("14_water_top")
+
+[node name="WaterTop11" type="Sprite2D" parent="."]
+position = Vector2(4300, 1008)
+texture = ExtResource("14_water_top")
+
+[node name="WaterHazard" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 1
+monitoring = true
+script = ExtResource("13_damage_script")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WaterHazard"]
+position = Vector2(2300, 1020)
+shape = SubResource("WaterShape")
+
+[node name="SeaFloor" type="StaticBody2D" parent="."]
+position = Vector2(2300, 1120)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SeaFloor"]
+shape = SubResource("SeaFloorShape")
+
+[node name="SpawnPoint" type="Marker2D" parent="."]
+position = Vector2(400, 850)
+
+[node name="MissionSign" parent="." instance=ExtResource("9_sign")]
+position = Vector2(400, 880)
+interaction_text = "Cruza el mar saltando de isla en isla."
+
+[node name="Luke" parent="." instance=ExtResource("2_luke")]
+position = Vector2(400, 850)
+
+[node name="Checkpoint" parent="." instance=ExtResource("6_checkpoint")]
+position = Vector2(400, 850)
+
+[node name="CheckpointTwo" parent="." instance=ExtResource("6_checkpoint")]
+position = Vector2(2600, 850)
+
+[node name="FishBlueOne" parent="." instance=ExtResource("3_fish_blue")]
+position = Vector2(1000, 760)
+patrol_distance = 150.0
+
+[node name="FishBlueTwo" parent="." instance=ExtResource("3_fish_blue")]
+position = Vector2(2400, 760)
+patrol_distance = 160.0
+
+[node name="FishYellowOne" parent="." instance=ExtResource("4_fish_yellow")]
+position = Vector2(3100, 740)
+patrol_distance = 220.0
+
+[node name="FishPurpleOne" parent="." instance=ExtResource("5_fish_purple")]
+position = Vector2(1500, 790)
+bob_amplitude = 26.0
+
+[node name="FishPurpleTwo" parent="." instance=ExtResource("5_fish_purple")]
+position = Vector2(3600, 770)
+bob_amplitude = 26.0
+
+[node name="BoxA" parent="." instance=ExtResource("10_box")]
+position = Vector2(600, 929)
+
+[node name="BoxB" parent="." instance=ExtResource("10_box")]
+position = Vector2(2720, 838)
+
+[node name="Meat" parent="." instance=ExtResource("8_meat")]
+position = Vector2(700, 700)
+
+[node name="MeatFour" parent="." instance=ExtResource("8_meat")]
+position = Vector2(3000, 680)
+
+[node name="Finish" parent="." instance=ExtResource("7_finish")]
+position = Vector2(4000, 770)
+
+[node name="CompletionLabel" type="Label" parent="."]
+visible = false
+position = Vector2(1350, 360)
+text = "¡MAR CRUZADO!"
+horizontal_alignment = 1
+add_theme_font_size_override("font_size", 56)
+add_theme_color_override("font_color", Color(0.1, 0.65, 0.15, 1))
+add_theme_color_override("font_outline_color", Color(1, 1, 1, 1))
+add_theme_constant_override("outline_size", 8)

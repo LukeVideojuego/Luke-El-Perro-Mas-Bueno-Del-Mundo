@@ -1,0 +1,87 @@
+[gd_scene format=3 uid="uid://ty4an5ouwduv"]
+
+[ext_resource type="Script" path="res://scripts/ui/intro_cinematic.gd" id="1_intro_script"]
+
+[node name="CinematicIntro" type="CanvasLayer" unique_id=839210552]
+script = ExtResource("1_intro_script")
+
+[node name="Panel1" type="Control" parent="." unique_id=1937312034]
+custom_minimum_size = Vector2(1152, 648)
+layout_mode = 3
+anchors_preset = 0
+
+[node name="Panel1Background" type="ColorRect" parent="Panel1" unique_id=1764683299]
+custom_minimum_size = Vector2(1152, 648)
+layout_mode = 0
+color = Color(0.5, 0.5, 0.5, 1)
+
+[node name="Panel1Text" type="RichTextLabel" parent="Panel1" unique_id=697865172]
+custom_minimum_size = Vector2(952, 300)
+layout_mode = 0
+offset_left = 100.0
+offset_top = 150.0
+offset_right = 100.0
+offset_bottom = 150.0
+
+[node name="Panel1Button" type="Button" parent="Panel1" unique_id=124133479]
+custom_minimum_size = Vector2(200, 50)
+layout_mode = 0
+offset_left = 476.0
+offset_top = 400.0
+offset_right = 476.0
+offset_bottom = 400.0
+text = "SIGUIENTE"
+
+[node name="Panel2" type="Control" parent="." unique_id=1535115337]
+custom_minimum_size = Vector2(1152, 648)
+layout_mode = 3
+anchors_preset = 0
+
+[node name="Panel2Background" type="ColorRect" parent="Panel2" unique_id=2034464358]
+custom_minimum_size = Vector2(1152, 648)
+layout_mode = 0
+color = Color(0.6, 0.8, 0.9, 1)
+
+[node name="Panel2Text" type="RichTextLabel" parent="Panel2" unique_id=1047301220]
+custom_minimum_size = Vector2(900, 400)
+layout_mode = 0
+offset_left = 126.0
+offset_top = 100.0
+offset_right = 126.0
+offset_bottom = 100.0
+
+[node name="Panel2Button" type="Button" parent="Panel2" unique_id=518476680]
+custom_minimum_size = Vector2(200, 50)
+layout_mode = 0
+offset_left = 476.0
+offset_top = 400.0
+offset_right = 476.0
+offset_bottom = 400.0
+text = "SIGUIENTE"
+
+[node name="Panel3" type="Control" parent="." unique_id=51249399]
+custom_minimum_size = Vector2(1152, 648)
+layout_mode = 3
+anchors_preset = 0
+
+[node name="Panel3Background" type="ColorRect" parent="Panel3" unique_id=859209043]
+custom_minimum_size = Vector2(1152, 648)
+layout_mode = 0
+color = Color(1, 0.6, 0.4, 1)
+
+[node name="Panel3Text" type="RichTextLabel" parent="Panel3" unique_id=1117633452]
+custom_minimum_size = Vector2(800, 500)
+layout_mode = 0
+offset_left = 176.0
+offset_top = 50.0
+offset_right = 176.0
+offset_bottom = 50.0
+
+[node name="Panel3Button" type="Button" parent="Panel3" unique_id=1789127924]
+custom_minimum_size = Vector2(200, 50)
+layout_mode = 0
+offset_left = 476.0
+offset_top = 500.0
+offset_right = 476.0
+offset_bottom = 500.0
+text = "JUGAR"

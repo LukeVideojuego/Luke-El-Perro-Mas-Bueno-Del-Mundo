@@ -1,0 +1,253 @@
+[gd_scene load_steps=29 format=3]
+
+[ext_resource type="Script" path="res://scripts/levels/world_1_level_2.gd" id="1_level"]
+[ext_resource type="PackedScene" path="res://scenes/player/player.tscn" id="2_luke"]
+[ext_resource type="PackedScene" path="res://scenes/enemies/thief.tscn" id="3_thief"]
+[ext_resource type="PackedScene" path="res://scenes/objects/checkpoint.tscn" id="4_checkpoint"]
+[ext_resource type="PackedScene" path="res://scenes/objects/level_finish.tscn" id="5_finish"]
+[ext_resource type="PackedScene" path="res://scenes/objects/meat_power_up.tscn" id="6_meat"]
+[ext_resource type="Texture2D" path="res://assets/backgrounds/Default/background_solid_sky.png" id="7_sky"]
+[ext_resource type="Texture2D" path="res://assets/backgrounds/Default/background_color_trees.png" id="8_trees"]
+[ext_resource type="Texture2D" path="res://assets/Tiles/Default/terrain_grass_block_top.png" id="9_grass"]
+[ext_resource type="Texture2D" path="res://assets/Tiles/Default/terrain_stone_block.png" id="10_stone"]
+[ext_resource type="Texture2D" path="res://assets/Tiles/Default/fence.png" id="11_fence"]
+[ext_resource type="Texture2D" path="res://assets/characters/Default/character_green_idle.png" id="12_person_a"]
+[ext_resource type="Texture2D" path="res://assets/characters/Default/character_pink_idle.png" id="13_person_b"]
+[ext_resource type="PackedScene" path="res://scenes/objects/mission_sign.tscn" id="14_sign"]
+[ext_resource type="PackedScene" path="res://scenes/objects/damage_zone.tscn" id="15_hazard"]
+[ext_resource type="PackedScene" path="res://scenes/objects/breakable_box.tscn" id="16_box"]
+[ext_resource type="Texture2D" path="res://assets/Tiles/Default/window.png" id="17_window"]
+[ext_resource type="Texture2D" path="res://assets/Tiles/Default/door_closed.png" id="18_door"]
+[ext_resource type="Texture2D" path="res://assets/characters/Default/character_yellow_idle.png" id="19_person_c"]
+[ext_resource type="Texture2D" path="res://assets/Tiles/Default/sign_exit.png" id="20_exit"]
+[ext_resource type="Texture2D" path="res://assets/Tiles/Default/spikes.png" id="21_spikes"]
+[ext_resource type="Texture2D" path="res://assets/Tiles/Default/bush.png" id="22_bush"]
+
+[sub_resource type="RectangleShape2D" id="GroundShape"]
+size = Vector2(4200, 110)
+[sub_resource type="RectangleShape2D" id="PlatformOneShape"]
+size = Vector2(320, 50)
+[sub_resource type="RectangleShape2D" id="PlatformTwoShape"]
+size = Vector2(260, 50)
+[sub_resource type="RectangleShape2D" id="PlatformThreeShape"]
+size = Vector2(360, 50)
+[sub_resource type="RectangleShape2D" id="PlatformFourShape"]
+size = Vector2(300, 50)
+[sub_resource type="RectangleShape2D" id="WallShape"]
+size = Vector2(70, 1080)
+
+[node name="World1Level2" type="Node2D"]
+script = ExtResource("1_level")
+
+[node name="Sky" type="Sprite2D" parent="."]
+texture = ExtResource("7_sky")
+position = Vector2(2100, 540)
+scale = Vector2(17, 5)
+z_index = -10
+[node name="Trees" type="Sprite2D" parent="."]
+texture = ExtResource("8_trees")
+position = Vector2(2100, 700)
+scale = Vector2(17, 2.7)
+z_index = -9
+
+[node name="BuildingLeft" type="Sprite2D" parent="."]
+texture = ExtResource("10_stone")
+position = Vector2(650, 740)
+scale = Vector2(5, 4.8)
+modulate = Color(0.75, 0.77, 0.88, 1)
+z_index = -5
+[node name="WindowA1" type="Sprite2D" parent="."]
+texture = ExtResource("17_window")
+position = Vector2(580, 645)
+z_index = -5
+[node name="WindowA2" type="Sprite2D" parent="."]
+texture = ExtResource("17_window")
+position = Vector2(720, 645)
+z_index = -5
+[node name="DoorA" type="Sprite2D" parent="."]
+texture = ExtResource("18_door")
+position = Vector2(650, 818)
+z_index = -5
+[node name="BuildingRight" type="Sprite2D" parent="."]
+texture = ExtResource("10_stone")
+position = Vector2(3300, 730)
+scale = Vector2(5.6, 5.1)
+modulate = Color(0.75, 0.77, 0.88, 1)
+z_index = -5
+[node name="WindowB1" type="Sprite2D" parent="."]
+texture = ExtResource("17_window")
+position = Vector2(3200, 645)
+z_index = -5
+[node name="WindowB2" type="Sprite2D" parent="."]
+texture = ExtResource("17_window")
+position = Vector2(3400, 645)
+z_index = -5
+[node name="DoorB" type="Sprite2D" parent="."]
+texture = ExtResource("18_door")
+position = Vector2(3300, 818)
+z_index = -5
+
+[node name="Ground" type="StaticBody2D" parent="."]
+position = Vector2(2100, 1015)
+[node name="Visual" type="Sprite2D" parent="Ground"]
+texture = ExtResource("9_grass")
+scale = Vector2(66, 1.85)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ground"]
+shape = SubResource("GroundShape")
+
+[node name="PlatformOne" type="StaticBody2D" parent="."]
+position = Vector2(720, 810)
+[node name="Visual" type="Sprite2D" parent="PlatformOne"]
+texture = ExtResource("9_grass")
+scale = Vector2(5, 0.78)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlatformOne"]
+shape = SubResource("PlatformOneShape")
+
+[node name="PlatformTwo" type="StaticBody2D" parent="."]
+position = Vector2(1260, 815)
+[node name="Visual" type="Sprite2D" parent="PlatformTwo"]
+texture = ExtResource("9_grass")
+scale = Vector2(4.1, 0.78)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlatformTwo"]
+shape = SubResource("PlatformTwoShape")
+
+[node name="PlatformThree" type="StaticBody2D" parent="."]
+position = Vector2(1910, 805)
+[node name="Visual" type="Sprite2D" parent="PlatformThree"]
+texture = ExtResource("9_grass")
+scale = Vector2(5.6, 0.78)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlatformThree"]
+shape = SubResource("PlatformThreeShape")
+
+[node name="PlatformFour" type="StaticBody2D" parent="."]
+position = Vector2(2630, 810)
+[node name="Visual" type="Sprite2D" parent="PlatformFour"]
+texture = ExtResource("9_grass")
+scale = Vector2(4.7, 0.78)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlatformFour"]
+shape = SubResource("PlatformFourShape")
+
+[node name="FenceA" type="Sprite2D" parent="."]
+texture = ExtResource("11_fence")
+position = Vector2(1030, 884)
+scale = Vector2(2.4, 1)
+[node name="FenceB" type="Sprite2D" parent="."]
+texture = ExtResource("11_fence")
+position = Vector2(3050, 884)
+scale = Vector2(2.4, 1)
+[node name="ExitSign" type="Sprite2D" parent="."]
+texture = ExtResource("20_exit")
+position = Vector2(3650, 855)
+scale = Vector2(1.2, 1.2)
+
+[node name="PersonGreen" type="Sprite2D" parent="."]
+texture = ExtResource("12_person_a")
+position = Vector2(430, 875)
+scale = Vector2(0.65, 0.65)
+[node name="PersonPink" type="Sprite2D" parent="."]
+texture = ExtResource("13_person_b")
+position = Vector2(2820, 875)
+scale = Vector2(0.65, 0.65)
+[node name="PersonYellow" type="Sprite2D" parent="."]
+texture = ExtResource("19_person_c")
+position = Vector2(3730, 875)
+scale = Vector2(0.65, 0.65)
+
+[node name="BushA" type="Sprite2D" parent="."]
+texture = ExtResource("22_bush")
+position = Vector2(850, 928)
+[node name="BushB" type="Sprite2D" parent="."]
+texture = ExtResource("22_bush")
+position = Vector2(1600, 928)
+
+[node name="SpikeVisualsOne" type="Node2D" parent="."]
+[node name="SpikeA" type="Sprite2D" parent="SpikeVisualsOne"]
+texture = ExtResource("21_spikes")
+position = Vector2(520, 928)
+scale = Vector2(1.5, 1)
+[node name="SpikeB" type="Sprite2D" parent="SpikeVisualsOne"]
+texture = ExtResource("21_spikes")
+position = Vector2(600, 928)
+scale = Vector2(1.5, 1)
+[node name="SpikeHazardOne" parent="." instance=ExtResource("15_hazard")]
+position = Vector2(560, 950)
+
+[node name="SpikeVisualsTwo" type="Node2D" parent="."]
+[node name="SpikeA" type="Sprite2D" parent="SpikeVisualsTwo"]
+texture = ExtResource("21_spikes")
+position = Vector2(2000, 928)
+scale = Vector2(1.5, 1)
+[node name="SpikeB" type="Sprite2D" parent="SpikeVisualsTwo"]
+texture = ExtResource("21_spikes")
+position = Vector2(2050, 928)
+scale = Vector2(1.5, 1)
+[node name="SpikeC" type="Sprite2D" parent="SpikeVisualsTwo"]
+texture = ExtResource("21_spikes")
+position = Vector2(2100, 928)
+scale = Vector2(1.5, 1)
+[node name="SpikeHazardTwo" parent="." instance=ExtResource("15_hazard")]
+position = Vector2(2050, 950)
+
+[node name="SpikeVisualsThree" type="Node2D" parent="."]
+[node name="SpikeA" type="Sprite2D" parent="SpikeVisualsThree"]
+texture = ExtResource("21_spikes")
+position = Vector2(3500, 928)
+scale = Vector2(1.5, 1)
+[node name="SpikeB" type="Sprite2D" parent="SpikeVisualsThree"]
+texture = ExtResource("21_spikes")
+position = Vector2(3550, 928)
+scale = Vector2(1.5, 1)
+[node name="SpikeC" type="Sprite2D" parent="SpikeVisualsThree"]
+texture = ExtResource("21_spikes")
+position = Vector2(3600, 928)
+scale = Vector2(1.5, 1)
+[node name="SpikeHazardThree" parent="." instance=ExtResource("15_hazard")]
+position = Vector2(3550, 950)
+
+[node name="LeftBoundary" type="StaticBody2D" parent="."]
+position = Vector2(-35, 540)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LeftBoundary"]
+shape = SubResource("WallShape")
+[node name="RightBoundary" type="StaticBody2D" parent="."]
+position = Vector2(4235, 540)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RightBoundary"]
+shape = SubResource("WallShape")
+
+[node name="SpawnPoint" type="Marker2D" parent="."]
+position = Vector2(180, 850)
+[node name="Luke" parent="." instance=ExtResource("2_luke")]
+position = Vector2(180, 850)
+[node name="MissionSign" parent="." instance=ExtResource("14_sign")]
+position = Vector2(470, 870)
+interaction_text = "¡Los ladrones merodean el barrio! Cruza las calles y llega hasta la bandera verde."
+[node name="ThiefOne" parent="." instance=ExtResource("3_thief")]
+position = Vector2(1020, 850)
+patrol_distance = 125.0
+[node name="ThiefTwo" parent="." instance=ExtResource("3_thief")]
+position = Vector2(1920, 650)
+patrol_distance = 110.0
+[node name="ThiefThree" parent="." instance=ExtResource("3_thief")]
+position = Vector2(3240, 850)
+patrol_distance = 160.0
+
+[node name="Checkpoint" parent="." instance=ExtResource("4_checkpoint")]
+position = Vector2(2210, 860)
+checkpoint_id = "courtyard_safe"
+[node name="CheckpointTwo" parent="." instance=ExtResource("4_checkpoint")]
+position = Vector2(3000, 860)
+checkpoint_id = "plaza_del_sol"
+[node name="CheckpointThree" parent="." instance=ExtResource("4_checkpoint")]
+position = Vector2(3700, 860)
+checkpoint_id = "llegada_barrio"
+[node name="Meat" parent="." instance=ExtResource("6_meat")]
+position = Vector2(1260, 665)
+[node name="MeatFour" parent="." instance=ExtResource("6_meat")]
+position = Vector2(2630, 665)
+[node name="BoxA" parent="." instance=ExtResource("16_box")]
+position = Vector2(1500, 929)
+contents = ExtResource("6_meat")
+[node name="BoxB" parent="." instance=ExtResource("16_box")]
+position = Vector2(2700, 929)
+contents = ExtResource("6_meat")
+[node name="Finish" parent="." instance=ExtResource("5_finish")]
+position = Vector2(3880, 850)

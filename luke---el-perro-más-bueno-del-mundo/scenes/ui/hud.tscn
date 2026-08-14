@@ -1,0 +1,58 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/ui/hud.gd" id="1_script"]
+
+[node name="HUD" type="CanvasLayer"]
+layer = 10
+script = ExtResource("1_script")
+
+[node name="Panel" type="ColorRect" parent="."]
+offset_left = 24.0
+offset_top = 20.0
+offset_right = 360.0
+offset_bottom = 145.0
+color = Color(0.04, 0.1, 0.18, 0.78)
+mouse_filter = 2
+
+[node name="LevelLabel" type="Label" parent="Panel"]
+offset_left = 16.0
+offset_top = 10.0
+offset_right = 320.0
+offset_bottom = 34.0
+theme_override_colors/font_color = Color(1, 0.88, 0.34, 1)
+theme_override_font_sizes/font_size = 18
+text = "MUNDO 1 · EL BARRIO"
+
+[node name="LivesLabel" type="Label" parent="Panel"]
+offset_left = 16.0
+offset_top = 42.0
+offset_right = 180.0
+offset_bottom = 66.0
+theme_override_font_sizes/font_size = 17
+text = "VIDAS: 3"
+
+[node name="AuraLabel" type="Label" parent="Panel"]
+offset_left = 16.0
+offset_top = 68.0
+offset_right = 210.0
+offset_bottom = 92.0
+theme_override_font_sizes/font_size = 17
+text = "AURA: --"
+
+[node name="ProgressLabel" type="Label" parent="Panel"]
+offset_left = 16.0
+offset_top = 94.0
+offset_right = 315.0
+offset_bottom = 118.0
+theme_override_font_sizes/font_size = 17
+text = "BARRIO: INICIO"
+
+[node name="TimeLabel" type="Label" parent="."]
+offset_left = 1660.0
+offset_top = 28.0
+offset_right = 1888.0
+offset_bottom = 58.0
+theme_override_colors/font_color = Color(1, 1, 1, 0.9)
+theme_override_font_sizes/font_size = 18
+horizontal_alignment = 2
+text = "TIEMPO: --:--"

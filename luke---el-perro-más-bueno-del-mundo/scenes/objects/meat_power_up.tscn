@@ -1,0 +1,25 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/world/meat_power_up.gd" id="1_script"]
+
+[sub_resource type="CircleShape2D" id="PickupShape"]
+radius = 26.0
+
+[node name="MeatPowerUp" type="Area2D"]
+collision_layer = 0
+collision_mask = 1
+monitoring = true
+script = ExtResource("1_script")
+
+[node name="Meat" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(-28, -8, -16, -25, 10, -26, 29, -10, 24, 14, 6, 27, -18, 20)
+color = Color(0.78, 0.2, 0.16, 1)
+
+[node name="Bone" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(-34, 5, -26, -4, 25, 8, 34, 0, 38, 8, 30, 17, -24, 8, -34, 16, -42, 9)
+color = Color(1, 0.91, 0.67, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("PickupShape")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

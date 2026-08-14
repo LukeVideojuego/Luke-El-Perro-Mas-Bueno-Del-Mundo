@@ -1,0 +1,38 @@
+[gd_scene load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://scripts/enemies/enemy_base.gd" id="1_script"]
+[ext_resource type="Texture2D" path="res://assets/Enemies/Default/fly_a.png" id="2_texture"]
+
+[sub_resource type="RectangleShape2D" id="BodyShape"]
+size = Vector2(20, 16)
+
+[sub_resource type="RectangleShape2D" id="DamageShape"]
+size = Vector2(30, 22)
+
+[node name="Fly" type="CharacterBody2D"]
+collision_layer = 4
+collision_mask = 1
+script = ExtResource("1_script")
+movement_mode = 1
+patrol_speed = 160.0
+patrol_distance = 200.0
+bob_amplitude = 14.0
+bob_frequency = 3.0
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_texture")
+scale = Vector2(1.5, 1.5)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 3)
+shape = SubResource("BodyShape")
+
+[node name="DamageArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 1
+monitoring = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DamageArea"]
+shape = SubResource("DamageShape")
+
+[connection signal="body_entered" from="DamageArea" to="." method="_on_damage_area_body_entered"]

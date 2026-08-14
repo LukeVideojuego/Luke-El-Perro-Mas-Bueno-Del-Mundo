@@ -1,0 +1,35 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/enemies/enemy_base.gd" id="1_script"]
+[ext_resource type="Texture2D" path="res://assets/Enemies/Default/ladybug_fly.png" id="2_texture"]
+
+[sub_resource type="RectangleShape2D" id="BodyShape"]
+size = Vector2(40, 28)
+[sub_resource type="RectangleShape2D" id="DamageShape"]
+size = Vector2(50, 36)
+
+[node name="Ladybug" type="CharacterBody2D"]
+collision_layer = 4
+collision_mask = 1
+movement_mode = 1
+patrol_speed = 90.0
+patrol_distance = 140.0
+bob_amplitude = 10.0
+bob_frequency = 2.0
+script = ExtResource("1_script")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_texture")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("BodyShape")
+
+[node name="DamageArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 1
+monitoring = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DamageArea"]
+shape = SubResource("DamageShape")
+
+[connection signal="body_entered" from="DamageArea" to="." method="_on_damage_area_body_entered"]

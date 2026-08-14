@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://scripts/world/level_finish.gd" id="1_script"]
+[ext_resource type="Texture2D" path="res://assets/Tiles/Default/flag_green_a.png" id="2_flag"]
+
+[sub_resource type="RectangleShape2D" id="FinishShape"]
+size = Vector2(90, 150)
+
+[node name="LevelFinish" type="Area2D"]
+collision_layer = 0
+collision_mask = 1
+monitoring = true
+script = ExtResource("1_script")
+
+[node name="Flag" type="Sprite2D" parent="."]
+texture = ExtResource("2_flag")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("FinishShape")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

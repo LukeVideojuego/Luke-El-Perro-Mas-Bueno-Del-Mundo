@@ -1,0 +1,82 @@
+[gd_scene load_steps=5 format=3]
+
+[ext_resource type="Script" path="res://scripts/ui/final_cinematic.gd" id="1_final_script"]
+[ext_resource type="Texture2D" path="res://assets/backgrounds/Default/background_solid_sky.png" id="2_sky"]
+[ext_resource type="Texture2D" path="res://assets/characters/Default/character_beige_idle.png" id="3_luke"]
+[ext_resource type="Texture2D" path="res://assets/Tiles/Default/terrain_grass_block_top.png" id="4_grass"]
+
+[node name="CinematicFinal" type="CanvasLayer"]
+script = ExtResource("1_final_script")
+
+[node name="Panel1" type="Control" parent="."]
+custom_minimum_size = Vector2(1152, 648)
+layout_mode = 3
+anchors_preset = 0
+
+[node name="Background1" type="Sprite2D" parent="Panel1"]
+position = Vector2(0, 0)
+texture = ExtResource("2_sky")
+modulate = Color(0.1, 0.1, 0.1, 1)
+
+[node name="Text1" type="Label" parent="Panel1"]
+position = Vector2(20, 20)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 2
+theme_override_font_sizes/font_size = 24
+text = "EL MUNDO CAMBIÓ"
+text += "\nEl mundo que antes estaba triste"
+text += "\nahora aparece lleno de luz."
+text += "\nCiudades, barrios, plazas y personas felices."
+
+[node name="Panel2" type="Control" parent="."]
+custom_minimum_size = Vector2(1152, 648)
+layout_mode = 3
+anchors_preset = 0
+
+[node name="Background2" type="Sprite2D" parent="Panel2"]
+position = Vector2(0, 0)
+texture = ExtResource("3_luke")
+modulate = Color(1, 1, 1, 1)
+
+[node name="Text2" type="Label" parent="Panel2"]
+position = Vector2(20, 20)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 2
+theme_override_font_sizes/font_size = 24
+text = "DIEGO Y LOS NIÑOS"
+text += "\nDiego volvió a sonreír."
+text += "\nLara, Bauti, Zoe, Roma y Mathi."
+text += "\ntodos estaban felices, abrazando"
+text += "\na Luke."
+
+[node name="Panel3" type="Control" parent="."]
+custom_minimum_size = Vector2(1152, 648)
+layout_mode = 3
+anchors_preset = 0
+
+[node name="Background3" type="Sprite2D" parent="Panel3"]
+position = Vector2(0, 0)
+texture = ExtResource("4_grass")
+modulate = Color(0.2, 0.7, 0.3, 1)
+
+[node name="Text3" type="Label" parent="Panel3"]
+position = Vector2(20, 20)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 2
+theme_override_font_sizes/font_size = 24
+text = "EL HÉROE MUNDIAL"
+text += "\nLuke había conseguido algo que parecía imposible."
+text += "\nEl mundo entero había recuperado"
+text += "\nla esperanza."
+text += "\nHabía más amor."
+text += "\nMás solidaridad."
+text += "\nMás alegría."
+text += "\nLuke había conseguido que el mundo"
+text += "\nvolviera a ser un lugar mejor."
+text += "\n\nLUKE"
+text += "\nEL PERRO MÁS BUENO"
+text += "\nDEL MUNDO"
+text += "\nGRACIAS POR JUGAR"

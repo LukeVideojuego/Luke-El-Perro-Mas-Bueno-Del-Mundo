@@ -1,0 +1,193 @@
+[gd_scene load_steps=21 format=3]
+
+[ext_resource type="Script" path="res://scripts/levels/level_base.gd" id="1_level"]
+[ext_resource type="PackedScene" path="res://scenes/player/player.tscn" id="2_luke"]
+[ext_resource type="PackedScene" path="res://scenes/enemies/worm.tscn" id="3_worm"]
+[ext_resource type="PackedScene" path="res://scenes/enemies/snail.tscn" id="4_snail"]
+[ext_resource type="PackedScene" path="res://scenes/enemies/slime.tscn" id="5_slime"]
+[ext_resource type="PackedScene" path="res://scenes/objects/checkpoint.tscn" id="6_checkpoint"]
+[ext_resource type="PackedScene" path="res://scenes/objects/level_finish.tscn" id="7_finish"]
+[ext_resource type="PackedScene" path="res://scenes/objects/meat_power_up.tscn" id="8_meat"]
+[ext_resource type="PackedScene" path="res://scenes/objects/mission_sign.tscn" id="9_sign"]
+[ext_resource type="PackedScene" path="res://scenes/objects/damage_zone.tscn" id="10_hazard"]
+[ext_resource type="PackedScene" path="res://scenes/objects/breakable_box.tscn" id="11_box"]
+[ext_resource type="Texture2D" path="res://assets/backgrounds/Default/background_solid_sky.png" id="12_sky"]
+[ext_resource type="Texture2D" path="res://assets/backgrounds/Default/background_color_trees.png" id="13_trees"]
+[ext_resource type="Texture2D" path="res://assets/Tiles/Default/terrain_sand_block_top.png" id="14_sand"]
+[ext_resource type="Texture2D" path="res://assets/Tiles/Default/terrain_stone_block.png" id="15_stone"]
+[ext_resource type="Texture2D" path="res://assets/Tiles/Default/spikes.png" id="16_spikes"]
+
+[sub_resource type="RectangleShape2D" id="GroundShape"]
+size = Vector2(4400, 110)
+
+[sub_resource type="RectangleShape2D" id="PlatformShape"]
+size = Vector2(420, 52)
+
+[sub_resource type="RectangleShape2D" id="BoundaryShape"]
+size = Vector2(70, 900)
+
+[sub_resource type="RectangleShape2D" id="HazardShape"]
+size = Vector2(150, 30)
+
+[node name="world_4_level_3" type="Node2D"]
+script = ExtResource("1_level")
+level_id = "world_4_level_3"
+mission_text = "Escapa de las serpientes gigantes de la India."
+
+[node name="Sky" type="Sprite2D" parent="."]
+position = Vector2(2200, 540)
+texture = ExtResource("12_sky")
+
+[node name="Trees" type="Sprite2D" parent="."]
+position = Vector2(1400, 540)
+texture = ExtResource("13_trees")
+
+[node name="Ground" type="StaticBody2D" parent="."]
+
+[node name="BlockTop" type="Sprite2D" parent="Ground"]
+position = Vector2(2200, 960)
+texture = ExtResource("14_sand")
+
+[node name="BlockBody" type="Sprite2D" parent="Ground"]
+position = Vector2(2200, 1010)
+texture = ExtResource("15_stone")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ground"]
+position = Vector2(2200, 960)
+shape = SubResource("GroundShape")
+
+[node name="PlatformOne" type="StaticBody2D" parent="."]
+position = Vector2(620, 820)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlatformOne"]
+shape = SubResource("PlatformShape")
+
+[node name="PlatformTwo" type="StaticBody2D" parent="."]
+position = Vector2(1400, 730)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlatformTwo"]
+shape = SubResource("PlatformShape")
+
+[node name="PlatformThree" type="StaticBody2D" parent="."]
+position = Vector2(2350, 800)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlatformThree"]
+shape = SubResource("PlatformShape")
+
+[node name="PlatformFour" type="StaticBody2D" parent="."]
+position = Vector2(3250, 730)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlatformFour"]
+shape = SubResource("PlatformShape")
+
+[node name="LeftBoundary" type="StaticBody2D" parent="."]
+position = Vector2(-35, 500)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LeftBoundary"]
+shape = SubResource("BoundaryShape")
+
+[node name="RightBoundary" type="StaticBody2D" parent="."]
+position = Vector2(4435, 500)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RightBoundary"]
+shape = SubResource("BoundaryShape")
+
+[node name="SpawnPoint" type="Marker2D" parent="."]
+position = Vector2(180, 850)
+
+[node name="MissionSign" parent="." instance=ExtResource("9_sign")]
+position = Vector2(520, 880)
+interaction_text = "Escapa de las serpientes gigantes de la India."
+
+[node name="Luke" parent="." instance=ExtResource("2_luke")]
+position = Vector2(180, 850)
+
+[node name="Checkpoint" parent="." instance=ExtResource("6_checkpoint")]
+position = Vector2(1800, 860)
+
+[node name="CheckpointTwo" parent="." instance=ExtResource("6_checkpoint")]
+position = Vector2(3300, 860)
+
+[node name="SpikeHazardOne" parent="." instance=ExtResource("10_hazard")]
+position = Vector2(1050, 920)
+
+[node name="SpikeHazardTwo" parent="." instance=ExtResource("10_hazard")]
+position = Vector2(3900, 920)
+
+[node name="SpikeVisualsOne" type="Node2D" parent="."]
+
+[node name="SpikeA" type="Sprite2D" parent="SpikeVisualsOne"]
+position = Vector2(1000, 928)
+scale = Vector2(1.5, 1)
+modulate = Color(0.6, 1, 0.6, 1)
+texture = ExtResource("16_spikes")
+
+[node name="SpikeB" type="Sprite2D" parent="SpikeVisualsOne"]
+position = Vector2(1050, 928)
+scale = Vector2(1.5, 1)
+modulate = Color(0.6, 1, 0.6, 1)
+texture = ExtResource("16_spikes")
+
+[node name="SpikeC" type="Sprite2D" parent="SpikeVisualsOne"]
+position = Vector2(1100, 928)
+scale = Vector2(1.5, 1)
+modulate = Color(0.6, 1, 0.6, 1)
+texture = ExtResource("16_spikes")
+
+[node name="SpikeVisualsTwo" type="Node2D" parent="."]
+
+[node name="SpikeA" type="Sprite2D" parent="SpikeVisualsTwo"]
+position = Vector2(3850, 928)
+scale = Vector2(1.5, 1)
+modulate = Color(0.6, 1, 0.6, 1)
+texture = ExtResource("16_spikes")
+
+[node name="SpikeB" type="Sprite2D" parent="SpikeVisualsTwo"]
+position = Vector2(3900, 928)
+scale = Vector2(1.5, 1)
+modulate = Color(0.6, 1, 0.6, 1)
+texture = ExtResource("16_spikes")
+
+[node name="SpikeC" type="Sprite2D" parent="SpikeVisualsTwo"]
+position = Vector2(3950, 928)
+scale = Vector2(1.5, 1)
+modulate = Color(0.6, 1, 0.6, 1)
+texture = ExtResource("16_spikes")
+
+[node name="WormOne" parent="." instance=ExtResource("3_worm")]
+position = Vector2(950, 850)
+patrol_distance = 140.0
+
+[node name="WormTwo" parent="." instance=ExtResource("3_worm")]
+position = Vector2(2000, 850)
+patrol_distance = 130.0
+
+[node name="SlimeOne" parent="." instance=ExtResource("5_slime")]
+position = Vector2(2800, 850)
+patrol_distance = 130.0
+
+[node name="SnailOne" parent="." instance=ExtResource("4_snail")]
+position = Vector2(3600, 850)
+patrol_distance = 120.0
+
+[node name="BoxA" parent="." instance=ExtResource("11_box")]
+position = Vector2(1500, 929)
+
+[node name="Meat" parent="." instance=ExtResource("8_meat")]
+position = Vector2(700, 655)
+
+[node name="MeatFour" parent="." instance=ExtResource("8_meat")]
+position = Vector2(2800, 655)
+
+[node name="Finish" parent="." instance=ExtResource("7_finish")]
+position = Vector2(4100, 850)
+
+[node name="CompletionLabel" type="Label" parent="."]
+visible = false
+position = Vector2(1350, 380)
+text = "¡INDIA A SALVO!"
+horizontal_alignment = 1
+add_theme_font_size_override("font_size", 56)
+add_theme_color_override("font_color", Color(0.1, 0.65, 0.15, 1))
+add_theme_color_override("font_outline_color", Color(1, 1, 1, 1))
+add_theme_constant_override("outline_size", 8)
