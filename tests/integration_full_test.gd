@@ -69,6 +69,16 @@ func _teleport_to_finish() -> bool:
 	luke.global_position = finish.global_position
 	return true
 
+func _hug_everyone() -> bool:
+	var level := _current_level()
+	var luke := level.get_node("Luke")
+	var people := level.get_tree().get_nodes_in_group("huggable")
+	if people.is_empty():
+		return false
+	for person in people:
+		person._on_body_entered(luke)
+	return true
+
 func _defeat_boss() -> bool:
 	var level := _current_level()
 	var luke := level.get_node("Luke")
@@ -100,8 +110,8 @@ func _physics_process(_delta: float) -> void:
 				var is_last := chain_index == CHAIN.size() - 1
 				if is_last:
 					_check(GameState.current_level_id == "final_screen", "pantalla final alcanzada (toda la progresión)")
-					var ok := _teleport_to_finish()
-					_check(ok, "meta de la pantalla final disponible")
+					var ok := _hug_everyone()
+					_check(ok, "minijuego de abrazos disponible en la pantalla final")
 					_phase(2)
 				else:
 					var completed := _complete_current_step()

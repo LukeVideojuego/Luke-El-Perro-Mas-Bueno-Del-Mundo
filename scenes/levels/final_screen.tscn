@@ -1,17 +1,27 @@
-[gd_scene load_steps=15 format=3]
+[gd_scene load_steps=25 format=3]
 
-[ext_resource type="Script" path="res://scripts/levels/level_base.gd" id="1_level"]
+[ext_resource type="Script" path="res://scripts/levels/hug_minigame.gd" id="1_level"]
 [ext_resource type="PackedScene" path="res://scenes/player/player.tscn" id="2_luke"]
-[ext_resource type="PackedScene" path="res://scenes/objects/level_finish.tscn" id="3_finish"]
 [ext_resource type="PackedScene" path="res://scenes/objects/mission_sign.tscn" id="4_sign"]
-[ext_resource type="Texture2D" path="res://assets/backgrounds/Default/background_solid_sky.png" id="5_sky"]
-[ext_resource type="Texture2D" path="res://assets/backgrounds/Default/background_color_trees.png" id="6_trees"]
-[ext_resource type="Texture2D" path="res://assets/Tiles/Default/terrain_grass_block_top.png" id="7_grass"]
-[ext_resource type="Texture2D" path="res://assets/Tiles/Default/terrain_stone_block.png" id="8_stone"]
-[ext_resource type="Texture2D" path="res://assets/characters/Default/character_green_idle.png" id="9_npc1"]
-[ext_resource type="Texture2D" path="res://assets/characters/Default/character_pink_idle.png" id="10_npc2"]
-[ext_resource type="Texture2D" path="res://assets/characters/Default/character_yellow_idle.png" id="11_npc3"]
-[ext_resource type="Texture2D" path="res://assets/characters/Default/character_purple_idle.png" id="12_npc4"]
+[ext_resource type="PackedScene" path="res://scenes/objects/huggable_person.tscn" id="5_person"]
+[ext_resource type="Texture2D" path="res://assets/backgrounds/Default/background_solid_sky.png" id="6_sky"]
+[ext_resource type="Texture2D" path="res://assets/backgrounds/Default/background_color_trees.png" id="7_trees"]
+[ext_resource type="Texture2D" path="res://assets/Tiles/Default/terrain_grass_block_top.png" id="8_grass"]
+[ext_resource type="Texture2D" path="res://assets/Tiles/Default/terrain_stone_block.png" id="9_stone"]
+[ext_resource type="Texture2D" path="res://assets/characters/Diego/diego.png" id="10_diego"]
+[ext_resource type="Texture2D" path="res://assets/characters/Kids/lara.png" id="11_lara"]
+[ext_resource type="Texture2D" path="res://assets/characters/Kids/bauti.png" id="12_bauti"]
+[ext_resource type="Texture2D" path="res://assets/characters/Kids/zoe.png" id="13_zoe"]
+[ext_resource type="Texture2D" path="res://assets/characters/Kids/roma.png" id="14_roma"]
+[ext_resource type="Texture2D" path="res://assets/characters/Kids/mathi.png" id="15_mathi"]
+[ext_resource type="Texture2D" path="res://assets/characters/Default/character_green_idle.png" id="16_green_idle"]
+[ext_resource type="Texture2D" path="res://assets/characters/Default/character_green_front.png" id="17_green_front"]
+[ext_resource type="Texture2D" path="res://assets/characters/Default/character_yellow_idle.png" id="18_yellow_idle"]
+[ext_resource type="Texture2D" path="res://assets/characters/Default/character_yellow_front.png" id="19_yellow_front"]
+[ext_resource type="Texture2D" path="res://assets/characters/Default/character_purple_idle.png" id="20_purple_idle"]
+[ext_resource type="Texture2D" path="res://assets/characters/Default/character_purple_front.png" id="21_purple_front"]
+[ext_resource type="Texture2D" path="res://assets/characters/Default/character_pink_idle.png" id="22_pink_idle"]
+[ext_resource type="Texture2D" path="res://assets/characters/Default/character_pink_front.png" id="23_pink_front"]
 
 [sub_resource type="RectangleShape2D" id="GroundShape"]
 size = Vector2(2000, 110)
@@ -22,29 +32,30 @@ size = Vector2(70, 900)
 [node name="final_screen" type="Node2D"]
 script = ExtResource("1_level")
 level_id = "final_screen"
-mission_text = "Acércate a tu gente para completar la aventura."
+mission_text = "¡Abrazá a toda la gente que puedas antes de que se acabe el tiempo!"
 
 [node name="Sky" type="Sprite2D" parent="."]
 position = Vector2(1000, 540)
-texture = ExtResource("5_sky")
-modulate = Color(0.6, 0.82, 1, 1)
+texture = ExtResource("6_sky")
+modulate = Color(0.6, 0.85, 1, 1)
 scale = Vector2(7.812, 5)
 
 [node name="Trees" type="Sprite2D" parent="."]
 position = Vector2(1000, 540)
-texture = ExtResource("6_trees")
+texture = ExtResource("7_trees")
+modulate = Color(0.55, 0.9, 0.55, 1)
 scale = Vector2(7.812, 2.7)
 
 [node name="Ground" type="StaticBody2D" parent="."]
 
 [node name="BlockTop" type="Sprite2D" parent="Ground"]
 position = Vector2(1000, 960)
-texture = ExtResource("7_grass")
+texture = ExtResource("8_grass")
 scale = Vector2(31.25, 2)
 
 [node name="BlockBody" type="Sprite2D" parent="Ground"]
 position = Vector2(1000, 1010)
-texture = ExtResource("8_stone")
+texture = ExtResource("9_stone")
 scale = Vector2(31.25, 3.2)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Ground"]
@@ -68,33 +79,106 @@ position = Vector2(200, 850)
 
 [node name="MissionSign" parent="." instance=ExtResource("4_sign")]
 position = Vector2(400, 880)
-interaction_text = "Acércate a tu gente para completar la aventura."
+interaction_text = "¡Abrazá a toda la gente que puedas antes de que se acabe el tiempo!"
 
 [node name="Luke" parent="." instance=ExtResource("2_luke")]
 position = Vector2(200, 850)
 
-[node name="PersonGreen" type="Sprite2D" parent="."]
-position = Vector2(650, 880)
-texture = ExtResource("9_npc1")
-scale = Vector2(0.78, 0.78)
+[node name="Diego" parent="." instance=ExtResource("5_person")]
+position = Vector2(500, 870)
+[node name="Sprite2D" parent="Diego" index="0"]
+texture = ExtResource("10_diego")
 
-[node name="PersonYellow" type="Sprite2D" parent="."]
-position = Vector2(800, 880)
-texture = ExtResource("11_npc3")
-scale = Vector2(0.78, 0.78)
+[node name="Lara" parent="." instance=ExtResource("5_person")]
+position = Vector2(650, 870)
+[node name="Sprite2D" parent="Lara" index="0"]
+texture = ExtResource("11_lara")
 
-[node name="PersonPurple" type="Sprite2D" parent="."]
-position = Vector2(1200, 880)
-texture = ExtResource("12_npc4")
-scale = Vector2(0.78, 0.78)
+[node name="Bauti" parent="." instance=ExtResource("5_person")]
+position = Vector2(800, 870)
+[node name="Sprite2D" parent="Bauti" index="0"]
+texture = ExtResource("12_bauti")
 
-[node name="PersonPink" type="Sprite2D" parent="."]
-position = Vector2(1350, 880)
-texture = ExtResource("10_npc2")
-scale = Vector2(0.78, 0.78)
+[node name="Zoe" parent="." instance=ExtResource("5_person")]
+position = Vector2(950, 870)
+[node name="Sprite2D" parent="Zoe" index="0"]
+texture = ExtResource("13_zoe")
 
-[node name="Finish" parent="." instance=ExtResource("3_finish")]
-position = Vector2(1000, 850)
+[node name="Roma" parent="." instance=ExtResource("5_person")]
+position = Vector2(1100, 870)
+[node name="Sprite2D" parent="Roma" index="0"]
+texture = ExtResource("14_roma")
+
+[node name="Mathi" parent="." instance=ExtResource("5_person")]
+position = Vector2(1250, 870)
+[node name="Sprite2D" parent="Mathi" index="0"]
+texture = ExtResource("15_mathi")
+
+[node name="PersonGreen" parent="." instance=ExtResource("5_person")]
+position = Vector2(1400, 870)
+happy_texture = ExtResource("17_green_front")
+[node name="Sprite2D" parent="PersonGreen" index="0"]
+texture = ExtResource("16_green_idle")
+
+[node name="PersonYellow" parent="." instance=ExtResource("5_person")]
+position = Vector2(1550, 870)
+happy_texture = ExtResource("19_yellow_front")
+[node name="Sprite2D" parent="PersonYellow" index="0"]
+texture = ExtResource("18_yellow_idle")
+
+[node name="PersonPurple" parent="." instance=ExtResource("5_person")]
+position = Vector2(300, 870)
+happy_texture = ExtResource("21_purple_front")
+[node name="Sprite2D" parent="PersonPurple" index="0"]
+texture = ExtResource("20_purple_idle")
+
+[node name="PersonPink" parent="." instance=ExtResource("5_person")]
+position = Vector2(1700, 870)
+happy_texture = ExtResource("23_pink_front")
+[node name="Sprite2D" parent="PersonPink" index="0"]
+texture = ExtResource("22_pink_idle")
+
+[node name="HugHUD" type="CanvasLayer" parent="."]
+layer = 12
+
+[node name="Panel" type="ColorRect" parent="HugHUD"]
+offset_left = 20.0
+offset_top = 110.0
+offset_right = 340.0
+offset_bottom = 210.0
+color = Color(0.04, 0.1, 0.18, 0.78)
+mouse_filter = 2
+
+[node name="TimerLabel" type="Label" parent="HugHUD/Panel"]
+offset_left = 12.0
+offset_top = 6.0
+offset_right = 120.0
+offset_bottom = 46.0
+theme_override_colors/font_color = Color(1, 0.85, 0.3, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/font_size = 34
+text = "45"
+
+[node name="LoveLabel" type="Label" parent="HugHUD/Panel"]
+offset_left = 130.0
+offset_top = 14.0
+offset_right = 310.0
+offset_bottom = 42.0
+theme_override_colors/font_color = Color(1, 0.6, 0.75, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 22
+text = "0 / 10"
+
+[node name="LoveBar" type="ProgressBar" parent="HugHUD/Panel"]
+offset_left = 12.0
+offset_top = 58.0
+offset_right = 308.0
+offset_bottom = 84.0
+theme_override_colors/font_color = Color(0, 0, 0, 0)
+value = 0.0
+show_percentage = false
 
 [node name="CompletionLabel" type="Label" parent="."]
 visible = false
