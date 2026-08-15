@@ -4,3 +4,6 @@
 
 [node name="ShotLevel" type="Node2D"]
 script = ExtResource("1_script")
+scene_path = "res://scenes/levels/world_3_level_1.tscn"
+out_name = "villain_legs"
+camera_focus_x = 1010.0

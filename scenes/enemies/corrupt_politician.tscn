@@ -17,6 +17,7 @@ patrol_speed = 70.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_texture")
+offset = Vector2(0, -16.5)
 scale = Vector2(1.45, 1.45)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

@@ -26,6 +26,7 @@ hp_bar_width = 160.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_texture")
+offset = Vector2(0, -16.5)
 scale = Vector2(1.9, 1.9)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
