@@ -112,6 +112,12 @@ position = Vector2(180, 850)
 
 [node name="ThiefBoss" parent="." instance=ExtResource("3_boss")]
 position = Vector2(1000, 780)
+max_health = 4
+patrol_speed = 140.0
+charge_speed = 300.0
+charge_cooldown = 1.25
+detect_range = 470.0
+hop_interval = 1.5
 Sprite2D/modulate = Color(0.55, 1, 0.55, 1)
 
 [node name="BoxA" parent="." instance=ExtResource("6_box")]
