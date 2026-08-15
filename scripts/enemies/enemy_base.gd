@@ -34,6 +34,18 @@ signal defeated(enemy: EnemyBase)
 @export var hop_strength := -360.0
 @export var hop_interval := 1.1
 
+@export_category("Ataque a distancia")
+## Si true, este enemigo lanza proyectiles a Luke cuando está dentro de
+## ranged_detect_range, con una cadencia de ranged_cooldown segundos.
+@export var can_ranged_attack := false
+@export var ranged_projectile_scene: PackedScene
+@export var ranged_detect_range := 420.0
+@export var ranged_cooldown := 2.2
+## Retraso inicial antes del primer disparo (evita que dispare apenas spawnea).
+@export var ranged_initial_delay := 0.6
+
+var _ranged_cooldown_time := 0.0
+
 var health := 1
 var spawn_x := 0.0
 var base_y := 0.0
@@ -53,6 +65,7 @@ func _ready() -> void:
 	health = max_health
 	spawn_x = global_position.x
 	base_y = global_position.y
+	_ranged_cooldown_time = ranged_initial_delay
 
 func _physics_process(delta: float) -> void:
 	if is_defeated:
@@ -69,6 +82,7 @@ func _physics_process(delta: float) -> void:
 			_handle_charge(delta)
 		MovementMode.HOP:
 			_handle_hop(delta)
+	_handle_ranged_attack(delta)
 	move_and_slide()
 	if sprite != null:
 		sprite.flip_h = patrol_direction > 0.0
@@ -132,6 +146,31 @@ func _handle_hop(delta: float) -> void:
 	if is_on_floor() and _hop_time >= hop_interval:
 		_hop_time = 0.0
 		velocity.y = hop_strength
+
+func _handle_ranged_attack(delta: float) -> void:
+	if not can_ranged_attack or ranged_projectile_scene == null:
+		return
+	if _ranged_cooldown_time > 0.0:
+		_ranged_cooldown_time -= delta
+		return
+	var target := _get_player()
+	if target == null:
+		return
+	if global_position.distance_to(target.global_position) > ranged_detect_range:
+		return
+	_fire_projectile(target)
+	_ranged_cooldown_time = ranged_cooldown
+
+func _fire_projectile(target: Luke) -> void:
+	var parent := get_parent()
+	if parent == null:
+		return
+	var dir := signf(target.global_position.x - global_position.x)
+	if is_zero_approx(dir):
+		dir = 1.0
+	var projectile: Node = ranged_projectile_scene.instantiate()
+	parent.add_child(projectile)
+	projectile.launch(global_position, dir, self)
 
 func _get_player() -> Luke:
 	var parent := get_parent()
