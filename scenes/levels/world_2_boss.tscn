@@ -12,6 +12,8 @@
 [ext_resource type="Texture2D" path="res://assets/Tiles/Default/terrain_stone_block.png" id="10_stone"]
 [ext_resource type="Texture2D" path="res://assets/Tiles/Default/fence.png" id="11_fence"]
 [ext_resource type="Texture2D" path="res://assets/Tiles/Default/door_closed.png" id="12_door"]
+[ext_resource type="Texture2D" path="res://assets/props/crosswalk.png" id="13_crosswalk"]
+[ext_resource type="Texture2D" path="res://assets/props/traffic_light.png" id="14_trafficlight"]
 
 [sub_resource type="RectangleShape2D" id="GroundShape"]
 size = Vector2(2000, 110)
@@ -107,6 +109,14 @@ texture = ExtResource("11_fence")
 [node name="FenceB" type="Sprite2D" parent="."]
 position = Vector2(1500, 915)
 texture = ExtResource("11_fence")
+
+[node name="TrafficLightBoss" type="Sprite2D" parent="."]
+position = Vector2(380, 924)
+texture = ExtResource("14_trafficlight")
+[node name="CrosswalkBoss" type="Sprite2D" parent="."]
+position = Vector2(1000, 953)
+scale = Vector2(6, 1)
+texture = ExtResource("13_crosswalk")
 
 [node name="CompletionLabel" type="Label" parent="."]
 visible = false

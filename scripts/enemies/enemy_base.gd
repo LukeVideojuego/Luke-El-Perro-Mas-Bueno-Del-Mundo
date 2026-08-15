@@ -71,16 +71,25 @@ func _physics_process(delta: float) -> void:
 	if sprite != null:
 		sprite.flip_h = patrol_direction > 0.0
 
+## Solo invierte la dirección cuando el enemigo se está alejando del punto
+## de spawn más allá del límite; si ya está volviendo, nunca vuelve a
+## activarse aunque la distancia absoluta siga siendo >= patrol_distance
+## por un frame más (evita que quede oscilando/trabado justo en el borde).
+func _past_patrol_edge() -> bool:
+	var offset := global_position.x - spawn_x
+	return (patrol_direction > 0.0 and offset >= patrol_distance) \
+		or (patrol_direction < 0.0 and offset <= -patrol_distance)
+
 func _handle_ground_patrol(delta: float) -> void:
 	velocity.y = minf(velocity.y + gravity * delta, 1100.0)
 	velocity.x = patrol_direction * patrol_speed
-	if absf(global_position.x - spawn_x) >= patrol_distance or is_on_wall():
+	if _past_patrol_edge() or is_on_wall():
 		patrol_direction *= -1.0
 
 func _handle_fly_horizontal() -> void:
 	velocity.x = patrol_direction * patrol_speed
 	velocity.y = 0.0
-	if absf(global_position.x - spawn_x) >= patrol_distance:
+	if _past_patrol_edge():
 		patrol_direction *= -1.0
 	if bob_amplitude > 0.0:
 		global_position.y = base_y + sin(_time * bob_frequency * TAU) * bob_amplitude
@@ -115,7 +124,7 @@ func _handle_charge(delta: float) -> void:
 func _handle_hop(delta: float) -> void:
 	velocity.y = minf(velocity.y + gravity * delta, 1100.0)
 	velocity.x = patrol_direction * patrol_speed
-	if absf(global_position.x - spawn_x) >= patrol_distance or is_on_wall():
+	if _past_patrol_edge() or is_on_wall():
 		patrol_direction *= -1.0
 	_hop_time += delta
 	if is_on_floor() and _hop_time >= hop_interval:

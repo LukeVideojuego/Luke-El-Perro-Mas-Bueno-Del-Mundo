@@ -64,4 +64,5 @@ func _update_time() -> void:
 	if time_label == null:
 		return
 	var total := int(elapsed_seconds)
-	time_label.text = "%02d:%02d" % [total / 60, total % 60]
+	var minutes := total / 60.0
+	time_label.text = "%02d:%02d" % [floori(minutes), total % 60]

@@ -16,6 +16,7 @@
 [ext_resource type="Texture2D" path="res://assets/Tiles/Default/terrain_sand_block_top.png" id="14_sand"]
 [ext_resource type="Texture2D" path="res://assets/Tiles/Default/terrain_stone_block.png" id="15_stone"]
 [ext_resource type="Texture2D" path="res://assets/Tiles/Default/spikes.png" id="16_spikes"]
+[ext_resource type="Texture2D" path="res://assets/props/temple.png" id="20_temple"]
 
 [sub_resource type="RectangleShape2D" id="GroundShape"]
 size = Vector2(4400, 110)
@@ -37,10 +38,24 @@ mission_text = "Escapa de las serpientes gigantes de la India."
 [node name="Sky" type="Sprite2D" parent="."]
 position = Vector2(2200, 540)
 texture = ExtResource("12_sky")
+modulate = Color(1, 0.88, 0.68, 1)
 
 [node name="Trees" type="Sprite2D" parent="."]
 position = Vector2(1400, 540)
 texture = ExtResource("13_trees")
+modulate = Color(0.9, 0.72, 0.5, 1)
+
+[node name="TempleOne" type="Sprite2D" parent="."]
+position = Vector2(950, 760)
+scale = Vector2(2.2, 2.2)
+z_index = -6
+texture = ExtResource("20_temple")
+
+[node name="TempleTwo" type="Sprite2D" parent="."]
+position = Vector2(3300, 760)
+scale = Vector2(1.8, 1.8)
+z_index = -6
+texture = ExtResource("20_temple")
 
 [node name="Ground" type="StaticBody2D" parent="."]
 

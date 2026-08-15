@@ -72,27 +72,27 @@ offset_bottom = 648.0
 color = Color(0.3, 0.6, 0.24, 1)
 
 [node name="Diego" type="Sprite2D" parent="Panel2"]
-position = Vector2(120, 500)
+position = Vector2(110, 456)
 scale = Vector2(2.8, 2.8)
 texture = ExtResource("4_diego")
 [node name="Lara" type="Sprite2D" parent="Panel2"]
-position = Vector2(310, 505)
+position = Vector2(300, 491)
 scale = Vector2(2.8, 2.8)
 texture = ExtResource("5_lara")
 [node name="Bauti" type="Sprite2D" parent="Panel2"]
-position = Vector2(500, 505)
+position = Vector2(490, 479)
 scale = Vector2(2.8, 2.8)
 texture = ExtResource("6_bauti")
 [node name="Zoe" type="Sprite2D" parent="Panel2"]
-position = Vector2(690, 505)
+position = Vector2(690, 467)
 scale = Vector2(2.8, 2.8)
 texture = ExtResource("7_zoe")
 [node name="Roma" type="Sprite2D" parent="Panel2"]
-position = Vector2(880, 505)
+position = Vector2(880, 504)
 scale = Vector2(2.8, 2.8)
 texture = ExtResource("8_roma")
 [node name="Mathi" type="Sprite2D" parent="Panel2"]
-position = Vector2(1050, 505)
+position = Vector2(1060, 473)
 scale = Vector2(2.8, 2.8)
 texture = ExtResource("9_mathi")
 

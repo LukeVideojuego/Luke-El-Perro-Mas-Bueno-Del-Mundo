@@ -104,13 +104,14 @@ func _on_level_completed(level_id: String) -> void:
 	if is_transitioning:
 		return
 	is_transitioning = true
-	var next_level_id := LevelProgression.get_next_level(level_id)
 	if level_id == "world_4_boss":
+		# La cinemática final decide cuándo terminar (el jugador la mira o
+		# se auto-completa); _on_final_finished() se encarga de cargar
+		# final_screen cuando corresponda, no hay transición genérica acá.
 		show_final_cinematic()
-		await get_tree().create_timer(0.1).timeout
-		if final_cinematic != null:
-			final_cinematic.queue_free()
-			final_cinematic = null
+		is_transitioning = false
+		return
+	var next_level_id := LevelProgression.get_next_level(level_id)
 	await transition.play_completion(next_level_id)
 	if not next_level_id.is_empty() and not LevelProgression.get_scene_path(next_level_id).is_empty():
 		GameState.prepare_next_level()

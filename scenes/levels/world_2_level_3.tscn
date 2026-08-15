@@ -19,6 +19,8 @@
 [ext_resource type="Texture2D" path="res://assets/Tiles/Default/window.png" id="17_window"]
 [ext_resource type="Texture2D" path="res://assets/characters/Default/character_green_idle.png" id="18_npc1"]
 [ext_resource type="Texture2D" path="res://assets/characters/Default/character_purple_idle.png" id="19_npc2"]
+[ext_resource type="Texture2D" path="res://assets/props/crosswalk.png" id="21_crosswalk"]
+[ext_resource type="Texture2D" path="res://assets/props/traffic_light.png" id="22_trafficlight"]
 
 [sub_resource type="RectangleShape2D" id="GroundShape"]
 size = Vector2(4600, 110)
@@ -199,6 +201,18 @@ texture = ExtResource("15_fence")
 
 [node name="Finish" parent="." instance=ExtResource("5_finish")]
 position = Vector2(4300, 850)
+
+[node name="TrafficLight" type="Sprite2D" parent="."]
+position = Vector2(420, 924)
+texture = ExtResource("22_trafficlight")
+[node name="Crosswalk" type="Sprite2D" parent="."]
+position = Vector2(1150, 953)
+scale = Vector2(6, 1)
+texture = ExtResource("21_crosswalk")
+[node name="CrosswalkTwo" type="Sprite2D" parent="."]
+position = Vector2(3450, 953)
+scale = Vector2(6, 1)
+texture = ExtResource("21_crosswalk")
 
 [node name="CompletionLabel" type="Label" parent="."]
 visible = false
