@@ -1,8 +1,8 @@
 extends Node2D
 
-@export var scene_path := "res://scenes/levels/world_3_level_1.tscn"
-@export var out_name := "world3"
-@export var camera_focus_x := 0.0
+@export var scene_path := "res://scenes/levels/world_4_level_1.tscn"
+@export var out_name := "world4_platforms"
+@export var camera_focus_x := 1400.0
 var level: Node
 var frame := 0
 

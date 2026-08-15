@@ -67,11 +67,19 @@ shape = SubResource("GroundShape")
 [node name="PlatformOne" type="StaticBody2D" parent="."]
 position = Vector2(620, 820)
 
+[node name="Visual" type="Sprite2D" parent="PlatformOne"]
+texture = ExtResource("12_white")
+scale = Vector2(6.5625, 0.8125)
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlatformOne"]
 shape = SubResource("PlatformShape")
 
 [node name="PlatformTwo" type="StaticBody2D" parent="."]
 position = Vector2(1400, 730)
+
+[node name="Visual" type="Sprite2D" parent="PlatformTwo"]
+texture = ExtResource("12_white")
+scale = Vector2(6.5625, 0.8125)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlatformTwo"]
 shape = SubResource("PlatformShape")
@@ -79,11 +87,19 @@ shape = SubResource("PlatformShape")
 [node name="PlatformThree" type="StaticBody2D" parent="."]
 position = Vector2(2300, 800)
 
+[node name="Visual" type="Sprite2D" parent="PlatformThree"]
+texture = ExtResource("12_white")
+scale = Vector2(6.5625, 0.8125)
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlatformThree"]
 shape = SubResource("PlatformShape")
 
 [node name="PlatformFour" type="StaticBody2D" parent="."]
 position = Vector2(3200, 730)
+
+[node name="Visual" type="Sprite2D" parent="PlatformFour"]
+texture = ExtResource("12_white")
+scale = Vector2(6.5625, 0.8125)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlatformFour"]
 shape = SubResource("PlatformShape")
