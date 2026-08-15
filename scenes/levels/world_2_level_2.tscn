@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3]
+[gd_scene load_steps=25 format=3]
 
 [ext_resource type="Script" path="res://scripts/levels/level_base.gd" id="1_level"]
 [ext_resource type="PackedScene" path="res://scenes/player/player.tscn" id="2_luke"]
@@ -20,6 +20,7 @@
 [ext_resource type="Texture2D" path="res://assets/characters/Default/character_pink_idle.png" id="18_npc3"]
 [ext_resource type="Texture2D" path="res://assets/props/crosswalk.png" id="21_crosswalk"]
 [ext_resource type="Texture2D" path="res://assets/props/traffic_light.png" id="22_trafficlight"]
+[ext_resource type="PackedScene" path="res://scenes/objects/coin.tscn" id="23_coin"]
 
 [sub_resource type="RectangleShape2D" id="GroundShape"]
 size = Vector2(4400, 110)
@@ -250,6 +251,16 @@ texture = ExtResource("21_crosswalk")
 position = Vector2(3450, 953)
 scale = Vector2(6, 1)
 texture = ExtResource("21_crosswalk")
+
+
+[node name="CoinA" parent="." instance=ExtResource("23_coin")]
+position = Vector2(792, 780)
+[node name="CoinB" parent="." instance=ExtResource("23_coin")]
+position = Vector2(1760, 780)
+[node name="CoinC" parent="." instance=ExtResource("23_coin")]
+position = Vector2(2728, 780)
+[node name="CoinD" parent="." instance=ExtResource("23_coin")]
+position = Vector2(3696, 780)
 
 [node name="CompletionLabel" type="Label" parent="."]
 visible = false

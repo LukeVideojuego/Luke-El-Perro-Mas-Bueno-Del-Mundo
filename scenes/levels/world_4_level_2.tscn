@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3]
+[gd_scene load_steps=23 format=3]
 
 [ext_resource type="Script" path="res://scripts/levels/level_base.gd" id="1_level"]
 [ext_resource type="PackedScene" path="res://scenes/player/player.tscn" id="2_luke"]
@@ -16,6 +16,7 @@
 [ext_resource type="Texture2D" path="res://assets/Tiles/Default/water_top.png" id="14_water_top"]
 [ext_resource type="Texture2D" path="res://assets/Tiles/Default/terrain_grass_block_top.png" id="15_grass"]
 [ext_resource type="Texture2D" path="res://assets/Tiles/Default/terrain_stone_block.png" id="16_stone"]
+[ext_resource type="PackedScene" path="res://scenes/objects/coin.tscn" id="17_coin"]
 
 [sub_resource type="RectangleShape2D" id="StartPadShape"]
 size = Vector2(300, 110)
@@ -280,6 +281,16 @@ position = Vector2(3000, 680)
 
 [node name="Finish" parent="." instance=ExtResource("7_finish")]
 position = Vector2(4000, 770)
+
+
+[node name="CoinA" parent="." instance=ExtResource("17_coin")]
+position = Vector2(828, 780)
+[node name="CoinB" parent="." instance=ExtResource("17_coin")]
+position = Vector2(1840, 780)
+[node name="CoinC" parent="." instance=ExtResource("17_coin")]
+position = Vector2(2852, 780)
+[node name="CoinD" parent="." instance=ExtResource("17_coin")]
+position = Vector2(3864, 780)
 
 [node name="CompletionLabel" type="Label" parent="."]
 visible = false

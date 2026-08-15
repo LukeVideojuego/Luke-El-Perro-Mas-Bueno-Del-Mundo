@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3]
+[gd_scene load_steps=17 format=3]
 
 [ext_resource type="Script" path="res://scripts/levels/level_base.gd" id="1_level"]
 [ext_resource type="PackedScene" path="res://scenes/player/player.tscn" id="2_luke"]
@@ -14,6 +14,7 @@
 [ext_resource type="Texture2D" path="res://assets/Tiles/Default/door_closed.png" id="12_door"]
 [ext_resource type="Texture2D" path="res://assets/props/crosswalk.png" id="13_crosswalk"]
 [ext_resource type="Texture2D" path="res://assets/props/traffic_light.png" id="14_trafficlight"]
+[ext_resource type="PackedScene" path="res://scenes/objects/coin.tscn" id="15_coin"]
 
 [sub_resource type="RectangleShape2D" id="GroundShape"]
 size = Vector2(2000, 110)
@@ -129,6 +130,16 @@ texture = ExtResource("14_trafficlight")
 position = Vector2(1000, 953)
 scale = Vector2(6, 1)
 texture = ExtResource("13_crosswalk")
+
+
+[node name="CoinA" parent="." instance=ExtResource("15_coin")]
+position = Vector2(440, 620)
+[node name="CoinB" parent="." instance=ExtResource("15_coin")]
+position = Vector2(800, 620)
+[node name="CoinC" parent="." instance=ExtResource("15_coin")]
+position = Vector2(1200, 620)
+[node name="CoinD" parent="." instance=ExtResource("15_coin")]
+position = Vector2(1560, 620)
 
 [node name="CompletionLabel" type="Label" parent="."]
 visible = false

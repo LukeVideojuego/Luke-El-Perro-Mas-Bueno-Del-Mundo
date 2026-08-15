@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3]
+[gd_scene load_steps=30 format=3]
 
 [ext_resource type="Script" path="res://scripts/levels/world_1_level_2.gd" id="1_level"]
 [ext_resource type="PackedScene" path="res://scenes/player/player.tscn" id="2_luke"]
@@ -22,6 +22,7 @@
 [ext_resource type="Texture2D" path="res://assets/Tiles/Default/sign_exit.png" id="20_exit"]
 [ext_resource type="Texture2D" path="res://assets/Tiles/Default/spikes.png" id="21_spikes"]
 [ext_resource type="Texture2D" path="res://assets/Tiles/Default/bush.png" id="22_bush"]
+[ext_resource type="PackedScene" path="res://scenes/objects/coin.tscn" id="23_coin"]
 
 [sub_resource type="RectangleShape2D" id="GroundShape"]
 size = Vector2(4200, 110)
@@ -253,3 +254,13 @@ position = Vector2(2700, 929)
 contents = ExtResource("6_meat")
 [node name="Finish" parent="." instance=ExtResource("5_finish")]
 position = Vector2(3880, 850)
+
+[node name="CoinA" parent="." instance=ExtResource("23_coin")]
+position = Vector2(756, 780)
+[node name="CoinB" parent="." instance=ExtResource("23_coin")]
+position = Vector2(1680, 780)
+[node name="CoinC" parent="." instance=ExtResource("23_coin")]
+position = Vector2(2604, 780)
+[node name="CoinD" parent="." instance=ExtResource("23_coin")]
+position = Vector2(3528, 780)
+
