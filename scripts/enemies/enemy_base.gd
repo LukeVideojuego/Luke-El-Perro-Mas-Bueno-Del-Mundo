@@ -18,6 +18,8 @@ signal defeated(enemy: EnemyBase)
 @export_category("Combat")
 @export var contact_damage := 1
 @export var max_health := 1
+## Si true, este enemigo suelta un huesito coleccionable al ser derrotado.
+@export var drops_bone_on_defeat := false
 @export_category("Movement")
 @export var patrol_speed := 95.0
 @export var gravity := 1800.0
@@ -145,8 +147,21 @@ func receive_attack(_attacker: Node) -> void:
 		is_defeated = true
 		$CollisionShape2D.set_deferred("disabled", true)
 		$DamageArea.set_deferred("monitoring", false)
+		_drop_bone()
 		defeated.emit(self)
 		queue_free()
+
+const BONE_PICKUP_SCENE := preload("res://scenes/objects/bone_pickup.tscn")
+
+func _drop_bone() -> void:
+	if not drops_bone_on_defeat:
+		return
+	var parent := get_parent()
+	if parent == null:
+		return
+	var bone := BONE_PICKUP_SCENE.instantiate()
+	bone.global_position = global_position
+	parent.add_child(bone)
 
 func _on_damage_area_body_entered(body: Node2D) -> void:
 	if not is_defeated and body is Luke:

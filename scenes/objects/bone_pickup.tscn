@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/world/bone_pickup.gd" id="1_script"]
+[ext_resource type="Texture2D" path="res://assets/ui/icon_huesito.png" id="2_icon"]
+
+[sub_resource type="CircleShape2D" id="PickupShape"]
+radius = 26.0
+
+[node name="BonePickup" type="Area2D"]
+collision_layer = 0
+collision_mask = 1
+monitoring = true
+script = ExtResource("1_script")
+
+[node name="Icon" type="Sprite2D" parent="."]
+scale = Vector2(0.85, 0.85)
+texture = ExtResource("2_icon")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("PickupShape")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

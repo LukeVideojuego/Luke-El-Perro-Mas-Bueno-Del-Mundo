@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3]
+[gd_scene load_steps=30 format=3]
 
 [ext_resource type="Script" path="res://scripts/levels/level_base.gd" id="1_level"]
 [ext_resource type="PackedScene" path="res://scenes/player/player.tscn" id="2_luke"]
@@ -20,6 +20,7 @@
 [ext_resource type="PackedScene" path="res://scenes/objects/invincibility_power_up.tscn" id="18_invincibility"]
 [ext_resource type="Texture2D" path="res://assets/Tiles/Default/bush.png" id="19_bush"]
 [ext_resource type="PackedScene" path="res://scenes/objects/bubble.tscn" id="20_bubble"]
+[ext_resource type="PackedScene" path="res://scenes/objects/bone_pickup.tscn" id="21_bonepickup"]
 
 [sub_resource type="RectangleShape2D" id="StartPadShape"]
 size = Vector2(300, 110)
@@ -280,6 +281,7 @@ bob_amplitude = 26.0
 [node name="FishPurpleTwo" parent="." instance=ExtResource("5_fish_purple")]
 position = Vector2(3600, 770)
 bob_amplitude = 26.0
+drops_bone_on_defeat = true
 
 [node name="BoxA" parent="." instance=ExtResource("10_box")]
 position = Vector2(600, 929)
@@ -458,3 +460,6 @@ add_theme_font_size_override("font_size", 56)
 add_theme_color_override("font_color", Color(0.1, 0.65, 0.15, 1))
 add_theme_color_override("font_outline_color", Color(1, 1, 1, 1))
 add_theme_constant_override("outline_size", 8)
+
+[node name="HiddenBone" parent="." instance=ExtResource("21_bonepickup")]
+position = Vector2(2150, 520)

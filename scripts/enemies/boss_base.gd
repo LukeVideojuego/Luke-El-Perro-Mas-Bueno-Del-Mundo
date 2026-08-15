@@ -9,6 +9,9 @@ signal boss_defeated
 @export var hp_bar_width := 120.0
 @export var hp_bar_height := 10.0
 
+func _init() -> void:
+	drops_bone_on_defeat = true
+
 var _hp_back: ColorRect
 var _hp_front: ColorRect
 
@@ -36,6 +39,7 @@ func receive_attack(_attacker: Node) -> void:
 		is_defeated = true
 		$CollisionShape2D.set_deferred("disabled", true)
 		$DamageArea.set_deferred("monitoring", false)
+		_drop_bone()
 		boss_defeated.emit(self)
 		GameState.complete_current_level()
 		queue_free()

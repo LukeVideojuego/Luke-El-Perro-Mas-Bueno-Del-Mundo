@@ -19,6 +19,7 @@ func save_game() -> void:
 		"coins": GameState.coins,
 		"has_seen_intro": GameState.has_seen_intro,
 		"highest_order_reached": GameState.highest_order_reached,
+		"bone_throw_unlocked": GameState.bone_throw_unlocked,
 	}
 	var file := FileAccess.open(SAVE_PATH, FileAccess.WRITE)
 	if file == null:
@@ -53,6 +54,7 @@ func load_game() -> bool:
 	GameState.coins = int(data.get("coins", 0))
 	GameState.has_seen_intro = bool(data.get("has_seen_intro", false))
 	GameState.highest_order_reached = maxi(1, int(data.get("highest_order_reached", 1)))
+	GameState.bone_throw_unlocked = bool(data.get("bone_throw_unlocked", false))
 	GameState.is_level_complete = false
 	GameState.resume_at_checkpoint = true
 	return true

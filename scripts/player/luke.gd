@@ -24,6 +24,13 @@ extends CharacterBody2D
 @export var speed_boost_duration := 6.0
 @export var invincibility_duration := 6.0
 
+@export_category("Ataque a distancia")
+## Ventana para detectar doble tap del botón de ataque (huesito a distancia).
+@export var double_tap_window := 0.28
+@export var throw_offset := Vector2(46.0, -6.0)
+
+const THROWN_BONE_SCENE := preload("res://scenes/objects/thrown_bone.tscn")
+
 signal attack_started
 signal damaged
 signal defeated
@@ -34,6 +41,7 @@ signal invincibility_changed(is_active: bool)
 var facing_direction := 1
 var jumps_used := 0
 var is_attacking := false
+var is_throwing := false
 var has_protective_aura := false
 var can_receive_damage := true
 var has_speed_boost := false
@@ -41,13 +49,15 @@ var has_invincibility := false
 
 var _speed_boost_token := 0
 var _invincibility_token := 0
+var _attack_tap_pending := false
+var _attack_tap_timer := 0.0
 
 func _physics_process(delta: float) -> void:
 	var was_on_floor := is_on_floor()
 	_apply_gravity(delta)
 	_handle_movement(delta)
 	_handle_jump(was_on_floor)
-	_handle_attack()
+	_handle_attack(delta)
 	move_and_slide()
 	if is_on_floor():
 		jumps_used = 0
@@ -81,13 +91,48 @@ func _handle_jump(was_on_floor: bool) -> void:
 		jumps_used = 2
 		AudioDirector.play_event(&"jump")
 
-func _handle_attack() -> void:
-	if Input.is_action_just_pressed("attack") and not is_attacking:
-		_start_attack()
-	elif is_attacking:
+## Un solo toque de "attack" = golpe cuerpo a cuerpo inmediato (sin retraso,
+## comportamiento original intacto). Con el huesito desbloqueado, un doble
+## tap dentro de double_tap_window lanza el ataque a distancia en su lugar;
+## el primer toque espera esa ventana antes de confirmarse como golpe simple.
+func _handle_attack(delta: float) -> void:
+	if not GameState.bone_throw_unlocked:
+		if Input.is_action_just_pressed("attack") and not is_attacking:
+			_start_attack()
+	else:
+		if Input.is_action_just_pressed("attack"):
+			if _attack_tap_pending:
+				_attack_tap_pending = false
+				if not is_attacking and not is_throwing:
+					_start_bone_throw()
+			else:
+				_attack_tap_pending = true
+				_attack_tap_timer = double_tap_window
+		elif _attack_tap_pending:
+			_attack_tap_timer -= delta
+			if _attack_tap_timer <= 0.0:
+				_attack_tap_pending = false
+				if not is_attacking and not is_throwing:
+					_start_attack()
+	if is_attacking:
 		for body in attack_area.get_overlapping_bodies():
 			if body.has_method("receive_attack"):
 				body.receive_attack(self)
+
+func _start_bone_throw() -> void:
+	is_throwing = true
+	attack_visual.visible = true
+	attack_visual.scale.x = facing_direction
+	attack_started.emit()
+	AudioDirector.play_event(&"attack")
+	var bone := THROWN_BONE_SCENE.instantiate()
+	var parent := get_parent()
+	if parent != null:
+		parent.add_child(bone)
+		bone.launch(global_position + throw_offset * Vector2(facing_direction, 1.0), float(facing_direction), self)
+	await get_tree().create_timer(0.15).timeout
+	attack_visual.visible = false
+	is_throwing = false
 
 func _start_attack() -> void:
 	is_attacking = true
@@ -170,7 +215,7 @@ func _update_animation() -> void:
 		animated_sprite.modulate = Color(0.6, 0.85, 1.0, 1.0)
 	else:
 		animated_sprite.modulate = Color(1, 1, 1, 1)
-	if is_attacking:
+	if is_attacking or is_throwing:
 		animated_sprite.play("attack")
 	elif not is_on_floor():
 		animated_sprite.play("jump")

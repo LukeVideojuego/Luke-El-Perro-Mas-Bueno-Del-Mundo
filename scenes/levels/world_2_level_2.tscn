@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3]
+[gd_scene load_steps=28 format=3]
 
 [ext_resource type="Script" path="res://scripts/levels/level_base.gd" id="1_level"]
 [ext_resource type="PackedScene" path="res://scenes/player/player.tscn" id="2_luke"]
@@ -23,6 +23,7 @@
 [ext_resource type="PackedScene" path="res://scenes/objects/coin.tscn" id="23_coin"]
 [ext_resource type="PackedScene" path="res://scenes/objects/invincibility_power_up.tscn" id="24_invincibility"]
 [ext_resource type="Texture2D" path="res://assets/Tiles/Default/bush.png" id="25_bush"]
+[ext_resource type="PackedScene" path="res://scenes/objects/bone_pickup.tscn" id="26_bonepickup"]
 
 [sub_resource type="RectangleShape2D" id="GroundShape"]
 size = Vector2(4400, 110)
@@ -217,6 +218,7 @@ patrol_distance = 130.0
 [node name="ThiefThree" parent="." instance=ExtResource("3_thief")]
 position = Vector2(3000, 850)
 patrol_distance = 150.0
+drops_bone_on_defeat = true
 
 [node name="BoxA" parent="." instance=ExtResource("9_box")]
 position = Vector2(1500, 929)
@@ -296,3 +298,6 @@ add_theme_font_size_override("font_size", 56)
 add_theme_color_override("font_color", Color(0.1, 0.65, 0.15, 1))
 add_theme_color_override("font_outline_color", Color(1, 1, 1, 1))
 add_theme_constant_override("outline_size", 8)
+
+[node name="HiddenBone" parent="." instance=ExtResource("26_bonepickup")]
+position = Vector2(3250, 620)

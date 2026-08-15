@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3]
+[gd_scene load_steps=33 format=3]
 
 [ext_resource type="Script" path="res://scripts/levels/world_1_level_2.gd" id="1_level"]
 [ext_resource type="PackedScene" path="res://scenes/player/player.tscn" id="2_luke"]
@@ -25,6 +25,7 @@
 [ext_resource type="PackedScene" path="res://scenes/objects/coin.tscn" id="23_coin"]
 [ext_resource type="PackedScene" path="res://scenes/objects/invincibility_power_up.tscn" id="24_invincibility"]
 [ext_resource type="Texture2D" path="res://assets/Tiles/Default/bricks_brown.png" id="25_brick"]
+[ext_resource type="PackedScene" path="res://scenes/objects/bone_pickup.tscn" id="26_bonepickup"]
 
 [sub_resource type="RectangleShape2D" id="GroundShape"]
 size = Vector2(4200, 110)
@@ -235,6 +236,7 @@ patrol_distance = 110.0
 [node name="ThiefThree" parent="." instance=ExtResource("3_thief")]
 position = Vector2(3240, 850)
 patrol_distance = 160.0
+drops_bone_on_defeat = true
 
 [node name="Checkpoint" parent="." instance=ExtResource("4_checkpoint")]
 position = Vector2(2210, 860)
@@ -277,3 +279,6 @@ position = Vector2(4032, 918)
 scale = Vector2(1.2, 1.2)
 texture = ExtResource("22_bush")
 
+
+[node name="HiddenBone" parent="." instance=ExtResource("26_bonepickup")]
+position = Vector2(1910, 500)

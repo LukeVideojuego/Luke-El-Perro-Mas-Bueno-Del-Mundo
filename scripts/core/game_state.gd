@@ -9,6 +9,7 @@ signal level_completed(level_id: String)
 signal coins_changed(total_coins: int)
 signal speed_boost_changed(is_active: bool)
 signal invincibility_changed(is_active: bool)
+signal bone_throw_unlocked_changed(is_unlocked: bool)
 
 const DEFAULT_LIVES := 3
 
@@ -20,6 +21,10 @@ var current_level_id := ""
 var is_level_complete := false
 var coins := 0
 var has_seen_intro := false
+
+## Permanente una vez conseguido el primer huesito: desbloquea el ataque a
+## distancia de Luke (doble tap del botón de ataque). Nunca se desactiva.
+var bone_throw_unlocked := false
 
 ## Orden global (LevelProgression.get_global_order) del nivel más avanzado
 ## que el jugador ya desbloqueó. Nunca baja; lo usa el mapa del mundo para
@@ -73,6 +78,13 @@ func set_invincibility(active: bool) -> void:
 func add_coins(amount: int = 1) -> void:
 	coins += amount
 	coins_changed.emit(coins)
+	SaveManager.save_game()
+
+func unlock_bone_throw() -> void:
+	if bone_throw_unlocked:
+		return
+	bone_throw_unlocked = true
+	bone_throw_unlocked_changed.emit(true)
 	SaveManager.save_game()
 
 func lose_life() -> bool:
