@@ -18,6 +18,7 @@ func save_game() -> void:
 		"lives": GameState.lives,
 		"coins": GameState.coins,
 		"has_seen_intro": GameState.has_seen_intro,
+		"highest_order_reached": GameState.highest_order_reached,
 	}
 	var file := FileAccess.open(SAVE_PATH, FileAccess.WRITE)
 	if file == null:
@@ -51,6 +52,7 @@ func load_game() -> bool:
 	GameState.lives = int(data.get("lives", GameState.DEFAULT_LIVES))
 	GameState.coins = int(data.get("coins", 0))
 	GameState.has_seen_intro = bool(data.get("has_seen_intro", false))
+	GameState.highest_order_reached = maxi(1, int(data.get("highest_order_reached", 1)))
 	GameState.is_level_complete = false
 	GameState.resume_at_checkpoint = true
 	return true
@@ -58,14 +60,23 @@ func load_game() -> bool:
 ## Solo lee has_seen_intro sin tocar el resto del estado; se usa al arrancar
 ## el juego para saber si "Comenzar juego" debe mostrar la introducción.
 func peek_has_seen_intro() -> bool:
+	return bool(_peek_field("has_seen_intro", false))
+
+## Solo lee el progreso desbloqueado, sin tocar el resto del estado; se usa
+## para poblar el mapa del mundo aunque el jugador no haya tocado "Cargar
+## partida" todavía.
+func peek_highest_order_reached() -> int:
+	return maxi(1, int(_peek_field("highest_order_reached", 1)))
+
+func _peek_field(key: String, default_value):
 	if not has_save():
-		return false
+		return default_value
 	var file := FileAccess.open(SAVE_PATH, FileAccess.READ)
 	if file == null:
-		return false
+		return default_value
 	var text := file.get_as_text()
 	file.close()
 	var parsed = JSON.parse_string(text)
 	if typeof(parsed) != TYPE_DICTIONARY:
-		return false
-	return bool(parsed.get("has_seen_intro", false))
+		return default_value
+	return parsed.get(key, default_value)

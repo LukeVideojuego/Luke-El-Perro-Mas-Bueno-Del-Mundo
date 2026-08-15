@@ -9,16 +9,19 @@ var is_transitioning := false
 var game_started := false
 var intro_cinematic: Node = null
 var final_cinematic: Node = null
+var world_map: Node = null
 
 func _ready() -> void:
 	hud.visible = false
 	GameState.level_completed.connect(_on_level_completed)
 	GameState.has_seen_intro = SaveManager.peek_has_seen_intro()
+	GameState.highest_order_reached = SaveManager.peek_highest_order_reached()
 	var menu := get_node_or_null("MainMenu")
 	if menu != null:
 		menu.new_game_requested.connect(start_game)
 		menu.continue_requested.connect(_on_continue_requested)
 		menu.password_requested.connect(_on_password_requested)
+		menu.map_requested.connect(_on_map_requested)
 	else:
 		start_game()
 
@@ -54,6 +57,34 @@ func _on_password_requested(level_id: String) -> void:
 		return
 	game_started = true
 	GameState.reset_for_new_game()
+	_free_menu()
+	GameState.current_level_id = level_id
+	GameState.level_begun.emit(level_id)
+	load_level(level_id)
+
+## Muestra el mapa del mundo desde el menú principal (no reemplaza al menú,
+## solo se superpone; "VOLVER" lo cierra sin perder el menú de fondo).
+func _on_map_requested() -> void:
+	if world_map != null:
+		return
+	var map_scene := load("res://scenes/ui/world_map.tscn") as PackedScene
+	world_map = map_scene.instantiate()
+	add_child(world_map)
+	world_map.level_selected.connect(_on_map_level_selected)
+	world_map.closed.connect(_on_map_closed)
+
+func _on_map_closed() -> void:
+	if world_map != null:
+		world_map.queue_free()
+		world_map = null
+
+func _on_map_level_selected(level_id: String) -> void:
+	if game_started:
+		return
+	_on_map_closed()
+	game_started = true
+	GameState.reset_for_new_game()
+	GameState.highest_order_reached = SaveManager.peek_highest_order_reached()
 	_free_menu()
 	GameState.current_level_id = level_id
 	GameState.level_begun.emit(level_id)

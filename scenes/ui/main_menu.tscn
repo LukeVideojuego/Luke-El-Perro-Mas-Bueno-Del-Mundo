@@ -101,6 +101,12 @@ size_flags_horizontal = 4
 theme_override_font_sizes/font_size = 26
 text = "CONTRASEÑA"
 
+[node name="MapButton" type="Button" parent="MenuPanel/Center"]
+custom_minimum_size = Vector2(360, 56)
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 26
+text = "MAPA DEL MUNDO"
+
 [node name="Spacer2" type="Control" parent="MenuPanel/Center"]
 custom_minimum_size = Vector2(0, 12)
 

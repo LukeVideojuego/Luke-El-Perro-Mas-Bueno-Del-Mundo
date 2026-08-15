@@ -21,6 +21,12 @@ var is_level_complete := false
 var coins := 0
 var has_seen_intro := false
 
+## Orden global (LevelProgression.get_global_order) del nivel más avanzado
+## que el jugador ya desbloqueó. Nunca baja; lo usa el mapa del mundo para
+## decidir qué niveles se pueden elegir. 1 = Mundo 1 Nivel 1, siempre
+## desbloqueado desde el arranque.
+var highest_order_reached := 1
+
 ## Cuando true, el próximo nivel que arranque debe reubicar a Luke en
 ## checkpoint_position en vez de en su SpawnPoint (usado por "Cargar partida").
 var resume_at_checkpoint := false
@@ -87,6 +93,8 @@ func complete_current_level() -> void:
 	if is_level_complete:
 		return
 	is_level_complete = true
+	var next_order := LevelProgression.get_global_order(current_level_id) + 1
+	highest_order_reached = maxi(highest_order_reached, next_order)
 	level_completed.emit(current_level_id)
 	SaveManager.save_game()
 
@@ -108,3 +116,4 @@ func reset_for_new_game() -> void:
 	is_level_complete = false
 	coins = 0
 	resume_at_checkpoint = false
+	highest_order_reached = 1

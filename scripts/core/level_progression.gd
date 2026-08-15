@@ -56,6 +56,21 @@ static func get_world_name(world: int) -> String:
 static func get_boss_name(world: int) -> String:
 	return String(BOSS_NAMES.get(world, "Jefe del Mundo %d" % world))
 
+## Orden global 1..16 (Mundo 1 Nivel 1 = 1, ..., Mundo 4 Jefe = 16), usado
+## por el mapa del mundo para saber qué niveles están desbloqueados.
+static func get_global_order(level_id: String) -> int:
+	var world := get_world(level_id)
+	var order := get_order(level_id)
+	if world <= 0 or order <= 0:
+		return 0
+	return (world - 1) * 4 + order
+
+static func get_level_id_for_global_order(global_order: int) -> String:
+	for level_id in LEVELS:
+		if get_global_order(level_id) == global_order:
+			return level_id
+	return ""
+
 ## Contraseñas simples y ampliables: "LUKE" + número de orden global de dos
 ## dígitos (01..16). Pensadas para que un jugador pueda saltar directo a
 ## cualquier nivel sin tener que jugar los anteriores.

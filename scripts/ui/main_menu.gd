@@ -5,12 +5,14 @@ extends CanvasLayer
 signal new_game_requested
 signal continue_requested
 signal password_requested(level_id: String)
+signal map_requested
 
 @onready var menu_panel: Control = $MenuPanel
 @onready var password_panel: Control = $PasswordPanel
 @onready var new_game_button: Button = $MenuPanel/Center/NewGameButton
 @onready var continue_button: Button = $MenuPanel/Center/ContinueButton
 @onready var password_button: Button = $MenuPanel/Center/PasswordButton
+@onready var map_button: Button = $MenuPanel/Center/MapButton
 @onready var password_input: LineEdit = $PasswordPanel/Center/PasswordInput
 @onready var password_error: Label = $PasswordPanel/Center/ErrorLabel
 @onready var password_submit: Button = $PasswordPanel/Center/SubmitButton
@@ -21,6 +23,7 @@ func _ready() -> void:
 	new_game_button.pressed.connect(_on_new_game_pressed)
 	continue_button.pressed.connect(_on_continue_pressed)
 	password_button.pressed.connect(_on_password_menu_pressed)
+	map_button.pressed.connect(func() -> void: map_requested.emit())
 	password_submit.pressed.connect(_on_password_submit)
 	password_back.pressed.connect(_on_password_back)
 	password_input.text_submitted.connect(func(_text: String) -> void: _on_password_submit())
