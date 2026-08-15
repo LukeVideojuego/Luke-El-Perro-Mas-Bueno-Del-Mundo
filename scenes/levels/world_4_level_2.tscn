@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3]
+[gd_scene load_steps=29 format=3]
 
 [ext_resource type="Script" path="res://scripts/levels/level_base.gd" id="1_level"]
 [ext_resource type="PackedScene" path="res://scenes/player/player.tscn" id="2_luke"]
@@ -19,6 +19,7 @@
 [ext_resource type="PackedScene" path="res://scenes/objects/coin.tscn" id="17_coin"]
 [ext_resource type="PackedScene" path="res://scenes/objects/invincibility_power_up.tscn" id="18_invincibility"]
 [ext_resource type="Texture2D" path="res://assets/Tiles/Default/bush.png" id="19_bush"]
+[ext_resource type="PackedScene" path="res://scenes/objects/bubble.tscn" id="20_bubble"]
 
 [sub_resource type="RectangleShape2D" id="StartPadShape"]
 size = Vector2(300, 110)
@@ -43,25 +44,25 @@ mission_text = "Cruza el mar saltando de isla en isla."
 [node name="Sky" type="Sprite2D" parent="."]
 position = Vector2(2300, 540)
 texture = ExtResource("11_sky")
-modulate = Color(0.65, 0.85, 1, 1)
+modulate = Color(0.18, 0.5, 0.68, 1)
 scale = Vector2(18, 5)
 
 [node name="Trees" type="Sprite2D" parent="."]
 position = Vector2(2300, 540)
 texture = ExtResource("12_trees")
-modulate = Color(0.5, 0.75, 0.85, 1)
+modulate = Color(0.1, 0.35, 0.42, 1)
 scale = Vector2(18, 2.7)
 
 [node name="LandmarkLeft" type="Sprite2D" parent="."]
-position = Vector2(1012, 760)
-scale = Vector2(3.1, 3.6)
-texture = ExtResource("16_stone")
-modulate = Color(0.22, 0.32, 0.2, 1)
+position = Vector2(1012, 800)
+scale = Vector2(2.2, 2.2)
+texture = ExtResource("19_bush")
+modulate = Color(0.85, 0.35, 0.45, 1)
 [node name="LandmarkRight" type="Sprite2D" parent="."]
-position = Vector2(3588, 745)
-scale = Vector2(2.7, 3.9)
-texture = ExtResource("16_stone")
-modulate = Color(0.22, 0.32, 0.2, 1)
+position = Vector2(3588, 790)
+scale = Vector2(2, 2)
+texture = ExtResource("19_bush")
+modulate = Color(0.55, 0.3, 0.75, 1)
 
 [node name="StartPad" type="StaticBody2D" parent="."]
 position = Vector2(400, 960)
@@ -182,7 +183,7 @@ shape = SubResource("BoundaryShape")
 [node name="WaterVisual" type="ColorRect" parent="."]
 position = Vector2(2300, 1060)
 size = Vector2(4600, 160)
-color = Color(0.2, 0.55, 0.85, 1)
+color = Color(0.08, 0.35, 0.6, 0.92)
 
 [node name="WaterTop1" type="Sprite2D" parent="."]
 position = Vector2(300, 1008)
@@ -317,6 +318,137 @@ position = Vector2(4416, 918)
 scale = Vector2(1.2, 1.2)
 texture = ExtResource("19_bush")
 
+[node name="Coral1" type="Sprite2D" parent="."]
+position = Vector2(845, 905)
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("19_bush")
+modulate = Color(0.95, 0.4, 0.35, 1)
+[node name="Coral2" type="Sprite2D" parent="."]
+position = Vector2(1295, 855)
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("19_bush")
+modulate = Color(0.9, 0.55, 0.2, 1)
+[node name="Coral3" type="Sprite2D" parent="."]
+position = Vector2(1745, 905)
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("19_bush")
+modulate = Color(0.6, 0.3, 0.8, 1)
+[node name="Coral4" type="Sprite2D" parent="."]
+position = Vector2(2195, 855)
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("19_bush")
+modulate = Color(0.95, 0.4, 0.35, 1)
+[node name="Coral5" type="Sprite2D" parent="."]
+position = Vector2(2645, 905)
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("19_bush")
+modulate = Color(0.9, 0.55, 0.2, 1)
+[node name="Coral6" type="Sprite2D" parent="."]
+position = Vector2(3095, 855)
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("19_bush")
+modulate = Color(0.6, 0.3, 0.8, 1)
+[node name="Coral7" type="Sprite2D" parent="."]
+position = Vector2(3545, 905)
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("19_bush")
+modulate = Color(0.95, 0.4, 0.35, 1)
+[node name="Coral8" type="Sprite2D" parent="."]
+position = Vector2(3995, 855)
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("19_bush")
+modulate = Color(0.9, 0.55, 0.2, 1)
+[node name="Bubble1" parent="." instance=ExtResource("20_bubble")]
+position = Vector2(250, 800)
+scale = Vector2(1.54, 1.54)
+[node name="Bubble2" parent="." instance=ExtResource("20_bubble")]
+position = Vector2(440, 1010)
+scale = Vector2(0.55, 0.55)
+[node name="Bubble3" parent="." instance=ExtResource("20_bubble")]
+position = Vector2(685, 950)
+scale = Vector2(0.6, 0.6)
+[node name="Bubble4" parent="." instance=ExtResource("20_bubble")]
+position = Vector2(899, 650)
+scale = Vector2(1.5, 1.5)
+[node name="Bubble5" parent="." instance=ExtResource("20_bubble")]
+position = Vector2(1066, 650)
+scale = Vector2(0.59, 0.59)
+[node name="Bubble6" parent="." instance=ExtResource("20_bubble")]
+position = Vector2(1259, 650)
+scale = Vector2(0.76, 0.76)
+[node name="Bubble7" parent="." instance=ExtResource("20_bubble")]
+position = Vector2(1469, 880)
+scale = Vector2(0.57, 0.57)
+[node name="Bubble8" parent="." instance=ExtResource("20_bubble")]
+position = Vector2(1681, 650)
+scale = Vector2(1.54, 1.54)
+[node name="Bubble9" parent="." instance=ExtResource("20_bubble")]
+position = Vector2(1901, 1010)
+scale = Vector2(1.14, 1.14)
+[node name="Bubble10" parent="." instance=ExtResource("20_bubble")]
+position = Vector2(2048, 950)
+scale = Vector2(1.14, 1.14)
+[node name="Bubble11" parent="." instance=ExtResource("20_bubble")]
+position = Vector2(2194, 720)
+scale = Vector2(0.55, 0.55)
+[node name="Bubble12" parent="." instance=ExtResource("20_bubble")]
+position = Vector2(2443, 720)
+scale = Vector2(0.82, 0.82)
+[node name="Bubble13" parent="." instance=ExtResource("20_bubble")]
+position = Vector2(2601, 950)
+scale = Vector2(0.63, 0.63)
+[node name="Bubble14" parent="." instance=ExtResource("20_bubble")]
+position = Vector2(2780, 950)
+scale = Vector2(1.4, 1.4)
+[node name="Bubble15" parent="." instance=ExtResource("20_bubble")]
+position = Vector2(2943, 650)
+scale = Vector2(1.14, 1.14)
+[node name="Bubble16" parent="." instance=ExtResource("20_bubble")]
+position = Vector2(3164, 720)
+scale = Vector2(0.91, 0.91)
+[node name="Bubble17" parent="." instance=ExtResource("20_bubble")]
+position = Vector2(3374, 1010)
+scale = Vector2(0.57, 0.57)
+[node name="Bubble18" parent="." instance=ExtResource("20_bubble")]
+position = Vector2(3521, 950)
+scale = Vector2(0.73, 0.73)
+[node name="Bubble19" parent="." instance=ExtResource("20_bubble")]
+position = Vector2(3748, 950)
+scale = Vector2(0.97, 0.97)
+[node name="Bubble20" parent="." instance=ExtResource("20_bubble")]
+position = Vector2(3928, 880)
+scale = Vector2(1.14, 1.14)
+[node name="Bubble21" parent="." instance=ExtResource("20_bubble")]
+position = Vector2(4126, 800)
+scale = Vector2(0.83, 0.83)
+[node name="Bubble22" parent="." instance=ExtResource("20_bubble")]
+position = Vector2(4367, 720)
+scale = Vector2(1.27, 1.27)
+[node name="LightRay1" type="Polygon2D" parent="."]
+position = Vector2(500, 400)
+rotation = 0.15
+polygon = PackedVector2Array(-40, -300, 40, -300, 90, 500, -90, 500)
+color = Color(1, 1, 0.95, 0.07)
+[node name="LightRay2" type="Polygon2D" parent="."]
+position = Vector2(1400, 400)
+rotation = 0.15
+polygon = PackedVector2Array(-40, -300, 40, -300, 90, 500, -90, 500)
+color = Color(1, 1, 0.95, 0.07)
+[node name="LightRay3" type="Polygon2D" parent="."]
+position = Vector2(2300, 400)
+rotation = 0.15
+polygon = PackedVector2Array(-40, -300, 40, -300, 90, 500, -90, 500)
+color = Color(1, 1, 0.95, 0.07)
+[node name="LightRay4" type="Polygon2D" parent="."]
+position = Vector2(3200, 400)
+rotation = 0.15
+polygon = PackedVector2Array(-40, -300, 40, -300, 90, 500, -90, 500)
+color = Color(1, 1, 0.95, 0.07)
+[node name="LightRay5" type="Polygon2D" parent="."]
+position = Vector2(4000, 400)
+rotation = 0.15
+polygon = PackedVector2Array(-40, -300, 40, -300, 90, 500, -90, 500)
+color = Color(1, 1, 0.95, 0.07)
 [node name="CompletionLabel" type="Label" parent="."]
 visible = false
 position = Vector2(1350, 360)

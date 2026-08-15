@@ -4,10 +4,10 @@
 [ext_resource type="Texture2D" path="res://assets/Enemies/Reference/medusa.png" id="2_texture"]
 
 [sub_resource type="RectangleShape2D" id="BodyShape"]
-size = Vector2(34, 44)
+size = Vector2(56, 72)
 
 [sub_resource type="RectangleShape2D" id="DamageShape"]
-size = Vector2(44, 52)
+size = Vector2(70, 86)
 
 [node name="FishPurple" type="CharacterBody2D"]
 collision_layer = 4
@@ -19,7 +19,7 @@ bob_frequency = 1.2
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_texture")
-scale = Vector2(1.1, 1.1)
+scale = Vector2(1.8, 1.8)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 4)

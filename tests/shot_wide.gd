@@ -1,7 +1,7 @@
 extends Node2D
 
-@export var scene_path := "res://scenes/levels/world_3_level_2.tscn"
-@export var out_name := "fid_world3_2"
+@export var scene_path := "res://scenes/levels/world_4_level_2.tscn"
+@export var out_name := "underwater"
 var level: Node
 
 func _ready() -> void:
@@ -11,7 +11,7 @@ func _ready() -> void:
 	add_child(level)
 	var cam := Camera2D.new()
 	cam.zoom = Vector2(0.28, 0.28)
-	cam.position = Vector2(2200, 750)
+	cam.position = Vector2(2200, 850)
 	add_child(cam)
 	cam.make_current()
 
