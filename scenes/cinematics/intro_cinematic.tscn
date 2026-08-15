@@ -1,22 +1,9 @@
-[gd_scene load_steps=17 format=3]
+[gd_scene load_steps=4 format=3]
 
 [ext_resource type="Script" path="res://scripts/ui/intro_cinematic.gd" id="1_intro_script"]
-[ext_resource type="Texture2D" path="res://assets/backgrounds/Default/background_solid_sky.png" id="2_sky"]
-[ext_resource type="Texture2D" path="res://assets/Tiles/Default/terrain_stone_block.png" id="3_stone"]
-[ext_resource type="Texture2D" path="res://assets/Tiles/Default/window.png" id="4_window"]
-[ext_resource type="Texture2D" path="res://assets/characters/Diego/diego.png" id="5_diego"]
-[ext_resource type="Texture2D" path="res://assets/characters/Kids/lara.png" id="6_lara"]
-[ext_resource type="Texture2D" path="res://assets/characters/Kids/bauti.png" id="7_bauti"]
-[ext_resource type="Texture2D" path="res://assets/characters/Kids/zoe.png" id="8_zoe"]
-[ext_resource type="Texture2D" path="res://assets/characters/Kids/roma.png" id="9_roma"]
-[ext_resource type="Texture2D" path="res://assets/characters/Kids/mathi.png" id="10_mathi"]
-[ext_resource type="Texture2D" path="res://assets/characters/Luke/luke_idle.png" id="11_luke"]
-[ext_resource type="Texture2D" path="res://assets/Tiles/Default/star.png" id="12_star"]
-[ext_resource type="Texture2D" path="res://assets/characters/Default/character_beige_hit.png" id="13_npc_a"]
-[ext_resource type="Texture2D" path="res://assets/characters/Default/character_purple_duck.png" id="14_npc_b"]
-[ext_resource type="Texture2D" path="res://assets/characters/Default/character_yellow_hit.png" id="15_npc_c"]
-[ext_resource type="Texture2D" path="res://assets/Tiles/Default/bush.png" id="16_bush"]
-[ext_resource type="Texture2D" path="res://assets/props/traffic_light.png" id="17_lamp"]
+[ext_resource type="Texture2D" path="res://assets/backgrounds/Cinematics/intro_panel1.png" id="2_panel1"]
+[ext_resource type="Texture2D" path="res://assets/backgrounds/Cinematics/intro_panel2.png" id="3_panel2"]
+[ext_resource type="Texture2D" path="res://assets/backgrounds/Cinematics/intro_panel3.png" id="4_panel3"]
 
 [node name="CinematicIntro" type="CanvasLayer" unique_id=839210552]
 layer = 30
@@ -27,148 +14,26 @@ custom_minimum_size = Vector2(1920, 1080)
 layout_mode = 3
 anchors_preset = 0
 
-[node name="Sky1" type="Sprite2D" parent="Panel1"]
-position = Vector2(960, 540)
-scale = Vector2(15, 9)
-texture = ExtResource("2_sky")
-modulate = Color(0.12, 0.11, 0.22, 1)
+[node name="Backdrop1" type="ColorRect" parent="Panel1"]
+offset_right = 1920.0
+offset_bottom = 1080.0
+color = Color(0, 0, 0, 1)
 
-[node name="Building1A" type="Sprite2D" parent="Panel1"]
-position = Vector2(250, 783.333)
-scale = Vector2(4, 6)
-texture = ExtResource("3_stone")
-modulate = Color(0.08, 0.08, 0.14, 1)
-[node name="Building1B" type="Sprite2D" parent="Panel1"]
-position = Vector2(700, 716.667)
-scale = Vector2(4.667, 7.667)
-texture = ExtResource("3_stone")
-modulate = Color(0.1, 0.1, 0.17, 1)
-[node name="Building1C" type="Sprite2D" parent="Panel1"]
-position = Vector2(1266.667, 750)
-scale = Vector2(4.333, 7)
-texture = ExtResource("3_stone")
-modulate = Color(0.08, 0.08, 0.14, 1)
-[node name="Building1D" type="Sprite2D" parent="Panel1"]
-position = Vector2(1700, 783.333)
-scale = Vector2(4, 6)
-texture = ExtResource("3_stone")
-modulate = Color(0.1, 0.1, 0.17, 1)
-[node name="Window1A" type="Sprite2D" parent="Panel1"]
-position = Vector2(700, 633.333)
-texture = ExtResource("4_window")
-modulate = Color(1, 0.85, 0.4, 0.7)
-[node name="Window1B" type="Sprite2D" parent="Panel1"]
-position = Vector2(1266.667, 666.667)
-texture = ExtResource("4_window")
-modulate = Color(1, 0.85, 0.4, 0.55)
-[node name="Building1E" type="Sprite2D" parent="Panel1"]
-position = Vector2(60, 810)
-scale = Vector2(3.4, 5.2)
-texture = ExtResource("3_stone")
-modulate = Color(0.09, 0.09, 0.15, 1)
-[node name="Building1F" type="Sprite2D" parent="Panel1"]
-position = Vector2(1880, 800)
-scale = Vector2(3.6, 5.4)
-texture = ExtResource("3_stone")
-modulate = Color(0.08, 0.08, 0.14, 1)
-[node name="Window1C" type="Sprite2D" parent="Panel1"]
-position = Vector2(60, 700)
-texture = ExtResource("4_window")
-modulate = Color(1, 0.85, 0.4, 0.45)
-[node name="Window1D" type="Sprite2D" parent="Panel1"]
-position = Vector2(1880, 690)
-texture = ExtResource("4_window")
-modulate = Color(1, 0.85, 0.4, 0.6)
-
-[node name="Star1A" type="Sprite2D" parent="Panel1"]
-position = Vector2(180, 110)
-scale = Vector2(0.3, 0.3)
-texture = ExtResource("12_star")
-modulate = Color(1, 1, 0.9, 0.8)
-[node name="Star1B" type="Sprite2D" parent="Panel1"]
-position = Vector2(500, 70)
-scale = Vector2(0.22, 0.22)
-texture = ExtResource("12_star")
-modulate = Color(1, 1, 0.9, 0.7)
-[node name="Star1C" type="Sprite2D" parent="Panel1"]
-position = Vector2(1050, 90)
-scale = Vector2(0.26, 0.26)
-texture = ExtResource("12_star")
-modulate = Color(1, 1, 0.9, 0.75)
-[node name="Star1D" type="Sprite2D" parent="Panel1"]
-position = Vector2(1500, 130)
-scale = Vector2(0.3, 0.3)
-texture = ExtResource("12_star")
-modulate = Color(1, 1, 0.9, 0.8)
-[node name="Moon1" type="Sprite2D" parent="Panel1"]
-position = Vector2(1720, 150)
-scale = Vector2(0.9, 0.9)
-texture = ExtResource("12_star")
-modulate = Color(0.9, 0.92, 0.85, 0.9)
-
-[node name="StreetLamp1" type="Sprite2D" parent="Panel1"]
-position = Vector2(980, 855)
-scale = Vector2(1.4, 1.4)
-texture = ExtResource("17_lamp")
-modulate = Color(0.5, 0.5, 0.55, 1)
-
-[node name="SadPersonA" type="Sprite2D" parent="Panel1"]
-position = Vector2(420, 895)
-scale = Vector2(1.1, 1.1)
-texture = ExtResource("13_npc_a")
-modulate = Color(0.5, 0.48, 0.55, 1)
-[node name="SadPersonB" type="Sprite2D" parent="Panel1"]
-position = Vector2(1080, 900)
-scale = Vector2(1.05, 1.05)
-texture = ExtResource("14_npc_b")
-modulate = Color(0.48, 0.46, 0.52, 1)
-[node name="SadPersonC" type="Sprite2D" parent="Panel1"]
-position = Vector2(1600, 897)
-scale = Vector2(1.1, 1.1)
-texture = ExtResource("15_npc_c")
-modulate = Color(0.5, 0.48, 0.55, 1)
-[node name="Bush1A" type="Sprite2D" parent="Panel1"]
-position = Vector2(150, 918)
-scale = Vector2(1.2, 1.2)
-texture = ExtResource("16_bush")
-modulate = Color(0.15, 0.2, 0.15, 1)
-
-[node name="Ground1" type="ColorRect" parent="Panel1"]
-offset_left = 0
-offset_top = 933.333
-offset_right = 1920
-offset_bottom = 1080
-color = Color(0.05, 0.05, 0.08, 1)
-
-[node name="Panel1Text" type="RichTextLabel" parent="Panel1" unique_id=697865172]
-custom_minimum_size = Vector2(1666.667, 316.667)
-layout_mode = 0
-offset_left = 126.667
-offset_top = 66.667
-offset_right = 126.667
-offset_bottom = 66.667
-theme_override_colors/default_color = Color(1, 1, 1, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 6
-theme_override_font_sizes/normal_font_size = 26
-bbcode_enabled = true
-text = "[center]Hubo un tiempo en que las calles brillaban y las risas se escuchaban en cada esquina.
-
-Pero, poco a poco, el mundo fue perdiendo la alegría. El egoísmo, la indiferencia y la tristeza se instalaron en cada casa, en cada plaza, en cada corazón.
-
-Las luces de la ciudad se apagaron una por una... y con ellas, también se apagó la esperanza.[/center]"
-fit_content = true
-scroll_active = false
-horizontal_alignment = 1
+[node name="Image1" type="TextureRect" parent="Panel1"]
+offset_top = 155.0
+offset_right = 1920.0
+offset_bottom = 926.0
+texture = ExtResource("2_panel1")
+stretch_mode = 0
 
 [node name="Panel1Button" type="Button" parent="Panel1" unique_id=124133479]
-custom_minimum_size = Vector2(333.333, 83.333)
-layout_mode = 0
-offset_left = 793.333
-offset_top = 966.667
-offset_right = 793.333
-offset_bottom = 966.667
+custom_minimum_size = Vector2(280, 66)
+offset_left = 820.0
+offset_top = 990.0
+offset_right = 1100.0
+offset_bottom = 1056.0
 z_index = 5
+theme_override_font_sizes/font_size = 22
 text = "SIGUIENTE"
 
 [node name="Panel2" type="Control" parent="." unique_id=1535115337]
@@ -176,89 +41,26 @@ custom_minimum_size = Vector2(1920, 1080)
 layout_mode = 3
 anchors_preset = 0
 
-[node name="Sky2" type="Sprite2D" parent="Panel2"]
-position = Vector2(960, 540)
-scale = Vector2(15, 9)
-texture = ExtResource("2_sky")
-modulate = Color(0.14, 0.13, 0.24, 1)
+[node name="Backdrop2" type="ColorRect" parent="Panel2"]
+offset_right = 1920.0
+offset_bottom = 1080.0
+color = Color(0, 0, 0, 1)
 
-[node name="Ground2" type="ColorRect" parent="Panel2"]
-offset_left = 0
-offset_top = 933.333
-offset_right = 1920
-offset_bottom = 1080
-color = Color(0.07, 0.09, 0.1, 1)
-
-[node name="Diego" type="Sprite2D" parent="Panel2"]
-position = Vector2(183.333, 673)
-scale = Vector2(5.2, 5.2)
-texture = ExtResource("5_diego")
-modulate = Color(0.55, 0.58, 0.68, 1)
-[node name="Lara" type="Sprite2D" parent="Panel2"]
-position = Vector2(500, 818.333)
-scale = Vector2(4.667, 4.667)
-texture = ExtResource("6_lara")
-modulate = Color(0.55, 0.58, 0.68, 1)
-[node name="Bauti" type="Sprite2D" parent="Panel2"]
-position = Vector2(816.667, 798.333)
-scale = Vector2(4.667, 4.667)
-texture = ExtResource("7_bauti")
-modulate = Color(0.55, 0.58, 0.68, 1)
-[node name="Zoe" type="Sprite2D" parent="Panel2"]
-position = Vector2(1150, 778.333)
-scale = Vector2(4.667, 4.667)
-texture = ExtResource("8_zoe")
-modulate = Color(0.55, 0.58, 0.68, 1)
-[node name="Roma" type="Sprite2D" parent="Panel2"]
-position = Vector2(1466.667, 840)
-scale = Vector2(4.667, 4.667)
-texture = ExtResource("9_roma")
-modulate = Color(0.55, 0.58, 0.68, 1)
-[node name="Mathi" type="Sprite2D" parent="Panel2"]
-position = Vector2(1766.667, 788.333)
-scale = Vector2(4.667, 4.667)
-texture = ExtResource("10_mathi")
-modulate = Color(0.55, 0.58, 0.68, 1)
-[node name="WiltedBushA" type="Sprite2D" parent="Panel2"]
-position = Vector2(90, 940)
-scale = Vector2(1.3, 1.1)
-texture = ExtResource("16_bush")
-modulate = Color(0.35, 0.32, 0.3, 1)
-[node name="WiltedBushB" type="Sprite2D" parent="Panel2"]
-position = Vector2(1870, 940)
-scale = Vector2(1.3, 1.1)
-texture = ExtResource("16_bush")
-modulate = Color(0.35, 0.32, 0.3, 1)
-
-[node name="Panel2Text" type="RichTextLabel" parent="Panel2" unique_id=1047301220]
-custom_minimum_size = Vector2(1666.667, 316.667)
-layout_mode = 0
-offset_left = 126.667
-offset_top = 50
-offset_right = 126.667
-offset_bottom = 50
-theme_override_colors/default_color = Color(1, 1, 1, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 6
-theme_override_font_sizes/normal_font_size = 26
-bbcode_enabled = true
-text = "[center]En ese mundo triste vivía Diego, su mejor amigo, un chico con un corazón enorme... aunque también un poco cansado.
-
-Junto a él, los niños que tanto quería —Lara, Bauti, Zoe, Roma y Mathi— ya no jugaban como antes. Habían dejado de soñar.
-
-Sus sonrisas se habían escondido en algún lugar, y nadie sabía cómo encontrarlas de nuevo.[/center]"
-fit_content = true
-scroll_active = false
-horizontal_alignment = 1
+[node name="Image2" type="TextureRect" parent="Panel2"]
+offset_top = 154.0
+offset_right = 1920.0
+offset_bottom = 926.0
+texture = ExtResource("3_panel2")
+stretch_mode = 0
 
 [node name="Panel2Button" type="Button" parent="Panel2" unique_id=518476680]
-custom_minimum_size = Vector2(333.333, 83.333)
-layout_mode = 0
-offset_left = 793.333
-offset_top = 966.667
-offset_right = 793.333
-offset_bottom = 966.667
+custom_minimum_size = Vector2(280, 66)
+offset_left = 820.0
+offset_top = 990.0
+offset_right = 1100.0
+offset_bottom = 1056.0
 z_index = 5
+theme_override_font_sizes/font_size = 22
 text = "SIGUIENTE"
 
 [node name="Panel3" type="Control" parent="." unique_id=51249399]
@@ -266,73 +68,24 @@ custom_minimum_size = Vector2(1920, 1080)
 layout_mode = 3
 anchors_preset = 0
 
-[node name="Sky3" type="Sprite2D" parent="Panel3"]
-position = Vector2(960, 540)
-scale = Vector2(15, 9)
-texture = ExtResource("2_sky")
-modulate = Color(0.55, 0.42, 0.5, 1)
-[node name="SunGlow" type="Sprite2D" parent="Panel3"]
-position = Vector2(960, 620)
-scale = Vector2(6.5, 6.5)
-texture = ExtResource("2_sky")
-modulate = Color(1, 0.9, 0.55, 0.35)
+[node name="Backdrop3" type="ColorRect" parent="Panel3"]
+offset_right = 1920.0
+offset_bottom = 1080.0
+color = Color(0, 0, 0, 1)
 
-[node name="Ground3" type="ColorRect" parent="Panel3"]
-offset_left = 0
-offset_top = 933.333
-offset_right = 1920
-offset_bottom = 1080
-color = Color(0.2, 0.16, 0.22, 1)
-
-[node name="LukeHero" type="Sprite2D" parent="Panel3"]
-position = Vector2(960, 745)
-scale = Vector2(5.4, 5.4)
-texture = ExtResource("11_luke")
-[node name="Sparkle3A" type="Sprite2D" parent="Panel3"]
-position = Vector2(680, 560)
-scale = Vector2(0.4, 0.4)
-texture = ExtResource("12_star")
-modulate = Color(1, 0.95, 0.6, 0.9)
-[node name="Sparkle3B" type="Sprite2D" parent="Panel3"]
-position = Vector2(1260, 590)
-scale = Vector2(0.32, 0.32)
-texture = ExtResource("12_star")
-modulate = Color(1, 0.95, 0.6, 0.85)
-[node name="Sparkle3C" type="Sprite2D" parent="Panel3"]
-position = Vector2(1330, 820)
-scale = Vector2(0.28, 0.28)
-texture = ExtResource("12_star")
-modulate = Color(1, 0.95, 0.6, 0.8)
-
-[node name="Panel3Text" type="RichTextLabel" parent="Panel3" unique_id=1117633452]
-custom_minimum_size = Vector2(1666.667, 283.333)
-layout_mode = 0
-offset_left = 126.667
-offset_top = 33.333
-offset_right = 126.667
-offset_bottom = 33.333
-theme_override_colors/default_color = Color(1, 1, 1, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 6
-theme_override_font_sizes/normal_font_size = 24
-bbcode_enabled = true
-text = "[center]Pero había alguien que todavía creía que las cosas podían cambiar: Luke, el perro más bueno del mundo.
-
-Con su corazón puro y su valentía sin límites, Luke decidió que no se quedaría quieto viendo cómo el mundo se apagaba.
-
-Iba a recorrer cada rincón, ayudar a cada persona, y devolverle la sonrisa a Diego y a sus amigos... ¡y a todo el mundo!
-
-[color=#ffd93d]La aventura de Luke está por comenzar... y vos sos parte de ella![/color][/center]"
-fit_content = true
-scroll_active = false
-horizontal_alignment = 1
+[node name="Image3" type="TextureRect" parent="Panel3"]
+offset_top = 160.0
+offset_right = 1920.0
+offset_bottom = 919.0
+texture = ExtResource("4_panel3")
+stretch_mode = 0
 
 [node name="Panel3Button" type="Button" parent="Panel3" unique_id=1789127924]
-custom_minimum_size = Vector2(333.333, 83.333)
-layout_mode = 0
-offset_left = 793.333
-offset_top = 966.667
-offset_right = 793.333
-offset_bottom = 966.667
+custom_minimum_size = Vector2(280, 66)
+offset_left = 820.0
+offset_top = 990.0
+offset_right = 1100.0
+offset_bottom = 1056.0
 z_index = 5
+theme_override_font_sizes/font_size = 22
 text = "JUGAR"
