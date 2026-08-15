@@ -46,6 +46,7 @@ scale = Vector2(7.812, 2.7)
 position = Vector2(1000, 750)
 scale = Vector2(2.6, 2.6)
 texture = ExtResource("13_temple")
+modulate = Color(0.95, 0.72, 0.4, 1)
 
 [node name="LandmarkLeft" type="Sprite2D" parent="."]
 position = Vector2(440, 760)

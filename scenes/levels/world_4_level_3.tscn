@@ -55,11 +55,13 @@ scale = Vector2(17.188, 2.7)
 position = Vector2(950, 760)
 scale = Vector2(2.2, 2.2)
 texture = ExtResource("20_temple")
+modulate = Color(0.95, 0.72, 0.4, 1)
 
 [node name="TempleTwo" type="Sprite2D" parent="."]
 position = Vector2(3300, 760)
 scale = Vector2(1.8, 1.8)
 texture = ExtResource("20_temple")
+modulate = Color(0.95, 0.72, 0.4, 1)
 
 [node name="Ground" type="StaticBody2D" parent="."]
 

@@ -4,6 +4,6 @@
 
 [node name="ShotLevel" type="Node2D"]
 script = ExtResource("1_script")
-scene_path = "res://scenes/levels/world_4_boss.tscn"
-out_name = "snake_fixed"
-camera_focus_x = 1000.0
+scene_path = "res://scenes/levels/world_1_level_2.tscn"
+out_name = "w1_grandma"
+camera_focus_x = 930.0

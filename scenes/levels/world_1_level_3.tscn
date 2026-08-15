@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3]
+[gd_scene load_steps=30 format=3]
 
 [ext_resource type="Script" path="res://scripts/levels/level_base.gd" id="1_level"]
 [ext_resource type="PackedScene" path="res://scenes/player/player.tscn" id="2_luke"]
@@ -20,6 +20,10 @@
 [ext_resource type="Texture2D" path="res://assets/Tiles/Default/bush.png" id="18_bush"]
 [ext_resource type="Texture2D" path="res://assets/Tiles/Default/bricks_brown.png" id="19_brick"]
 [ext_resource type="PackedScene" path="res://scenes/objects/bone_pickup.tscn" id="20_bonepickup"]
+[ext_resource type="Texture2D" path="res://assets/characters/Default/grandma_idle.png" id="21_grandma"]
+[ext_resource type="Texture2D" path="res://assets/props/streetlamp.png" id="22_lamp"]
+[ext_resource type="Texture2D" path="res://assets/props/trash_can.png" id="23_can"]
+[ext_resource type="Texture2D" path="res://assets/props/wood_crate.png" id="24_crate"]
 
 [sub_resource type="RectangleShape2D" id="GroundShape"]
 size = Vector2(4400, 110)
@@ -281,3 +285,31 @@ add_theme_constant_override("outline_size", 8)
 
 [node name="HiddenBone" parent="." instance=ExtResource("20_bonepickup")]
 position = Vector2(3150, 600)
+
+[node name="Grandma1" type="Sprite2D" parent="."]
+texture = ExtResource("21_grandma")
+position = Vector2(935, 850)
+scale = Vector2(0.9, 0.9)
+[node name="Streetlamp1" type="Sprite2D" parent="."]
+texture = ExtResource("22_lamp")
+position = Vector2(600, 895)
+scale = Vector2(1.4, 1.4)
+z_index = -1
+[node name="Streetlamp2" type="Sprite2D" parent="."]
+texture = ExtResource("22_lamp")
+position = Vector2(2000, 895)
+scale = Vector2(1.4, 1.4)
+z_index = -1
+[node name="Streetlamp3" type="Sprite2D" parent="."]
+texture = ExtResource("22_lamp")
+position = Vector2(3600, 895)
+scale = Vector2(1.4, 1.4)
+z_index = -1
+[node name="TrashCan1" type="Sprite2D" parent="."]
+texture = ExtResource("23_can")
+position = Vector2(1600, 900)
+scale = Vector2(1.3, 1.3)
+[node name="WoodCrate1" type="Sprite2D" parent="."]
+texture = ExtResource("24_crate")
+position = Vector2(2450, 900)
+scale = Vector2(1.3, 1.3)
