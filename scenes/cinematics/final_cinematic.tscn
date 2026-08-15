@@ -73,8 +73,8 @@ offset_bottom = 1080
 color = Color(0.3, 0.6, 0.24, 1)
 
 [node name="Diego" type="Sprite2D" parent="Panel2"]
-position = Vector2(183.333, 760)
-scale = Vector2(4.667, 4.667)
+position = Vector2(183.333, 673)
+scale = Vector2(5.2, 5.2)
 texture = ExtResource("4_diego")
 [node name="Lara" type="Sprite2D" parent="Panel2"]
 position = Vector2(500, 818.333)

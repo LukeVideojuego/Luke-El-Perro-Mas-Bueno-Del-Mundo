@@ -85,9 +85,10 @@ interaction_text = "¡Abrazá a toda la gente que puedas antes de que se acabe e
 position = Vector2(200, 850)
 
 [node name="Diego" parent="." instance=ExtResource("5_person")]
-position = Vector2(500, 870)
+position = Vector2(500, 848)
 [node name="Sprite2D" parent="Diego" index="0"]
 texture = ExtResource("10_diego")
+scale = Vector2(1.0, 1.0)
 
 [node name="Lara" parent="." instance=ExtResource("5_person")]
 position = Vector2(650, 870)

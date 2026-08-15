@@ -1,7 +1,7 @@
 extends Node2D
 
 @export var scene_path := "res://scenes/levels/final_screen.tscn"
-@export var out_name := "hug_minigame"
+@export var out_name := "final_diego"
 @export var camera_focus_x := 0.0
 var level: Node
 var frame := 0
