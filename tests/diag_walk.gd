@@ -5,7 +5,7 @@ extends Node2D
 ## invisibles/huérfanas: si Luke deja de avanzar en X durante muchos frames
 ## seguidos estando en el piso, imprime STUCK con su posición.
 
-@export var scene_path := "res://scenes/levels/world_4_level_3.tscn"
+@export var scene_path := "res://scenes/levels/world_1_level_3.tscn"
 @export var max_frames := 3600
 
 var level: Node
@@ -17,6 +17,7 @@ var max_x_reached := 0.0
 var reported_stuck := false
 
 func _ready() -> void:
+	get_window().size = Vector2i(1280, 720)
 	Input.action_press("move_right")
 	Input.action_press("run")
 	var packed := load(scene_path) as PackedScene

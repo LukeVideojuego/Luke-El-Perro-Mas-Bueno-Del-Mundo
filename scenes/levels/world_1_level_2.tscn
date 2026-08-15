@@ -91,6 +91,17 @@ texture = ExtResource("18_door")
 position = Vector2(3300, 818)
 z_index = -5
 
+[node name="LandmarkLeft" type="Sprite2D" parent="."]
+position = Vector2(924, 760)
+scale = Vector2(3.1, 3.6)
+texture = ExtResource("10_stone")
+modulate = Color(0.15, 0.15, 0.22, 1)
+[node name="LandmarkRight" type="Sprite2D" parent="."]
+position = Vector2(3276, 745)
+scale = Vector2(2.7, 3.9)
+texture = ExtResource("10_stone")
+modulate = Color(0.15, 0.15, 0.22, 1)
+
 [node name="Ground" type="StaticBody2D" parent="."]
 position = Vector2(2100, 1015)
 [node name="Visual" type="Sprite2D" parent="Ground"]
@@ -266,4 +277,12 @@ position = Vector2(2604, 780)
 position = Vector2(3528, 780)
 [node name="InvincibilityPowerUp" parent="." instance=ExtResource("24_invincibility")]
 position = Vector2(2100, 620)
+[node name="EdgeBushA" type="Sprite2D" parent="."]
+position = Vector2(168, 918)
+scale = Vector2(1.2, 1.2)
+texture = ExtResource("22_bush")
+[node name="EdgeBushB" type="Sprite2D" parent="."]
+position = Vector2(4032, 918)
+scale = Vector2(1.2, 1.2)
+texture = ExtResource("22_bush")
 
