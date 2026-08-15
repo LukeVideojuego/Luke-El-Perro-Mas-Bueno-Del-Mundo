@@ -5,7 +5,7 @@ extends Node2D
 ## invisibles/huérfanas: si Luke deja de avanzar en X durante muchos frames
 ## seguidos estando en el piso, imprime STUCK con su posición.
 
-@export var scene_path := "res://scenes/levels/world_2_level_1.tscn"
+@export var scene_path := "res://scenes/levels/world_4_level_3.tscn"
 @export var max_frames := 3600
 
 var level: Node
@@ -33,8 +33,13 @@ func _physics_process(_delta: float) -> void:
 	if frame % 50 == 5:
 		Input.action_release("jump")
 
-	if frame >= 650 and frame <= 800 and frame % 5 == 0:
-		print("t=", frame, " x=", luke.global_position.x, " y=", luke.global_position.y, " vel=", luke.velocity, " onfloor=", luke.is_on_floor(), " onwall=", luke.is_on_wall(), " onceil=", luke.is_on_ceiling())
+	if frame % 12 == 0:
+		Input.action_press("attack")
+	if frame % 12 == 3:
+		Input.action_release("attack")
+
+	if frame % 30 == 0:
+		print("t=", frame, " x=", luke.global_position.x, " y=", luke.global_position.y, " vel=", luke.velocity, " onfloor=", luke.is_on_floor())
 	if frame % 20 == 0:
 		var dx = luke.global_position.x - last_x
 		if dx < 1.0 and luke.is_on_floor():
@@ -49,6 +54,11 @@ func _physics_process(_delta: float) -> void:
 		if stuck_streak == 0 and reported_stuck:
 			reported_stuck = false
 			print("RECOVERED at frame ", frame, " x=", luke.global_position.x)
+
+	if GameState.is_level_complete:
+		print("LEVEL COMPLETE at frame ", frame, " x=", luke.global_position.x)
+		get_tree().quit()
+		return
 
 	if frame >= max_frames:
 		print("DONE max_x_reached=", max_x_reached, " final_x=", luke.global_position.x)
