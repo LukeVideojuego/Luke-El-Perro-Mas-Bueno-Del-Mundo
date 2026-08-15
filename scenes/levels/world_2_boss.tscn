@@ -27,7 +27,7 @@ size = Vector2(70, 900)
 [node name="world_2_boss" type="Node2D"]
 script = ExtResource("1_level")
 level_id = "world_2_boss"
-mission_text = "¡Detén al ladrón de cruces!"
+mission_text = "¡Detén a La Bruja del Olvido!"
 
 [node name="Sky" type="Sprite2D" parent="."]
 position = Vector2(1000, 540)
@@ -133,7 +133,7 @@ texture = ExtResource("13_crosswalk")
 [node name="CompletionLabel" type="Label" parent="."]
 visible = false
 position = Vector2(500, 380)
-text = "¡MUNDO 2 SUPERADO!"
+text = "¡CORAZONES DE ORO RECUPERADOS!"
 horizontal_alignment = 1
 add_theme_font_size_override("font_size", 56)
 add_theme_color_override("font_color", Color(0.95, 0.7, 0.1, 1))

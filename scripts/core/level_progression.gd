@@ -35,6 +35,27 @@ static func get_world(level_id: String) -> int:
 static func get_order(level_id: String) -> int:
 	return int(LEVELS.get(level_id, {}).get("order", 0))
 
+## Nombres oficiales de mundo y jefe (hoja de referencia visual del proyecto).
+const WORLD_NAMES := {
+	1: "Ciudad Segura",
+	2: "Corazones de Oro",
+	3: "El Reino del Poder",
+	4: "Guardianes de la Naturaleza",
+}
+
+const BOSS_NAMES := {
+	1: "Don Sombra",
+	2: "La Bruja del Olvido",
+	3: "El Gran Codicia",
+	4: "La Reina Veneno",
+}
+
+static func get_world_name(world: int) -> String:
+	return String(WORLD_NAMES.get(world, "Mundo %d" % world))
+
+static func get_boss_name(world: int) -> String:
+	return String(BOSS_NAMES.get(world, "Jefe del Mundo %d" % world))
+
 ## Contraseñas simples y ampliables: "LUKE" + número de orden global de dos
 ## dígitos (01..16). Pensadas para que un jugador pueda saltar directo a
 ## cualquier nivel sin tener que jugar los anteriores.

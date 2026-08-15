@@ -11,7 +11,11 @@ func play_completion(next_level_id: String) -> void:
 		detail_label.text = "Luke conquistó el corazón de toda la humanidad."
 	else:
 		title_label.text = "¡NIVEL COMPLETADO!"
-		detail_label.text = "Preparando el siguiente rescate..." if not next_level_id.is_empty() else "Próximo desafío en preparación"
+		var next_world := LevelProgression.get_world(next_level_id)
+		if next_world > 0:
+			detail_label.text = "Rumbo a %s..." % LevelProgression.get_world_name(next_world)
+		else:
+			detail_label.text = "Preparando el siguiente rescate..."
 	overlay.modulate.a = 0.0
 	var tween := create_tween()
 	tween.tween_property(overlay, "modulate:a", 1.0, 0.45)

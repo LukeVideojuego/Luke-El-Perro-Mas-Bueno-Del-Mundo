@@ -38,9 +38,9 @@ func _update_level(level_id: String) -> void:
 	if world == 0:
 		level_label.text = "GRAN FINAL"
 	elif order >= 4:
-		level_label.text = "MUNDO %d · JEFE" % world
+		level_label.text = "%s · %s" % [LevelProgression.get_world_name(world), LevelProgression.get_boss_name(world)]
 	else:
-		level_label.text = "MUNDO %d · NIVEL %d" % [world, order]
+		level_label.text = "%s · NIVEL %d" % [LevelProgression.get_world_name(world), order]
 
 func _update_lives(value: int) -> void:
 	if lives_label == null:
