@@ -6,7 +6,7 @@ extends Node2D
 ## seguidos estando en el piso, imprime STUCK con su posición.
 
 @export var scene_path := "res://scenes/levels/world_1_level_3.tscn"
-@export var max_frames := 3600
+@export var max_frames := 7200
 
 var level: Node
 var luke: CharacterBody2D

@@ -27,7 +27,11 @@ func _physics_process(delta: float) -> void:
 
 func _on_body_entered(body: Node2D) -> void:
 	if body is Luke:
-		body.receive_damage(_thrower)
+		# El enemigo que lo lanzó puede haber sido derrotado (queue_free) antes
+		# de que el proyectil llegue a destino; en ese caso no pasar la
+		# referencia inválida.
+		var source: Node2D = _thrower if is_instance_valid(_thrower) else null
+		body.receive_damage(source)
 		queue_free()
 	elif body is StaticBody2D:
 		queue_free()

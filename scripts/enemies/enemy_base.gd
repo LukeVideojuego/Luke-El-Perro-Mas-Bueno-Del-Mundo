@@ -200,7 +200,7 @@ func _drop_bone() -> void:
 		return
 	var bone := BONE_PICKUP_SCENE.instantiate()
 	bone.global_position = global_position
-	parent.add_child(bone)
+	parent.call_deferred("add_child", bone)
 
 func _on_damage_area_body_entered(body: Node2D) -> void:
 	if not is_defeated and body is Luke:
