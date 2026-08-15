@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3]
+[gd_scene load_steps=18 format=3]
 
 [ext_resource type="Script" path="res://scripts/ui/final_cinematic.gd" id="1_final_script"]
 [ext_resource type="Texture2D" path="res://assets/backgrounds/Default/background_solid_sky.png" id="2_sky"]
@@ -10,6 +10,13 @@
 [ext_resource type="Texture2D" path="res://assets/characters/Kids/roma.png" id="8_roma"]
 [ext_resource type="Texture2D" path="res://assets/characters/Kids/mathi.png" id="9_mathi"]
 [ext_resource type="Texture2D" path="res://assets/characters/Luke/luke_idle.png" id="10_luke"]
+[ext_resource type="Texture2D" path="res://assets/Tiles/Default/bricks_brown.png" id="11_brick"]
+[ext_resource type="Texture2D" path="res://assets/Tiles/Default/window.png" id="12_window"]
+[ext_resource type="Texture2D" path="res://assets/Tiles/Default/star.png" id="13_star"]
+[ext_resource type="Texture2D" path="res://assets/Tiles/Default/terrain_stone_block.png" id="14_stone"]
+[ext_resource type="Texture2D" path="res://assets/Tiles/Default/bush.png" id="15_bush"]
+[ext_resource type="Texture2D" path="res://assets/characters/Default/character_green_idle.png" id="16_npc1"]
+[ext_resource type="Texture2D" path="res://assets/characters/Default/character_pink_idle.png" id="17_npc2"]
 
 [node name="CinematicFinal" type="CanvasLayer"]
 layer = 30
@@ -26,12 +33,36 @@ scale = Vector2(15, 9)
 texture = ExtResource("2_sky")
 modulate = Color(0.55, 0.78, 1, 1)
 
+[node name="Building1A" type="Sprite2D" parent="Panel1"]
+position = Vector2(250, 810)
+scale = Vector2(4, 5.6)
+texture = ExtResource("11_brick")
+modulate = Color(0.95, 0.72, 0.55, 1)
+[node name="Building1B" type="Sprite2D" parent="Panel1"]
+position = Vector2(1670, 800)
+scale = Vector2(4.4, 5.9)
+texture = ExtResource("11_brick")
+modulate = Color(1, 0.78, 0.6, 1)
+[node name="Window1A" type="Sprite2D" parent="Panel1"]
+position = Vector2(250, 700)
+texture = ExtResource("12_window")
+modulate = Color(1, 0.95, 0.6, 0.9)
+[node name="Window1B" type="Sprite2D" parent="Panel1"]
+position = Vector2(1670, 690)
+texture = ExtResource("12_window")
+modulate = Color(1, 0.95, 0.6, 0.9)
+[node name="Sun1" type="Sprite2D" parent="Panel1"]
+position = Vector2(1500, 200)
+scale = Vector2(1.1, 1.1)
+texture = ExtResource("13_star")
+modulate = Color(1, 0.92, 0.5, 1)
+
 [node name="Ground1" type="ColorRect" parent="Panel1"]
 offset_left = 0
 offset_top = 933.333
 offset_right = 1920
 offset_bottom = 1080
-color = Color(0.25, 0.55, 0.2, 1)
+color = Color(0.3, 0.62, 0.24, 1)
 
 [node name="Text1" type="RichTextLabel" parent="Panel1"]
 custom_minimum_size = Vector2(1666.667, 366.667)
@@ -96,6 +127,14 @@ texture = ExtResource("8_roma")
 position = Vector2(1766.667, 788.333)
 scale = Vector2(4.667, 4.667)
 texture = ExtResource("9_mathi")
+[node name="BushA" type="Sprite2D" parent="Panel2"]
+position = Vector2(90, 900)
+scale = Vector2(1.3, 1.3)
+texture = ExtResource("15_bush")
+[node name="BushB" type="Sprite2D" parent="Panel2"]
+position = Vector2(1870, 900)
+scale = Vector2(1.3, 1.3)
+texture = ExtResource("15_bush")
 
 [node name="Text2" type="RichTextLabel" parent="Panel2"]
 custom_minimum_size = Vector2(1666.667, 316.667)
@@ -124,7 +163,7 @@ anchors_preset = 0
 position = Vector2(960, 540)
 scale = Vector2(15, 9)
 texture = ExtResource("2_sky")
-modulate = Color(0.65, 0.85, 1, 1)
+modulate = Color(0.75, 0.55, 0.6, 1)
 
 [node name="Ground3" type="ColorRect" parent="Panel3"]
 offset_left = 0
@@ -133,9 +172,43 @@ offset_right = 1920
 offset_bottom = 1080
 color = Color(0.3, 0.6, 0.24, 1)
 
+[node name="Firework1" type="Sprite2D" parent="Panel3"]
+position = Vector2(300, 220)
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("13_star")
+modulate = Color(1, 0.5, 0.5, 0.9)
+[node name="Firework2" type="Sprite2D" parent="Panel3"]
+position = Vector2(1620, 180)
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("13_star")
+modulate = Color(0.5, 0.8, 1, 0.9)
+[node name="Firework3" type="Sprite2D" parent="Panel3"]
+position = Vector2(900, 140)
+scale = Vector2(0.55, 0.55)
+texture = ExtResource("13_star")
+modulate = Color(1, 0.9, 0.4, 0.9)
+
+[node name="CrowdDiego" type="Sprite2D" parent="Panel3"]
+position = Vector2(650, 900)
+scale = Vector2(3.6, 3.6)
+texture = ExtResource("4_diego")
+[node name="CrowdA" type="Sprite2D" parent="Panel3"]
+position = Vector2(1300, 900)
+scale = Vector2(2.6, 2.6)
+texture = ExtResource("16_npc1")
+[node name="CrowdB" type="Sprite2D" parent="Panel3"]
+position = Vector2(1420, 895)
+scale = Vector2(2.6, 2.6)
+texture = ExtResource("17_npc2")
+
+[node name="Pedestal" type="Sprite2D" parent="Panel3"]
+position = Vector2(960, 895)
+scale = Vector2(3.6, 1.8)
+texture = ExtResource("14_stone")
+
 [node name="LukeHero" type="Sprite2D" parent="Panel3"]
-position = Vector2(960, 816.667)
-scale = Vector2(7.667, 7.667)
+position = Vector2(960, 575)
+scale = Vector2(6.4, 6.4)
 texture = ExtResource("10_luke")
 
 [node name="Banner" type="Label" parent="Panel3"]
