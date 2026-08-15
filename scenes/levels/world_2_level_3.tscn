@@ -45,7 +45,7 @@ texture = ExtResource("10_sky")
 scale = Vector2(17.969, 5)
 
 [node name="Trees" type="Sprite2D" parent="."]
-position = Vector2(1500, 540)
+position = Vector2(2300, 540)
 texture = ExtResource("11_trees")
 scale = Vector2(17.969, 2.7)
 

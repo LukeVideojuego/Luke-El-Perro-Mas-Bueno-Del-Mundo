@@ -44,7 +44,7 @@ modulate = Color(0.65, 0.85, 1, 1)
 scale = Vector2(18, 5)
 
 [node name="Trees" type="Sprite2D" parent="."]
-position = Vector2(1500, 540)
+position = Vector2(2300, 540)
 texture = ExtResource("12_trees")
 modulate = Color(0.5, 0.75, 0.85, 1)
 scale = Vector2(18, 2.7)
