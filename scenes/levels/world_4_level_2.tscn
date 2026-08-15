@@ -255,6 +255,13 @@ interaction_text = "Cruza el mar saltando de isla en isla."
 
 [node name="Luke" parent="." instance=ExtResource("2_luke")]
 position = Vector2(400, 850)
+walk_speed = 225.0
+run_speed = 335.0
+gravity = 950.0
+jump_velocity = -760.0
+double_jump_velocity = -680.0
+max_fall_speed = 650.0
+underwater_mode = true
 
 [node name="Checkpoint" parent="." instance=ExtResource("6_checkpoint")]
 position = Vector2(400, 850)
@@ -463,3 +470,12 @@ add_theme_constant_override("outline_size", 8)
 
 [node name="HiddenBone" parent="." instance=ExtResource("21_bonepickup")]
 position = Vector2(2150, 520)
+
+[node name="UnderwaterTint" type="CanvasLayer" parent="."]
+layer = 5
+
+[node name="Tint" type="ColorRect" parent="UnderwaterTint"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+color = Color(0.14, 0.42, 0.52, 0.16)

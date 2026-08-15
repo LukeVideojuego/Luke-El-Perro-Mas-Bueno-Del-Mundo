@@ -31,6 +31,21 @@ extends CharacterBody2D
 
 const THROWN_BONE_SCENE := preload("res://scenes/objects/thrown_bone.tscn")
 
+@export_category("Bajo el agua")
+## Activado por instancia en los niveles acuáticos: agrega burbujas al
+## moverse y una animación de flote sutil en el idle (puramente visual,
+## no afecta la física; la velocidad/gravedad se ajustan aparte con los
+## export de Movement de esta misma instancia).
+@export var underwater_mode := false
+@export var bubble_interval := 0.45
+@export var idle_bob_amplitude := 4.0
+@export var idle_bob_speed := 2.2
+
+const RISING_BUBBLE_SCENE := preload("res://scenes/objects/rising_bubble.tscn")
+var _bubble_timer := 0.0
+var _idle_time := 0.0
+var _sprite_base_y := 0.0
+
 signal attack_started
 signal damaged
 signal defeated
@@ -62,6 +77,8 @@ func _physics_process(delta: float) -> void:
 	if is_on_floor():
 		jumps_used = 0
 	_update_animation()
+	if underwater_mode:
+		_handle_underwater_effects(delta)
 
 func _apply_gravity(delta: float) -> void:
 	if not is_on_floor():
@@ -223,3 +240,23 @@ func _update_animation() -> void:
 		animated_sprite.play("walk")
 	else:
 		animated_sprite.play("idle")
+	if underwater_mode and not is_attacking and not is_throwing and absf(velocity.x) <= 25.0:
+		animated_sprite.position.y = _sprite_base_y + sin(_idle_time * idle_bob_speed) * idle_bob_amplitude
+	else:
+		animated_sprite.position.y = _sprite_base_y
+
+func _handle_underwater_effects(delta: float) -> void:
+	_idle_time += delta
+	_bubble_timer -= delta
+	if _bubble_timer <= 0.0:
+		_bubble_timer = bubble_interval
+		_spawn_trail_bubble()
+
+func _spawn_trail_bubble() -> void:
+	var parent := get_parent()
+	if parent == null:
+		return
+	var bubble := RISING_BUBBLE_SCENE.instantiate()
+	parent.add_child(bubble)
+	var offset := Vector2(randf_range(-16.0, 16.0), randf_range(-10.0, 10.0))
+	bubble.global_position = global_position + offset + Vector2(0.0, -20.0)
