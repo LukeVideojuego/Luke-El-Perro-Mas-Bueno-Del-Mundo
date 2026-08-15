@@ -16,30 +16,30 @@ layer = 30
 script = ExtResource("1_final_script")
 
 [node name="Panel1" type="Control" parent="."]
-custom_minimum_size = Vector2(1152, 648)
+custom_minimum_size = Vector2(1920, 1080)
 layout_mode = 3
 anchors_preset = 0
 
 [node name="Background1" type="Sprite2D" parent="Panel1"]
-position = Vector2(576, 324)
-scale = Vector2(9, 5.4)
+position = Vector2(960, 540)
+scale = Vector2(15, 9)
 texture = ExtResource("2_sky")
 modulate = Color(0.55, 0.78, 1, 1)
 
 [node name="Ground1" type="ColorRect" parent="Panel1"]
-offset_left = 0.0
-offset_top = 560.0
-offset_right = 1152.0
-offset_bottom = 648.0
+offset_left = 0
+offset_top = 933.333
+offset_right = 1920
+offset_bottom = 1080
 color = Color(0.25, 0.55, 0.2, 1)
 
 [node name="Text1" type="RichTextLabel" parent="Panel1"]
-custom_minimum_size = Vector2(1000, 220)
+custom_minimum_size = Vector2(1666.667, 366.667)
 layout_mode = 0
-offset_left = 76.0
-offset_top = 40.0
-offset_right = 76.0
-offset_bottom = 40.0
+offset_left = 126.667
+offset_top = 66.667
+offset_right = 126.667
+offset_bottom = 66.667
 theme_override_colors/default_color = Color(1, 1, 1, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 6
@@ -55,55 +55,55 @@ scroll_active = false
 horizontal_alignment = 1
 
 [node name="Panel2" type="Control" parent="."]
-custom_minimum_size = Vector2(1152, 648)
+custom_minimum_size = Vector2(1920, 1080)
 layout_mode = 3
 anchors_preset = 0
 
 [node name="Background2" type="Sprite2D" parent="Panel2"]
-position = Vector2(576, 324)
-scale = Vector2(9, 5.4)
+position = Vector2(960, 540)
+scale = Vector2(15, 9)
 texture = ExtResource("2_sky")
 modulate = Color(0.6, 0.82, 1, 1)
 
 [node name="Ground2" type="ColorRect" parent="Panel2"]
-offset_left = 0.0
-offset_top = 560.0
-offset_right = 1152.0
-offset_bottom = 648.0
+offset_left = 0
+offset_top = 933.333
+offset_right = 1920
+offset_bottom = 1080
 color = Color(0.3, 0.6, 0.24, 1)
 
 [node name="Diego" type="Sprite2D" parent="Panel2"]
-position = Vector2(110, 456)
-scale = Vector2(2.8, 2.8)
+position = Vector2(183.333, 760)
+scale = Vector2(4.667, 4.667)
 texture = ExtResource("4_diego")
 [node name="Lara" type="Sprite2D" parent="Panel2"]
-position = Vector2(300, 491)
-scale = Vector2(2.8, 2.8)
+position = Vector2(500, 818.333)
+scale = Vector2(4.667, 4.667)
 texture = ExtResource("5_lara")
 [node name="Bauti" type="Sprite2D" parent="Panel2"]
-position = Vector2(490, 479)
-scale = Vector2(2.8, 2.8)
+position = Vector2(816.667, 798.333)
+scale = Vector2(4.667, 4.667)
 texture = ExtResource("6_bauti")
 [node name="Zoe" type="Sprite2D" parent="Panel2"]
-position = Vector2(690, 467)
-scale = Vector2(2.8, 2.8)
+position = Vector2(1150, 778.333)
+scale = Vector2(4.667, 4.667)
 texture = ExtResource("7_zoe")
 [node name="Roma" type="Sprite2D" parent="Panel2"]
-position = Vector2(880, 504)
-scale = Vector2(2.8, 2.8)
+position = Vector2(1466.667, 840)
+scale = Vector2(4.667, 4.667)
 texture = ExtResource("8_roma")
 [node name="Mathi" type="Sprite2D" parent="Panel2"]
-position = Vector2(1060, 473)
-scale = Vector2(2.8, 2.8)
+position = Vector2(1766.667, 788.333)
+scale = Vector2(4.667, 4.667)
 texture = ExtResource("9_mathi")
 
 [node name="Text2" type="RichTextLabel" parent="Panel2"]
-custom_minimum_size = Vector2(1000, 190)
+custom_minimum_size = Vector2(1666.667, 316.667)
 layout_mode = 0
-offset_left = 76.0
-offset_top = 30.0
-offset_right = 76.0
-offset_bottom = 30.0
+offset_left = 126.667
+offset_top = 50
+offset_right = 126.667
+offset_bottom = 50
 theme_override_colors/default_color = Color(1, 1, 1, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 6
@@ -116,33 +116,33 @@ scroll_active = false
 horizontal_alignment = 1
 
 [node name="Panel3" type="Control" parent="."]
-custom_minimum_size = Vector2(1152, 648)
+custom_minimum_size = Vector2(1920, 1080)
 layout_mode = 3
 anchors_preset = 0
 
 [node name="Background3" type="Sprite2D" parent="Panel3"]
-position = Vector2(576, 324)
-scale = Vector2(9, 5.4)
+position = Vector2(960, 540)
+scale = Vector2(15, 9)
 texture = ExtResource("2_sky")
 modulate = Color(0.65, 0.85, 1, 1)
 
 [node name="Ground3" type="ColorRect" parent="Panel3"]
-offset_left = 0.0
-offset_top = 560.0
-offset_right = 1152.0
-offset_bottom = 648.0
+offset_left = 0
+offset_top = 933.333
+offset_right = 1920
+offset_bottom = 1080
 color = Color(0.3, 0.6, 0.24, 1)
 
 [node name="LukeHero" type="Sprite2D" parent="Panel3"]
-position = Vector2(576, 490)
-scale = Vector2(4.6, 4.6)
+position = Vector2(960, 816.667)
+scale = Vector2(7.667, 7.667)
 texture = ExtResource("10_luke")
 
 [node name="Banner" type="Label" parent="Panel3"]
-offset_left = 76.0
-offset_top = 30.0
-offset_right = 1076.0
-offset_bottom = 90.0
+offset_left = 126.667
+offset_top = 50
+offset_right = 1793.333
+offset_bottom = 150
 theme_override_colors/font_color = Color(1, 0.85, 0.2, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 8
@@ -151,12 +151,12 @@ text = "¡GRACIAS LUKE!"
 horizontal_alignment = 1
 
 [node name="Text3" type="RichTextLabel" parent="Panel3"]
-custom_minimum_size = Vector2(1000, 190)
+custom_minimum_size = Vector2(1666.667, 316.667)
 layout_mode = 0
-offset_left = 76.0
-offset_top = 100.0
-offset_right = 76.0
-offset_bottom = 100.0
+offset_left = 126.667
+offset_top = 166.667
+offset_right = 126.667
+offset_bottom = 166.667
 theme_override_colors/default_color = Color(1, 1, 1, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 6
