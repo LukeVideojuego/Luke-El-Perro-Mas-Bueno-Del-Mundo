@@ -42,7 +42,7 @@ mission_text = "Escapa de las serpientes gigantes de la India."
 [node name="Sky" type="Sprite2D" parent="."]
 position = Vector2(2200, 540)
 texture = ExtResource("12_sky")
-modulate = Color(1, 0.88, 0.68, 1)
+modulate = Color(0.55, 0.42, 0.32, 1)
 scale = Vector2(17.188, 5)
 
 [node name="Trees" type="Sprite2D" parent="."]

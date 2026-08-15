@@ -48,6 +48,7 @@ mission_text = "Limpia el cruce para que la gente mayor cruce segura."
 position = Vector2(2200, 540)
 texture = ExtResource("10_sky")
 scale = Vector2(17.188, 5)
+modulate = Color(0.4, 0.44, 0.55, 1)
 
 [node name="Trees" type="Sprite2D" parent="."]
 position = Vector2(2200, 540)

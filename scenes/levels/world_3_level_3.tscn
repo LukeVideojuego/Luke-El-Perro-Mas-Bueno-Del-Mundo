@@ -43,7 +43,7 @@ mission_text = "Recupera el documento del pueblo en la Casa Rosada."
 [node name="Sky" type="Sprite2D" parent="."]
 position = Vector2(2300, 540)
 texture = ExtResource("10_sky")
-modulate = Color(0.7, 0.85, 1, 1)
+modulate = Color(0.42, 0.48, 0.6, 1)
 scale = Vector2(17.969, 5)
 
 [node name="Trees" type="Sprite2D" parent="."]

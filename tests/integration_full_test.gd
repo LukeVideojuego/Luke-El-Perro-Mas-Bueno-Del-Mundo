@@ -21,7 +21,9 @@ var wait_start := 0
 var stable_frames := 0
 var failures := 0
 
-const WATCHDOG_FRAMES := 900
+## La cinemática final ahora tiene 2 paneles con timeout automático de 10s
+## cada uno (hasta ~1200 frames a 60fps) antes de cargar final_screen.
+const WATCHDOG_FRAMES := 1300
 const STABLE_FRAMES := 5
 
 func _ready() -> void:

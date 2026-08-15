@@ -33,7 +33,7 @@ mission_text = "¡Vence a La Reina Veneno!"
 [node name="Sky" type="Sprite2D" parent="."]
 position = Vector2(1000, 540)
 texture = ExtResource("7_sky")
-modulate = Color(1, 0.85, 0.62, 1)
+modulate = Color(0.55, 0.4, 0.3, 1)
 scale = Vector2(7.812, 5)
 
 [node name="Trees" type="Sprite2D" parent="."]

@@ -42,7 +42,7 @@ mission_text = "Cruza la jungla y evita el dengue."
 [node name="Sky" type="Sprite2D" parent="."]
 position = Vector2(2200, 540)
 texture = ExtResource("13_sky")
-modulate = Color(0.75, 0.92, 0.72, 1)
+modulate = Color(0.38, 0.52, 0.4, 1)
 scale = Vector2(17.188, 5)
 
 [node name="Trees" type="Sprite2D" parent="."]
