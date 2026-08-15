@@ -1,7 +1,7 @@
 extends Node2D
 
-@export var scene_path := "res://scenes/levels/world_1_level_3.tscn"
-@export var out_name := "wide"
+@export var scene_path := "res://scenes/levels/world_3_level_2.tscn"
+@export var out_name := "fid_world3_2"
 var level: Node
 
 func _ready() -> void:
