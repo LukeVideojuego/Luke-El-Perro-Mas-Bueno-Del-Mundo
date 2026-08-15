@@ -45,7 +45,6 @@ scale = Vector2(7.812, 2.7)
 [node name="TempleBackdrop" type="Sprite2D" parent="."]
 position = Vector2(1000, 750)
 scale = Vector2(2.6, 2.6)
-z_index = -6
 texture = ExtResource("13_temple")
 
 [node name="LandmarkLeft" type="Sprite2D" parent="."]

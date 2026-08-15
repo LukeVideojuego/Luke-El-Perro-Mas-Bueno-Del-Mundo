@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3]
+[gd_scene load_steps=27 format=3]
 
 [ext_resource type="Script" path="res://scripts/levels/level_base.gd" id="1_level"]
 [ext_resource type="PackedScene" path="res://scenes/player/player.tscn" id="2_luke"]
@@ -22,6 +22,8 @@
 [ext_resource type="Texture2D" path="res://assets/props/traffic_light.png" id="22_trafficlight"]
 [ext_resource type="Texture2D" path="res://assets/Tiles/Default/bush.png" id="23_bush"]
 [ext_resource type="PackedScene" path="res://scenes/objects/bone_pickup.tscn" id="24_bonepickup"]
+[ext_resource type="Texture2D" path="res://assets/Tiles/Default/window.png" id="25_window"]
+[ext_resource type="Texture2D" path="res://assets/Tiles/Default/door_closed.png" id="26_door"]
 
 [sub_resource type="RectangleShape2D" id="GroundShape"]
 size = Vector2(4200, 110)
@@ -56,13 +58,37 @@ scale = Vector2(16.406, 2.7)
 [node name="LandmarkLeft" type="Sprite2D" parent="."]
 position = Vector2(924, 760)
 scale = Vector2(3.1, 3.6)
-texture = ExtResource("13_stone")
-modulate = Color(0.32, 0.32, 0.48, 1)
+texture = ExtResource("12_street")
+modulate = Color(0.42, 0.42, 0.58, 1)
+[node name="WindowLeftA" type="Sprite2D" parent="."]
+position = Vector2(880, 719)
+scale = Vector2(0.55, 0.55)
+texture = ExtResource("25_window")
+[node name="WindowLeftB" type="Sprite2D" parent="."]
+position = Vector2(968, 719)
+scale = Vector2(0.55, 0.55)
+texture = ExtResource("25_window")
+[node name="DoorLeft" type="Sprite2D" parent="."]
+position = Vector2(924, 843)
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("26_door")
 [node name="LandmarkRight" type="Sprite2D" parent="."]
 position = Vector2(3276, 745)
 scale = Vector2(2.7, 3.9)
-texture = ExtResource("13_stone")
-modulate = Color(0.32, 0.32, 0.48, 1)
+texture = ExtResource("12_street")
+modulate = Color(0.42, 0.42, 0.58, 1)
+[node name="WindowRightA" type="Sprite2D" parent="."]
+position = Vector2(3238, 700)
+scale = Vector2(0.55, 0.55)
+texture = ExtResource("25_window")
+[node name="WindowRightB" type="Sprite2D" parent="."]
+position = Vector2(3314, 700)
+scale = Vector2(0.55, 0.55)
+texture = ExtResource("25_window")
+[node name="DoorRight" type="Sprite2D" parent="."]
+position = Vector2(3276, 835)
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("26_door")
 
 [node name="Ground" type="StaticBody2D" parent="."]
 
