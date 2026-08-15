@@ -4,10 +4,10 @@
 [ext_resource type="Texture2D" path="res://assets/Enemies/Reference/tiburon.png" id="2_texture"]
 
 [sub_resource type="RectangleShape2D" id="BodyShape"]
-size = Vector2(240, 160)
+size = Vector2(120, 80)
 
 [sub_resource type="RectangleShape2D" id="DamageShape"]
-size = Vector2(280, 190)
+size = Vector2(140, 95)
 
 [node name="FishBlue" type="CharacterBody2D"]
 collision_layer = 4
@@ -20,7 +20,7 @@ bob_amplitude = 0.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_texture")
-scale = Vector2(6, 6)
+scale = Vector2(3, 3)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 4)
