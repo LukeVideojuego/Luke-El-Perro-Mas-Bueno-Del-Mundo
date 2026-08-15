@@ -7,6 +7,8 @@ signal checkpoint_changed(checkpoint_id: String)
 signal level_begun(level_id: String)
 signal level_completed(level_id: String)
 signal coins_changed(total_coins: int)
+signal speed_boost_changed(is_active: bool)
+signal invincibility_changed(is_active: bool)
 
 const DEFAULT_LIVES := 3
 
@@ -53,6 +55,14 @@ func set_aura(active: bool) -> void:
 		return
 	aura_active = active
 	aura_changed.emit(aura_active)
+
+## Buffs temporizados: no persisten entre niveles ni se guardan, a
+## diferencia del aura protectora.
+func set_speed_boost(active: bool) -> void:
+	speed_boost_changed.emit(active)
+
+func set_invincibility(active: bool) -> void:
+	invincibility_changed.emit(active)
 
 func add_coins(amount: int = 1) -> void:
 	coins += amount

@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3]
+[gd_scene load_steps=26 format=3]
 
 [ext_resource type="Script" path="res://scripts/levels/level_base.gd" id="1_level"]
 [ext_resource type="PackedScene" path="res://scenes/player/player.tscn" id="2_luke"]
@@ -21,6 +21,7 @@
 [ext_resource type="Texture2D" path="res://assets/props/crosswalk.png" id="21_crosswalk"]
 [ext_resource type="Texture2D" path="res://assets/props/traffic_light.png" id="22_trafficlight"]
 [ext_resource type="PackedScene" path="res://scenes/objects/coin.tscn" id="23_coin"]
+[ext_resource type="PackedScene" path="res://scenes/objects/invincibility_power_up.tscn" id="24_invincibility"]
 
 [sub_resource type="RectangleShape2D" id="GroundShape"]
 size = Vector2(4400, 110)
@@ -261,6 +262,9 @@ position = Vector2(1760, 780)
 position = Vector2(2728, 780)
 [node name="CoinD" parent="." instance=ExtResource("23_coin")]
 position = Vector2(3696, 780)
+
+[node name="InvincibilityPowerUp" parent="." instance=ExtResource("24_invincibility")]
+position = Vector2(2200, 620)
 
 [node name="CompletionLabel" type="Label" parent="."]
 visible = false

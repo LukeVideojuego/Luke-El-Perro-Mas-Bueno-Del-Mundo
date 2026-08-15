@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3]
+[gd_scene load_steps=26 format=3]
 
 [ext_resource type="Script" path="res://scripts/levels/level_base.gd" id="1_level"]
 [ext_resource type="PackedScene" path="res://scenes/player/player.tscn" id="2_luke"]
@@ -22,6 +22,7 @@
 [ext_resource type="Texture2D" path="res://assets/props/crosswalk.png" id="21_crosswalk"]
 [ext_resource type="Texture2D" path="res://assets/props/traffic_light.png" id="22_trafficlight"]
 [ext_resource type="PackedScene" path="res://scenes/objects/coin.tscn" id="23_coin"]
+[ext_resource type="PackedScene" path="res://scenes/objects/speed_power_up.tscn" id="24_speed"]
 
 [sub_resource type="RectangleShape2D" id="GroundShape"]
 size = Vector2(4600, 110)
@@ -244,6 +245,9 @@ position = Vector2(1840, 780)
 position = Vector2(2852, 780)
 [node name="CoinD" parent="." instance=ExtResource("23_coin")]
 position = Vector2(3864, 780)
+
+[node name="SpeedPowerUp" parent="." instance=ExtResource("24_speed")]
+position = Vector2(2300, 620)
 
 [node name="CompletionLabel" type="Label" parent="."]
 visible = false

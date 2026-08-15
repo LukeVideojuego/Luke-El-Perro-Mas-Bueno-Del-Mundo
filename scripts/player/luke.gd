@@ -19,16 +19,28 @@ extends CharacterBody2D
 @onready var attack_visual: Polygon2D = $AttackVisual
 @onready var aura_visual: Polygon2D = $AuraVisual
 
+@export_category("Power-ups")
+@export var speed_boost_multiplier := 1.5
+@export var speed_boost_duration := 6.0
+@export var invincibility_duration := 6.0
+
 signal attack_started
 signal damaged
 signal defeated
 signal aura_changed(is_active: bool)
+signal speed_boost_changed(is_active: bool)
+signal invincibility_changed(is_active: bool)
 
 var facing_direction := 1
 var jumps_used := 0
 var is_attacking := false
 var has_protective_aura := false
 var can_receive_damage := true
+var has_speed_boost := false
+var has_invincibility := false
+
+var _speed_boost_token := 0
+var _invincibility_token := 0
 
 func _physics_process(delta: float) -> void:
 	var was_on_floor := is_on_floor()
@@ -48,6 +60,8 @@ func _apply_gravity(delta: float) -> void:
 func _handle_movement(delta: float) -> void:
 	var direction := Input.get_axis("move_left", "move_right")
 	var target_speed := run_speed if Input.is_action_pressed("run") else walk_speed
+	if has_speed_boost:
+		target_speed *= speed_boost_multiplier
 	if not is_zero_approx(direction):
 		var acceleration := ground_acceleration if is_on_floor() else air_acceleration
 		velocity.x = move_toward(velocity.x, direction * target_speed, acceleration * delta)
@@ -93,7 +107,7 @@ func _on_attack_area_body_entered(body: Node2D) -> void:
 		body.receive_attack(self)
 
 func receive_damage(_source: Node2D = null) -> void:
-	if not can_receive_damage:
+	if has_invincibility or not can_receive_damage:
 		return
 	can_receive_damage = false
 	damaged.emit()
@@ -114,6 +128,34 @@ func set_protective_aura(active: bool) -> void:
 	aura_changed.emit(active)
 	AudioDirector.play_event(&"aura_on" if active else &"aura_lost")
 
+## Duración limitada: cada pickup reinicia el cronómetro en vez de sumarse,
+## así que agarrar varios seguidos extiende el efecto sin acumular velocidad.
+func grant_speed_boost() -> void:
+	_speed_boost_token += 1
+	var my_token := _speed_boost_token
+	if not has_speed_boost:
+		has_speed_boost = true
+		speed_boost_changed.emit(true)
+		GameState.set_speed_boost(true)
+	await get_tree().create_timer(speed_boost_duration).timeout
+	if my_token == _speed_boost_token:
+		has_speed_boost = false
+		speed_boost_changed.emit(false)
+		GameState.set_speed_boost(false)
+
+func grant_invincibility() -> void:
+	_invincibility_token += 1
+	var my_token := _invincibility_token
+	if not has_invincibility:
+		has_invincibility = true
+		invincibility_changed.emit(true)
+		GameState.set_invincibility(true)
+	await get_tree().create_timer(invincibility_duration).timeout
+	if my_token == _invincibility_token:
+		has_invincibility = false
+		invincibility_changed.emit(false)
+		GameState.set_invincibility(false)
+
 func respawn(respawn_position: Vector2) -> void:
 	velocity = Vector2.ZERO
 	global_position = respawn_position
@@ -121,6 +163,13 @@ func respawn(respawn_position: Vector2) -> void:
 
 func _update_animation() -> void:
 	animated_sprite.flip_h = facing_direction < 0
+	if has_invincibility:
+		var blink: float = sin(Time.get_ticks_msec() / 60.0)
+		animated_sprite.modulate = Color(1.0, 0.85, 0.2, 1.0) if blink > 0.0 else Color(1.0, 1.0, 1.0, 0.55)
+	elif has_speed_boost:
+		animated_sprite.modulate = Color(0.6, 0.85, 1.0, 1.0)
+	else:
+		animated_sprite.modulate = Color(1, 1, 1, 1)
 	if is_attacking:
 		animated_sprite.play("attack")
 	elif not is_on_floor():

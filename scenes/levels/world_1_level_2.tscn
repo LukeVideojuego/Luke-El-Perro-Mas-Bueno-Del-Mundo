@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3]
+[gd_scene load_steps=31 format=3]
 
 [ext_resource type="Script" path="res://scripts/levels/world_1_level_2.gd" id="1_level"]
 [ext_resource type="PackedScene" path="res://scenes/player/player.tscn" id="2_luke"]
@@ -23,6 +23,7 @@
 [ext_resource type="Texture2D" path="res://assets/Tiles/Default/spikes.png" id="21_spikes"]
 [ext_resource type="Texture2D" path="res://assets/Tiles/Default/bush.png" id="22_bush"]
 [ext_resource type="PackedScene" path="res://scenes/objects/coin.tscn" id="23_coin"]
+[ext_resource type="PackedScene" path="res://scenes/objects/invincibility_power_up.tscn" id="24_invincibility"]
 
 [sub_resource type="RectangleShape2D" id="GroundShape"]
 size = Vector2(4200, 110)
@@ -263,4 +264,6 @@ position = Vector2(1680, 780)
 position = Vector2(2604, 780)
 [node name="CoinD" parent="." instance=ExtResource("23_coin")]
 position = Vector2(3528, 780)
+[node name="InvincibilityPowerUp" parent="." instance=ExtResource("24_invincibility")]
+position = Vector2(2100, 620)
 

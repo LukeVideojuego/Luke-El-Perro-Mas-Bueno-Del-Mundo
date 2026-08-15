@@ -10,6 +10,8 @@ const HEART_EMPTY := preload("res://assets/ui/icon_corazon_empty.png")
 @onready var time_label: Label = $Panel/TimeLabel
 @onready var meat_icon: TextureRect = $Panel/MeatIcon
 @onready var hearts: Array[TextureRect] = [$Panel/Heart1, $Panel/Heart2, $Panel/Heart3]
+@onready var invincibility_icon: TextureRect = $Panel/InvincibilityIcon
+@onready var speed_icon: TextureRect = $Panel/SpeedIcon
 
 var elapsed_seconds := 0.0
 
@@ -18,9 +20,13 @@ func _ready() -> void:
 	GameState.lives_changed.connect(_update_lives)
 	GameState.aura_changed.connect(_update_aura)
 	GameState.coins_changed.connect(_update_coins)
+	GameState.invincibility_changed.connect(_update_invincibility)
+	GameState.speed_boost_changed.connect(_update_speed_boost)
 	_update_lives(GameState.lives)
 	_update_aura(GameState.aura_active)
 	_update_coins(GameState.coins)
+	_update_invincibility(false)
+	_update_speed_boost(false)
 	_update_time()
 
 func _process(delta: float) -> void:
@@ -59,6 +65,16 @@ func _update_coins(total: int) -> void:
 	if coins_label == null:
 		return
 	coins_label.text = "x%d" % total
+
+func _update_invincibility(active: bool) -> void:
+	if invincibility_icon == null:
+		return
+	invincibility_icon.modulate = Color(1, 1, 1, 1) if active else Color(1, 1, 1, 0.25)
+
+func _update_speed_boost(active: bool) -> void:
+	if speed_icon == null:
+		return
+	speed_icon.modulate = Color(1, 1, 1, 1) if active else Color(1, 1, 1, 0.25)
 
 func _update_time() -> void:
 	if time_label == null:
