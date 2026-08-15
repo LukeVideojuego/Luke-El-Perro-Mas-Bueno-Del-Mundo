@@ -12,6 +12,7 @@
 [ext_resource type="Texture2D" path="res://assets/characters/Luke/luke_idle.png" id="10_luke"]
 
 [node name="CinematicFinal" type="CanvasLayer"]
+layer = 30
 script = ExtResource("1_final_script")
 
 [node name="Panel1" type="Control" parent="."]

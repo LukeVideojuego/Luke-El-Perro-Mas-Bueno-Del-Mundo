@@ -41,11 +41,13 @@ mission_text = "Cruza el mar saltando de isla en isla."
 position = Vector2(2300, 540)
 texture = ExtResource("11_sky")
 modulate = Color(0.65, 0.85, 1, 1)
+scale = Vector2(18, 5)
 
 [node name="Trees" type="Sprite2D" parent="."]
 position = Vector2(1500, 540)
 texture = ExtResource("12_trees")
 modulate = Color(0.5, 0.75, 0.85, 1)
+scale = Vector2(18, 2.7)
 
 [node name="StartPad" type="StaticBody2D" parent="."]
 position = Vector2(400, 960)
@@ -53,10 +55,12 @@ position = Vector2(400, 960)
 [node name="BlockTop" type="Sprite2D" parent="StartPad"]
 position = Vector2(0, 0)
 texture = ExtResource("15_grass")
+scale = Vector2(4.8, 1.8)
 
 [node name="BlockBody" type="Sprite2D" parent="StartPad"]
 position = Vector2(0, 50)
 texture = ExtResource("16_stone")
+scale = Vector2(4.8, 1.8)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StartPad"]
 shape = SubResource("StartPadShape")

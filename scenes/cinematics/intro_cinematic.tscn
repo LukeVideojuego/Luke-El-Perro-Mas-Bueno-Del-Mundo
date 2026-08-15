@@ -13,6 +13,7 @@
 [ext_resource type="Texture2D" path="res://assets/characters/Luke/luke_idle.png" id="11_luke"]
 
 [node name="CinematicIntro" type="CanvasLayer" unique_id=839210552]
+layer = 30
 script = ExtResource("1_intro_script")
 
 [node name="Panel1" type="Control" parent="." unique_id=1937312034]

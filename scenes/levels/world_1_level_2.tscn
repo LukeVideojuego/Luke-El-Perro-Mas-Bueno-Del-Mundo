@@ -223,8 +223,8 @@ position = Vector2(180, 850)
 position = Vector2(470, 870)
 interaction_text = "¡Los ladrones merodean el barrio! Cruza las calles y llega hasta la bandera verde."
 [node name="ThiefOne" parent="." instance=ExtResource("3_thief")]
-position = Vector2(1020, 850)
-patrol_distance = 125.0
+position = Vector2(1005, 850)
+patrol_distance = 90.0
 [node name="ThiefTwo" parent="." instance=ExtResource("3_thief")]
 position = Vector2(1920, 650)
 patrol_distance = 110.0

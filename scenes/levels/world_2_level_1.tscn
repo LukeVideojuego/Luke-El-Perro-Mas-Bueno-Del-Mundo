@@ -44,20 +44,24 @@ mission_text = "Ayuda a la señora Mayor a cruzar el mercado."
 [node name="Sky" type="Sprite2D" parent="."]
 position = Vector2(2100, 540)
 texture = ExtResource("10_sky")
+scale = Vector2(16.406, 5)
 
 [node name="Trees" type="Sprite2D" parent="."]
 position = Vector2(1300, 540)
 texture = ExtResource("11_trees")
+scale = Vector2(16.406, 2.7)
 
 [node name="Ground" type="StaticBody2D" parent="."]
 
 [node name="BlockTop" type="Sprite2D" parent="Ground"]
 position = Vector2(2100, 960)
 texture = ExtResource("12_street")
+scale = Vector2(65.625, 2)
 
 [node name="BlockBody" type="Sprite2D" parent="Ground"]
 position = Vector2(2100, 1010)
 texture = ExtResource("13_stone")
+scale = Vector2(65.625, 3.2)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Ground"]
 position = Vector2(2100, 960)
@@ -162,11 +166,11 @@ scale = Vector2(1.5, 1)
 texture = ExtResource("14_spikes")
 
 [node name="ThiefOne" parent="." instance=ExtResource("3_thief")]
-position = Vector2(900, 850)
+position = Vector2(1010, 850)
 patrol_distance = 140.0
 
 [node name="ThiefTwo" parent="." instance=ExtResource("3_thief")]
-position = Vector2(2600, 850)
+position = Vector2(2700, 850)
 patrol_distance = 150.0
 
 [node name="BoxA" parent="." instance=ExtResource("9_box")]

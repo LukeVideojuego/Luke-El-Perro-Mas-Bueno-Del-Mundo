@@ -39,11 +39,13 @@ mission_text = "Escapa de las serpientes gigantes de la India."
 position = Vector2(2200, 540)
 texture = ExtResource("12_sky")
 modulate = Color(1, 0.88, 0.68, 1)
+scale = Vector2(17.188, 5)
 
 [node name="Trees" type="Sprite2D" parent="."]
 position = Vector2(1400, 540)
 texture = ExtResource("13_trees")
 modulate = Color(0.9, 0.72, 0.5, 1)
+scale = Vector2(17.188, 2.7)
 
 [node name="TempleOne" type="Sprite2D" parent="."]
 position = Vector2(950, 760)
@@ -62,10 +64,12 @@ texture = ExtResource("20_temple")
 [node name="BlockTop" type="Sprite2D" parent="Ground"]
 position = Vector2(2200, 960)
 texture = ExtResource("14_sand")
+scale = Vector2(68.75, 2)
 
 [node name="BlockBody" type="Sprite2D" parent="Ground"]
 position = Vector2(2200, 1010)
 texture = ExtResource("15_stone")
+scale = Vector2(68.75, 3.2)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Ground"]
 position = Vector2(2200, 960)
@@ -170,12 +174,12 @@ modulate = Color(0.6, 1, 0.6, 1)
 texture = ExtResource("16_spikes")
 
 [node name="WormOne" parent="." instance=ExtResource("3_worm")]
-position = Vector2(950, 850)
+position = Vector2(1000, 850)
 patrol_distance = 140.0
 
 [node name="WormTwo" parent="." instance=ExtResource("3_worm")]
 position = Vector2(2000, 850)
-patrol_distance = 130.0
+patrol_distance = 110.0
 
 [node name="SlimeOne" parent="." instance=ExtResource("5_slime")]
 position = Vector2(2800, 850)

@@ -2,6 +2,7 @@ extends Node
 
 @onready var level_container: Node = $LevelContainer
 @onready var transition: CanvasLayer = $LevelTransition
+@onready var hud: CanvasLayer = $HUD
 
 var active_level: Node
 var is_transitioning := false
@@ -10,6 +11,7 @@ var intro_cinematic: Node = null
 var final_cinematic: Node = null
 
 func _ready() -> void:
+	hud.visible = false
 	GameState.level_completed.connect(_on_level_completed)
 	GameState.has_seen_intro = SaveManager.peek_has_seen_intro()
 	var menu := get_node_or_null("MainMenu")
@@ -63,6 +65,7 @@ func _free_menu() -> void:
 		menu.queue_free()
 
 func show_intro_cinematic() -> void:
+	hud.visible = false
 	var intro_scene := load("res://scenes/cinematics/intro_cinematic.tscn") as PackedScene
 	intro_cinematic = intro_scene.instantiate()
 	add_child(intro_cinematic)
@@ -79,6 +82,7 @@ func _on_intro_finished() -> void:
 	load_level("world_1_level_1")
 
 func show_final_cinematic() -> void:
+	hud.visible = false
 	var cinematic_scene := load("res://scenes/cinematics/final_cinematic.tscn") as PackedScene
 	final_cinematic = cinematic_scene.instantiate()
 	add_child(final_cinematic)
@@ -99,6 +103,7 @@ func load_level(level_id: String) -> void:
 	var packed_scene := load(scene_path) as PackedScene
 	active_level = packed_scene.instantiate()
 	level_container.add_child(active_level)
+	hud.visible = true
 
 func _on_level_completed(level_id: String) -> void:
 	if is_transitioning:

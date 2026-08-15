@@ -32,20 +32,24 @@ mission_text = "¡Detén al ladrón de cruces!"
 [node name="Sky" type="Sprite2D" parent="."]
 position = Vector2(1000, 540)
 texture = ExtResource("7_sky")
+scale = Vector2(7.812, 5)
 
 [node name="Trees" type="Sprite2D" parent="."]
 position = Vector2(500, 540)
 texture = ExtResource("8_trees")
+scale = Vector2(7.812, 2.7)
 
 [node name="Ground" type="StaticBody2D" parent="."]
 
 [node name="BlockTop" type="Sprite2D" parent="Ground"]
 position = Vector2(1000, 960)
 texture = ExtResource("9_street")
+scale = Vector2(31.25, 2)
 
 [node name="BlockBody" type="Sprite2D" parent="Ground"]
 position = Vector2(1000, 1010)
 texture = ExtResource("10_stone")
+scale = Vector2(31.25, 3.2)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Ground"]
 position = Vector2(1000, 960)

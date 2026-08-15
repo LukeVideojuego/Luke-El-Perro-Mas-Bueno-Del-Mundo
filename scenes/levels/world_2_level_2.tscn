@@ -41,20 +41,24 @@ mission_text = "Limpia el cruce para que la gente mayor cruce segura."
 [node name="Sky" type="Sprite2D" parent="."]
 position = Vector2(2200, 540)
 texture = ExtResource("10_sky")
+scale = Vector2(17.188, 5)
 
 [node name="Trees" type="Sprite2D" parent="."]
 position = Vector2(1400, 540)
 texture = ExtResource("11_trees")
+scale = Vector2(17.188, 2.7)
 
 [node name="Ground" type="StaticBody2D" parent="."]
 
 [node name="BlockTop" type="Sprite2D" parent="Ground"]
 position = Vector2(2200, 960)
 texture = ExtResource("12_street")
+scale = Vector2(68.75, 2)
 
 [node name="BlockBody" type="Sprite2D" parent="Ground"]
 position = Vector2(2200, 1010)
 texture = ExtResource("13_stone")
+scale = Vector2(68.75, 3.2)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Ground"]
 position = Vector2(2200, 960)
@@ -173,7 +177,7 @@ scale = Vector2(1.5, 1)
 texture = ExtResource("14_spikes")
 
 [node name="ThiefOne" parent="." instance=ExtResource("3_thief")]
-position = Vector2(950, 850)
+position = Vector2(1010, 850)
 patrol_distance = 140.0
 
 [node name="ThiefTwo" parent="." instance=ExtResource("3_thief")]
