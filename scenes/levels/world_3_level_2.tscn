@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3]
+[gd_scene load_steps=32 format=3]
 
 [ext_resource type="Script" path="res://scripts/levels/level_base.gd" id="1_level"]
 [ext_resource type="PackedScene" path="res://scenes/player/player.tscn" id="2_luke"]
@@ -25,6 +25,8 @@
 [ext_resource type="PackedScene" path="res://scenes/objects/bone_pickup.tscn" id="23_bonepickup"]
 [ext_resource type="PackedScene" path="res://scenes/objects/moving_platform.tscn" id="24_movingplatform"]
 [ext_resource type="Texture2D" path="res://assets/Enemies/Reference/politico_corrupto.png" id="25_lookout_texture"]
+[ext_resource type="Texture2D" path="res://assets/props/limousine.png" id="26_limo"]
+[ext_resource type="Texture2D" path="res://assets/props/suit_guard.png" id="27_guard"]
 
 [sub_resource type="RectangleShape2D" id="GroundShape"]
 size = Vector2(9480, 110)
@@ -410,3 +412,12 @@ position = Vector2(8500, 985)
 scale = Vector2(1.1, 1.1)
 flip_h = true
 modulate = Color(0.2, 0.18, 0.22, 1)
+
+[node name="Limousine" type="Sprite2D" parent="."]
+position = Vector2(740, 792)
+texture = ExtResource("26_limo")
+
+[node name="SuitGuard" type="Sprite2D" parent="."]
+position = Vector2(600, 850)
+scale = Vector2(1.3, 1.3)
+texture = ExtResource("27_guard")

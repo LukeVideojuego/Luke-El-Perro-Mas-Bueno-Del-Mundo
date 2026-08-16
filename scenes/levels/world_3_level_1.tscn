@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3]
+[gd_scene load_steps=28 format=3]
 
 [ext_resource type="Script" path="res://scripts/levels/level_base.gd" id="1_level"]
 [ext_resource type="PackedScene" path="res://scenes/player/player.tscn" id="2_luke"]
@@ -22,6 +22,8 @@
 [ext_resource type="Texture2D" path="res://assets/props/temple.png" id="22_temple"]
 [ext_resource type="PackedScene" path="res://scenes/objects/bone_pickup.tscn" id="23_bonepickup"]
 [ext_resource type="PackedScene" path="res://scenes/objects/moving_platform.tscn" id="24_movingplatform"]
+[ext_resource type="Texture2D" path="res://assets/props/limousine.png" id="25_limo"]
+[ext_resource type="Texture2D" path="res://assets/props/suit_guard.png" id="26_guard"]
 
 [sub_resource type="RectangleShape2D" id="GroundShape"]
 size = Vector2(8400, 110)
@@ -357,3 +359,12 @@ position = Vector2(4850, 780)
 position = Vector2(6100, 780)
 [node name="CoinF" parent="." instance=ExtResource("20_coin")]
 position = Vector2(7600, 780)
+
+[node name="Limousine" type="Sprite2D" parent="."]
+position = Vector2(740, 792)
+texture = ExtResource("25_limo")
+
+[node name="SuitGuard" type="Sprite2D" parent="."]
+position = Vector2(600, 850)
+scale = Vector2(1.3, 1.3)
+texture = ExtResource("26_guard")
