@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3]
+[gd_scene load_steps=26 format=3]
 
 [ext_resource type="Script" path="res://scripts/levels/level_base.gd" id="1_level"]
 [ext_resource type="PackedScene" path="res://scenes/player/player.tscn" id="2_luke"]
@@ -21,9 +21,10 @@
 [ext_resource type="PackedScene" path="res://scenes/objects/speed_power_up.tscn" id="22_speed"]
 [ext_resource type="Texture2D" path="res://assets/Tiles/Default/bush.png" id="23_bush"]
 [ext_resource type="PackedScene" path="res://scenes/objects/bone_pickup.tscn" id="24_bonepickup"]
+[ext_resource type="PackedScene" path="res://scenes/objects/moving_platform.tscn" id="25_movingplatform"]
 
 [sub_resource type="RectangleShape2D" id="GroundShape"]
-size = Vector2(4400, 110)
+size = Vector2(8800, 110)
 
 [sub_resource type="RectangleShape2D" id="PlatformShape"]
 size = Vector2(420, 52)
@@ -66,17 +67,17 @@ modulate = Color(0.95, 0.72, 0.4, 1)
 [node name="Ground" type="StaticBody2D" parent="."]
 
 [node name="BlockTop" type="Sprite2D" parent="Ground"]
-position = Vector2(2200, 960)
+position = Vector2(4400, 960)
 texture = ExtResource("14_sand")
-scale = Vector2(68.75, 2)
+scale = Vector2(137.5000, 2)
 
 [node name="BlockBody" type="Sprite2D" parent="Ground"]
-position = Vector2(2200, 1010)
+position = Vector2(4400, 1010)
 texture = ExtResource("15_stone")
-scale = Vector2(68.75, 3.2)
+scale = Vector2(137.5000, 3.2)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Ground"]
-position = Vector2(2200, 960)
+position = Vector2(4400, 960)
 shape = SubResource("GroundShape")
 
 [node name="PlatformOne" type="StaticBody2D" parent="."]
@@ -126,7 +127,7 @@ position = Vector2(-35, 500)
 shape = SubResource("BoundaryShape")
 
 [node name="RightBoundary" type="StaticBody2D" parent="."]
-position = Vector2(4435, 500)
+position = Vector2(8835, 500)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RightBoundary"]
 shape = SubResource("BoundaryShape")
@@ -220,7 +221,7 @@ position = Vector2(700, 655)
 position = Vector2(2800, 655)
 
 [node name="Finish" parent="." instance=ExtResource("7_finish")]
-position = Vector2(4100, 850)
+position = Vector2(8300, 850)
 
 
 [node name="CoinA" parent="." instance=ExtResource("21_coin")]
@@ -240,7 +241,7 @@ position = Vector2(176, 918)
 scale = Vector2(1.2, 1.2)
 texture = ExtResource("23_bush")
 [node name="EdgeBushB" type="Sprite2D" parent="."]
-position = Vector2(4224, 918)
+position = Vector2(8624, 918)
 scale = Vector2(1.2, 1.2)
 texture = ExtResource("23_bush")
 
@@ -256,3 +257,108 @@ add_theme_constant_override("outline_size", 8)
 
 [node name="HiddenBone" parent="." instance=ExtResource("24_bonepickup")]
 position = Vector2(3250, 620)
+
+[node name="PlatformFive" type="StaticBody2D" parent="."]
+position = Vector2(5020, 820)
+[node name="Visual" type="Sprite2D" parent="PlatformFive"]
+texture = ExtResource("14_sand")
+scale = Vector2(6.5625, 0.8125)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlatformFive"]
+shape = SubResource("PlatformShape")
+
+[node name="PlatformSix" type="StaticBody2D" parent="."]
+position = Vector2(5800, 730)
+[node name="Visual" type="Sprite2D" parent="PlatformSix"]
+texture = ExtResource("14_sand")
+scale = Vector2(6.5625, 0.8125)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlatformSix"]
+shape = SubResource("PlatformShape")
+
+[node name="PlatformSeven" type="StaticBody2D" parent="."]
+position = Vector2(6750, 800)
+[node name="Visual" type="Sprite2D" parent="PlatformSeven"]
+texture = ExtResource("14_sand")
+scale = Vector2(6.5625, 0.8125)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlatformSeven"]
+shape = SubResource("PlatformShape")
+
+[node name="PlatformEight" type="StaticBody2D" parent="."]
+position = Vector2(7650, 730)
+[node name="Visual" type="Sprite2D" parent="PlatformEight"]
+texture = ExtResource("14_sand")
+scale = Vector2(6.5625, 0.8125)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlatformEight"]
+shape = SubResource("PlatformShape")
+
+[node name="MovingPlatformOne" parent="." instance=ExtResource("25_movingplatform")]
+position = Vector2(6300, 560)
+travel = Vector2(260, 0)
+speed = 90.0
+
+[node name="SpikeVisualsThree" type="Node2D" parent="."]
+[node name="SpikeA" type="Sprite2D" parent="SpikeVisualsThree"]
+position = Vector2(5400, 928)
+scale = Vector2(1.5, 1)
+modulate = Color(0.6, 1, 0.6, 1)
+texture = ExtResource("16_spikes")
+[node name="SpikeB" type="Sprite2D" parent="SpikeVisualsThree"]
+position = Vector2(5450, 928)
+scale = Vector2(1.5, 1)
+modulate = Color(0.6, 1, 0.6, 1)
+texture = ExtResource("16_spikes")
+[node name="SpikeC" type="Sprite2D" parent="SpikeVisualsThree"]
+position = Vector2(5500, 928)
+scale = Vector2(1.5, 1)
+modulate = Color(0.6, 1, 0.6, 1)
+texture = ExtResource("16_spikes")
+[node name="SpikeHazardThree" parent="." instance=ExtResource("10_hazard")]
+position = Vector2(5450, 920)
+
+[node name="SpikeVisualsFour" type="Node2D" parent="."]
+[node name="SpikeA" type="Sprite2D" parent="SpikeVisualsFour"]
+position = Vector2(8250, 928)
+scale = Vector2(1.5, 1)
+modulate = Color(0.6, 1, 0.6, 1)
+texture = ExtResource("16_spikes")
+[node name="SpikeB" type="Sprite2D" parent="SpikeVisualsFour"]
+position = Vector2(8300, 928)
+scale = Vector2(1.5, 1)
+modulate = Color(0.6, 1, 0.6, 1)
+texture = ExtResource("16_spikes")
+[node name="SpikeC" type="Sprite2D" parent="SpikeVisualsFour"]
+position = Vector2(8350, 928)
+scale = Vector2(1.5, 1)
+modulate = Color(0.6, 1, 0.6, 1)
+texture = ExtResource("16_spikes")
+[node name="SpikeHazardFour" parent="." instance=ExtResource("10_hazard")]
+position = Vector2(8300, 920)
+
+[node name="WormThree" parent="." instance=ExtResource("3_worm")]
+position = Vector2(5400, 850)
+patrol_distance = 140.0
+[node name="SlimeTwo" parent="." instance=ExtResource("5_slime")]
+position = Vector2(7200, 850)
+patrol_distance = 130.0
+[node name="SnailTwo" parent="." instance=ExtResource("4_snail")]
+position = Vector2(8000, 850)
+patrol_distance = 120.0
+
+[node name="CheckpointThree" parent="." instance=ExtResource("6_checkpoint")]
+position = Vector2(6200, 860)
+[node name="CheckpointFour" parent="." instance=ExtResource("6_checkpoint")]
+position = Vector2(7700, 860)
+
+[node name="TempleThree" type="Sprite2D" parent="."]
+position = Vector2(5350, 760)
+scale = Vector2(2.2, 2.2)
+texture = ExtResource("20_temple")
+modulate = Color(0.95, 0.72, 0.4, 1)
+
+[node name="CoinE" parent="." instance=ExtResource("21_coin")]
+position = Vector2(5192, 780)
+[node name="CoinF" parent="." instance=ExtResource("21_coin")]
+position = Vector2(6160, 780)
+[node name="CoinG" parent="." instance=ExtResource("21_coin")]
+position = Vector2(7128, 780)
+[node name="CoinH" parent="." instance=ExtResource("21_coin")]
+position = Vector2(8096, 780)
