@@ -19,6 +19,7 @@ patrol_speed = 160.0
 patrol_distance = 200.0
 bob_amplitude = 14.0
 bob_frequency = 3.0
+contact_anim = 2
 can_ranged_attack = true
 ranged_projectile_scene = ExtResource("3_projectile")
 ranged_detect_range = 350.0

@@ -18,6 +18,7 @@ patrol_speed = 175.0
 patrol_distance = 220.0
 bob_amplitude = 10.0
 bob_frequency = 3.0
+contact_anim = 1
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_texture")

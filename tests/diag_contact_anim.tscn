@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://tests/diag_contact_anim.gd" id="1_script"]
+
+[node name="DiagContactAnim" type="Node2D"]
+script = ExtResource("1_script")
+scene_path = "res://scenes/levels/world_4_level_2.tscn"
+enemy_name = "FishBlueOne"
+out_name = "bite"

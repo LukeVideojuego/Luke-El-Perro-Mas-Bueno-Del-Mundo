@@ -13,6 +13,12 @@ enum MovementMode {
 	HOP,
 }
 
+## Animación cosmética al tocar a Luke, elegida por tipo de personaje:
+## BITE (mordida, tiburones), STING (picadura, insectos/medusa/serpiente),
+## STEAL (el ladrón "roba" el chaleco de Luke y se lo devuelve), FINE (el
+## político le entrega una multa), GENERIC (sacudida simple).
+enum ContactAnim { GENERIC, BITE, STING, STEAL, FINE }
+
 signal defeated(enemy: EnemyBase)
 
 @export_category("Combat")
@@ -20,6 +26,7 @@ signal defeated(enemy: EnemyBase)
 @export var max_health := 1
 ## Si true, este enemigo suelta un huesito coleccionable al ser derrotado.
 @export var drops_bone_on_defeat := false
+@export var contact_anim: ContactAnim = ContactAnim.GENERIC
 @export_category("Movement")
 @export var patrol_speed := 95.0
 @export var gravity := 1800.0
@@ -202,6 +209,93 @@ func _drop_bone() -> void:
 	bone.global_position = global_position
 	parent.call_deferred("add_child", bone)
 
+const VEST_ICON := preload("res://assets/ui/icon_chaleco.png")
+const FINE_ICON := preload("res://assets/ui/icon_multa.png")
+
 func _on_damage_area_body_entered(body: Node2D) -> void:
 	if not is_defeated and body is Luke:
+		_play_contact_animation(body)
 		body.receive_damage(self)
+
+## Animación puramente cosmética en el instante del contacto; no afecta el
+## daño (ya resuelto por Luke.receive_damage). Cada rama usa un Tween corto
+## para no bloquear el resto de la lógica del enemigo.
+func _play_contact_animation(luke: Luke) -> void:
+	if sprite == null:
+		return
+	match contact_anim:
+		ContactAnim.BITE:
+			_anim_snap()
+		ContactAnim.STING:
+			_anim_jab(Color(1, 1, 1, 1))
+		ContactAnim.STEAL:
+			_anim_steal(luke)
+		ContactAnim.FINE:
+			_anim_fine(luke)
+		_:
+			_anim_wobble()
+
+## Mordida: el sprite se agranda de golpe y vuelve, simulando un mordisco.
+func _anim_snap() -> void:
+	var base_scale := sprite.scale
+	var tween := create_tween()
+	tween.tween_property(sprite, "scale", base_scale * 1.35, 0.08).set_trans(Tween.TRANS_SINE)
+	tween.tween_property(sprite, "scale", base_scale, 0.14).set_trans(Tween.TRANS_SINE)
+
+## Picadura: el sprite se lanza hacia adelante (hacia Luke) y vuelve rápido.
+func _anim_jab(tint: Color) -> void:
+	var base_pos := sprite.position
+	var dir := 1.0 if not sprite.flip_h else -1.0
+	var jab_offset := Vector2(14.0 * dir, 0.0)
+	var base_modulate := sprite.modulate
+	var tween := create_tween()
+	tween.tween_property(sprite, "position", base_pos + jab_offset, 0.06).set_trans(Tween.TRANS_SINE)
+	tween.parallel().tween_property(sprite, "modulate", tint, 0.06)
+	tween.tween_property(sprite, "position", base_pos, 0.12).set_trans(Tween.TRANS_SINE)
+	tween.parallel().tween_property(sprite, "modulate", base_modulate, 0.12)
+
+## Sacudida genérica (enemigos sin animación temática específica).
+func _anim_wobble() -> void:
+	var base_rotation := sprite.rotation
+	var tween := create_tween()
+	tween.tween_property(sprite, "rotation", base_rotation + 0.25, 0.06)
+	tween.tween_property(sprite, "rotation", base_rotation - 0.2, 0.08)
+	tween.tween_property(sprite, "rotation", base_rotation, 0.08)
+
+## El ladrón "roba" el chaleco de Luke: un ícono vuela de Luke al ladrón,
+## espera un instante y vuelve a Luke, que recupera su apariencia normal.
+func _anim_steal(luke: Luke) -> void:
+	var parent := get_parent()
+	if parent == null:
+		return
+	var icon := Sprite2D.new()
+	icon.texture = VEST_ICON
+	icon.scale = Vector2(0.8, 0.8)
+	icon.z_index = 10
+	icon.global_position = luke.global_position + Vector2(0, -60)
+	parent.call_deferred("add_child", icon)
+	var to_thief := global_position + Vector2(0, -50)
+	var tween := create_tween()
+	tween.tween_property(icon, "global_position", to_thief, 0.25).set_trans(Tween.TRANS_QUAD)
+	tween.tween_interval(0.35)
+	tween.tween_property(icon, "global_position", luke.global_position + Vector2(0, -60), 0.3).set_trans(Tween.TRANS_QUAD)
+	tween.tween_callback(icon.queue_free)
+
+## El político le entrega una multa a Luke: el ícono aparece sobre Luke y
+## se desvanece.
+func _anim_fine(luke: Luke) -> void:
+	var parent := get_parent()
+	if parent == null:
+		return
+	var icon := Sprite2D.new()
+	icon.texture = FINE_ICON
+	icon.scale = Vector2(0.8, 0.8)
+	icon.z_index = 10
+	icon.global_position = global_position + Vector2(0, -60)
+	parent.call_deferred("add_child", icon)
+	var target := luke.global_position + Vector2(0, -70)
+	var tween := create_tween()
+	tween.tween_property(icon, "global_position", target, 0.25).set_trans(Tween.TRANS_QUAD)
+	tween.tween_interval(0.4)
+	tween.tween_property(icon, "modulate:a", 0.0, 0.3)
+	tween.tween_callback(icon.queue_free)

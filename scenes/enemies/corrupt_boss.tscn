@@ -24,6 +24,7 @@ detect_range = 500.0
 hop_interval = 1.3
 hop_strength = -480.0
 hp_bar_width = 160.0
+contact_anim = 4
 can_ranged_attack = true
 ranged_projectile_scene = ExtResource("3_projectile")
 ranged_detect_range = 500.0

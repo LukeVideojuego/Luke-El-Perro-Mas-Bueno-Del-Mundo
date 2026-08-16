@@ -17,6 +17,7 @@ script = ExtResource("1_script")
 movement_mode = 2
 bob_amplitude = 26.0
 bob_frequency = 1.2
+contact_anim = 2
 can_ranged_attack = true
 ranged_projectile_scene = ExtResource("3_projectile")
 ranged_detect_range = 380.0
