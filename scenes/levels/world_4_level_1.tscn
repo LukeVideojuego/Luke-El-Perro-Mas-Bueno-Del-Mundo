@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3]
+[gd_scene load_steps=27 format=3]
 
 [ext_resource type="Script" path="res://scripts/levels/level_base.gd" id="1_level"]
 [ext_resource type="PackedScene" path="res://scenes/player/player.tscn" id="2_luke"]
@@ -21,12 +21,17 @@
 [ext_resource type="Texture2D" path="res://assets/Tiles/Default/spikes.png" id="17_spikes"]
 [ext_resource type="Texture2D" path="res://assets/Tiles/Default/bush.png" id="21_bush"]
 [ext_resource type="PackedScene" path="res://scenes/objects/bone_pickup.tscn" id="22_bonepickup"]
+[ext_resource type="PackedScene" path="res://scenes/objects/moving_platform.tscn" id="23_movingplatform"]
+[ext_resource type="Texture2D" path="res://assets/Enemies/Reference/serpiente.png" id="24_lookout_texture"]
 
 [sub_resource type="RectangleShape2D" id="GroundShape"]
-size = Vector2(4400, 110)
+size = Vector2(9480, 110)
 
 [sub_resource type="RectangleShape2D" id="PlatformShape"]
 size = Vector2(420, 52)
+
+[sub_resource type="RectangleShape2D" id="PlatformSmallShape"]
+size = Vector2(260, 40)
 
 [sub_resource type="RectangleShape2D" id="BoundaryShape"]
 size = Vector2(70, 900)
@@ -65,17 +70,17 @@ modulate = Color(0.22, 0.32, 0.2, 1)
 [node name="Ground" type="StaticBody2D" parent="."]
 
 [node name="BlockTop" type="Sprite2D" parent="Ground"]
-position = Vector2(2200, 960)
+position = Vector2(4740, 960)
 texture = ExtResource("15_grass")
-scale = Vector2(68.75, 2)
+scale = Vector2(148.1250, 2)
 
 [node name="BlockBody" type="Sprite2D" parent="Ground"]
-position = Vector2(2200, 1010)
+position = Vector2(4740, 1010)
 texture = ExtResource("16_stone")
-scale = Vector2(68.75, 3.2)
+scale = Vector2(148.1250, 3.2)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Ground"]
-position = Vector2(2200, 960)
+position = Vector2(4740, 960)
 shape = SubResource("GroundShape")
 
 [node name="PlatformOne" type="StaticBody2D" parent="."]
@@ -125,7 +130,7 @@ position = Vector2(-35, 500)
 shape = SubResource("BoundaryShape")
 
 [node name="RightBoundary" type="StaticBody2D" parent="."]
-position = Vector2(4435, 500)
+position = Vector2(9515, 500)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RightBoundary"]
 shape = SubResource("BoundaryShape")
@@ -223,7 +228,7 @@ position = Vector2(700, 655)
 position = Vector2(2800, 655)
 
 [node name="Finish" parent="." instance=ExtResource("8_finish")]
-position = Vector2(4100, 850)
+position = Vector2(9180, 850)
 
 [node name="CoinA" parent="." instance=ExtResource("20_coin")]
 position = Vector2(650, 780)
@@ -237,7 +242,7 @@ position = Vector2(176, 918)
 scale = Vector2(1.2, 1.2)
 texture = ExtResource("21_bush")
 [node name="EdgeBushB" type="Sprite2D" parent="."]
-position = Vector2(4224, 918)
+position = Vector2(9304, 918)
 scale = Vector2(1.2, 1.2)
 texture = ExtResource("21_bush")
 
@@ -253,3 +258,116 @@ add_theme_constant_override("outline_size", 8)
 
 [node name="HiddenBone" parent="." instance=ExtResource("22_bonepickup")]
 position = Vector2(3250, 620)
+
+[node name="PlatformFive" type="StaticBody2D" parent="."]
+position = Vector2(5020, 820)
+[node name="Visual" type="Sprite2D" parent="PlatformFive"]
+texture = ExtResource("15_grass")
+scale = Vector2(6.5625, 0.8125)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlatformFive"]
+shape = SubResource("PlatformShape")
+
+[node name="PlatformSix" type="StaticBody2D" parent="."]
+position = Vector2(5800, 730)
+[node name="Visual" type="Sprite2D" parent="PlatformSix"]
+texture = ExtResource("15_grass")
+scale = Vector2(6.5625, 0.8125)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlatformSix"]
+shape = SubResource("PlatformShape")
+
+[node name="MovingPlatformOne" parent="." instance=ExtResource("23_movingplatform")]
+position = Vector2(6400, 560)
+travel = Vector2(260, 0)
+speed = 90.0
+
+[node name="SpikeVisualsThree" type="Node2D" parent="."]
+[node name="SpikeA" type="Sprite2D" parent="SpikeVisualsThree"]
+position = Vector2(5400, 928)
+scale = Vector2(1.5, 1)
+modulate = Color(0.6, 1, 0.6, 1)
+texture = ExtResource("17_spikes")
+[node name="SpikeB" type="Sprite2D" parent="SpikeVisualsThree"]
+position = Vector2(5450, 928)
+scale = Vector2(1.5, 1)
+modulate = Color(0.6, 1, 0.6, 1)
+texture = ExtResource("17_spikes")
+[node name="SpikeC" type="Sprite2D" parent="SpikeVisualsThree"]
+position = Vector2(5500, 928)
+scale = Vector2(1.5, 1)
+modulate = Color(0.6, 1, 0.6, 1)
+texture = ExtResource("17_spikes")
+[node name="SpikeHazardThree" parent="." instance=ExtResource("11_hazard")]
+position = Vector2(5450, 920)
+
+[node name="BeeThree" parent="." instance=ExtResource("3_bee")]
+position = Vector2(5100, 700)
+patrol_distance = 180.0
+[node name="FlyTwo" parent="." instance=ExtResource("4_fly")]
+position = Vector2(6600, 720)
+patrol_distance = 180.0
+
+[node name="CheckpointThree" parent="." instance=ExtResource("7_checkpoint")]
+position = Vector2(5700, 860)
+
+[node name="CoinD" parent="." instance=ExtResource("20_coin")]
+position = Vector2(5050, 780)
+[node name="CoinE" parent="." instance=ExtResource("20_coin")]
+position = Vector2(6400, 780)
+[node name="PrecisionPlat1" type="StaticBody2D" parent="."]
+position = Vector2(7000, 850)
+[node name="Visual" type="Sprite2D" parent="PrecisionPlat1"]
+texture = ExtResource("15_grass")
+scale = Vector2(4.0625, 0.625)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PrecisionPlat1"]
+shape = SubResource("PlatformSmallShape")
+[node name="PrecisionPlat2" type="StaticBody2D" parent="."]
+position = Vector2(7470, 760)
+[node name="Visual" type="Sprite2D" parent="PrecisionPlat2"]
+texture = ExtResource("15_grass")
+scale = Vector2(4.0625, 0.625)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PrecisionPlat2"]
+shape = SubResource("PlatformSmallShape")
+[node name="PrecisionPlat3" type="StaticBody2D" parent="."]
+position = Vector2(7940, 850)
+[node name="Visual" type="Sprite2D" parent="PrecisionPlat3"]
+texture = ExtResource("15_grass")
+scale = Vector2(4.0625, 0.625)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PrecisionPlat3"]
+shape = SubResource("PlatformSmallShape")
+[node name="PrecisionPlat4" type="StaticBody2D" parent="."]
+position = Vector2(8410, 740)
+[node name="Visual" type="Sprite2D" parent="PrecisionPlat4"]
+texture = ExtResource("15_grass")
+scale = Vector2(4.0625, 0.625)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PrecisionPlat4"]
+shape = SubResource("PlatformSmallShape")
+[node name="PrecisionPlat5" type="StaticBody2D" parent="."]
+position = Vector2(8880, 850)
+[node name="Visual" type="Sprite2D" parent="PrecisionPlat5"]
+texture = ExtResource("15_grass")
+scale = Vector2(4.0625, 0.625)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PrecisionPlat5"]
+shape = SubResource("PlatformSmallShape")
+[node name="PitSpikesVisual" type="Node2D" parent="."]
+[node name="SpikeStrip" type="Sprite2D" parent="PitSpikesVisual"]
+position = Vector2(7940.0, 928)
+scale = Vector2(33.438, 1)
+modulate = Color(0.6, 1, 0.6, 1)
+texture = ExtResource("17_spikes")
+[node name="PitHazard470" parent="." instance=ExtResource("11_hazard")]
+position = Vector2(7470, 920)
+[node name="PitHazard940" parent="." instance=ExtResource("11_hazard")]
+position = Vector2(7940, 920)
+[node name="PitHazard1410" parent="." instance=ExtResource("11_hazard")]
+position = Vector2(8410, 920)
+[node name="LookoutOne" type="Sprite2D" parent="."]
+texture = ExtResource("24_lookout_texture")
+position = Vector2(7300, 1000)
+scale = Vector2(1.4, 1.4)
+modulate = Color(0.15, 0.35, 0.1, 1)
+[node name="LookoutTwo" type="Sprite2D" parent="."]
+texture = ExtResource("24_lookout_texture")
+position = Vector2(8400, 1000)
+scale = Vector2(1.4, 1.4)
+flip_h = true
+modulate = Color(0.15, 0.35, 0.1, 1)
