@@ -1,13 +1,15 @@
 extends Node2D
 
-const LEVEL := preload("res://scenes/levels/world_1_level_3.tscn")
+@export var scene_path := "res://scenes/levels/world_1_level_3.tscn"
+
 var level: Node
 var luke: CharacterBody2D
 var finish: Node
 var frame := 0
 
 func _ready() -> void:
-	level = LEVEL.instantiate()
+	var packed := load(scene_path) as PackedScene
+	level = packed.instantiate()
 	add_child(level)
 	luke = level.get_node("Luke")
 	finish = level.get_node("Finish")

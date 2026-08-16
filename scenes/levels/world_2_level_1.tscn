@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3]
+[gd_scene load_steps=28 format=3]
 
 [ext_resource type="Script" path="res://scripts/levels/level_base.gd" id="1_level"]
 [ext_resource type="PackedScene" path="res://scenes/player/player.tscn" id="2_luke"]
@@ -24,9 +24,10 @@
 [ext_resource type="PackedScene" path="res://scenes/objects/bone_pickup.tscn" id="24_bonepickup"]
 [ext_resource type="Texture2D" path="res://assets/Tiles/Default/window.png" id="25_window"]
 [ext_resource type="Texture2D" path="res://assets/Tiles/Default/door_closed.png" id="26_door"]
+[ext_resource type="PackedScene" path="res://scenes/objects/moving_platform.tscn" id="27_movingplatform"]
 
 [sub_resource type="RectangleShape2D" id="GroundShape"]
-size = Vector2(4200, 110)
+size = Vector2(8400, 110)
 
 [sub_resource type="RectangleShape2D" id="PlatformShape"]
 size = Vector2(420, 52)
@@ -94,17 +95,17 @@ texture = ExtResource("26_door")
 [node name="Ground" type="StaticBody2D" parent="."]
 
 [node name="BlockTop" type="Sprite2D" parent="Ground"]
-position = Vector2(2100, 960)
+position = Vector2(4200, 960)
 texture = ExtResource("12_street")
-scale = Vector2(65.625, 2)
+scale = Vector2(131.25, 2)
 
 [node name="BlockBody" type="Sprite2D" parent="Ground"]
-position = Vector2(2100, 1010)
+position = Vector2(4200, 1010)
 texture = ExtResource("13_stone")
-scale = Vector2(65.625, 3.2)
+scale = Vector2(131.25, 3.2)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Ground"]
-position = Vector2(2100, 960)
+position = Vector2(4200, 960)
 shape = SubResource("GroundShape")
 
 [node name="PlatformOne" type="StaticBody2D" parent="."]
@@ -164,7 +165,7 @@ position = Vector2(-35, 500)
 shape = SubResource("BoundaryShape")
 
 [node name="RightBoundary" type="StaticBody2D" parent="."]
-position = Vector2(4235, 500)
+position = Vector2(8435, 500)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RightBoundary"]
 shape = SubResource("BoundaryShape")
@@ -258,11 +259,11 @@ position = Vector2(300, 915)
 texture = ExtResource("15_fence")
 
 [node name="FenceB" type="Sprite2D" parent="."]
-position = Vector2(3800, 915)
+position = Vector2(7800, 915)
 texture = ExtResource("15_fence")
 
 [node name="Finish" parent="." instance=ExtResource("5_finish")]
-position = Vector2(4000, 850)
+position = Vector2(8000, 850)
 
 [node name="CoinA" parent="." instance=ExtResource("20_coin")]
 position = Vector2(700, 780)
@@ -290,7 +291,7 @@ position = Vector2(168, 918)
 scale = Vector2(1.2, 1.2)
 texture = ExtResource("23_bush")
 [node name="EdgeBushB" type="Sprite2D" parent="."]
-position = Vector2(4032, 918)
+position = Vector2(8232, 918)
 scale = Vector2(1.2, 1.2)
 texture = ExtResource("23_bush")
 
@@ -306,3 +307,140 @@ add_theme_constant_override("outline_size", 8)
 
 [node name="HiddenBone" parent="." instance=ExtResource("24_bonepickup")]
 position = Vector2(3200, 620)
+
+[node name="PlatformSix" type="StaticBody2D" parent="."]
+position = Vector2(4820, 820)
+[node name="Visual" type="Sprite2D" parent="PlatformSix"]
+texture = ExtResource("12_street")
+scale = Vector2(6.5625, 0.8125)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlatformSix"]
+shape = SubResource("PlatformShape")
+
+[node name="PlatformSeven" type="StaticBody2D" parent="."]
+position = Vector2(5600, 730)
+[node name="Visual" type="Sprite2D" parent="PlatformSeven"]
+texture = ExtResource("12_street")
+scale = Vector2(6.5625, 0.8125)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlatformSeven"]
+shape = SubResource("PlatformShape")
+
+[node name="PlatformEight" type="StaticBody2D" parent="."]
+position = Vector2(6500, 800)
+[node name="Visual" type="Sprite2D" parent="PlatformEight"]
+texture = ExtResource("12_street")
+scale = Vector2(6.5625, 0.8125)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlatformEight"]
+shape = SubResource("PlatformShape")
+
+[node name="PlatformNine" type="StaticBody2D" parent="."]
+position = Vector2(7400, 730)
+[node name="Visual" type="Sprite2D" parent="PlatformNine"]
+texture = ExtResource("12_street")
+scale = Vector2(6.5625, 0.8125)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlatformNine"]
+shape = SubResource("PlatformShape")
+
+[node name="PlatformTen" type="StaticBody2D" parent="."]
+position = Vector2(8100, 820)
+[node name="Visual" type="Sprite2D" parent="PlatformTen"]
+texture = ExtResource("12_street")
+scale = Vector2(4.0625, 0.625)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlatformTen"]
+shape = SubResource("PlatformSmall")
+
+[node name="MovingPlatformOne" parent="." instance=ExtResource("27_movingplatform")]
+position = Vector2(6050, 580)
+travel = Vector2(260, 0)
+speed = 90.0
+
+[node name="SpikeVisualsThree" type="Node2D" parent="."]
+[node name="SpikeA" type="Sprite2D" parent="SpikeVisualsThree"]
+position = Vector2(5150, 928)
+scale = Vector2(1.5, 1)
+texture = ExtResource("14_spikes")
+[node name="SpikeB" type="Sprite2D" parent="SpikeVisualsThree"]
+position = Vector2(5200, 928)
+scale = Vector2(1.5, 1)
+texture = ExtResource("14_spikes")
+[node name="SpikeC" type="Sprite2D" parent="SpikeVisualsThree"]
+position = Vector2(5250, 928)
+scale = Vector2(1.5, 1)
+texture = ExtResource("14_spikes")
+[node name="SpikeHazardThree" parent="." instance=ExtResource("8_hazard")]
+position = Vector2(5200, 920)
+
+[node name="SpikeVisualsFour" type="Node2D" parent="."]
+[node name="SpikeA" type="Sprite2D" parent="SpikeVisualsFour"]
+position = Vector2(6950, 928)
+scale = Vector2(1.5, 1)
+texture = ExtResource("14_spikes")
+[node name="SpikeB" type="Sprite2D" parent="SpikeVisualsFour"]
+position = Vector2(7000, 928)
+scale = Vector2(1.5, 1)
+texture = ExtResource("14_spikes")
+[node name="SpikeC" type="Sprite2D" parent="SpikeVisualsFour"]
+position = Vector2(7050, 928)
+scale = Vector2(1.5, 1)
+texture = ExtResource("14_spikes")
+[node name="SpikeHazardFour" parent="." instance=ExtResource("8_hazard")]
+position = Vector2(7000, 920)
+
+[node name="ThiefThree" parent="." instance=ExtResource("3_thief")]
+position = Vector2(5210, 850)
+patrol_distance = 150.0
+[node name="ThiefFour" parent="." instance=ExtResource("3_thief")]
+position = Vector2(6900, 850)
+patrol_distance = 160.0
+
+[node name="CheckpointThree" parent="." instance=ExtResource("4_checkpoint")]
+position = Vector2(6000, 860)
+[node name="CheckpointFour" parent="." instance=ExtResource("4_checkpoint")]
+position = Vector2(7500, 860)
+
+[node name="ElderC" type="Sprite2D" parent="."]
+position = Vector2(6450, 880)
+texture = ExtResource("16_npc1")
+scale = Vector2(0.78, 0.78)
+[node name="ElderD" type="Sprite2D" parent="."]
+position = Vector2(7700, 880)
+texture = ExtResource("17_npc2")
+scale = Vector2(0.78, 0.78)
+
+[node name="TrafficLightTwo" type="Sprite2D" parent="."]
+position = Vector2(4620, 924)
+texture = ExtResource("22_trafficlight")
+[node name="CrosswalkThree" type="Sprite2D" parent="."]
+position = Vector2(5350, 953)
+scale = Vector2(6, 1)
+texture = ExtResource("21_crosswalk")
+[node name="CrosswalkFour" type="Sprite2D" parent="."]
+position = Vector2(7650, 953)
+scale = Vector2(6, 1)
+texture = ExtResource("21_crosswalk")
+
+[node name="LandmarkThird" type="Sprite2D" parent="."]
+position = Vector2(7476, 745)
+scale = Vector2(2.7, 3.9)
+texture = ExtResource("12_street")
+modulate = Color(0.42, 0.42, 0.58, 1)
+[node name="WindowThirdA" type="Sprite2D" parent="."]
+position = Vector2(7438, 700)
+scale = Vector2(0.55, 0.55)
+texture = ExtResource("25_window")
+[node name="WindowThirdB" type="Sprite2D" parent="."]
+position = Vector2(7514, 700)
+scale = Vector2(0.55, 0.55)
+texture = ExtResource("25_window")
+[node name="DoorThird" type="Sprite2D" parent="."]
+position = Vector2(7476, 835)
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("26_door")
+
+[node name="CoinE" parent="." instance=ExtResource("20_coin")]
+position = Vector2(4900, 780)
+[node name="CoinF" parent="." instance=ExtResource("20_coin")]
+position = Vector2(5800, 780)
+[node name="CoinG" parent="." instance=ExtResource("20_coin")]
+position = Vector2(7100, 780)
+[node name="CoinH" parent="." instance=ExtResource("20_coin")]
+position = Vector2(7800, 780)
