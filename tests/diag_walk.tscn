@@ -4,4 +4,4 @@
 
 [node name="DiagWalk" type="Node2D"]
 script = ExtResource("1_script")
-scene_path = "res://scenes/levels/world_4_level_1.tscn"
+scene_path = "res://scenes/levels/_baseline_check.tscn"

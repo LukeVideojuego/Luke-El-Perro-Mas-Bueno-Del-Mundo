@@ -32,10 +32,10 @@ size = Vector2(80, 20)
 size = Vector2(70, 900)
 
 [sub_resource type="RectangleShape2D" id="WaterShape"]
-size = Vector2(4600, 120)
+size = Vector2(9200, 120)
 
 [sub_resource type="RectangleShape2D" id="SeaFloorShape"]
-size = Vector2(4600, 50)
+size = Vector2(9200, 50)
 
 [node name="world_4_level_2" type="Node2D"]
 script = ExtResource("1_level")
@@ -176,14 +176,14 @@ position = Vector2(-35, 500)
 shape = SubResource("BoundaryShape")
 
 [node name="RightBoundary" type="StaticBody2D" parent="."]
-position = Vector2(4635, 500)
+position = Vector2(9235, 500)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RightBoundary"]
 shape = SubResource("BoundaryShape")
 
 [node name="WaterVisual" type="ColorRect" parent="."]
-position = Vector2(2300, 1060)
-size = Vector2(4600, 160)
+position = Vector2(0, 980)
+size = Vector2(9200, 160)
 color = Color(0.08, 0.35, 0.6, 0.92)
 
 [node name="WaterTop1" type="Sprite2D" parent="."]
@@ -237,11 +237,11 @@ monitoring = true
 script = ExtResource("13_damage_script")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="WaterHazard"]
-position = Vector2(2300, 1020)
+position = Vector2(4600, 1020)
 shape = SubResource("WaterShape")
 
 [node name="SeaFloor" type="StaticBody2D" parent="."]
-position = Vector2(2300, 1120)
+position = Vector2(4600, 1120)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SeaFloor"]
 shape = SubResource("SeaFloorShape")
@@ -303,7 +303,7 @@ position = Vector2(700, 700)
 position = Vector2(3000, 680)
 
 [node name="Finish" parent="." instance=ExtResource("7_finish")]
-position = Vector2(4000, 770)
+position = Vector2(8400, 770)
 
 
 [node name="CoinA" parent="." instance=ExtResource("17_coin")]
@@ -323,7 +323,7 @@ position = Vector2(184, 918)
 scale = Vector2(1.2, 1.2)
 texture = ExtResource("19_bush")
 [node name="EdgeBushB" type="Sprite2D" parent="."]
-position = Vector2(4416, 918)
+position = Vector2(9016, 918)
 scale = Vector2(1.2, 1.2)
 texture = ExtResource("19_bush")
 
@@ -479,3 +479,122 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
 color = Color(0.14, 0.42, 0.52, 0.16)
+[node name="WaterTop12" type="Sprite2D" parent="."]
+position = Vector2(4900, 1008)
+texture = ExtResource("14_water_top")
+[node name="WaterTop13" type="Sprite2D" parent="."]
+position = Vector2(5300, 1008)
+texture = ExtResource("14_water_top")
+[node name="WaterTop14" type="Sprite2D" parent="."]
+position = Vector2(5700, 1008)
+texture = ExtResource("14_water_top")
+[node name="WaterTop15" type="Sprite2D" parent="."]
+position = Vector2(6100, 1008)
+texture = ExtResource("14_water_top")
+[node name="WaterTop16" type="Sprite2D" parent="."]
+position = Vector2(6500, 1008)
+texture = ExtResource("14_water_top")
+[node name="WaterTop17" type="Sprite2D" parent="."]
+position = Vector2(6900, 1008)
+texture = ExtResource("14_water_top")
+[node name="WaterTop18" type="Sprite2D" parent="."]
+position = Vector2(7300, 1008)
+texture = ExtResource("14_water_top")
+[node name="WaterTop19" type="Sprite2D" parent="."]
+position = Vector2(7700, 1008)
+texture = ExtResource("14_water_top")
+[node name="WaterTop20" type="Sprite2D" parent="."]
+position = Vector2(8100, 1008)
+texture = ExtResource("14_water_top")
+[node name="WaterTop21" type="Sprite2D" parent="."]
+position = Vector2(8500, 1008)
+texture = ExtResource("14_water_top")
+[node name="WaterTop22" type="Sprite2D" parent="."]
+position = Vector2(8900, 1008)
+texture = ExtResource("14_water_top")
+[node name="StoneNine" type="StaticBody2D" parent="."]
+position = Vector2(5400, 870)
+[node name="Sprite2D" type="Sprite2D" parent="StoneNine"]
+position = Vector2(0, 2)
+scale = Vector2(1.3, 1)
+texture = ExtResource("15_grass")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StoneNine"]
+shape = SubResource("StoneShape")
+[node name="StoneTen" type="StaticBody2D" parent="."]
+position = Vector2(5850, 820)
+[node name="Sprite2D" type="Sprite2D" parent="StoneTen"]
+position = Vector2(0, 2)
+scale = Vector2(1.3, 1)
+texture = ExtResource("15_grass")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StoneTen"]
+shape = SubResource("StoneShape")
+[node name="StoneEleven" type="StaticBody2D" parent="."]
+position = Vector2(6300, 870)
+[node name="Sprite2D" type="Sprite2D" parent="StoneEleven"]
+position = Vector2(0, 2)
+scale = Vector2(1.3, 1)
+texture = ExtResource("15_grass")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StoneEleven"]
+shape = SubResource("StoneShape")
+[node name="StoneTwelve" type="StaticBody2D" parent="."]
+position = Vector2(6750, 820)
+[node name="Sprite2D" type="Sprite2D" parent="StoneTwelve"]
+position = Vector2(0, 2)
+scale = Vector2(1.3, 1)
+texture = ExtResource("15_grass")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StoneTwelve"]
+shape = SubResource("StoneShape")
+[node name="StoneThirteen" type="StaticBody2D" parent="."]
+position = Vector2(7200, 870)
+[node name="Sprite2D" type="Sprite2D" parent="StoneThirteen"]
+position = Vector2(0, 2)
+scale = Vector2(1.3, 1)
+texture = ExtResource("15_grass")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StoneThirteen"]
+shape = SubResource("StoneShape")
+[node name="StoneFourteen" type="StaticBody2D" parent="."]
+position = Vector2(7650, 820)
+[node name="Sprite2D" type="Sprite2D" parent="StoneFourteen"]
+position = Vector2(0, 2)
+scale = Vector2(1.3, 1)
+texture = ExtResource("15_grass")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StoneFourteen"]
+shape = SubResource("StoneShape")
+[node name="StoneFifteen" type="StaticBody2D" parent="."]
+position = Vector2(8100, 870)
+[node name="Sprite2D" type="Sprite2D" parent="StoneFifteen"]
+position = Vector2(0, 2)
+scale = Vector2(1.3, 1)
+texture = ExtResource("15_grass")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StoneFifteen"]
+shape = SubResource("StoneShape")
+[node name="StoneSixteen" type="StaticBody2D" parent="."]
+position = Vector2(8550, 820)
+[node name="Sprite2D" type="Sprite2D" parent="StoneSixteen"]
+position = Vector2(0, 2)
+scale = Vector2(1.3, 1)
+texture = ExtResource("15_grass")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StoneSixteen"]
+shape = SubResource("StoneShape")
+
+[node name="CheckpointThree" parent="." instance=ExtResource("6_checkpoint")]
+position = Vector2(5400, 850)
+
+[node name="FishBlueThree" parent="." instance=ExtResource("3_fish_blue")]
+position = Vector2(5600, 760)
+patrol_distance = 150.0
+[node name="FishYellowTwo" parent="." instance=ExtResource("4_fish_yellow")]
+position = Vector2(6800, 740)
+patrol_distance = 200.0
+[node name="FishPurpleThree" parent="." instance=ExtResource("5_fish_purple")]
+position = Vector2(7700, 790)
+bob_amplitude = 26.0
+
+[node name="CoinE" parent="." instance=ExtResource("17_coin")]
+position = Vector2(5428, 780)
+[node name="CoinF" parent="." instance=ExtResource("17_coin")]
+position = Vector2(6440, 780)
+[node name="CoinG" parent="." instance=ExtResource("17_coin")]
+position = Vector2(7452, 780)
+[node name="CoinH" parent="." instance=ExtResource("17_coin")]
+position = Vector2(8464, 780)
