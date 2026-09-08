@@ -9,11 +9,13 @@
 [ext_resource type="Texture2D" path="res://assets/Tiles/Default/terrain_grass_block_top.png" id="8_grass"]
 [ext_resource type="Texture2D" path="res://assets/Tiles/Default/terrain_stone_block.png" id="9_stone"]
 [ext_resource type="Texture2D" path="res://assets/characters/Diego/diego.png" id="10_diego"]
-[ext_resource type="Texture2D" path="res://assets/characters/Kids/lara.png" id="11_lara"]
-[ext_resource type="Texture2D" path="res://assets/characters/Kids/bauti.png" id="12_bauti"]
-[ext_resource type="Texture2D" path="res://assets/characters/Kids/zoe.png" id="13_zoe"]
-[ext_resource type="Texture2D" path="res://assets/characters/Kids/roma.png" id="14_roma"]
-[ext_resource type="Texture2D" path="res://assets/characters/Kids/mathi.png" id="15_mathi"]
+[ext_resource type="Texture2D" path="res://assets/characters/Kids/EndOfWorld1/lara.png" id="11_lara"]
+[ext_resource type="Texture2D" path="res://assets/characters/Kids/EndOfWorld1/bauti.png" id="12_bauti"]
+[ext_resource type="Texture2D" path="res://assets/characters/Kids/EndOfWorld1/zoe.png" id="13_zoe"]
+[ext_resource type="Texture2D" path="res://assets/characters/Kids/EndOfWorld1/roma.png" id="14_roma"]
+[ext_resource type="Texture2D" path="res://assets/characters/Kids/EndOfWorld1/mathi.png" id="15_mathi"]
+[ext_resource type="Texture2D" path="res://assets/characters/Kids/EndOfWorld1/izan.png" id="24_izan"]
+[ext_resource type="Texture2D" path="res://assets/characters/Kids/EndOfWorld1/fausto.png" id="25_fausto"]
 [ext_resource type="Texture2D" path="res://assets/characters/Default/character_green_idle.png" id="16_green_idle"]
 [ext_resource type="Texture2D" path="res://assets/characters/Default/character_green_front.png" id="17_green_front"]
 [ext_resource type="Texture2D" path="res://assets/characters/Default/character_yellow_idle.png" id="18_yellow_idle"]
@@ -84,80 +86,6 @@ interaction_text = "¡Abrazá a toda la gente que puedas antes de que se acabe e
 [node name="Luke" parent="." instance=ExtResource("2_luke")]
 position = Vector2(200, 850)
 
-[node name="Diego" parent="." instance=ExtResource("5_person")]
-position = Vector2(500, 759)
-wander_enabled = true
-wander_radius = 150.0
-wander_speed = 65.0
-[node name="Sprite2D" parent="Diego" index="0"]
-texture = ExtResource("10_diego")
-scale = Vector2(2.59, 2.59)
-
-[node name="Lara" parent="." instance=ExtResource("5_person")]
-position = Vector2(650, 834)
-wander_enabled = true
-wander_radius = 150.0
-wander_speed = 65.0
-[node name="Sprite2D" parent="Lara" index="0"]
-texture = ExtResource("11_lara")
-scale = Vector2(1.9, 1.9)
-
-[node name="Bauti" parent="." instance=ExtResource("5_person")]
-position = Vector2(800, 818)
-wander_enabled = true
-wander_radius = 150.0
-wander_speed = 65.0
-[node name="Sprite2D" parent="Bauti" index="0"]
-texture = ExtResource("12_bauti")
-scale = Vector2(2.18, 2.18)
-
-[node name="Zoe" parent="." instance=ExtResource("5_person")]
-position = Vector2(950, 795)
-wander_enabled = true
-wander_radius = 150.0
-wander_speed = 65.0
-[node name="Sprite2D" parent="Zoe" index="0"]
-texture = ExtResource("13_zoe")
-scale = Vector2(2.75, 2.75)
-
-[node name="Roma" parent="." instance=ExtResource("5_person")]
-position = Vector2(1100, 840)
-wander_enabled = true
-wander_radius = 150.0
-wander_speed = 65.0
-[node name="Sprite2D" parent="Roma" index="0"]
-texture = ExtResource("14_roma")
-scale = Vector2(1.8, 1.8)
-
-[node name="Mathi" parent="." instance=ExtResource("5_person")]
-position = Vector2(1250, 813)
-wander_enabled = true
-wander_radius = 150.0
-wander_speed = 65.0
-[node name="Sprite2D" parent="Mathi" index="0"]
-texture = ExtResource("15_mathi")
-scale = Vector2(2.25, 2.25)
-
-[node name="PersonGreen" parent="." instance=ExtResource("5_person")]
-position = Vector2(1400, 732)
-wander_enabled = true
-wander_radius = 150.0
-wander_speed = 65.0
-happy_texture = ExtResource("17_green_front")
-[node name="Sprite2D" parent="PersonGreen" index="0"]
-texture = ExtResource("16_green_idle")
-scale = Vector2(2.94, 2.94)
-
-[node name="PersonYellow" parent="." instance=ExtResource("5_person")]
-position = Vector2(1550, 732)
-wander_enabled = true
-wander_radius = 150.0
-wander_speed = 65.0
-happy_texture = ExtResource("19_yellow_front")
-[node name="Sprite2D" parent="PersonYellow" index="0"]
-texture = ExtResource("18_yellow_idle")
-scale = Vector2(2.94, 2.94)
-
 [node name="PersonPurple" parent="." instance=ExtResource("5_person")]
 position = Vector2(300, 732)
 wander_enabled = true
@@ -168,8 +96,100 @@ happy_texture = ExtResource("21_purple_front")
 texture = ExtResource("20_purple_idle")
 scale = Vector2(2.94, 2.94)
 
+[node name="Diego" parent="." instance=ExtResource("5_person")]
+position = Vector2(450, 759)
+wander_enabled = true
+wander_radius = 150.0
+wander_speed = 65.0
+[node name="Sprite2D" parent="Diego" index="0"]
+texture = ExtResource("10_diego")
+scale = Vector2(2.59, 2.59)
+
+[node name="Roma" parent="." instance=ExtResource("5_person")]
+position = Vector2(600, 854.23)
+wander_enabled = true
+wander_radius = 150.0
+wander_speed = 65.0
+[node name="Sprite2D" parent="Roma" index="0"]
+texture = ExtResource("14_roma")
+scale = Vector2(1.229, 1.229)
+
+[node name="Lara" parent="." instance=ExtResource("5_person")]
+position = Vector2(750, 844.65)
+wander_enabled = true
+wander_radius = 150.0
+wander_speed = 65.0
+[node name="Sprite2D" parent="Lara" index="0"]
+texture = ExtResource("11_lara")
+scale = Vector2(1.199, 1.199)
+
+[node name="Izan" parent="." instance=ExtResource("5_person")]
+position = Vector2(900, 838.86)
+wander_enabled = true
+wander_radius = 150.0
+wander_speed = 65.0
+[node name="Sprite2D" parent="Izan" index="0"]
+texture = ExtResource("24_izan")
+scale = Vector2(1.357, 1.357)
+
+[node name="Fausto" parent="." instance=ExtResource("5_person")]
+position = Vector2(1050, 832.94)
+wander_enabled = true
+wander_radius = 150.0
+wander_speed = 65.0
+[node name="Sprite2D" parent="Fausto" index="0"]
+texture = ExtResource("25_fausto")
+scale = Vector2(1.579, 1.579)
+
+[node name="Bauti" parent="." instance=ExtResource("5_person")]
+position = Vector2(1200, 823.27)
+wander_enabled = true
+wander_radius = 150.0
+wander_speed = 65.0
+[node name="Sprite2D" parent="Bauti" index="0"]
+texture = ExtResource("12_bauti")
+scale = Vector2(1.755, 1.755)
+
+[node name="Mathi" parent="." instance=ExtResource("5_person")]
+position = Vector2(1350, 816.14)
+wander_enabled = true
+wander_radius = 150.0
+wander_speed = 65.0
+[node name="Sprite2D" parent="Mathi" index="0"]
+texture = ExtResource("15_mathi")
+scale = Vector2(2.092, 2.092)
+
+[node name="Zoe" parent="." instance=ExtResource("5_person")]
+position = Vector2(1500, 803.65)
+wander_enabled = true
+wander_radius = 150.0
+wander_speed = 65.0
+[node name="Sprite2D" parent="Zoe" index="0"]
+texture = ExtResource("13_zoe")
+scale = Vector2(2.069, 2.069)
+
+[node name="PersonGreen" parent="." instance=ExtResource("5_person")]
+position = Vector2(1650, 732)
+wander_enabled = true
+wander_radius = 150.0
+wander_speed = 65.0
+happy_texture = ExtResource("17_green_front")
+[node name="Sprite2D" parent="PersonGreen" index="0"]
+texture = ExtResource("16_green_idle")
+scale = Vector2(2.94, 2.94)
+
+[node name="PersonYellow" parent="." instance=ExtResource("5_person")]
+position = Vector2(1800, 732)
+wander_enabled = true
+wander_radius = 150.0
+wander_speed = 65.0
+happy_texture = ExtResource("19_yellow_front")
+[node name="Sprite2D" parent="PersonYellow" index="0"]
+texture = ExtResource("18_yellow_idle")
+scale = Vector2(2.94, 2.94)
+
 [node name="PersonPink" parent="." instance=ExtResource("5_person")]
-position = Vector2(1700, 732)
+position = Vector2(1950, 732)
 wander_enabled = true
 wander_radius = 150.0
 wander_speed = 65.0
