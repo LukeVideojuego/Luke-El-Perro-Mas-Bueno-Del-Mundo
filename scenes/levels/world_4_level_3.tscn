@@ -22,6 +22,7 @@
 [ext_resource type="Texture2D" path="res://assets/Tiles/Default/bush.png" id="23_bush"]
 [ext_resource type="PackedScene" path="res://scenes/objects/bone_pickup.tscn" id="24_bonepickup"]
 [ext_resource type="PackedScene" path="res://scenes/objects/moving_platform.tscn" id="25_movingplatform"]
+[ext_resource type="PackedScene" path="res://scenes/enemies/spider.tscn" id="27_spider"]
 [ext_resource type="Texture2D" path="res://assets/backgrounds/Worlds/world4_india.jpg" id="26_bg"]
 
 [sub_resource type="RectangleShape2D" id="GroundShape"]
@@ -196,6 +197,10 @@ patrol_distance = 130.0
 [node name="SnailOne" parent="." instance=ExtResource("4_snail")]
 position = Vector2(3600, 850)
 patrol_distance = 120.0
+
+[node name="SpiderOne" parent="." instance=ExtResource("27_spider")]
+position = Vector2(4500, 850)
+patrol_distance = 100.0
 drops_bone_on_defeat = true
 
 [node name="BoxA" parent="." instance=ExtResource("11_box")]
@@ -345,6 +350,10 @@ patrol_distance = 130.0
 [node name="SnailTwo" parent="." instance=ExtResource("4_snail")]
 position = Vector2(8000, 850)
 patrol_distance = 120.0
+
+[node name="SpiderTwo" parent="." instance=ExtResource("27_spider")]
+position = Vector2(6300, 850)
+patrol_distance = 100.0
 
 [node name="CheckpointThree" parent="." instance=ExtResource("6_checkpoint")]
 position = Vector2(6200, 860)

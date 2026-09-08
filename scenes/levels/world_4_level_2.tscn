@@ -21,6 +21,7 @@
 [ext_resource type="Texture2D" path="res://assets/Tiles/Default/bush.png" id="19_bush"]
 [ext_resource type="PackedScene" path="res://scenes/objects/bubble.tscn" id="20_bubble"]
 [ext_resource type="PackedScene" path="res://scenes/objects/bone_pickup.tscn" id="21_bonepickup"]
+[ext_resource type="PackedScene" path="res://scenes/enemies/barnacle.tscn" id="23_barnacle"]
 [ext_resource type="Texture2D" path="res://assets/backgrounds/Worlds/world4_mar.jpg" id="22_bg"]
 
 [sub_resource type="RectangleShape2D" id="StartPadShape"]
@@ -272,6 +273,12 @@ patrol_distance = 220.0
 [node name="FishPurpleOne" parent="." instance=ExtResource("5_fish_purple")]
 position = Vector2(1500, 790)
 bob_amplitude = 26.0
+
+[node name="BarnacleOne" parent="." instance=ExtResource("23_barnacle")]
+position = Vector2(1900, 900)
+
+[node name="BarnacleTwo" parent="." instance=ExtResource("23_barnacle")]
+position = Vector2(4700, 900)
 
 [node name="FishPurpleTwo" parent="." instance=ExtResource("5_fish_purple")]
 position = Vector2(3600, 770)

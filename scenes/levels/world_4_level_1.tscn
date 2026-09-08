@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" path="res://scenes/enemies/slime.tscn" id="5_slime"]
 [ext_resource type="PackedScene" path="res://scenes/enemies/snail.tscn" id="6_snail"]
 [ext_resource type="PackedScene" path="res://scenes/enemies/frog.tscn" id="18_frog"]
+[ext_resource type="PackedScene" path="res://scenes/enemies/spider.tscn" id="26_spider"]
 [ext_resource type="PackedScene" path="res://scenes/objects/checkpoint.tscn" id="7_checkpoint"]
 [ext_resource type="PackedScene" path="res://scenes/objects/level_finish.tscn" id="8_finish"]
 [ext_resource type="PackedScene" path="res://scenes/objects/meat_power_up.tscn" id="9_meat"]
@@ -204,6 +205,10 @@ patrol_distance = 130.0
 [node name="SnailOne" parent="." instance=ExtResource("6_snail")]
 position = Vector2(2700, 850)
 patrol_distance = 120.0
+
+[node name="SpiderOne" parent="." instance=ExtResource("26_spider")]
+position = Vector2(3800, 850)
+patrol_distance = 100.0
 drops_bone_on_defeat = true
 
 [node name="BoxA" parent="." instance=ExtResource("12_box")]
@@ -305,6 +310,10 @@ patrol_distance = 180.0
 [node name="FlyTwo" parent="." instance=ExtResource("4_fly")]
 position = Vector2(6600, 720)
 patrol_distance = 180.0
+
+[node name="SpiderTwo" parent="." instance=ExtResource("26_spider")]
+position = Vector2(7500, 850)
+patrol_distance = 110.0
 
 [node name="CheckpointThree" parent="." instance=ExtResource("7_checkpoint")]
 position = Vector2(5700, 860)
