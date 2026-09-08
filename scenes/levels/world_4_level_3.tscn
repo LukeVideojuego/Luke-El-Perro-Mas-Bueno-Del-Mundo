@@ -22,6 +22,7 @@
 [ext_resource type="Texture2D" path="res://assets/Tiles/Default/bush.png" id="23_bush"]
 [ext_resource type="PackedScene" path="res://scenes/objects/bone_pickup.tscn" id="24_bonepickup"]
 [ext_resource type="PackedScene" path="res://scenes/objects/moving_platform.tscn" id="25_movingplatform"]
+[ext_resource type="Texture2D" path="res://assets/backgrounds/Worlds/world4_india.jpg" id="26_bg"]
 
 [sub_resource type="RectangleShape2D" id="GroundShape"]
 size = Vector2(8800, 110)
@@ -40,29 +41,15 @@ script = ExtResource("1_level")
 level_id = "world_4_level_3"
 mission_text = "Escapa de las serpientes gigantes de la India."
 
-[node name="Sky" type="Sprite2D" parent="."]
-position = Vector2(2200, 540)
-texture = ExtResource("12_sky")
-modulate = Color(0.55, 0.42, 0.32, 1)
-scale = Vector2(17.188, 5)
-
-[node name="Trees" type="Sprite2D" parent="."]
-position = Vector2(2200, 540)
-texture = ExtResource("13_trees")
-modulate = Color(0.9, 0.72, 0.5, 1)
-scale = Vector2(17.188, 2.7)
-
-[node name="TempleOne" type="Sprite2D" parent="."]
-position = Vector2(950, 760)
-scale = Vector2(2.2, 2.2)
-texture = ExtResource("20_temple")
-modulate = Color(0.95, 0.72, 0.4, 1)
-
-[node name="TempleTwo" type="Sprite2D" parent="."]
-position = Vector2(3300, 760)
-scale = Vector2(1.8, 1.8)
-texture = ExtResource("20_temple")
-modulate = Color(0.95, 0.72, 0.4, 1)
+[node name="Background" type="Sprite2D" parent="."]
+position = Vector2(0, 0)
+centered = false
+z_index = -10
+texture = ExtResource("26_bg")
+scale = Vector2(1.7763, 1.7763)
+region_enabled = true
+region_rect = Rect2(0, 0, 20000, 608)
+texture_repeat = 2
 
 [node name="Ground" type="StaticBody2D" parent="."]
 
@@ -348,11 +335,6 @@ position = Vector2(6200, 860)
 [node name="CheckpointFour" parent="." instance=ExtResource("6_checkpoint")]
 position = Vector2(7700, 860)
 
-[node name="TempleThree" type="Sprite2D" parent="."]
-position = Vector2(5350, 760)
-scale = Vector2(2.2, 2.2)
-texture = ExtResource("20_temple")
-modulate = Color(0.95, 0.72, 0.4, 1)
 
 [node name="CoinE" parent="." instance=ExtResource("21_coin")]
 position = Vector2(5192, 780)

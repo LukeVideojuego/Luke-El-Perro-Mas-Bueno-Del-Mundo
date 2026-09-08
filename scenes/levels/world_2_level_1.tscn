@@ -24,6 +24,7 @@
 [ext_resource type="PackedScene" path="res://scenes/objects/bone_pickup.tscn" id="24_bonepickup"]
 [ext_resource type="Texture2D" path="res://assets/Tiles/Default/window.png" id="25_window"]
 [ext_resource type="Texture2D" path="res://assets/Tiles/Default/door_closed.png" id="26_door"]
+[ext_resource type="Texture2D" path="res://assets/backgrounds/Worlds/world2_final.png" id="27_bg"]
 [ext_resource type="PackedScene" path="res://scenes/objects/moving_platform.tscn" id="27_movingplatform"]
 
 [sub_resource type="RectangleShape2D" id="GroundShape"]
@@ -46,51 +47,15 @@ script = ExtResource("1_level")
 level_id = "world_2_level_1"
 mission_text = "Ayuda a la señora Mayor a cruzar el mercado."
 
-[node name="Sky" type="Sprite2D" parent="."]
-position = Vector2(2100, 540)
-texture = ExtResource("10_sky")
-scale = Vector2(16.406, 5)
-modulate = Color(0.4, 0.44, 0.55, 1)
-
-[node name="Trees" type="Sprite2D" parent="."]
-position = Vector2(2100, 540)
-texture = ExtResource("11_trees")
-scale = Vector2(16.406, 2.7)
-
-[node name="LandmarkLeft" type="Sprite2D" parent="."]
-position = Vector2(924, 760)
-scale = Vector2(3.1, 3.6)
-texture = ExtResource("12_street")
-modulate = Color(0.42, 0.42, 0.58, 1)
-[node name="WindowLeftA" type="Sprite2D" parent="."]
-position = Vector2(880, 719)
-scale = Vector2(0.55, 0.55)
-texture = ExtResource("25_window")
-[node name="WindowLeftB" type="Sprite2D" parent="."]
-position = Vector2(968, 719)
-scale = Vector2(0.55, 0.55)
-texture = ExtResource("25_window")
-[node name="DoorLeft" type="Sprite2D" parent="."]
-position = Vector2(924, 843)
-scale = Vector2(0.6, 0.6)
-texture = ExtResource("26_door")
-[node name="LandmarkRight" type="Sprite2D" parent="."]
-position = Vector2(3276, 745)
-scale = Vector2(2.7, 3.9)
-texture = ExtResource("12_street")
-modulate = Color(0.42, 0.42, 0.58, 1)
-[node name="WindowRightA" type="Sprite2D" parent="."]
-position = Vector2(3238, 700)
-scale = Vector2(0.55, 0.55)
-texture = ExtResource("25_window")
-[node name="WindowRightB" type="Sprite2D" parent="."]
-position = Vector2(3314, 700)
-scale = Vector2(0.55, 0.55)
-texture = ExtResource("25_window")
-[node name="DoorRight" type="Sprite2D" parent="."]
-position = Vector2(3276, 835)
-scale = Vector2(0.6, 0.6)
-texture = ExtResource("26_door")
+[node name="Background" type="Sprite2D" parent="."]
+position = Vector2(0, 0)
+centered = false
+z_index = -10
+texture = ExtResource("27_bg")
+scale = Vector2(1.4344, 1.4344)
+region_enabled = true
+region_rect = Rect2(0, 0, 20000, 753)
+texture_repeat = 2
 
 [node name="Ground" type="StaticBody2D" parent="."]
 
@@ -417,24 +382,6 @@ texture = ExtResource("21_crosswalk")
 position = Vector2(7650, 953)
 scale = Vector2(6, 1)
 texture = ExtResource("21_crosswalk")
-
-[node name="LandmarkThird" type="Sprite2D" parent="."]
-position = Vector2(7476, 745)
-scale = Vector2(2.7, 3.9)
-texture = ExtResource("12_street")
-modulate = Color(0.42, 0.42, 0.58, 1)
-[node name="WindowThirdA" type="Sprite2D" parent="."]
-position = Vector2(7438, 700)
-scale = Vector2(0.55, 0.55)
-texture = ExtResource("25_window")
-[node name="WindowThirdB" type="Sprite2D" parent="."]
-position = Vector2(7514, 700)
-scale = Vector2(0.55, 0.55)
-texture = ExtResource("25_window")
-[node name="DoorThird" type="Sprite2D" parent="."]
-position = Vector2(7476, 835)
-scale = Vector2(0.6, 0.6)
-texture = ExtResource("26_door")
 
 [node name="CoinE" parent="." instance=ExtResource("20_coin")]
 position = Vector2(4900, 780)

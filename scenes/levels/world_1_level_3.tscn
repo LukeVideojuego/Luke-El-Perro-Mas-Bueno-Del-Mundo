@@ -26,6 +26,7 @@
 [ext_resource type="Texture2D" path="res://assets/props/wood_crate.png" id="24_crate"]
 [ext_resource type="PackedScene" path="res://scenes/objects/moving_platform.tscn" id="25_movingplatform"]
 [ext_resource type="Texture2D" path="res://assets/Enemies/Reference/thief.png" id="26_lookout_texture"]
+[ext_resource type="Texture2D" path="res://assets/backgrounds/Worlds/world1_final.png" id="27_bg"]
 
 [sub_resource type="RectangleShape2D" id="GroundShape"]
 size = Vector2(9820, 110)
@@ -47,28 +48,15 @@ script = ExtResource("1_level")
 level_id = "world_1_level_3"
 mission_text = "Cruza las azoteas del barrio y detén a los ladrones."
 
-[node name="Sky" type="Sprite2D" parent="."]
-position = Vector2(2200, 540)
-texture = ExtResource("10_sky")
-modulate = Color(0.3, 0.22, 0.32, 1)
-scale = Vector2(17.188, 5)
-
-[node name="Trees" type="Sprite2D" parent="."]
-position = Vector2(2200, 540)
-texture = ExtResource("11_trees")
-modulate = Color(0.3, 0.16, 0.16, 1)
-scale = Vector2(17.188, 2.7)
-
-[node name="LandmarkLeft" type="Sprite2D" parent="."]
-position = Vector2(968, 760)
-scale = Vector2(3.1, 3.6)
-texture = ExtResource("19_brick")
-modulate = Color(0.85, 0.5, 0.38, 1)
-[node name="LandmarkRight" type="Sprite2D" parent="."]
-position = Vector2(3432, 745)
-scale = Vector2(2.7, 3.9)
-texture = ExtResource("19_brick")
-modulate = Color(0.85, 0.5, 0.38, 1)
+[node name="Background" type="Sprite2D" parent="."]
+position = Vector2(0, 0)
+centered = false
+z_index = -10
+texture = ExtResource("27_bg")
+scale = Vector2(1.4344, 1.4344)
+region_enabled = true
+region_rect = Rect2(0, 0, 20000, 753)
+texture_repeat = 2
 
 [node name="Ground" type="StaticBody2D" parent="."]
 

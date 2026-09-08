@@ -27,6 +27,7 @@
 [ext_resource type="PackedScene" path="res://scenes/objects/bone_pickup.tscn" id="26_bonepickup"]
 [ext_resource type="Texture2D" path="res://assets/Tiles/Default/window.png" id="27_window"]
 [ext_resource type="Texture2D" path="res://assets/Tiles/Default/door_closed.png" id="28_door"]
+[ext_resource type="Texture2D" path="res://assets/backgrounds/Worlds/world2_final.png" id="29_bg"]
 [ext_resource type="PackedScene" path="res://scenes/objects/moving_platform.tscn" id="29_movingplatform"]
 
 [sub_resource type="RectangleShape2D" id="GroundShape"]
@@ -46,51 +47,15 @@ script = ExtResource("1_level")
 level_id = "world_2_level_3"
 mission_text = "Recupera lo que robaron en la gran tienda."
 
-[node name="Sky" type="Sprite2D" parent="."]
-position = Vector2(2300, 540)
-texture = ExtResource("10_sky")
-scale = Vector2(17.969, 5)
-modulate = Color(0.4, 0.44, 0.55, 1)
-
-[node name="Trees" type="Sprite2D" parent="."]
-position = Vector2(2300, 540)
-texture = ExtResource("11_trees")
-scale = Vector2(17.969, 2.7)
-
-[node name="LandmarkLeft" type="Sprite2D" parent="."]
-position = Vector2(1012, 760)
-scale = Vector2(3.1, 3.6)
-texture = ExtResource("12_street")
-modulate = Color(0.42, 0.42, 0.58, 1)
-[node name="WindowLeftA" type="Sprite2D" parent="."]
-position = Vector2(968, 719)
-scale = Vector2(0.55, 0.55)
-texture = ExtResource("27_window")
-[node name="WindowLeftB" type="Sprite2D" parent="."]
-position = Vector2(1056, 719)
-scale = Vector2(0.55, 0.55)
-texture = ExtResource("27_window")
-[node name="DoorLeft" type="Sprite2D" parent="."]
-position = Vector2(1012, 843)
-scale = Vector2(0.6, 0.6)
-texture = ExtResource("28_door")
-[node name="LandmarkRight" type="Sprite2D" parent="."]
-position = Vector2(3588, 745)
-scale = Vector2(2.7, 3.9)
-texture = ExtResource("12_street")
-modulate = Color(0.42, 0.42, 0.58, 1)
-[node name="WindowRightA" type="Sprite2D" parent="."]
-position = Vector2(3550, 700)
-scale = Vector2(0.55, 0.55)
-texture = ExtResource("27_window")
-[node name="WindowRightB" type="Sprite2D" parent="."]
-position = Vector2(3626, 700)
-scale = Vector2(0.55, 0.55)
-texture = ExtResource("27_window")
-[node name="DoorRight" type="Sprite2D" parent="."]
-position = Vector2(3588, 835)
-scale = Vector2(0.6, 0.6)
-texture = ExtResource("28_door")
+[node name="Background" type="Sprite2D" parent="."]
+position = Vector2(0, 0)
+centered = false
+z_index = -10
+texture = ExtResource("29_bg")
+scale = Vector2(1.4344, 1.4344)
+region_enabled = true
+region_rect = Rect2(0, 0, 20000, 753)
+texture_repeat = 2
 
 [node name="Ground" type="StaticBody2D" parent="."]
 
@@ -240,14 +205,6 @@ position = Vector2(700, 655)
 
 [node name="MeatFour" parent="." instance=ExtResource("6_meat")]
 position = Vector2(2200, 655)
-
-[node name="Door" type="Sprite2D" parent="."]
-position = Vector2(300, 915)
-texture = ExtResource("16_door")
-
-[node name="Window" type="Sprite2D" parent="."]
-position = Vector2(2200, 915)
-texture = ExtResource("17_window")
 
 [node name="ElderA" type="Sprite2D" parent="."]
 position = Vector2(2250, 741.76)
@@ -421,23 +378,6 @@ position = Vector2(8050, 953)
 scale = Vector2(6, 1)
 texture = ExtResource("21_crosswalk")
 
-[node name="LandmarkThird" type="Sprite2D" parent="."]
-position = Vector2(8188, 745)
-scale = Vector2(2.7, 3.9)
-texture = ExtResource("12_street")
-modulate = Color(0.42, 0.42, 0.58, 1)
-[node name="WindowThirdA" type="Sprite2D" parent="."]
-position = Vector2(8150, 700)
-scale = Vector2(0.55, 0.55)
-texture = ExtResource("27_window")
-[node name="WindowThirdB" type="Sprite2D" parent="."]
-position = Vector2(8226, 700)
-scale = Vector2(0.55, 0.55)
-texture = ExtResource("27_window")
-[node name="DoorThird" type="Sprite2D" parent="."]
-position = Vector2(8188, 835)
-scale = Vector2(0.6, 0.6)
-texture = ExtResource("28_door")
 
 [node name="CoinE" parent="." instance=ExtResource("23_coin")]
 position = Vector2(5428, 780)

@@ -25,6 +25,7 @@
 [ext_resource type="PackedScene" path="res://scenes/objects/moving_platform.tscn" id="23_movingplatform"]
 [ext_resource type="Texture2D" path="res://assets/props/limousine.png" id="24_limo"]
 [ext_resource type="Texture2D" path="res://assets/props/suit_guard.png" id="25_guard"]
+[ext_resource type="Texture2D" path="res://assets/backgrounds/Worlds/world3_final.png" id="28_bg"]
 
 [sub_resource type="RectangleShape2D" id="GroundShape"]
 size = Vector2(9200, 110)
@@ -43,28 +44,15 @@ script = ExtResource("1_level")
 level_id = "world_3_level_3"
 mission_text = "Recupera el documento del pueblo en la Casa Rosada."
 
-[node name="Sky" type="Sprite2D" parent="."]
-position = Vector2(2300, 540)
-texture = ExtResource("10_sky")
-modulate = Color(0.42, 0.48, 0.6, 1)
-scale = Vector2(17.969, 5)
-
-[node name="Trees" type="Sprite2D" parent="."]
-position = Vector2(2300, 540)
-texture = ExtResource("11_trees")
-modulate = Color(0.85, 0.9, 0.8, 1)
-scale = Vector2(17.969, 2.7)
-
-[node name="LandmarkLeft" type="Sprite2D" parent="."]
-position = Vector2(1012, 760)
-scale = Vector2(1.3, 1.3)
-texture = ExtResource("21_temple")
-modulate = Color(0.94, 0.94, 0.97, 1)
-[node name="LandmarkRight" type="Sprite2D" parent="."]
-position = Vector2(3588, 745)
-scale = Vector2(1.3, 1.3)
-texture = ExtResource("21_temple")
-modulate = Color(0.94, 0.94, 0.97, 1)
+[node name="Background" type="Sprite2D" parent="."]
+position = Vector2(0, 0)
+centered = false
+z_index = -10
+texture = ExtResource("28_bg")
+scale = Vector2(1.4344, 1.4344)
+region_enabled = true
+region_rect = Rect2(0, 0, 20000, 753)
+texture_repeat = 2
 
 [node name="Ground" type="StaticBody2D" parent="."]
 
@@ -236,10 +224,6 @@ position = Vector2(700, 655)
 [node name="MeatFour" parent="." instance=ExtResource("6_meat")]
 position = Vector2(2200, 655)
 
-[node name="Window" type="Sprite2D" parent="."]
-position = Vector2(2250, 915)
-texture = ExtResource("15_window")
-
 [node name="ElderA" type="Sprite2D" parent="."]
 position = Vector2(2200, 741.76)
 texture = ExtResource("16_npc1")
@@ -384,11 +368,6 @@ position = Vector2(8250, 741.76)
 texture = ExtResource("17_npc2")
 scale = Vector2(2.94, 2.94)
 
-[node name="LandmarkThird" type="Sprite2D" parent="."]
-position = Vector2(5612, 760)
-scale = Vector2(1.3, 1.3)
-texture = ExtResource("21_temple")
-modulate = Color(0.94, 0.94, 0.97, 1)
 
 [node name="CoinE" parent="." instance=ExtResource("18_coin")]
 position = Vector2(5428, 780)

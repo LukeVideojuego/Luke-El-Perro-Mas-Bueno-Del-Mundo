@@ -21,6 +21,7 @@
 [ext_resource type="Texture2D" path="res://assets/Tiles/Default/bush.png" id="19_bush"]
 [ext_resource type="PackedScene" path="res://scenes/objects/bubble.tscn" id="20_bubble"]
 [ext_resource type="PackedScene" path="res://scenes/objects/bone_pickup.tscn" id="21_bonepickup"]
+[ext_resource type="Texture2D" path="res://assets/backgrounds/Worlds/world4_mar.jpg" id="22_bg"]
 
 [sub_resource type="RectangleShape2D" id="StartPadShape"]
 size = Vector2(300, 110)
@@ -42,28 +43,15 @@ script = ExtResource("1_level")
 level_id = "world_4_level_2"
 mission_text = "Cruza el mar saltando de isla en isla."
 
-[node name="Sky" type="Sprite2D" parent="."]
-position = Vector2(2300, 540)
-texture = ExtResource("11_sky")
-modulate = Color(0.12, 0.35, 0.5, 1)
-scale = Vector2(18, 5)
-
-[node name="Trees" type="Sprite2D" parent="."]
-position = Vector2(2300, 540)
-texture = ExtResource("12_trees")
-modulate = Color(0.1, 0.35, 0.42, 1)
-scale = Vector2(18, 2.7)
-
-[node name="LandmarkLeft" type="Sprite2D" parent="."]
-position = Vector2(1012, 800)
-scale = Vector2(2.2, 2.2)
-texture = ExtResource("19_bush")
-modulate = Color(0.85, 0.35, 0.45, 1)
-[node name="LandmarkRight" type="Sprite2D" parent="."]
-position = Vector2(3588, 790)
-scale = Vector2(2, 2)
-texture = ExtResource("19_bush")
-modulate = Color(0.55, 0.3, 0.75, 1)
+[node name="Background" type="Sprite2D" parent="."]
+position = Vector2(0, 0)
+centered = false
+z_index = -10
+texture = ExtResource("22_bg")
+scale = Vector2(1.7763, 1.7763)
+region_enabled = true
+region_rect = Rect2(0, 0, 20000, 608)
+texture_repeat = 2
 
 [node name="StartPad" type="StaticBody2D" parent="."]
 position = Vector2(400, 960)

@@ -22,6 +22,7 @@
 [ext_resource type="Texture2D" path="res://assets/props/trash_can.png" id="20_can"]
 [ext_resource type="Texture2D" path="res://assets/props/wood_crate.png" id="21_crate"]
 [ext_resource type="PackedScene" path="res://scenes/enemies/thief.tscn" id="22_thief"]
+[ext_resource type="Texture2D" path="res://assets/backgrounds/Worlds/world1_final.png" id="23_bg"]
 
 [sub_resource type="RectangleShape2D" id="GroundShape"]
 size = Vector2(6400, 120)
@@ -41,64 +42,15 @@ size = Vector2(80, 1080)
 [node name="World1Neighborhood" type="Node2D"]
 script = ExtResource("1_level")
 
-[node name="Sky" type="Sprite2D" parent="."]
-texture = ExtResource("9_sky")
-position = Vector2(3200, 540)
-scale = Vector2(25, 5)
+[node name="Background" type="Sprite2D" parent="."]
+position = Vector2(0, 0)
+centered = false
 z_index = -10
-modulate = Color(0.3, 0.22, 0.32, 1)
-
-[node name="Hills" type="Sprite2D" parent="."]
-texture = ExtResource("10_hills")
-position = Vector2(3200, 690)
-scale = Vector2(25, 2.5)
-z_index = -9
-modulate = Color(0.3, 0.18, 0.2, 1)
-
-[node name="CityBackdrop" type="Node2D" parent="."]
-z_index = -5
-
-[node name="BuildingA" type="Sprite2D" parent="CityBackdrop"]
-texture = ExtResource("18_brick")
-position = Vector2(720, 700)
-scale = Vector2(4.2, 5.8)
-modulate = Color(0.8, 0.46, 0.34, 1)
-[node name="WindowA1" type="Sprite2D" parent="CityBackdrop"]
-texture = ExtResource("13_window")
-position = Vector2(650, 620)
-[node name="WindowA2" type="Sprite2D" parent="CityBackdrop"]
-texture = ExtResource("13_window")
-position = Vector2(790, 620)
-[node name="DoorA" type="Sprite2D" parent="CityBackdrop"]
-texture = ExtResource("14_door")
-position = Vector2(720, 850)
-
-[node name="BuildingB" type="Sprite2D" parent="CityBackdrop"]
-texture = ExtResource("18_brick")
-position = Vector2(2450, 730)
-scale = Vector2(5.0, 5.0)
-modulate = Color(0.8, 0.46, 0.34, 1)
-[node name="WindowB1" type="Sprite2D" parent="CityBackdrop"]
-texture = ExtResource("13_window")
-position = Vector2(2360, 670)
-[node name="WindowB2" type="Sprite2D" parent="CityBackdrop"]
-texture = ExtResource("13_window")
-position = Vector2(2540, 670)
-[node name="DoorB" type="Sprite2D" parent="CityBackdrop"]
-texture = ExtResource("14_door")
-position = Vector2(2450, 850)
-
-[node name="BuildingC" type="Sprite2D" parent="CityBackdrop"]
-texture = ExtResource("18_brick")
-position = Vector2(4300, 700)
-scale = Vector2(6.0, 5.8)
-modulate = Color(0.8, 0.46, 0.34, 1)
-[node name="WindowC1" type="Sprite2D" parent="CityBackdrop"]
-texture = ExtResource("13_window")
-position = Vector2(4180, 610)
-[node name="WindowC2" type="Sprite2D" parent="CityBackdrop"]
-texture = ExtResource("13_window")
-position = Vector2(4420, 610)
+texture = ExtResource("23_bg")
+scale = Vector2(1.4344, 1.4344)
+region_enabled = true
+region_rect = Rect2(0, 0, 20000, 753)
+texture_repeat = 2
 
 [node name="Streetlamp1" type="Sprite2D" parent="."]
 texture = ExtResource("19_lamp")
