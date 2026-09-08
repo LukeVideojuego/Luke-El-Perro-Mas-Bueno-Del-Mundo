@@ -37,15 +37,40 @@ const MUSIC_FILES := {
 
 const SFX_POOL_SIZE := 6
 
+## Offsets relativos por efecto (sumados a sfx_volume_db). Pensados para que
+## ningún efecto tape a otro: los eventos "importantes" (daño, monedas, golpes
+## de jefe) se oyen un poco más fuerte; los muy frecuentes (salto, ataque)
+## quedan más discretos para no cansar; los de UI (pausa) van bajos.
+const SFX_VOLUME_OFFSET := {
+	&"jump": -3.0,
+	&"attack": -2.0,
+	&"damage": 2.0,
+	&"aura_on": -1.0,
+	&"aura_lost": -1.0,
+	&"coin_pickup": 0.0,
+	&"meat_pickup": 1.0,
+	&"hug": -1.0,
+	&"powerup_invincibility": 0.0,
+	&"powerup_speed": 0.0,
+	&"level_complete": 1.5,
+	&"boss_hit": 1.5,
+	&"enemy_defeat": -1.5,
+	&"pause": -4.0,
+}
+
+const MUSIC_CROSSFADE_SEC := 0.9
+
 var _sfx_streams: Dictionary = {}
 var _music_streams: Dictionary = {}
 var _sfx_players: Array[AudioStreamPlayer] = []
 var _next_player := 0
-var _music_player: AudioStreamPlayer
+var _music_players: Array[AudioStreamPlayer] = []
+var _active_music_index := 0
 var _current_music := ""
+var _music_tween: Tween
 
 @export var sfx_volume_db := -6.0
-@export var music_volume_db := -14.0
+@export var music_volume_db := -16.0
 
 func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
@@ -59,11 +84,13 @@ func _ready() -> void:
 		p.process_mode = Node.PROCESS_MODE_ALWAYS
 		add_child(p)
 		_sfx_players.append(p)
-	_music_player = AudioStreamPlayer.new()
-	_music_player.volume_db = music_volume_db
-	_music_player.process_mode = Node.PROCESS_MODE_ALWAYS
-	add_child(_music_player)
-	_music_player.finished.connect(_on_music_finished)
+	for i in 2:
+		var mp := AudioStreamPlayer.new()
+		mp.volume_db = -80.0
+		mp.process_mode = Node.PROCESS_MODE_ALWAYS
+		add_child(mp)
+		mp.finished.connect(_on_music_finished.bind(mp))
+		_music_players.append(mp)
 
 ## Dispara un efecto puntual por nombre. Silenciosamente no hace nada si el
 ## evento no está mapeado, para que llamar con un nombre nuevo no rompa nada.
@@ -73,22 +100,44 @@ func play_event(event_name: StringName) -> void:
 	var player: AudioStreamPlayer = _sfx_players[_next_player]
 	_next_player = (_next_player + 1) % _sfx_players.size()
 	player.stream = _sfx_streams[event_name]
+	player.volume_db = sfx_volume_db + SFX_VOLUME_OFFSET.get(event_name, 0.0)
 	player.play()
 
 ## Cambia la música de fondo si corresponde a una pista distinta de la
-## actual (evita reiniciar el loop al recargar el mismo mundo).
+## actual, con un crossfade suave en vez de un corte brusco (evita reiniciar
+## el loop al recargar el mismo mundo).
 func play_music(track_key: String) -> void:
 	if track_key == _current_music:
 		return
 	if not _music_streams.has(track_key):
 		return
 	_current_music = track_key
-	_music_player.stream = _music_streams[track_key]
-	_music_player.play()
+	var old_player: AudioStreamPlayer = _music_players[_active_music_index]
+	var new_index := 1 - _active_music_index
+	var new_player: AudioStreamPlayer = _music_players[new_index]
+	_active_music_index = new_index
+
+	if _music_tween != null and _music_tween.is_valid():
+		_music_tween.kill()
+
+	new_player.stream = _music_streams[track_key]
+	new_player.volume_db = -80.0
+	new_player.play()
+
+	_music_tween = create_tween()
+	_music_tween.set_parallel(true)
+	_music_tween.tween_property(new_player, "volume_db", music_volume_db, MUSIC_CROSSFADE_SEC)
+	if old_player.playing:
+		_music_tween.tween_property(old_player, "volume_db", -80.0, MUSIC_CROSSFADE_SEC)
+		_music_tween.chain().tween_callback(old_player.stop)
 
 func stop_music() -> void:
 	_current_music = ""
-	_music_player.stop()
+	if _music_tween != null and _music_tween.is_valid():
+		_music_tween.kill()
+	for mp in _music_players:
+		mp.stop()
 
-func _on_music_finished() -> void:
-	_music_player.play()
+func _on_music_finished(player: AudioStreamPlayer) -> void:
+	if player == _music_players[_active_music_index]:
+		player.play()

@@ -40,7 +40,9 @@ func start_game() -> void:
 	if GameState.has_seen_intro:
 		GameState.current_level_id = "world_1_level_1"
 		GameState.level_begun.emit("world_1_level_1")
+		await transition.fade_to_black()
 		load_level("world_1_level_1")
+		await transition.fade_from_black()
 	else:
 		show_intro_cinematic()
 
@@ -53,7 +55,9 @@ func _on_continue_requested() -> void:
 		GameState.reset_for_new_game()
 		show_intro_cinematic()
 		return
+	await transition.fade_to_black()
 	load_level(GameState.current_level_id)
+	await transition.fade_from_black()
 
 func _on_password_requested(level_id: String) -> void:
 	if game_started:
@@ -63,7 +67,9 @@ func _on_password_requested(level_id: String) -> void:
 	_free_menu()
 	GameState.current_level_id = level_id
 	GameState.level_begun.emit(level_id)
+	await transition.fade_to_black()
 	load_level(level_id)
+	await transition.fade_from_black()
 
 ## Muestra el mapa del mundo desde el menú principal (no reemplaza al menú,
 ## solo se superpone; "VOLVER" lo cierra sin perder el menú de fondo).
@@ -91,7 +97,9 @@ func _on_map_level_selected(level_id: String) -> void:
 	_free_menu()
 	GameState.current_level_id = level_id
 	GameState.level_begun.emit(level_id)
+	await transition.fade_to_black()
 	load_level(level_id)
+	await transition.fade_from_black()
 
 func _free_menu() -> void:
 	var menu := get_node_or_null("MainMenu")
@@ -101,12 +109,15 @@ func _free_menu() -> void:
 func show_intro_cinematic() -> void:
 	hud.visible = false
 	AudioDirector.play_music("final")
+	await transition.fade_to_black()
 	var intro_scene := load("res://scenes/cinematics/intro_cinematic.tscn") as PackedScene
 	intro_cinematic = intro_scene.instantiate()
 	add_child(intro_cinematic)
 	intro_cinematic.finished.connect(_on_intro_finished)
+	await transition.fade_from_black()
 
 func _on_intro_finished() -> void:
+	await transition.fade_to_black()
 	if intro_cinematic != null:
 		intro_cinematic.queue_free()
 		intro_cinematic = null
@@ -115,6 +126,7 @@ func _on_intro_finished() -> void:
 	SaveManager.save_game()
 	GameState.level_begun.emit("world_1_level_1")
 	load_level("world_1_level_1")
+	await transition.fade_from_black()
 
 ## Pantalla única (no se repite en partidas siguientes) con los 7 niños
 ## alentando a Luke, mostrada al completar el Mundo 1 antes de pasar al
@@ -122,10 +134,12 @@ func _on_intro_finished() -> void:
 func show_world1_cheer_screen() -> void:
 	hud.visible = false
 	AudioDirector.play_music("final")
+	await transition.fade_to_black()
 	var scene := load("res://scenes/cinematics/world1_cheer_screen.tscn") as PackedScene
 	world1_cheer_screen = scene.instantiate()
 	add_child(world1_cheer_screen)
 	world1_cheer_screen.finished.connect(_on_world1_cheer_finished)
+	await transition.fade_from_black()
 
 func _on_world1_cheer_finished() -> void:
 	if world1_cheer_screen != null:
@@ -139,16 +153,20 @@ func _on_world1_cheer_finished() -> void:
 func show_final_cinematic() -> void:
 	hud.visible = false
 	AudioDirector.play_music("final")
+	await transition.fade_to_black()
 	var cinematic_scene := load("res://scenes/cinematics/final_cinematic.tscn") as PackedScene
 	final_cinematic = cinematic_scene.instantiate()
 	add_child(final_cinematic)
 	final_cinematic.finished.connect(_on_final_finished)
+	await transition.fade_from_black()
 
 func _on_final_finished() -> void:
+	await transition.fade_to_black()
 	if final_cinematic != null:
 		final_cinematic.queue_free()
 		final_cinematic = null
 	load_level("final_screen")
+	await transition.fade_from_black()
 
 func load_level(level_id: String) -> void:
 	var scene_path := LevelProgression.get_scene_path(level_id)

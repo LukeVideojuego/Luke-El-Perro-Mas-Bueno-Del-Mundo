@@ -18,9 +18,9 @@ func _physics_process(_delta: float) -> void:
 	if frame == 20:
 		var btn = cinematic.get_node("Panel1/Panel1Button")
 		btn.pressed.emit()
-	if frame == 30:
+	if frame == 40:
 		await RenderingServer.frame_post_draw
 		get_viewport().get_texture().get_image().save_png("res://../shot_final_cine_panel2.png")
 		print("SAVED panel2")
-	if frame == 35:
+	if frame == 45:
 		get_tree().quit()

@@ -26,24 +26,26 @@ func _physics_process(_delta: float) -> void:
 			print("ERROR: MainMenu no encontrado (game_started ya en true?)")
 		else:
 			menu.new_game_button.pressed.emit()
-	if frame == 30:
+	# show_intro_cinematic ahora hace fade_to_black (~21 frames) antes de
+	# instanciar la intro; se deja margen extra antes de tocar el nodo.
+	if frame == 70:
 		await RenderingServer.frame_post_draw
 		_save("real_intro_panel1")
 		print("has_seen_intro=", GameState.has_seen_intro, " intro_cinematic=", main.intro_cinematic)
-	if frame == 35:
+	if frame == 75:
 		if main.intro_cinematic == null:
-			print("ERROR: intro_cinematic es null en frame 35, la intro no se mostró")
+			print("ERROR: intro_cinematic es null en frame 75, la intro no se mostró")
 		else:
 			var p1btn = main.intro_cinematic.get_node("Panel1/Panel1Button")
 			p1btn.pressed.emit()
-	if frame == 45:
+	if frame == 95:
 		await RenderingServer.frame_post_draw
 		_save("real_intro_panel2")
-	if frame == 50:
+	if frame == 100:
 		var p2btn = main.intro_cinematic.get_node("Panel2/Panel2Button")
 		p2btn.pressed.emit()
-	if frame == 60:
+	if frame == 120:
 		await RenderingServer.frame_post_draw
 		_save("real_intro_panel3")
-	if frame == 65:
+	if frame == 125:
 		get_tree().quit()

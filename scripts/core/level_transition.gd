@@ -30,3 +30,22 @@ func fade_out() -> void:
 	tween.tween_property(overlay, "modulate:a", 0.0, 0.4)
 	await tween.finished
 	overlay.visible = false
+
+## Fundidos "planos" (sin texto de nivel completado) para tapar cortes secos
+## entre pantallas de nivel superior: menú, cinemáticas, pantalla de niños.
+func fade_to_black(duration := 0.35) -> void:
+	title_label.visible = false
+	detail_label.visible = false
+	overlay.visible = true
+	overlay.modulate.a = 0.0
+	var tween := create_tween()
+	tween.tween_property(overlay, "modulate:a", 1.0, duration)
+	await tween.finished
+
+func fade_from_black(duration := 0.35) -> void:
+	var tween := create_tween()
+	tween.tween_property(overlay, "modulate:a", 0.0, duration)
+	await tween.finished
+	overlay.visible = false
+	title_label.visible = true
+	detail_label.visible = true
