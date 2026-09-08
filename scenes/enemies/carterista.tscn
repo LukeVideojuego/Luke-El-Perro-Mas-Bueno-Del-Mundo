@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3]
 
-[ext_resource type="Script" path="res://scripts/enemies/boss_base.gd" id="1_script"]
-[ext_resource type="Texture2D" path="res://assets/Enemies/Reference/don_sombra.png" id="2_texture"]
+[ext_resource type="Script" path="res://scripts/enemies/enemy_base.gd" id="1_script"]
+[ext_resource type="Texture2D" path="res://assets/Enemies/Reference/carterista.png" id="2_texture"]
 [ext_resource type="PackedScene" path="res://scenes/objects/rock_projectile.tscn" id="3_projectile"]
 
 [sub_resource type="RectangleShape2D" id="BodyShape"]
@@ -10,30 +10,20 @@ size = Vector2(52, 84)
 [sub_resource type="RectangleShape2D" id="DamageShape"]
 size = Vector2(72, 76)
 
-[node name="ThiefBoss" type="CharacterBody2D"]
+[node name="Carterista" type="CharacterBody2D"]
 collision_layer = 4
 collision_mask = 1
 script = ExtResource("1_script")
-max_health = 3
-movement_mode = 3
-patrol_speed = 110.0
-charge_speed = 260.0
-charge_duration = 0.8
-charge_cooldown = 1.4
-detect_range = 440.0
-hop_interval = 1.7
-hop_strength = -480.0
-hp_bar_width = 160.0
 contact_anim = 3
 can_ranged_attack = true
 ranged_projectile_scene = ExtResource("3_projectile")
-ranged_detect_range = 460.0
-ranged_cooldown = 2.0
+ranged_detect_range = 380.0
+ranged_cooldown = 2.4
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_texture")
-position = Vector2(0, -135.05)
-scale = Vector2(2.086, 2.086)
+position = Vector2(0, -92.5)
+scale = Vector2(2.767, 2.767)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 8)

@@ -18,6 +18,7 @@ func save_game() -> void:
 		"lives": GameState.lives,
 		"coins": GameState.coins,
 		"has_seen_intro": GameState.has_seen_intro,
+		"has_seen_world1_cheer": GameState.has_seen_world1_cheer,
 		"highest_order_reached": GameState.highest_order_reached,
 		"bone_throw_unlocked": GameState.bone_throw_unlocked,
 	}
@@ -53,6 +54,7 @@ func load_game() -> bool:
 	GameState.lives = int(data.get("lives", GameState.DEFAULT_LIVES))
 	GameState.coins = int(data.get("coins", 0))
 	GameState.has_seen_intro = bool(data.get("has_seen_intro", false))
+	GameState.has_seen_world1_cheer = bool(data.get("has_seen_world1_cheer", false))
 	GameState.highest_order_reached = maxi(1, int(data.get("highest_order_reached", 1)))
 	GameState.bone_throw_unlocked = bool(data.get("bone_throw_unlocked", false))
 	GameState.is_level_complete = false
@@ -63,6 +65,11 @@ func load_game() -> bool:
 ## el juego para saber si "Comenzar juego" debe mostrar la introducción.
 func peek_has_seen_intro() -> bool:
 	return bool(_peek_field("has_seen_intro", false))
+
+## Igual que peek_has_seen_intro() pero para la pantalla de los 7 niños
+## que se muestra una sola vez al completar el Mundo 1.
+func peek_has_seen_world1_cheer() -> bool:
+	return bool(_peek_field("has_seen_world1_cheer", false))
 
 ## Solo lee el progreso desbloqueado, sin tocar el resto del estado; se usa
 ## para poblar el mapa del mundo aunque el jugador no haya tocado "Cargar

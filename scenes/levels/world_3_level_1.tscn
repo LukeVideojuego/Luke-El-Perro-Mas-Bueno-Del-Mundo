@@ -16,8 +16,8 @@
 [ext_resource type="Texture2D" path="res://assets/Tiles/Default/terrain_stone_block.png" id="13_stone"]
 [ext_resource type="Texture2D" path="res://assets/Tiles/Default/spikes.png" id="14_spikes"]
 [ext_resource type="Texture2D" path="res://assets/Tiles/Default/window.png" id="15_window"]
-[ext_resource type="Texture2D" path="res://assets/characters/Default/character_green_idle.png" id="16_npc1"]
-[ext_resource type="Texture2D" path="res://assets/characters/Default/character_yellow_idle.png" id="17_npc2"]
+[ext_resource type="Texture2D" path="res://assets/characters/Reference/transeunte1.png" id="16_npc1"]
+[ext_resource type="Texture2D" path="res://assets/characters/Reference/transeunte2.png" id="17_npc2"]
 [ext_resource type="Texture2D" path="res://assets/Tiles/Default/bush.png" id="21_bush"]
 [ext_resource type="Texture2D" path="res://assets/props/temple.png" id="22_temple"]
 [ext_resource type="PackedScene" path="res://scenes/objects/bone_pickup.tscn" id="23_bonepickup"]
@@ -198,14 +198,14 @@ position = Vector2(700, 655)
 position = Vector2(3000, 655)
 
 [node name="ElderA" type="Sprite2D" parent="."]
-position = Vector2(2350, 741.76)
+position = Vector2(2350, 787.42)
 texture = ExtResource("16_npc1")
-scale = Vector2(2.94, 2.94)
+scale = Vector2(3.276, 3.276)
 
 [node name="ElderB" type="Sprite2D" parent="."]
-position = Vector2(3650, 741.76)
+position = Vector2(3650, 790.22)
 texture = ExtResource("17_npc2")
-scale = Vector2(2.94, 2.94)
+scale = Vector2(2.767, 2.767)
 
 [node name="Finish" parent="." instance=ExtResource("5_finish")]
 position = Vector2(7900, 850)
@@ -323,13 +323,13 @@ position = Vector2(6000, 860)
 position = Vector2(7500, 860)
 
 [node name="ElderC" type="Sprite2D" parent="."]
-position = Vector2(6550, 741.76)
+position = Vector2(6550, 787.42)
 texture = ExtResource("16_npc1")
-scale = Vector2(2.94, 2.94)
+scale = Vector2(3.276, 3.276)
 [node name="ElderD" type="Sprite2D" parent="."]
-position = Vector2(7850, 741.76)
+position = Vector2(7850, 790.22)
 texture = ExtResource("17_npc2")
-scale = Vector2(2.94, 2.94)
+scale = Vector2(2.767, 2.767)
 
 
 [node name="CoinD" parent="." instance=ExtResource("20_coin")]

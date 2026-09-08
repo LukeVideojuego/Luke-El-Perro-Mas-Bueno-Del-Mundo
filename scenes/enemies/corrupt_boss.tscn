@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3]
 
 [ext_resource type="Script" path="res://scripts/enemies/boss_base.gd" id="1_script"]
-[ext_resource type="Texture2D" path="res://assets/Enemies/Reference/politico_corrupto.png" id="2_texture"]
+[ext_resource type="Texture2D" path="res://assets/Enemies/Reference/gran_codicia.png" id="2_texture"]
 [ext_resource type="PackedScene" path="res://scenes/objects/briefcase_projectile.tscn" id="3_projectile"]
 
 [sub_resource type="RectangleShape2D" id="BodyShape"]
@@ -32,8 +32,8 @@ ranged_cooldown = 1.8
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_texture")
-offset = Vector2(0, -33.72)
-scale = Vector2(3.85, 3.85)
+offset = Vector2(0, -56.07)
+scale = Vector2(2.26, 2.26)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 8)

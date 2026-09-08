@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scripts/levels/level_base.gd" id="1_level"]
 [ext_resource type="PackedScene" path="res://scenes/player/player.tscn" id="2_luke"]
-[ext_resource type="PackedScene" path="res://scenes/enemies/thief.tscn" id="3_thief"]
+[ext_resource type="PackedScene" path="res://scenes/enemies/carterista.tscn" id="3_thief"]
 [ext_resource type="PackedScene" path="res://scenes/objects/checkpoint.tscn" id="4_checkpoint"]
 [ext_resource type="PackedScene" path="res://scenes/objects/level_finish.tscn" id="5_finish"]
 [ext_resource type="PackedScene" path="res://scenes/objects/meat_power_up.tscn" id="6_meat"]
@@ -16,8 +16,8 @@
 [ext_resource type="Texture2D" path="res://assets/Tiles/Default/terrain_stone_block.png" id="13_stone"]
 [ext_resource type="Texture2D" path="res://assets/Tiles/Default/spikes.png" id="14_spikes"]
 [ext_resource type="Texture2D" path="res://assets/Tiles/Default/fence.png" id="15_fence"]
-[ext_resource type="Texture2D" path="res://assets/characters/Default/character_green_idle.png" id="16_npc1"]
-[ext_resource type="Texture2D" path="res://assets/characters/Default/character_pink_idle.png" id="17_npc2"]
+[ext_resource type="Texture2D" path="res://assets/characters/Reference/anciana.png" id="16_npc1"]
+[ext_resource type="Texture2D" path="res://assets/characters/Reference/anciana.png" id="17_npc2"]
 [ext_resource type="Texture2D" path="res://assets/props/crosswalk.png" id="21_crosswalk"]
 [ext_resource type="Texture2D" path="res://assets/props/traffic_light.png" id="22_trafficlight"]
 [ext_resource type="Texture2D" path="res://assets/Tiles/Default/bush.png" id="23_bush"]
@@ -210,14 +210,14 @@ position = Vector2(700, 655)
 position = Vector2(3000, 655)
 
 [node name="ElderA" type="Sprite2D" parent="."]
-position = Vector2(2250, 741.76)
+position = Vector2(2250, 790.22)
 texture = ExtResource("16_npc1")
-scale = Vector2(2.94, 2.94)
+scale = Vector2(2.767, 2.767)
 
 [node name="ElderB" type="Sprite2D" parent="."]
-position = Vector2(3500, 741.76)
+position = Vector2(3500, 790.22)
 texture = ExtResource("17_npc2")
-scale = Vector2(2.94, 2.94)
+scale = Vector2(2.767, 2.767)
 
 [node name="FenceA" type="Sprite2D" parent="."]
 position = Vector2(300, 915)
@@ -363,13 +363,13 @@ position = Vector2(6000, 860)
 position = Vector2(7500, 860)
 
 [node name="ElderC" type="Sprite2D" parent="."]
-position = Vector2(6450, 741.76)
+position = Vector2(6450, 790.22)
 texture = ExtResource("16_npc1")
-scale = Vector2(2.94, 2.94)
+scale = Vector2(2.767, 2.767)
 [node name="ElderD" type="Sprite2D" parent="."]
-position = Vector2(7700, 741.76)
+position = Vector2(7700, 790.22)
 texture = ExtResource("17_npc2")
-scale = Vector2(2.94, 2.94)
+scale = Vector2(2.767, 2.767)
 
 [node name="TrafficLightTwo" type="Sprite2D" parent="."]
 position = Vector2(4620, 924)

@@ -1,0 +1,109 @@
+[gd_scene load_steps=10 format=3]
+
+[ext_resource type="Script" path="res://scripts/ui/world1_cheer_screen.gd" id="1_script"]
+[ext_resource type="Texture2D" path="res://assets/backgrounds/Worlds/world1_final.png" id="2_bg"]
+[ext_resource type="Texture2D" path="res://assets/characters/Kids/EndOfWorld1/zoe.png" id="3_zoe"]
+[ext_resource type="Texture2D" path="res://assets/characters/Kids/EndOfWorld1/mathi.png" id="4_mathi"]
+[ext_resource type="Texture2D" path="res://assets/characters/Kids/EndOfWorld1/bauti.png" id="5_bauti"]
+[ext_resource type="Texture2D" path="res://assets/characters/Kids/EndOfWorld1/fausto.png" id="6_fausto"]
+[ext_resource type="Texture2D" path="res://assets/characters/Kids/EndOfWorld1/roma.png" id="7_roma"]
+[ext_resource type="Texture2D" path="res://assets/characters/Kids/EndOfWorld1/izan.png" id="8_izan"]
+[ext_resource type="Texture2D" path="res://assets/characters/Kids/EndOfWorld1/lara.png" id="9_lara"]
+
+[node name="World1CheerScreen" type="CanvasLayer" unique_id=771230441]
+layer = 30
+script = ExtResource("1_script")
+
+[node name="Panel" type="Control" parent="."]
+custom_minimum_size = Vector2(1920, 1080)
+layout_mode = 3
+anchors_preset = 0
+
+[node name="Backdrop" type="ColorRect" parent="Panel"]
+offset_right = 1920.0
+offset_bottom = 1080.0
+color = Color(0, 0, 0, 1)
+
+[node name="Background" type="Sprite2D" parent="Panel"]
+position = Vector2(960, 540)
+texture = ExtResource("2_bg")
+scale = Vector2(1.4344, 1.4344)
+
+[node name="SignBackdrop" type="ColorRect" parent="Panel"]
+offset_left = 140.0
+offset_top = 130.0
+offset_right = 1780.0
+offset_bottom = 470.0
+color = Color(0.03, 0.05, 0.1, 0.8)
+
+[node name="Title" type="Label" parent="Panel"]
+offset_left = 160.0
+offset_top = 155.0
+offset_right = 1760.0
+offset_bottom = 210.0
+theme_override_colors/font_color = Color(1, 0.85, 0.3, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 6
+theme_override_font_sizes/font_size = 38
+text = "¡MUNDO 1 SUPERADO!"
+horizontal_alignment = 1
+
+[node name="MessageLabel" type="Label" parent="Panel"]
+offset_left = 190.0
+offset_top = 240.0
+offset_right = 1730.0
+offset_bottom = 450.0
+theme_override_colors/font_color = Color(0.95, 0.97, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 6
+theme_override_constants/line_spacing = 10
+theme_override_font_sizes/font_size = 32
+text = "Luke no está solo: Zoe, Mathi, Bauti, Fausto, Roma, Izan y Lara te estarán alentando en todo momento"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="Zoe" type="Sprite2D" parent="Panel"]
+position = Vector2(150, 700)
+texture = ExtResource("3_zoe")
+scale = Vector2(2.97, 2.97)
+
+[node name="Mathi" type="Sprite2D" parent="Panel"]
+position = Vector2(420, 700)
+texture = ExtResource("4_mathi")
+scale = Vector2(3.571, 3.571)
+
+[node name="Bauti" type="Sprite2D" parent="Panel"]
+position = Vector2(690, 700)
+texture = ExtResource("5_bauti")
+scale = Vector2(3.261, 3.261)
+
+[node name="Fausto" type="Sprite2D" parent="Panel"]
+position = Vector2(960, 700)
+texture = ExtResource("6_fausto")
+scale = Vector2(3.191, 3.191)
+
+[node name="Roma" type="Sprite2D" parent="Panel"]
+position = Vector2(1230, 700)
+texture = ExtResource("7_roma")
+scale = Vector2(3.529, 3.529)
+
+[node name="Izan" type="Sprite2D" parent="Panel"]
+position = Vector2(1500, 700)
+texture = ExtResource("8_izan")
+scale = Vector2(3.0, 3.0)
+
+[node name="Lara" type="Sprite2D" parent="Panel"]
+position = Vector2(1770, 700)
+texture = ExtResource("9_lara")
+scale = Vector2(2.913, 2.913)
+
+[node name="ContinueButton" type="Button" parent="Panel" unique_id=771230442]
+custom_minimum_size = Vector2(280, 66)
+offset_left = 820.0
+offset_top = 960.0
+offset_right = 1100.0
+offset_bottom = 1026.0
+z_index = 5
+theme_override_font_sizes/font_size = 22
+text = "CONTINUAR"

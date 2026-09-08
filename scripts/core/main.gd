@@ -9,12 +9,14 @@ var is_transitioning := false
 var game_started := false
 var intro_cinematic: Node = null
 var final_cinematic: Node = null
+var world1_cheer_screen: Node = null
 var world_map: Node = null
 
 func _ready() -> void:
 	hud.visible = false
 	GameState.level_completed.connect(_on_level_completed)
 	GameState.has_seen_intro = SaveManager.peek_has_seen_intro()
+	GameState.has_seen_world1_cheer = SaveManager.peek_has_seen_world1_cheer()
 	GameState.highest_order_reached = SaveManager.peek_highest_order_reached()
 	var menu := get_node_or_null("MainMenu")
 	if menu != null:
@@ -112,6 +114,25 @@ func _on_intro_finished() -> void:
 	GameState.level_begun.emit("world_1_level_1")
 	load_level("world_1_level_1")
 
+## Pantalla única (no se repite en partidas siguientes) con los 7 niños
+## alentando a Luke, mostrada al completar el Mundo 1 antes de pasar al
+## Mundo 2. Mismo criterio de "solo una vez" que la cinemática de inicio.
+func show_world1_cheer_screen() -> void:
+	hud.visible = false
+	var scene := load("res://scenes/cinematics/world1_cheer_screen.tscn") as PackedScene
+	world1_cheer_screen = scene.instantiate()
+	add_child(world1_cheer_screen)
+	world1_cheer_screen.finished.connect(_on_world1_cheer_finished)
+
+func _on_world1_cheer_finished() -> void:
+	if world1_cheer_screen != null:
+		world1_cheer_screen.queue_free()
+		world1_cheer_screen = null
+	GameState.has_seen_world1_cheer = true
+	SaveManager.save_game()
+	await _advance_after_level("world_1_boss")
+	is_transitioning = false
+
 func show_final_cinematic() -> void:
 	hud.visible = false
 	var cinematic_scene := load("res://scenes/cinematics/final_cinematic.tscn") as PackedScene
@@ -147,13 +168,19 @@ func _on_level_completed(level_id: String) -> void:
 		show_final_cinematic()
 		is_transitioning = false
 		return
+	if level_id == "world_1_boss" and not GameState.has_seen_world1_cheer:
+		show_world1_cheer_screen()
+		return
+	await _advance_after_level(level_id)
+	is_transitioning = false
+
+func _advance_after_level(level_id: String) -> void:
 	var next_level_id := LevelProgression.get_next_level(level_id)
 	await transition.play_completion(next_level_id)
 	if not next_level_id.is_empty() and not LevelProgression.get_scene_path(next_level_id).is_empty():
 		GameState.prepare_next_level()
 		load_level(next_level_id)
 		transition.fade_out()
-	is_transitioning = false
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("pause"):

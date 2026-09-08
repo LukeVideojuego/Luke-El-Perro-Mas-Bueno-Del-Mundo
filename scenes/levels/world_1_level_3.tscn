@@ -20,7 +20,7 @@
 [ext_resource type="Texture2D" path="res://assets/Tiles/Default/bush.png" id="18_bush"]
 [ext_resource type="Texture2D" path="res://assets/Tiles/Default/bricks_brown.png" id="19_brick"]
 [ext_resource type="PackedScene" path="res://scenes/objects/bone_pickup.tscn" id="20_bonepickup"]
-[ext_resource type="Texture2D" path="res://assets/characters/Default/grandma_idle.png" id="21_grandma"]
+[ext_resource type="Texture2D" path="res://assets/characters/Reference/anciana.png" id="21_grandma"]
 [ext_resource type="Texture2D" path="res://assets/props/streetlamp.png" id="22_lamp"]
 [ext_resource type="Texture2D" path="res://assets/props/trash_can.png" id="23_can"]
 [ext_resource type="Texture2D" path="res://assets/props/wood_crate.png" id="24_crate"]
@@ -278,8 +278,8 @@ position = Vector2(3150, 600)
 
 [node name="Grandma1" type="Sprite2D" parent="."]
 texture = ExtResource("21_grandma")
-position = Vector2(935, 821.02)
-scale = Vector2(1.13, 1.13)
+position = Vector2(935, 823.7)
+scale = Vector2(2.767, 2.767)
 [node name="Streetlamp1" type="Sprite2D" parent="."]
 texture = ExtResource("22_lamp")
 position = Vector2(600, 895)

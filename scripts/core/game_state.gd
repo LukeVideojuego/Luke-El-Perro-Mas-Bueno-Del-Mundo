@@ -21,6 +21,7 @@ var current_level_id := ""
 var is_level_complete := false
 var coins := 0
 var has_seen_intro := false
+var has_seen_world1_cheer := false
 
 ## Permanente una vez conseguido el primer huesito: desbloquea el ataque a
 ## distancia de Luke (doble tap del botón de ataque). Nunca se desactiva.
@@ -118,7 +119,8 @@ func prepare_next_level() -> void:
 	aura_changed.emit(aura_active)
 
 ## Reinicia todo el progreso para una partida nueva desde cero.
-## has_seen_intro NO se toca: es permanente una vez visto.
+## has_seen_intro y has_seen_world1_cheer NO se tocan: son permanentes
+## una vez vistos.
 func reset_for_new_game() -> void:
 	lives = DEFAULT_LIVES
 	aura_active = false

@@ -11,14 +11,14 @@
 [ext_resource type="Texture2D" path="res://assets/Tiles/Default/terrain_grass_block_top.png" id="9_grass"]
 [ext_resource type="Texture2D" path="res://assets/Tiles/Default/terrain_stone_block.png" id="10_stone"]
 [ext_resource type="Texture2D" path="res://assets/Tiles/Default/fence.png" id="11_fence"]
-[ext_resource type="Texture2D" path="res://assets/characters/Default/character_green_idle.png" id="12_person_a"]
-[ext_resource type="Texture2D" path="res://assets/characters/Default/character_pink_idle.png" id="13_person_b"]
+[ext_resource type="Texture2D" path="res://assets/characters/Reference/transeunte1.png" id="12_person_a"]
+[ext_resource type="Texture2D" path="res://assets/characters/Reference/transeunte2.png" id="13_person_b"]
 [ext_resource type="PackedScene" path="res://scenes/objects/mission_sign.tscn" id="14_sign"]
 [ext_resource type="PackedScene" path="res://scenes/objects/damage_zone.tscn" id="15_hazard"]
 [ext_resource type="PackedScene" path="res://scenes/objects/breakable_box.tscn" id="16_box"]
 [ext_resource type="Texture2D" path="res://assets/Tiles/Default/window.png" id="17_window"]
 [ext_resource type="Texture2D" path="res://assets/Tiles/Default/door_closed.png" id="18_door"]
-[ext_resource type="Texture2D" path="res://assets/characters/Default/character_yellow_idle.png" id="19_person_c"]
+[ext_resource type="Texture2D" path="res://assets/characters/Reference/transeunte3.png" id="19_person_c"]
 [ext_resource type="Texture2D" path="res://assets/Tiles/Default/sign_exit.png" id="20_exit"]
 [ext_resource type="Texture2D" path="res://assets/Tiles/Default/spikes.png" id="21_spikes"]
 [ext_resource type="Texture2D" path="res://assets/Tiles/Default/bush.png" id="22_bush"]
@@ -26,7 +26,7 @@
 [ext_resource type="PackedScene" path="res://scenes/objects/invincibility_power_up.tscn" id="24_invincibility"]
 [ext_resource type="Texture2D" path="res://assets/Tiles/Default/bricks_brown.png" id="25_brick"]
 [ext_resource type="PackedScene" path="res://scenes/objects/bone_pickup.tscn" id="26_bonepickup"]
-[ext_resource type="Texture2D" path="res://assets/characters/Default/grandma_idle.png" id="27_grandma"]
+[ext_resource type="Texture2D" path="res://assets/characters/Reference/anciana.png" id="27_grandma"]
 [ext_resource type="Texture2D" path="res://assets/props/streetlamp.png" id="28_lamp"]
 [ext_resource type="Texture2D" path="res://assets/props/trash_can.png" id="29_can"]
 [ext_resource type="Texture2D" path="res://assets/props/wood_crate.png" id="30_crate"]
@@ -114,16 +114,16 @@ scale = Vector2(1.2, 1.2)
 
 [node name="PersonGreen" type="Sprite2D" parent="."]
 texture = ExtResource("12_person_a")
-position = Vector2(430, 728.44)
-scale = Vector2(2.94, 2.94)
+position = Vector2(430, 774.1)
+scale = Vector2(3.276, 3.276)
 [node name="PersonPink" type="Sprite2D" parent="."]
 texture = ExtResource("13_person_b")
-position = Vector2(2820, 728.44)
-scale = Vector2(2.94, 2.94)
+position = Vector2(2820, 776.9)
+scale = Vector2(2.767, 2.767)
 [node name="PersonYellow" type="Sprite2D" parent="."]
 texture = ExtResource("19_person_c")
-position = Vector2(3730, 728.44)
-scale = Vector2(2.94, 2.94)
+position = Vector2(3730, 774.1)
+scale = Vector2(2.908, 2.908)
 
 [node name="BushA" type="Sprite2D" parent="."]
 texture = ExtResource("22_bush")
@@ -250,12 +250,12 @@ position = Vector2(1910, 500)
 
 [node name="Grandma1" type="Sprite2D" parent="."]
 texture = ExtResource("27_grandma")
-position = Vector2(930, 821.02)
-scale = Vector2(1.13, 1.13)
+position = Vector2(930, 823.7)
+scale = Vector2(2.767, 2.767)
 [node name="Grandma2" type="Sprite2D" parent="."]
 texture = ExtResource("27_grandma")
-position = Vector2(3160, 821.02)
-scale = Vector2(1.13, 1.13)
+position = Vector2(3160, 823.7)
+scale = Vector2(2.767, 2.767)
 [node name="Streetlamp1" type="Sprite2D" parent="."]
 texture = ExtResource("28_lamp")
 position = Vector2(600, 895)
@@ -374,8 +374,8 @@ position = Vector2(7728, 780)
 
 [node name="Grandma3" type="Sprite2D" parent="."]
 texture = ExtResource("27_grandma")
-position = Vector2(5130, 821.02)
-scale = Vector2(1.13, 1.13)
+position = Vector2(5130, 823.7)
+scale = Vector2(2.767, 2.767)
 [node name="Streetlamp4" type="Sprite2D" parent="."]
 texture = ExtResource("28_lamp")
 position = Vector2(4800, 895)
