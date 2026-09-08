@@ -3,6 +3,7 @@
 [ext_resource type="Script" path="res://scripts/levels/level_base.gd" id="1_level"]
 [ext_resource type="PackedScene" path="res://scenes/player/player.tscn" id="2_luke"]
 [ext_resource type="PackedScene" path="res://scenes/enemies/corrupt_politician.tscn" id="3_thief"]
+[ext_resource type="PackedScene" path="res://scenes/enemies/corrupt_lackey.tscn" id="30_lackey"]
 [ext_resource type="PackedScene" path="res://scenes/objects/checkpoint.tscn" id="4_checkpoint"]
 [ext_resource type="PackedScene" path="res://scenes/objects/level_finish.tscn" id="5_finish"]
 [ext_resource type="PackedScene" path="res://scenes/objects/meat_power_up.tscn" id="6_meat"]
@@ -26,7 +27,7 @@
 [ext_resource type="PackedScene" path="res://scenes/objects/moving_platform.tscn" id="24_movingplatform"]
 [ext_resource type="Texture2D" path="res://assets/Enemies/Reference/politico_corrupto.png" id="25_lookout_texture"]
 [ext_resource type="Texture2D" path="res://assets/props/limousine.png" id="26_limo"]
-[ext_resource type="Texture2D" path="res://assets/props/suit_guard.png" id="27_guard"]
+[ext_resource type="Texture2D" path="res://assets/Enemies/Reference/guardia.png" id="27_guard"]
 [ext_resource type="Texture2D" path="res://assets/backgrounds/Worlds/world3_final.png" id="28_bg"]
 
 [sub_resource type="RectangleShape2D" id="GroundShape"]
@@ -208,7 +209,7 @@ position = Vector2(1010, 850)
 patrol_distance = 140.0
 Sprite2D/modulate = Color(0.75, 0.75, 0.78, 1)
 
-[node name="ThiefTwo" parent="." instance=ExtResource("3_thief")]
+[node name="ThiefTwo" parent="." instance=ExtResource("30_lackey")]
 position = Vector2(1850, 850)
 patrol_distance = 130.0
 Sprite2D/modulate = Color(0.75, 0.75, 0.78, 1)
@@ -334,7 +335,7 @@ texture = ExtResource("14_spikes")
 [node name="SpikeHazardFour" parent="." instance=ExtResource("8_hazard")]
 position = Vector2(5450, 920)
 
-[node name="ThiefFour" parent="." instance=ExtResource("3_thief")]
+[node name="ThiefFour" parent="." instance=ExtResource("30_lackey")]
 position = Vector2(5410, 850)
 patrol_distance = 150.0
 Sprite2D/modulate = Color(0.75, 0.75, 0.78, 1)
@@ -426,6 +427,6 @@ position = Vector2(740, 792)
 texture = ExtResource("26_limo")
 
 [node name="SuitGuard" type="Sprite2D" parent="."]
-position = Vector2(600, 775.07)
-scale = Vector2(2.08, 2.08)
+position = Vector2(600, 769.39)
+scale = Vector2(2.822, 2.822)
 texture = ExtResource("27_guard")

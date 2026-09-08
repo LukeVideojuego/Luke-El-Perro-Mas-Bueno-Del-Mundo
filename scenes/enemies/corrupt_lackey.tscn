@@ -1,0 +1,41 @@
+[gd_scene load_steps=5 format=3]
+
+[ext_resource type="Script" path="res://scripts/enemies/enemy_base.gd" id="1_script"]
+[ext_resource type="Texture2D" path="res://assets/Enemies/Reference/ladron_politico.png" id="2_texture"]
+[ext_resource type="PackedScene" path="res://scenes/objects/briefcase_projectile.tscn" id="3_projectile"]
+
+[sub_resource type="RectangleShape2D" id="BodyShape"]
+size = Vector2(52, 84)
+
+[sub_resource type="RectangleShape2D" id="DamageShape"]
+size = Vector2(72, 76)
+
+[node name="CorruptLackey" type="CharacterBody2D"]
+collision_layer = 4
+collision_mask = 1
+script = ExtResource("1_script")
+patrol_speed = 75.0
+contact_anim = 4
+can_ranged_attack = true
+ranged_projectile_scene = ExtResource("3_projectile")
+ranged_detect_range = 400.0
+ranged_cooldown = 2.3
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_texture")
+position = Vector2(0, -98.86)
+scale = Vector2(2.822, 2.822)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 8)
+shape = SubResource("BodyShape")
+
+[node name="DamageArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 1
+monitoring = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DamageArea"]
+shape = SubResource("DamageShape")
+
+[connection signal="body_entered" from="DamageArea" to="." method="_on_damage_area_body_entered"]
