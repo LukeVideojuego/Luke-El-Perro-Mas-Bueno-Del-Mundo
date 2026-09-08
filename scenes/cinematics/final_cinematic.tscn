@@ -49,9 +49,23 @@ color = Color(0, 0, 0, 1)
 [node name="Image2" type="TextureRect" parent="Panel2"]
 offset_top = 160.0
 offset_right = 1920.0
-offset_bottom = 769.0
+offset_bottom = 708.0
 texture = ExtResource("3_verdadero_panel")
 stretch_mode = 0
+
+[node name="Caption2" type="Label" parent="Panel2"]
+offset_left = 20.0
+offset_top = 718.0
+offset_right = 1900.0
+offset_bottom = 800.0
+theme_override_colors/font_color = Color(0.95, 0.96, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 6
+theme_override_font_sizes/font_size = 26
+text = "El mundo volvió a creer.
+Porque un perro les recordó que el amor siempre es más fuerte que el mal."
+horizontal_alignment = 1
+autowrap_mode = 2
 
 [node name="Panel2Button" type="Button" parent="Panel2"]
 custom_minimum_size = Vector2(280, 66)
