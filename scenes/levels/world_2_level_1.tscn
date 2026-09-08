@@ -232,12 +232,28 @@ position = Vector2(8000, 850)
 
 [node name="CoinA" parent="." instance=ExtResource("20_coin")]
 position = Vector2(700, 780)
+[node name="CoinA_L" parent="." instance=ExtResource("20_coin")]
+position = Vector2(640.0, 780.0)
+[node name="CoinA_R" parent="." instance=ExtResource("20_coin")]
+position = Vector2(760.0, 780.0)
 [node name="CoinB" parent="." instance=ExtResource("20_coin")]
 position = Vector2(1600, 780)
+[node name="CoinB_L" parent="." instance=ExtResource("20_coin")]
+position = Vector2(1540.0, 780.0)
+[node name="CoinB_R" parent="." instance=ExtResource("20_coin")]
+position = Vector2(1660.0, 780.0)
 [node name="CoinC" parent="." instance=ExtResource("20_coin")]
 position = Vector2(2900, 780)
+[node name="CoinC_L" parent="." instance=ExtResource("20_coin")]
+position = Vector2(2840.0, 780.0)
+[node name="CoinC_R" parent="." instance=ExtResource("20_coin")]
+position = Vector2(2960.0, 780.0)
 [node name="CoinD" parent="." instance=ExtResource("20_coin")]
 position = Vector2(3600, 780)
+[node name="CoinD_L" parent="." instance=ExtResource("20_coin")]
+position = Vector2(3540.0, 780.0)
+[node name="CoinD_R" parent="." instance=ExtResource("20_coin")]
+position = Vector2(3660.0, 780.0)
 
 [node name="TrafficLight" type="Sprite2D" parent="."]
 position = Vector2(420, 924)
@@ -385,9 +401,25 @@ texture = ExtResource("21_crosswalk")
 
 [node name="CoinE" parent="." instance=ExtResource("20_coin")]
 position = Vector2(4900, 780)
+[node name="CoinE_L" parent="." instance=ExtResource("20_coin")]
+position = Vector2(4840.0, 780.0)
+[node name="CoinE_R" parent="." instance=ExtResource("20_coin")]
+position = Vector2(4960.0, 780.0)
 [node name="CoinF" parent="." instance=ExtResource("20_coin")]
 position = Vector2(5800, 780)
+[node name="CoinF_L" parent="." instance=ExtResource("20_coin")]
+position = Vector2(5740.0, 780.0)
+[node name="CoinF_R" parent="." instance=ExtResource("20_coin")]
+position = Vector2(5860.0, 780.0)
 [node name="CoinG" parent="." instance=ExtResource("20_coin")]
 position = Vector2(7100, 780)
+[node name="CoinG_L" parent="." instance=ExtResource("20_coin")]
+position = Vector2(7040.0, 780.0)
+[node name="CoinG_R" parent="." instance=ExtResource("20_coin")]
+position = Vector2(7160.0, 780.0)
 [node name="CoinH" parent="." instance=ExtResource("20_coin")]
 position = Vector2(7800, 780)
+[node name="CoinH_L" parent="." instance=ExtResource("20_coin")]
+position = Vector2(7740.0, 780.0)
+[node name="CoinH_R" parent="." instance=ExtResource("20_coin")]
+position = Vector2(7860.0, 780.0)

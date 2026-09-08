@@ -194,6 +194,7 @@ func receive_attack(_attacker: Node) -> void:
 		$CollisionShape2D.set_deferred("disabled", true)
 		$DamageArea.set_deferred("monitoring", false)
 		_drop_bone()
+		AudioDirector.play_event(&"enemy_defeat")
 		defeated.emit(self)
 		queue_free()
 

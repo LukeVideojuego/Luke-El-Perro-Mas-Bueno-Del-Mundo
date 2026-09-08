@@ -227,12 +227,28 @@ position = Vector2(8080, 850)
 
 [node name="CoinA" parent="." instance=ExtResource("23_coin")]
 position = Vector2(756, 780)
+[node name="CoinA_L" parent="." instance=ExtResource("23_coin")]
+position = Vector2(696.0, 780.0)
+[node name="CoinA_R" parent="." instance=ExtResource("23_coin")]
+position = Vector2(816.0, 780.0)
 [node name="CoinB" parent="." instance=ExtResource("23_coin")]
 position = Vector2(1680, 780)
+[node name="CoinB_L" parent="." instance=ExtResource("23_coin")]
+position = Vector2(1620.0, 780.0)
+[node name="CoinB_R" parent="." instance=ExtResource("23_coin")]
+position = Vector2(1740.0, 780.0)
 [node name="CoinC" parent="." instance=ExtResource("23_coin")]
 position = Vector2(2604, 780)
+[node name="CoinC_L" parent="." instance=ExtResource("23_coin")]
+position = Vector2(2544.0, 780.0)
+[node name="CoinC_R" parent="." instance=ExtResource("23_coin")]
+position = Vector2(2664.0, 780.0)
 [node name="CoinD" parent="." instance=ExtResource("23_coin")]
 position = Vector2(3528, 780)
+[node name="CoinD_L" parent="." instance=ExtResource("23_coin")]
+position = Vector2(3468.0, 780.0)
+[node name="CoinD_R" parent="." instance=ExtResource("23_coin")]
+position = Vector2(3588.0, 780.0)
 [node name="InvincibilityPowerUp" parent="." instance=ExtResource("24_invincibility")]
 position = Vector2(2100, 620)
 [node name="EdgeBushA" type="Sprite2D" parent="."]
@@ -365,12 +381,28 @@ checkpoint_id = "barrio_extendido"
 
 [node name="CoinE" parent="." instance=ExtResource("23_coin")]
 position = Vector2(4956, 780)
+[node name="CoinE_L" parent="." instance=ExtResource("23_coin")]
+position = Vector2(4896.0, 780.0)
+[node name="CoinE_R" parent="." instance=ExtResource("23_coin")]
+position = Vector2(5016.0, 780.0)
 [node name="CoinF" parent="." instance=ExtResource("23_coin")]
 position = Vector2(5880, 780)
+[node name="CoinF_L" parent="." instance=ExtResource("23_coin")]
+position = Vector2(5820.0, 780.0)
+[node name="CoinF_R" parent="." instance=ExtResource("23_coin")]
+position = Vector2(5940.0, 780.0)
 [node name="CoinG" parent="." instance=ExtResource("23_coin")]
 position = Vector2(6804, 780)
+[node name="CoinG_L" parent="." instance=ExtResource("23_coin")]
+position = Vector2(6744.0, 780.0)
+[node name="CoinG_R" parent="." instance=ExtResource("23_coin")]
+position = Vector2(6864.0, 780.0)
 [node name="CoinH" parent="." instance=ExtResource("23_coin")]
 position = Vector2(7728, 780)
+[node name="CoinH_L" parent="." instance=ExtResource("23_coin")]
+position = Vector2(7668.0, 780.0)
+[node name="CoinH_R" parent="." instance=ExtResource("23_coin")]
+position = Vector2(7788.0, 780.0)
 
 [node name="Grandma3" type="Sprite2D" parent="."]
 texture = ExtResource("27_grandma")

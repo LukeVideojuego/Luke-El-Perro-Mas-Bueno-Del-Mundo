@@ -212,10 +212,22 @@ position = Vector2(7900, 850)
 
 [node name="CoinA" parent="." instance=ExtResource("20_coin")]
 position = Vector2(650, 780)
+[node name="CoinA_L" parent="." instance=ExtResource("20_coin")]
+position = Vector2(590.0, 780.0)
+[node name="CoinA_R" parent="." instance=ExtResource("20_coin")]
+position = Vector2(710.0, 780.0)
 [node name="CoinB" parent="." instance=ExtResource("20_coin")]
 position = Vector2(1900, 780)
+[node name="CoinB_L" parent="." instance=ExtResource("20_coin")]
+position = Vector2(1840.0, 780.0)
+[node name="CoinB_R" parent="." instance=ExtResource("20_coin")]
+position = Vector2(1960.0, 780.0)
 [node name="CoinC" parent="." instance=ExtResource("20_coin")]
 position = Vector2(3400, 780)
+[node name="CoinC_L" parent="." instance=ExtResource("20_coin")]
+position = Vector2(3340.0, 780.0)
+[node name="CoinC_R" parent="." instance=ExtResource("20_coin")]
+position = Vector2(3460.0, 780.0)
 
 [node name="EdgeBushA" type="Sprite2D" parent="."]
 position = Vector2(168, 918)
@@ -334,10 +346,22 @@ scale = Vector2(2.767, 2.767)
 
 [node name="CoinD" parent="." instance=ExtResource("20_coin")]
 position = Vector2(4850, 780)
+[node name="CoinD_L" parent="." instance=ExtResource("20_coin")]
+position = Vector2(4790.0, 780.0)
+[node name="CoinD_R" parent="." instance=ExtResource("20_coin")]
+position = Vector2(4910.0, 780.0)
 [node name="CoinE" parent="." instance=ExtResource("20_coin")]
 position = Vector2(6100, 780)
+[node name="CoinE_L" parent="." instance=ExtResource("20_coin")]
+position = Vector2(6040.0, 780.0)
+[node name="CoinE_R" parent="." instance=ExtResource("20_coin")]
+position = Vector2(6160.0, 780.0)
 [node name="CoinF" parent="." instance=ExtResource("20_coin")]
 position = Vector2(7600, 780)
+[node name="CoinF_L" parent="." instance=ExtResource("20_coin")]
+position = Vector2(7540.0, 780.0)
+[node name="CoinF_R" parent="." instance=ExtResource("20_coin")]
+position = Vector2(7660.0, 780.0)
 
 [node name="Limousine" type="Sprite2D" parent="."]
 position = Vector2(740, 792)

@@ -296,12 +296,28 @@ position = Vector2(8400, 770)
 
 [node name="CoinA" parent="." instance=ExtResource("17_coin")]
 position = Vector2(828, 780)
+[node name="CoinA_L" parent="." instance=ExtResource("17_coin")]
+position = Vector2(768.0, 780.0)
+[node name="CoinA_R" parent="." instance=ExtResource("17_coin")]
+position = Vector2(888.0, 780.0)
 [node name="CoinB" parent="." instance=ExtResource("17_coin")]
 position = Vector2(1840, 780)
+[node name="CoinB_L" parent="." instance=ExtResource("17_coin")]
+position = Vector2(1780.0, 780.0)
+[node name="CoinB_R" parent="." instance=ExtResource("17_coin")]
+position = Vector2(1900.0, 780.0)
 [node name="CoinC" parent="." instance=ExtResource("17_coin")]
 position = Vector2(2852, 780)
+[node name="CoinC_L" parent="." instance=ExtResource("17_coin")]
+position = Vector2(2792.0, 780.0)
+[node name="CoinC_R" parent="." instance=ExtResource("17_coin")]
+position = Vector2(2912.0, 780.0)
 [node name="CoinD" parent="." instance=ExtResource("17_coin")]
 position = Vector2(3864, 780)
+[node name="CoinD_L" parent="." instance=ExtResource("17_coin")]
+position = Vector2(3804.0, 780.0)
+[node name="CoinD_R" parent="." instance=ExtResource("17_coin")]
+position = Vector2(3924.0, 780.0)
 
 [node name="InvincibilityPowerUp" parent="." instance=ExtResource("18_invincibility")]
 position = Vector2(2300, 600)
@@ -580,9 +596,25 @@ bob_amplitude = 26.0
 
 [node name="CoinE" parent="." instance=ExtResource("17_coin")]
 position = Vector2(5428, 780)
+[node name="CoinE_L" parent="." instance=ExtResource("17_coin")]
+position = Vector2(5368.0, 780.0)
+[node name="CoinE_R" parent="." instance=ExtResource("17_coin")]
+position = Vector2(5488.0, 780.0)
 [node name="CoinF" parent="." instance=ExtResource("17_coin")]
 position = Vector2(6440, 780)
+[node name="CoinF_L" parent="." instance=ExtResource("17_coin")]
+position = Vector2(6380.0, 780.0)
+[node name="CoinF_R" parent="." instance=ExtResource("17_coin")]
+position = Vector2(6500.0, 780.0)
 [node name="CoinG" parent="." instance=ExtResource("17_coin")]
 position = Vector2(7452, 780)
+[node name="CoinG_L" parent="." instance=ExtResource("17_coin")]
+position = Vector2(7392.0, 780.0)
+[node name="CoinG_R" parent="." instance=ExtResource("17_coin")]
+position = Vector2(7512.0, 780.0)
 [node name="CoinH" parent="." instance=ExtResource("17_coin")]
 position = Vector2(8464, 780)
+[node name="CoinH_L" parent="." instance=ExtResource("17_coin")]
+position = Vector2(8404.0, 780.0)
+[node name="CoinH_R" parent="." instance=ExtResource("17_coin")]
+position = Vector2(8524.0, 780.0)

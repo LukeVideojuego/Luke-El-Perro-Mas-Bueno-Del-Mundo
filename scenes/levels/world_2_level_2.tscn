@@ -266,12 +266,28 @@ texture = ExtResource("21_crosswalk")
 
 [node name="CoinA" parent="." instance=ExtResource("23_coin")]
 position = Vector2(792, 780)
+[node name="CoinA_L" parent="." instance=ExtResource("23_coin")]
+position = Vector2(732.0, 780.0)
+[node name="CoinA_R" parent="." instance=ExtResource("23_coin")]
+position = Vector2(852.0, 780.0)
 [node name="CoinB" parent="." instance=ExtResource("23_coin")]
 position = Vector2(1760, 780)
+[node name="CoinB_L" parent="." instance=ExtResource("23_coin")]
+position = Vector2(1700.0, 780.0)
+[node name="CoinB_R" parent="." instance=ExtResource("23_coin")]
+position = Vector2(1820.0, 780.0)
 [node name="CoinC" parent="." instance=ExtResource("23_coin")]
 position = Vector2(2728, 780)
+[node name="CoinC_L" parent="." instance=ExtResource("23_coin")]
+position = Vector2(2668.0, 780.0)
+[node name="CoinC_R" parent="." instance=ExtResource("23_coin")]
+position = Vector2(2788.0, 780.0)
 [node name="CoinD" parent="." instance=ExtResource("23_coin")]
 position = Vector2(3696, 780)
+[node name="CoinD_L" parent="." instance=ExtResource("23_coin")]
+position = Vector2(3636.0, 780.0)
+[node name="CoinD_R" parent="." instance=ExtResource("23_coin")]
+position = Vector2(3756.0, 780.0)
 
 [node name="InvincibilityPowerUp" parent="." instance=ExtResource("24_invincibility")]
 position = Vector2(2200, 620)
@@ -360,8 +376,16 @@ texture = ExtResource("21_crosswalk")
 
 [node name="CoinE" parent="." instance=ExtResource("23_coin")]
 position = Vector2(5192, 780)
+[node name="CoinE_L" parent="." instance=ExtResource("23_coin")]
+position = Vector2(5132.0, 780.0)
+[node name="CoinE_R" parent="." instance=ExtResource("23_coin")]
+position = Vector2(5252.0, 780.0)
 [node name="CoinF" parent="." instance=ExtResource("23_coin")]
 position = Vector2(6160, 780)
+[node name="CoinF_L" parent="." instance=ExtResource("23_coin")]
+position = Vector2(6100.0, 780.0)
+[node name="CoinF_R" parent="." instance=ExtResource("23_coin")]
+position = Vector2(6220.0, 780.0)
 [node name="PrecisionPlat1" type="StaticBody2D" parent="."]
 position = Vector2(7000, 850)
 [node name="Visual" type="Sprite2D" parent="PrecisionPlat1"]

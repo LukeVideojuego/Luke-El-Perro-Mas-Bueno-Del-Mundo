@@ -175,16 +175,40 @@ position = Vector2(2750, 925)
 
 [node name="CoinA" parent="." instance=ExtResource("17_coin")]
 position = Vector2(920, 700)
+[node name="CoinA_L" parent="." instance=ExtResource("17_coin")]
+position = Vector2(860.0, 700.0)
+[node name="CoinA_R" parent="." instance=ExtResource("17_coin")]
+position = Vector2(980.0, 700.0)
 [node name="CoinB" parent="." instance=ExtResource("17_coin")]
 position = Vector2(1570, 570)
+[node name="CoinB_L" parent="." instance=ExtResource("17_coin")]
+position = Vector2(1510.0, 570.0)
+[node name="CoinB_R" parent="." instance=ExtResource("17_coin")]
+position = Vector2(1630.0, 570.0)
 [node name="CoinC" parent="." instance=ExtResource("17_coin")]
 position = Vector2(2260, 680)
+[node name="CoinC_L" parent="." instance=ExtResource("17_coin")]
+position = Vector2(2200.0, 680.0)
+[node name="CoinC_R" parent="." instance=ExtResource("17_coin")]
+position = Vector2(2320.0, 680.0)
 [node name="CoinD" parent="." instance=ExtResource("17_coin")]
 position = Vector2(3180, 580)
+[node name="CoinD_L" parent="." instance=ExtResource("17_coin")]
+position = Vector2(3120.0, 580.0)
+[node name="CoinD_R" parent="." instance=ExtResource("17_coin")]
+position = Vector2(3240.0, 580.0)
 [node name="CoinE" parent="." instance=ExtResource("17_coin")]
 position = Vector2(4050, 660)
+[node name="CoinE_L" parent="." instance=ExtResource("17_coin")]
+position = Vector2(3990.0, 660.0)
+[node name="CoinE_R" parent="." instance=ExtResource("17_coin")]
+position = Vector2(4110.0, 660.0)
 [node name="CoinF" parent="." instance=ExtResource("17_coin")]
 position = Vector2(4900, 800)
+[node name="CoinF_L" parent="." instance=ExtResource("17_coin")]
+position = Vector2(4840.0, 800.0)
+[node name="CoinF_R" parent="." instance=ExtResource("17_coin")]
+position = Vector2(4960.0, 800.0)
 
 [node name="CompletionLabel" type="Label" parent="."]
 visible = false

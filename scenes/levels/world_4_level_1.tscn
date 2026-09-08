@@ -220,10 +220,22 @@ position = Vector2(9180, 850)
 
 [node name="CoinA" parent="." instance=ExtResource("20_coin")]
 position = Vector2(650, 780)
+[node name="CoinA_L" parent="." instance=ExtResource("20_coin")]
+position = Vector2(590.0, 780.0)
+[node name="CoinA_R" parent="." instance=ExtResource("20_coin")]
+position = Vector2(710.0, 780.0)
 [node name="CoinB" parent="." instance=ExtResource("20_coin")]
 position = Vector2(2000, 780)
+[node name="CoinB_L" parent="." instance=ExtResource("20_coin")]
+position = Vector2(1940.0, 780.0)
+[node name="CoinB_R" parent="." instance=ExtResource("20_coin")]
+position = Vector2(2060.0, 780.0)
 [node name="CoinC" parent="." instance=ExtResource("20_coin")]
 position = Vector2(3500, 780)
+[node name="CoinC_L" parent="." instance=ExtResource("20_coin")]
+position = Vector2(3440.0, 780.0)
+[node name="CoinC_R" parent="." instance=ExtResource("20_coin")]
+position = Vector2(3560.0, 780.0)
 
 [node name="EdgeBushA" type="Sprite2D" parent="."]
 position = Vector2(176, 918)
@@ -299,8 +311,16 @@ position = Vector2(5700, 860)
 
 [node name="CoinD" parent="." instance=ExtResource("20_coin")]
 position = Vector2(5050, 780)
+[node name="CoinD_L" parent="." instance=ExtResource("20_coin")]
+position = Vector2(4990.0, 780.0)
+[node name="CoinD_R" parent="." instance=ExtResource("20_coin")]
+position = Vector2(5110.0, 780.0)
 [node name="CoinE" parent="." instance=ExtResource("20_coin")]
 position = Vector2(6400, 780)
+[node name="CoinE_L" parent="." instance=ExtResource("20_coin")]
+position = Vector2(6340.0, 780.0)
+[node name="CoinE_R" parent="." instance=ExtResource("20_coin")]
+position = Vector2(6460.0, 780.0)
 [node name="PrecisionPlat1" type="StaticBody2D" parent="."]
 position = Vector2(7000, 850)
 [node name="Visual" type="Sprite2D" parent="PrecisionPlat1"]

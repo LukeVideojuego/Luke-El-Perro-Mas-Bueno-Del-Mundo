@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3]
 
 [ext_resource type="Script" path="res://scripts/ui/world_map.gd" id="1_script"]
-[ext_resource type="Texture2D" path="res://assets/backgrounds/Default/background_solid_sky.png" id="2_sky"]
+[ext_resource type="Texture2D" path="res://assets/backgrounds/Menu/menu_bg.png" id="2_sky"]
 
 [node name="WorldMap" type="CanvasLayer"]
 layer = 45
@@ -9,9 +9,7 @@ script = ExtResource("1_script")
 
 [node name="Sky" type="Sprite2D" parent="."]
 position = Vector2(960, 540)
-scale = Vector2(15, 8.5)
 texture = ExtResource("2_sky")
-modulate = Color(0.35, 0.4, 0.55, 1)
 
 [node name="Backdrop" type="ColorRect" parent="."]
 anchors_preset = 15
@@ -19,7 +17,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.02, 0.04, 0.09, 0.45)
+color = Color(0.02, 0.04, 0.09, 0.9)
 mouse_filter = 2
 
 [node name="Panel" type="Control" parent="."]
@@ -40,6 +38,13 @@ theme_override_constants/outline_size = 10
 theme_override_font_sizes/font_size = 52
 text = "MAPA DEL MUNDO"
 horizontal_alignment = 1
+
+[node name="ScrollBackdrop" type="ColorRect" parent="Panel"]
+offset_left = 130.0
+offset_top = 135.0
+offset_right = 1790.0
+offset_bottom = 915.0
+color = Color(0.03, 0.05, 0.1, 0.75)
 
 [node name="Scroll" type="ScrollContainer" parent="Panel"]
 offset_left = 160.0

@@ -213,12 +213,28 @@ position = Vector2(8300, 850)
 
 [node name="CoinA" parent="." instance=ExtResource("21_coin")]
 position = Vector2(792, 780)
+[node name="CoinA_L" parent="." instance=ExtResource("21_coin")]
+position = Vector2(732.0, 780.0)
+[node name="CoinA_R" parent="." instance=ExtResource("21_coin")]
+position = Vector2(852.0, 780.0)
 [node name="CoinB" parent="." instance=ExtResource("21_coin")]
 position = Vector2(1760, 780)
+[node name="CoinB_L" parent="." instance=ExtResource("21_coin")]
+position = Vector2(1700.0, 780.0)
+[node name="CoinB_R" parent="." instance=ExtResource("21_coin")]
+position = Vector2(1820.0, 780.0)
 [node name="CoinC" parent="." instance=ExtResource("21_coin")]
 position = Vector2(2728, 780)
+[node name="CoinC_L" parent="." instance=ExtResource("21_coin")]
+position = Vector2(2668.0, 780.0)
+[node name="CoinC_R" parent="." instance=ExtResource("21_coin")]
+position = Vector2(2788.0, 780.0)
 [node name="CoinD" parent="." instance=ExtResource("21_coin")]
 position = Vector2(3696, 780)
+[node name="CoinD_L" parent="." instance=ExtResource("21_coin")]
+position = Vector2(3636.0, 780.0)
+[node name="CoinD_R" parent="." instance=ExtResource("21_coin")]
+position = Vector2(3756.0, 780.0)
 
 [node name="SpeedPowerUp" parent="." instance=ExtResource("22_speed")]
 position = Vector2(2200, 620)
@@ -338,9 +354,25 @@ position = Vector2(7700, 860)
 
 [node name="CoinE" parent="." instance=ExtResource("21_coin")]
 position = Vector2(5192, 780)
+[node name="CoinE_L" parent="." instance=ExtResource("21_coin")]
+position = Vector2(5132.0, 780.0)
+[node name="CoinE_R" parent="." instance=ExtResource("21_coin")]
+position = Vector2(5252.0, 780.0)
 [node name="CoinF" parent="." instance=ExtResource("21_coin")]
 position = Vector2(6160, 780)
+[node name="CoinF_L" parent="." instance=ExtResource("21_coin")]
+position = Vector2(6100.0, 780.0)
+[node name="CoinF_R" parent="." instance=ExtResource("21_coin")]
+position = Vector2(6220.0, 780.0)
 [node name="CoinG" parent="." instance=ExtResource("21_coin")]
 position = Vector2(7128, 780)
+[node name="CoinG_L" parent="." instance=ExtResource("21_coin")]
+position = Vector2(7068.0, 780.0)
+[node name="CoinG_R" parent="." instance=ExtResource("21_coin")]
+position = Vector2(7188.0, 780.0)
 [node name="CoinH" parent="." instance=ExtResource("21_coin")]
 position = Vector2(8096, 780)
+[node name="CoinH_L" parent="." instance=ExtResource("21_coin")]
+position = Vector2(8036.0, 780.0)
+[node name="CoinH_R" parent="." instance=ExtResource("21_coin")]
+position = Vector2(8156.0, 780.0)

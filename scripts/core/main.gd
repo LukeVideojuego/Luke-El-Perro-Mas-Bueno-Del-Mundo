@@ -24,6 +24,7 @@ func _ready() -> void:
 		menu.continue_requested.connect(_on_continue_requested)
 		menu.password_requested.connect(_on_password_requested)
 		menu.map_requested.connect(_on_map_requested)
+		AudioDirector.play_music("menu")
 	else:
 		start_game()
 
@@ -99,6 +100,7 @@ func _free_menu() -> void:
 
 func show_intro_cinematic() -> void:
 	hud.visible = false
+	AudioDirector.play_music("final")
 	var intro_scene := load("res://scenes/cinematics/intro_cinematic.tscn") as PackedScene
 	intro_cinematic = intro_scene.instantiate()
 	add_child(intro_cinematic)
@@ -119,6 +121,7 @@ func _on_intro_finished() -> void:
 ## Mundo 2. Mismo criterio de "solo una vez" que la cinemática de inicio.
 func show_world1_cheer_screen() -> void:
 	hud.visible = false
+	AudioDirector.play_music("final")
 	var scene := load("res://scenes/cinematics/world1_cheer_screen.tscn") as PackedScene
 	world1_cheer_screen = scene.instantiate()
 	add_child(world1_cheer_screen)
@@ -135,6 +138,7 @@ func _on_world1_cheer_finished() -> void:
 
 func show_final_cinematic() -> void:
 	hud.visible = false
+	AudioDirector.play_music("final")
 	var cinematic_scene := load("res://scenes/cinematics/final_cinematic.tscn") as PackedScene
 	final_cinematic = cinematic_scene.instantiate()
 	add_child(final_cinematic)
@@ -156,6 +160,17 @@ func load_level(level_id: String) -> void:
 	active_level = packed_scene.instantiate()
 	level_container.add_child(active_level)
 	hud.visible = true
+	_update_music_for_level(level_id)
+
+## La música de cada mundo se elige por el mundo del nivel (LevelProgression);
+## "final_screen" comparte la pista emotiva con las cinemáticas.
+func _update_music_for_level(level_id: String) -> void:
+	if level_id == "final_screen":
+		AudioDirector.play_music("final")
+		return
+	var world := LevelProgression.get_world(level_id)
+	if world >= 1 and world <= 4:
+		AudioDirector.play_music("world%d" % world)
 
 func _on_level_completed(level_id: String) -> void:
 	if is_transitioning:
@@ -185,3 +200,4 @@ func _advance_after_level(level_id: String) -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("pause"):
 		get_tree().paused = not get_tree().paused
+		AudioDirector.play_event(&"pause")
