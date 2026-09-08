@@ -203,7 +203,7 @@ position = Vector2(1300, 850)
 patrol_distance = 130.0
 
 [node name="SnailOne" parent="." instance=ExtResource("6_snail")]
-position = Vector2(2700, 850)
+position = Vector2(2950, 850)
 patrol_distance = 120.0
 
 [node name="SpiderOne" parent="." instance=ExtResource("26_spider")]
