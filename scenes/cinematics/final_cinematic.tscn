@@ -47,17 +47,18 @@ offset_bottom = 1080.0
 color = Color(0, 0, 0, 1)
 
 [node name="Image2" type="TextureRect" parent="Panel2"]
+offset_top = 160.0
 offset_right = 1920.0
-offset_bottom = 1080.0
+offset_bottom = 769.0
 texture = ExtResource("3_verdadero_panel")
 stretch_mode = 0
 
 [node name="Panel2Button" type="Button" parent="Panel2"]
 custom_minimum_size = Vector2(280, 66)
 offset_left = 820.0
-offset_top = 990.0
+offset_top = 850.0
 offset_right = 1100.0
-offset_bottom = 1056.0
+offset_bottom = 916.0
 z_index = 5
 theme_override_font_sizes/font_size = 22
 text = "CONTINUAR"
