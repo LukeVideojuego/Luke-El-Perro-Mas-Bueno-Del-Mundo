@@ -241,14 +241,14 @@ position = Vector2(2250, 915)
 texture = ExtResource("15_window")
 
 [node name="ElderA" type="Sprite2D" parent="."]
-position = Vector2(2200, 880)
+position = Vector2(2200, 741.76)
 texture = ExtResource("16_npc1")
-scale = Vector2(0.78, 0.78)
+scale = Vector2(2.94, 2.94)
 
 [node name="ElderB" type="Sprite2D" parent="."]
-position = Vector2(3650, 880)
+position = Vector2(3650, 741.76)
 texture = ExtResource("17_npc2")
-scale = Vector2(0.78, 0.78)
+scale = Vector2(2.94, 2.94)
 
 [node name="Finish" parent="." instance=ExtResource("5_finish")]
 position = Vector2(8700, 850)
@@ -376,13 +376,13 @@ position = Vector2(6400, 860)
 position = Vector2(8000, 860)
 
 [node name="ElderC" type="Sprite2D" parent="."]
-position = Vector2(6800, 880)
+position = Vector2(6800, 741.76)
 texture = ExtResource("16_npc1")
-scale = Vector2(0.78, 0.78)
+scale = Vector2(2.94, 2.94)
 [node name="ElderD" type="Sprite2D" parent="."]
-position = Vector2(8250, 880)
+position = Vector2(8250, 741.76)
 texture = ExtResource("17_npc2")
-scale = Vector2(0.78, 0.78)
+scale = Vector2(2.94, 2.94)
 
 [node name="LandmarkThird" type="Sprite2D" parent="."]
 position = Vector2(5612, 760)
@@ -404,6 +404,6 @@ position = Vector2(740, 792)
 texture = ExtResource("24_limo")
 
 [node name="SuitGuard" type="Sprite2D" parent="."]
-position = Vector2(600, 828.5)
-scale = Vector2(1.3, 1.3)
+position = Vector2(600, 775.07)
+scale = Vector2(2.08, 2.08)
 texture = ExtResource("25_guard")

@@ -85,89 +85,98 @@ interaction_text = "¡Abrazá a toda la gente que puedas antes de que se acabe e
 position = Vector2(200, 850)
 
 [node name="Diego" parent="." instance=ExtResource("5_person")]
-position = Vector2(500, 848)
+position = Vector2(500, 759)
 wander_enabled = true
 wander_radius = 150.0
 wander_speed = 65.0
 [node name="Sprite2D" parent="Diego" index="0"]
 texture = ExtResource("10_diego")
-scale = Vector2(1.0, 1.0)
+scale = Vector2(2.59, 2.59)
 
 [node name="Lara" parent="." instance=ExtResource("5_person")]
-position = Vector2(650, 870)
+position = Vector2(650, 834)
 wander_enabled = true
 wander_radius = 150.0
 wander_speed = 65.0
 [node name="Sprite2D" parent="Lara" index="0"]
 texture = ExtResource("11_lara")
+scale = Vector2(1.9, 1.9)
 
 [node name="Bauti" parent="." instance=ExtResource("5_person")]
-position = Vector2(800, 870)
+position = Vector2(800, 818)
 wander_enabled = true
 wander_radius = 150.0
 wander_speed = 65.0
 [node name="Sprite2D" parent="Bauti" index="0"]
 texture = ExtResource("12_bauti")
+scale = Vector2(2.18, 2.18)
 
 [node name="Zoe" parent="." instance=ExtResource("5_person")]
-position = Vector2(950, 870)
+position = Vector2(950, 795)
 wander_enabled = true
 wander_radius = 150.0
 wander_speed = 65.0
 [node name="Sprite2D" parent="Zoe" index="0"]
 texture = ExtResource("13_zoe")
+scale = Vector2(2.75, 2.75)
 
 [node name="Roma" parent="." instance=ExtResource("5_person")]
-position = Vector2(1100, 870)
+position = Vector2(1100, 840)
 wander_enabled = true
 wander_radius = 150.0
 wander_speed = 65.0
 [node name="Sprite2D" parent="Roma" index="0"]
 texture = ExtResource("14_roma")
+scale = Vector2(1.8, 1.8)
 
 [node name="Mathi" parent="." instance=ExtResource("5_person")]
-position = Vector2(1250, 870)
+position = Vector2(1250, 813)
 wander_enabled = true
 wander_radius = 150.0
 wander_speed = 65.0
 [node name="Sprite2D" parent="Mathi" index="0"]
 texture = ExtResource("15_mathi")
+scale = Vector2(2.25, 2.25)
 
 [node name="PersonGreen" parent="." instance=ExtResource("5_person")]
-position = Vector2(1400, 870)
+position = Vector2(1400, 732)
 wander_enabled = true
 wander_radius = 150.0
 wander_speed = 65.0
 happy_texture = ExtResource("17_green_front")
 [node name="Sprite2D" parent="PersonGreen" index="0"]
 texture = ExtResource("16_green_idle")
+scale = Vector2(2.94, 2.94)
 
 [node name="PersonYellow" parent="." instance=ExtResource("5_person")]
-position = Vector2(1550, 870)
+position = Vector2(1550, 732)
 wander_enabled = true
 wander_radius = 150.0
 wander_speed = 65.0
 happy_texture = ExtResource("19_yellow_front")
 [node name="Sprite2D" parent="PersonYellow" index="0"]
 texture = ExtResource("18_yellow_idle")
+scale = Vector2(2.94, 2.94)
 
 [node name="PersonPurple" parent="." instance=ExtResource("5_person")]
-position = Vector2(300, 870)
+position = Vector2(300, 732)
 wander_enabled = true
 wander_radius = 150.0
 wander_speed = 65.0
 happy_texture = ExtResource("21_purple_front")
 [node name="Sprite2D" parent="PersonPurple" index="0"]
 texture = ExtResource("20_purple_idle")
+scale = Vector2(2.94, 2.94)
 
 [node name="PersonPink" parent="." instance=ExtResource("5_person")]
-position = Vector2(1700, 870)
+position = Vector2(1700, 732)
 wander_enabled = true
 wander_radius = 150.0
 wander_speed = 65.0
 happy_texture = ExtResource("23_pink_front")
 [node name="Sprite2D" parent="PersonPink" index="0"]
 texture = ExtResource("22_pink_idle")
+scale = Vector2(2.94, 2.94)
 
 [node name="HugHUD" type="CanvasLayer" parent="."]
 layer = 12

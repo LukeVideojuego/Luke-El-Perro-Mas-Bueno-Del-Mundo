@@ -154,16 +154,16 @@ scale = Vector2(1.2, 1.2)
 
 [node name="PersonGreen" type="Sprite2D" parent="."]
 texture = ExtResource("12_person_a")
-position = Vector2(430, 875)
-scale = Vector2(0.65, 0.65)
+position = Vector2(430, 728.44)
+scale = Vector2(2.94, 2.94)
 [node name="PersonPink" type="Sprite2D" parent="."]
 texture = ExtResource("13_person_b")
-position = Vector2(2820, 875)
-scale = Vector2(0.65, 0.65)
+position = Vector2(2820, 728.44)
+scale = Vector2(2.94, 2.94)
 [node name="PersonYellow" type="Sprite2D" parent="."]
 texture = ExtResource("19_person_c")
-position = Vector2(3730, 875)
-scale = Vector2(0.65, 0.65)
+position = Vector2(3730, 728.44)
+scale = Vector2(2.94, 2.94)
 
 [node name="BushA" type="Sprite2D" parent="."]
 texture = ExtResource("22_bush")
@@ -290,12 +290,12 @@ position = Vector2(1910, 500)
 
 [node name="Grandma1" type="Sprite2D" parent="."]
 texture = ExtResource("27_grandma")
-position = Vector2(930, 850)
-scale = Vector2(0.9, 0.9)
+position = Vector2(930, 821.02)
+scale = Vector2(1.13, 1.13)
 [node name="Grandma2" type="Sprite2D" parent="."]
 texture = ExtResource("27_grandma")
-position = Vector2(3160, 850)
-scale = Vector2(0.9, 0.9)
+position = Vector2(3160, 821.02)
+scale = Vector2(1.13, 1.13)
 [node name="Streetlamp1" type="Sprite2D" parent="."]
 texture = ExtResource("28_lamp")
 position = Vector2(600, 895)
@@ -433,8 +433,8 @@ z_index = -5
 
 [node name="Grandma3" type="Sprite2D" parent="."]
 texture = ExtResource("27_grandma")
-position = Vector2(5130, 850)
-scale = Vector2(0.9, 0.9)
+position = Vector2(5130, 821.02)
+scale = Vector2(1.13, 1.13)
 [node name="Streetlamp4" type="Sprite2D" parent="."]
 texture = ExtResource("28_lamp")
 position = Vector2(4800, 895)
