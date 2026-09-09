@@ -18,6 +18,7 @@ patrol_speed = 95.0
 patrol_distance = 110.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
 texture = ExtResource("2_texture")
 scale = Vector2(0.85, 0.85)
 

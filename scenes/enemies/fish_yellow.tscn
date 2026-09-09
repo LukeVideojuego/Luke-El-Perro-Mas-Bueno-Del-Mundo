@@ -21,6 +21,7 @@ bob_frequency = 3.0
 contact_anim = 1
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
 texture = ExtResource("2_texture")
 scale = Vector2(2, 2)
 

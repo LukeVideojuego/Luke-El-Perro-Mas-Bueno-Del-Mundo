@@ -22,6 +22,7 @@ ranged_detect_range = 400.0
 ranged_cooldown = 2.3
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
 texture = ExtResource("2_texture")
 offset = Vector2(0, -32.41)
 scale = Vector2(3.065, 3.065)

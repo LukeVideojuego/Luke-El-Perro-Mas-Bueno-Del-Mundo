@@ -294,6 +294,7 @@ add_theme_constant_override("outline_size", 8)
 position = Vector2(3150, 600)
 
 [node name="Grandma1" type="Sprite2D" parent="."]
+texture_filter = 1
 texture = ExtResource("21_grandma")
 position = Vector2(935, 823.7)
 scale = Vector2(2.767, 2.767)
@@ -427,11 +428,13 @@ position = Vector2(8260, 920)
 [node name="PitHazard1440" parent="." instance=ExtResource("8_hazard")]
 position = Vector2(8740, 920)
 [node name="LookoutOne" type="Sprite2D" parent="."]
+texture_filter = 1
 texture = ExtResource("26_lookout_texture")
 position = Vector2(7500, 985)
 scale = Vector2(0.9, 0.9)
 modulate = Color(0.25, 0.12, 0.12, 1)
 [node name="LookoutTwo" type="Sprite2D" parent="."]
+texture_filter = 1
 texture = ExtResource("26_lookout_texture")
 position = Vector2(8800, 985)
 scale = Vector2(0.9, 0.9)

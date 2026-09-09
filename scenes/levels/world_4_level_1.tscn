@@ -379,11 +379,13 @@ position = Vector2(7940, 920)
 [node name="PitHazard1410" parent="." instance=ExtResource("11_hazard")]
 position = Vector2(8410, 920)
 [node name="LookoutOne" type="Sprite2D" parent="."]
+texture_filter = 1
 texture = ExtResource("24_lookout_texture")
 position = Vector2(7300, 1000)
 scale = Vector2(1.4, 1.4)
 modulate = Color(0.15, 0.35, 0.1, 1)
 [node name="LookoutTwo" type="Sprite2D" parent="."]
+texture_filter = 1
 texture = ExtResource("24_lookout_texture")
 position = Vector2(8400, 1000)
 scale = Vector2(1.4, 1.4)

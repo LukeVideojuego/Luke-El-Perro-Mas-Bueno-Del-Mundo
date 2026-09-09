@@ -115,14 +115,17 @@ position = Vector2(7850, 855)
 scale = Vector2(1.2, 1.2)
 
 [node name="PersonGreen" type="Sprite2D" parent="."]
+texture_filter = 1
 texture = ExtResource("12_person_a")
 position = Vector2(430, 774.1)
 scale = Vector2(3.276, 3.276)
 [node name="PersonPink" type="Sprite2D" parent="."]
+texture_filter = 1
 texture = ExtResource("13_person_b")
 position = Vector2(2820, 776.9)
 scale = Vector2(2.767, 2.767)
 [node name="PersonYellow" type="Sprite2D" parent="."]
+texture_filter = 1
 texture = ExtResource("19_person_c")
 position = Vector2(3730, 774.1)
 scale = Vector2(2.908, 2.908)
@@ -267,10 +270,12 @@ texture = ExtResource("22_bush")
 position = Vector2(1910, 500)
 
 [node name="Grandma1" type="Sprite2D" parent="."]
+texture_filter = 1
 texture = ExtResource("27_grandma")
 position = Vector2(930, 823.7)
 scale = Vector2(2.767, 2.767)
 [node name="Grandma2" type="Sprite2D" parent="."]
+texture_filter = 1
 texture = ExtResource("27_grandma")
 position = Vector2(3160, 823.7)
 scale = Vector2(2.767, 2.767)
@@ -407,6 +412,7 @@ position = Vector2(7668.0, 780.0)
 position = Vector2(7788.0, 780.0)
 
 [node name="Grandma3" type="Sprite2D" parent="."]
+texture_filter = 1
 texture = ExtResource("27_grandma")
 position = Vector2(5130, 823.7)
 scale = Vector2(2.767, 2.767)
