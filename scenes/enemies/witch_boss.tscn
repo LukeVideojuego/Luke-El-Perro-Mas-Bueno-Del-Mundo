@@ -5,10 +5,10 @@
 [ext_resource type="PackedScene" path="res://scenes/objects/curse_projectile.tscn" id="3_projectile"]
 
 [sub_resource type="RectangleShape2D" id="BodyShape"]
-size = Vector2(52, 84)
+size = Vector2(44, 72)
 
 [sub_resource type="RectangleShape2D" id="DamageShape"]
-size = Vector2(72, 76)
+size = Vector2(62, 65)
 
 [node name="WitchBoss" type="CharacterBody2D"]
 collision_layer = 4
@@ -23,7 +23,8 @@ charge_cooldown = 1.4
 detect_range = 440.0
 hop_interval = 1.7
 hop_strength = -480.0
-hp_bar_width = 160.0
+hp_bar_width = 140.0
+hp_bar_y_offset = -295.0
 contact_anim = 3
 can_ranged_attack = true
 ranged_projectile_scene = ExtResource("3_projectile")
@@ -34,8 +35,8 @@ ranged_initial_delay = 1.0
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
 texture = ExtResource("2_texture")
-position = Vector2(0, -139.22)
-scale = Vector2(0.52, 0.52)
+position = Vector2(0, -110.74)
+scale = Vector2(0.4438, 0.4438)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 8)

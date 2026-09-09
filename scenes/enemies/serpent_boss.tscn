@@ -5,10 +5,10 @@
 [ext_resource type="PackedScene" path="res://scenes/objects/venom_bubble_projectile.tscn" id="3_projectile"]
 
 [sub_resource type="RectangleShape2D" id="BodyShape"]
-size = Vector2(278, 377)
+size = Vector2(226, 307)
 
 [sub_resource type="RectangleShape2D" id="DamageShape"]
-size = Vector2(357, 377)
+size = Vector2(291, 307)
 
 [node name="SerpentBoss" type="CharacterBody2D"]
 collision_layer = 4
@@ -23,8 +23,8 @@ charge_cooldown = 0.95
 detect_range = 530.0
 hop_interval = 1.1
 hop_strength = -480.0
-hp_bar_width = 220.0
-hp_bar_y_offset = -230.0
+hp_bar_width = 180.0
+hp_bar_y_offset = -495.0
 contact_anim = 2
 can_ranged_attack = true
 ranged_projectile_scene = ExtResource("3_projectile")
@@ -36,8 +36,8 @@ ranged_initial_delay = 1.0
 texture_filter = 1
 texture = ExtResource("2_texture")
 modulate = Color(0.7, 1.1, 0.7, 1)
-offset = Vector2(0, -22.26)
-scale = Vector2(12.3, 12.3)
+offset = Vector2(0, -21.41)
+scale = Vector2(10.0174, 10.0174)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 8)

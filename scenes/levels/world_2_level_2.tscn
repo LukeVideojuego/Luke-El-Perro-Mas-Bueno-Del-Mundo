@@ -228,21 +228,21 @@ position = Vector2(2800, 655)
 
 [node name="ElderA" type="Sprite2D" parent="."]
 texture_filter = 1
-position = Vector2(2150, 790.22)
+position = Vector2(2150, 864.94)
 texture = ExtResource("16_npc1")
-scale = Vector2(2.767, 2.767)
+scale = Vector2(1.2873, 1.2873)
 
 [node name="ElderB" type="Sprite2D" parent="."]
 texture_filter = 1
-position = Vector2(2650, 790.22)
+position = Vector2(2650, 864.94)
 texture = ExtResource("17_npc2")
-scale = Vector2(2.767, 2.767)
+scale = Vector2(1.2873, 1.2873)
 
 [node name="ElderC" type="Sprite2D" parent="."]
 texture_filter = 1
-position = Vector2(3700, 790.22)
+position = Vector2(3700, 864.94)
 texture = ExtResource("18_npc3")
-scale = Vector2(2.767, 2.767)
+scale = Vector2(1.2873, 1.2873)
 
 [node name="FenceA" type="Sprite2D" parent="."]
 position = Vector2(300, 915)
@@ -367,9 +367,9 @@ position = Vector2(6200, 860)
 
 [node name="ElderD" type="Sprite2D" parent="."]
 texture_filter = 1
-position = Vector2(6550, 790.22)
+position = Vector2(6550, 864.94)
 texture = ExtResource("16_npc1")
-scale = Vector2(2.767, 2.767)
+scale = Vector2(1.2873, 1.2873)
 
 [node name="TrafficLightTwo" type="Sprite2D" parent="."]
 position = Vector2(4820, 924)

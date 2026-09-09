@@ -64,39 +64,39 @@ vertical_alignment = 1
 autowrap_mode = 2
 
 [node name="Zoe" type="Sprite2D" parent="Panel"]
-position = Vector2(150, 700)
+position = Vector2(150, 794.03)
 texture = ExtResource("3_zoe")
-scale = Vector2(2.97, 2.97)
+scale = Vector2(1.0311, 1.0311)
 
 [node name="Mathi" type="Sprite2D" parent="Panel"]
-position = Vector2(420, 700)
+position = Vector2(420, 814.94)
 texture = ExtResource("4_mathi")
-scale = Vector2(3.571, 3.571)
+scale = Vector2(0.8342, 0.8342)
 
 [node name="Bauti" type="Sprite2D" parent="Panel"]
-position = Vector2(690, 700)
+position = Vector2(690, 806.44)
 texture = ExtResource("5_bauti")
-scale = Vector2(3.261, 3.261)
+scale = Vector2(0.9471, 0.9471)
 
 [node name="Fausto" type="Sprite2D" parent="Panel"]
-position = Vector2(960, 700)
+position = Vector2(960, 799.87)
 texture = ExtResource("6_fausto")
-scale = Vector2(3.191, 3.191)
+scale = Vector2(0.9718, 0.9718)
 
 [node name="Roma" type="Sprite2D" parent="Panel"]
-position = Vector2(1230, 700)
+position = Vector2(1230, 809.77)
 texture = ExtResource("7_roma")
-scale = Vector2(3.529, 3.529)
+scale = Vector2(0.8185, 0.8185)
 
 [node name="Izan" type="Sprite2D" parent="Panel"]
-position = Vector2(1500, 700)
+position = Vector2(1500, 795.07)
 texture = ExtResource("8_izan")
-scale = Vector2(3.0, 3.0)
+scale = Vector2(1.0193, 1.0193)
 
 [node name="Lara" type="Sprite2D" parent="Panel"]
-position = Vector2(1770, 700)
+position = Vector2(1770, 792.10)
 texture = ExtResource("9_lara")
-scale = Vector2(2.913, 2.913)
+scale = Vector2(1.0523, 1.0523)
 
 [node name="ContinueButton" type="Button" parent="Panel" unique_id=771230442]
 custom_minimum_size = Vector2(280, 66)

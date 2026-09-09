@@ -296,8 +296,8 @@ position = Vector2(3150, 600)
 [node name="Grandma1" type="Sprite2D" parent="."]
 texture_filter = 1
 texture = ExtResource("21_grandma")
-position = Vector2(935, 823.7)
-scale = Vector2(2.767, 2.767)
+position = Vector2(935, 898.42)
+scale = Vector2(1.2873, 1.2873)
 [node name="Streetlamp1" type="Sprite2D" parent="."]
 texture = ExtResource("22_lamp")
 position = Vector2(600, 895)

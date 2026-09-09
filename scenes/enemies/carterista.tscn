@@ -23,8 +23,8 @@ ranged_cooldown = 2.4
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
 texture = ExtResource("2_texture")
-position = Vector2(0, -92.5)
-scale = Vector2(2.767, 2.767)
+position = Vector2(0, -35.24)
+scale = Vector2(1.6551, 1.6551)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 8)
