@@ -108,7 +108,7 @@ func _free_menu() -> void:
 
 func show_intro_cinematic() -> void:
 	hud.visible = false
-	AudioDirector.play_music("final")
+	AudioDirector.play_music("intro")
 	await transition.fade_to_black()
 	var intro_scene := load("res://scenes/cinematics/intro_cinematic.tscn") as PackedScene
 	intro_cinematic = intro_scene.instantiate()
@@ -180,14 +180,29 @@ func load_level(level_id: String) -> void:
 	hud.visible = true
 	_update_music_for_level(level_id)
 
-## La música de cada mundo se elige por el mundo del nivel (LevelProgression);
-## "final_screen" comparte la pista emotiva con las cinemáticas.
+## La música de cada mundo se elige por el mundo del nivel (LevelProgression),
+## con pista propia y mas tenebrosa para las peleas de jefe, y 3 variantes
+## para el Mundo 4 según el sub-ambiente (selva/mar/India). "final_screen"
+## comparte la pista triunfal con las cinemáticas de cierre.
 func _update_music_for_level(level_id: String) -> void:
 	if level_id == "final_screen":
 		AudioDirector.play_music("final")
 		return
+	if level_id.ends_with("_boss"):
+		AudioDirector.play_music("boss")
+		return
+	match level_id:
+		"world_4_level_1":
+			AudioDirector.play_music("world4_selva")
+			return
+		"world_4_level_2":
+			AudioDirector.play_music("world4_mar")
+			return
+		"world_4_level_3":
+			AudioDirector.play_music("world4_india")
+			return
 	var world := LevelProgression.get_world(level_id)
-	if world >= 1 and world <= 4:
+	if world >= 1 and world <= 3:
 		AudioDirector.play_music("world%d" % world)
 
 func _on_level_completed(level_id: String) -> void:

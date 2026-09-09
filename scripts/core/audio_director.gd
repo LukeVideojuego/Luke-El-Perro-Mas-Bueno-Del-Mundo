@@ -31,7 +31,11 @@ const MUSIC_FILES := {
 	"world1": "world1.wav",
 	"world2": "world2.wav",
 	"world3": "world3.wav",
-	"world4": "world4.wav",
+	"world4_selva": "world4_selva.wav",
+	"world4_mar": "world4_mar.wav",
+	"world4_india": "world4_india.wav",
+	"boss": "boss.wav",
+	"intro": "intro.wav",
 	"final": "final.wav",
 }
 
