@@ -1,4 +1,5 @@
 [gd_scene load_steps=28 format=3]
+[ext_resource type="PackedScene" path="res://scenes/enemies/bird.tscn" id="99_bird"]
 
 [ext_resource type="Script" path="res://scripts/levels/level_base.gd" id="1_level"]
 [ext_resource type="PackedScene" path="res://scenes/player/player.tscn" id="2_luke"]
@@ -423,3 +424,43 @@ position = Vector2(7800, 780)
 position = Vector2(7740.0, 780.0)
 [node name="CoinH_R" parent="." instance=ExtResource("20_coin")]
 position = Vector2(7860.0, 780.0)
+
+[node name="Bird1" parent="." instance=ExtResource("99_bird")]
+position = Vector2(718, 460)
+patrol_distance = 220.0
+modulate = Color(0.95, 0.95, 0.98, 1)
+
+[node name="Bird2" parent="." instance=ExtResource("99_bird")]
+position = Vector2(1656, 540)
+patrol_distance = 220.0
+modulate = Color(0.95, 0.95, 0.98, 1)
+
+[node name="Bird3" parent="." instance=ExtResource("99_bird")]
+position = Vector2(2593, 460)
+patrol_distance = 220.0
+modulate = Color(0.95, 0.95, 0.98, 1)
+
+[node name="Bird4" parent="." instance=ExtResource("99_bird")]
+position = Vector2(3531, 540)
+patrol_distance = 220.0
+modulate = Color(0.95, 0.95, 0.98, 1)
+
+[node name="Bird5" parent="." instance=ExtResource("99_bird")]
+position = Vector2(4468, 460)
+patrol_distance = 220.0
+modulate = Color(0.95, 0.95, 0.98, 1)
+
+[node name="Bird6" parent="." instance=ExtResource("99_bird")]
+position = Vector2(5406, 540)
+patrol_distance = 220.0
+modulate = Color(0.95, 0.95, 0.98, 1)
+
+[node name="Bird7" parent="." instance=ExtResource("99_bird")]
+position = Vector2(6343, 460)
+patrol_distance = 220.0
+modulate = Color(0.95, 0.95, 0.98, 1)
+
+[node name="Bird8" parent="." instance=ExtResource("99_bird")]
+position = Vector2(7281, 540)
+patrol_distance = 220.0
+modulate = Color(0.95, 0.95, 0.98, 1)

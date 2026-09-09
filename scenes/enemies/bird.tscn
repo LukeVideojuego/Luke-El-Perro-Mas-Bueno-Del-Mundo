@@ -1,0 +1,38 @@
+[gd_scene load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://scripts/enemies/bird.gd" id="1_script"]
+[ext_resource type="Texture2D" path="res://assets/Enemies/Reference/bird.png" id="2_texture"]
+
+[sub_resource type="RectangleShape2D" id="BodyShape"]
+size = Vector2(60, 34)
+
+[sub_resource type="RectangleShape2D" id="DamageShape"]
+size = Vector2(72, 44)
+
+[node name="Bird" type="CharacterBody2D"]
+collision_layer = 4
+collision_mask = 1
+script = ExtResource("1_script")
+movement_mode = 1
+patrol_speed = 110.0
+patrol_distance = 300.0
+bob_amplitude = 14.0
+bob_frequency = 1.8
+contact_anim = 0
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_texture")
+scale = Vector2(2.0, 2.0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("BodyShape")
+
+[node name="DamageArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 1
+monitoring = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DamageArea"]
+shape = SubResource("DamageShape")
+
+[connection signal="body_entered" from="DamageArea" to="." method="_on_damage_area_body_entered"]

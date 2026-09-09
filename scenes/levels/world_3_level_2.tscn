@@ -1,4 +1,5 @@
 [gd_scene load_steps=32 format=3]
+[ext_resource type="PackedScene" path="res://scenes/enemies/bird.tscn" id="99_bird"]
 
 [ext_resource type="Script" path="res://scripts/levels/level_base.gd" id="1_level"]
 [ext_resource type="PackedScene" path="res://scenes/player/player.tscn" id="2_luke"]
@@ -430,3 +431,83 @@ texture = ExtResource("26_limo")
 position = Vector2(600, 769.39)
 scale = Vector2(2.822, 2.822)
 texture = ExtResource("27_guard")
+
+[node name="Bird1" parent="." instance=ExtResource("99_bird")]
+position = Vector2(521, 460)
+patrol_distance = 220.0
+modulate = Color(0.55, 0.15, 0.15, 1)
+
+[node name="Bird2" parent="." instance=ExtResource("99_bird")]
+position = Vector2(1063, 540)
+patrol_distance = 220.0
+modulate = Color(0.55, 0.15, 0.15, 1)
+
+[node name="Bird3" parent="." instance=ExtResource("99_bird")]
+position = Vector2(1606, 460)
+patrol_distance = 220.0
+modulate = Color(0.55, 0.15, 0.15, 1)
+
+[node name="Bird4" parent="." instance=ExtResource("99_bird")]
+position = Vector2(2148, 540)
+patrol_distance = 220.0
+modulate = Color(0.55, 0.15, 0.15, 1)
+
+[node name="Bird5" parent="." instance=ExtResource("99_bird")]
+position = Vector2(2691, 460)
+patrol_distance = 220.0
+modulate = Color(0.55, 0.15, 0.15, 1)
+
+[node name="Bird6" parent="." instance=ExtResource("99_bird")]
+position = Vector2(3233, 540)
+patrol_distance = 220.0
+modulate = Color(0.55, 0.15, 0.15, 1)
+
+[node name="Bird7" parent="." instance=ExtResource("99_bird")]
+position = Vector2(3776, 460)
+patrol_distance = 220.0
+modulate = Color(0.55, 0.15, 0.15, 1)
+
+[node name="Bird8" parent="." instance=ExtResource("99_bird")]
+position = Vector2(4318, 540)
+patrol_distance = 220.0
+modulate = Color(0.55, 0.15, 0.15, 1)
+
+[node name="Bird9" parent="." instance=ExtResource("99_bird")]
+position = Vector2(4861, 460)
+patrol_distance = 220.0
+modulate = Color(0.55, 0.15, 0.15, 1)
+
+[node name="Bird10" parent="." instance=ExtResource("99_bird")]
+position = Vector2(5403, 540)
+patrol_distance = 220.0
+modulate = Color(0.55, 0.15, 0.15, 1)
+
+[node name="Bird11" parent="." instance=ExtResource("99_bird")]
+position = Vector2(5946, 460)
+patrol_distance = 220.0
+modulate = Color(0.55, 0.15, 0.15, 1)
+
+[node name="Bird12" parent="." instance=ExtResource("99_bird")]
+position = Vector2(6488, 540)
+patrol_distance = 220.0
+modulate = Color(0.55, 0.15, 0.15, 1)
+
+[node name="Bird13" parent="." instance=ExtResource("99_bird")]
+position = Vector2(7031, 460)
+patrol_distance = 220.0
+modulate = Color(0.55, 0.15, 0.15, 1)
+
+[node name="Bird14" parent="." instance=ExtResource("99_bird")]
+position = Vector2(7573, 540)
+patrol_distance = 220.0
+modulate = Color(0.55, 0.15, 0.15, 1)
+
+[node name="Bird15" parent="." instance=ExtResource("99_bird")]
+position = Vector2(8116, 460)
+patrol_distance = 220.0
+modulate = Color(0.55, 0.15, 0.15, 1)
+
+[node name="Bird16" parent="." instance=ExtResource("99_bird")]
+position = Vector2(8658, 540)
+patrol_distance = 220.0
+modulate = Color(0.55, 0.15, 0.15, 1)

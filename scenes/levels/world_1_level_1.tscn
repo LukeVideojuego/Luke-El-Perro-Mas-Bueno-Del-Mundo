@@ -1,4 +1,5 @@
 [gd_scene load_steps=24 format=3]
+[ext_resource type="PackedScene" path="res://scenes/enemies/bird.tscn" id="99_bird"]
 
 [ext_resource type="Script" path="res://scripts/levels/level_base.gd" id="1_level"]
 [ext_resource type="PackedScene" path="res://scenes/player/player.tscn" id="2_player"]
@@ -219,3 +220,13 @@ theme_override_colors/font_outline_color = Color(0.08, 0.12, 0.2, 1)
 theme_override_constants/outline_size = 8
 theme_override_font_sizes/font_size = 42
 text = "¡BARRIO A SALVO!\nNivel completado"
+
+[node name="Bird1" parent="." instance=ExtResource("99_bird")]
+position = Vector2(1405, 460)
+patrol_distance = 220.0
+modulate = Color(0.28, 0.28, 0.32, 1)
+
+[node name="Bird2" parent="." instance=ExtResource("99_bird")]
+position = Vector2(3715, 540)
+patrol_distance = 220.0
+modulate = Color(0.28, 0.28, 0.32, 1)

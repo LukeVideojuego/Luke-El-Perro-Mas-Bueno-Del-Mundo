@@ -1,4 +1,5 @@
 [gd_scene load_steps=31 format=3]
+[ext_resource type="PackedScene" path="res://scenes/enemies/bird.tscn" id="99_bird"]
 
 [ext_resource type="Script" path="res://scripts/levels/level_base.gd" id="1_level"]
 [ext_resource type="PackedScene" path="res://scenes/player/player.tscn" id="2_luke"]
@@ -432,3 +433,53 @@ position = Vector2(7470, 920)
 position = Vector2(7940, 920)
 [node name="PitHazard1410" parent="." instance=ExtResource("8_hazard")]
 position = Vector2(8410, 920)
+
+[node name="Bird1" parent="." instance=ExtResource("99_bird")]
+position = Vector2(684, 460)
+patrol_distance = 220.0
+modulate = Color(0.95, 0.95, 0.98, 1)
+
+[node name="Bird2" parent="." instance=ExtResource("99_bird")]
+position = Vector2(1552, 540)
+patrol_distance = 220.0
+modulate = Color(0.95, 0.95, 0.98, 1)
+
+[node name="Bird3" parent="." instance=ExtResource("99_bird")]
+position = Vector2(2420, 460)
+patrol_distance = 220.0
+modulate = Color(0.95, 0.95, 0.98, 1)
+
+[node name="Bird4" parent="." instance=ExtResource("99_bird")]
+position = Vector2(3288, 540)
+patrol_distance = 220.0
+modulate = Color(0.95, 0.95, 0.98, 1)
+
+[node name="Bird5" parent="." instance=ExtResource("99_bird")]
+position = Vector2(4156, 460)
+patrol_distance = 220.0
+modulate = Color(0.95, 0.95, 0.98, 1)
+
+[node name="Bird6" parent="." instance=ExtResource("99_bird")]
+position = Vector2(5024, 540)
+patrol_distance = 220.0
+modulate = Color(0.95, 0.95, 0.98, 1)
+
+[node name="Bird7" parent="." instance=ExtResource("99_bird")]
+position = Vector2(5892, 460)
+patrol_distance = 220.0
+modulate = Color(0.95, 0.95, 0.98, 1)
+
+[node name="Bird8" parent="." instance=ExtResource("99_bird")]
+position = Vector2(6760, 540)
+patrol_distance = 220.0
+modulate = Color(0.95, 0.95, 0.98, 1)
+
+[node name="Bird9" parent="." instance=ExtResource("99_bird")]
+position = Vector2(7628, 460)
+patrol_distance = 220.0
+modulate = Color(0.95, 0.95, 0.98, 1)
+
+[node name="Bird10" parent="." instance=ExtResource("99_bird")]
+position = Vector2(8496, 540)
+patrol_distance = 220.0
+modulate = Color(0.95, 0.95, 0.98, 1)
