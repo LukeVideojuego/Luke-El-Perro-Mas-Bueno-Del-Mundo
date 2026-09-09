@@ -78,9 +78,10 @@ shape = SubResource("GroundShape")
 position = Vector2(620, 820)
 
 [node name="Visual" type="Sprite2D" parent="PlatformOne"]
-texture = ExtResource("12_street")
+texture = ExtResource("13_stone")
 scale = Vector2(6.5625, 0.8125)
 
+modulate = Color(0.82, 0.85, 0.92, 1)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlatformOne"]
 shape = SubResource("PlatformShape")
 
@@ -88,9 +89,10 @@ shape = SubResource("PlatformShape")
 position = Vector2(1400, 730)
 
 [node name="Visual" type="Sprite2D" parent="PlatformTwo"]
-texture = ExtResource("12_street")
+texture = ExtResource("13_stone")
 scale = Vector2(6.5625, 0.8125)
 
+modulate = Color(0.82, 0.85, 0.92, 1)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlatformTwo"]
 shape = SubResource("PlatformShape")
 
@@ -98,9 +100,10 @@ shape = SubResource("PlatformShape")
 position = Vector2(2300, 800)
 
 [node name="Visual" type="Sprite2D" parent="PlatformThree"]
-texture = ExtResource("12_street")
+texture = ExtResource("13_stone")
 scale = Vector2(6.5625, 0.8125)
 
+modulate = Color(0.82, 0.85, 0.92, 1)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlatformThree"]
 shape = SubResource("PlatformShape")
 
@@ -108,9 +111,10 @@ shape = SubResource("PlatformShape")
 position = Vector2(3200, 730)
 
 [node name="Visual" type="Sprite2D" parent="PlatformFour"]
-texture = ExtResource("12_street")
+texture = ExtResource("13_stone")
 scale = Vector2(6.5625, 0.8125)
 
+modulate = Color(0.82, 0.85, 0.92, 1)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlatformFour"]
 shape = SubResource("PlatformShape")
 
@@ -118,9 +122,10 @@ shape = SubResource("PlatformShape")
 position = Vector2(3900, 820)
 
 [node name="Visual" type="Sprite2D" parent="PlatformFive"]
-texture = ExtResource("12_street")
+texture = ExtResource("13_stone")
 scale = Vector2(4.0625, 0.625)
 
+modulate = Color(0.82, 0.85, 0.92, 1)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlatformFive"]
 shape = SubResource("PlatformSmall")
 
@@ -295,40 +300,45 @@ position = Vector2(3200, 620)
 [node name="PlatformSix" type="StaticBody2D" parent="."]
 position = Vector2(4820, 820)
 [node name="Visual" type="Sprite2D" parent="PlatformSix"]
-texture = ExtResource("12_street")
+texture = ExtResource("13_stone")
 scale = Vector2(6.5625, 0.8125)
+modulate = Color(0.82, 0.85, 0.92, 1)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlatformSix"]
 shape = SubResource("PlatformShape")
 
 [node name="PlatformSeven" type="StaticBody2D" parent="."]
 position = Vector2(5600, 730)
 [node name="Visual" type="Sprite2D" parent="PlatformSeven"]
-texture = ExtResource("12_street")
+texture = ExtResource("13_stone")
 scale = Vector2(6.5625, 0.8125)
+modulate = Color(0.82, 0.85, 0.92, 1)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlatformSeven"]
 shape = SubResource("PlatformShape")
 
 [node name="PlatformEight" type="StaticBody2D" parent="."]
 position = Vector2(6500, 800)
 [node name="Visual" type="Sprite2D" parent="PlatformEight"]
-texture = ExtResource("12_street")
+texture = ExtResource("13_stone")
 scale = Vector2(6.5625, 0.8125)
+modulate = Color(0.82, 0.85, 0.92, 1)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlatformEight"]
 shape = SubResource("PlatformShape")
 
 [node name="PlatformNine" type="StaticBody2D" parent="."]
 position = Vector2(7400, 730)
 [node name="Visual" type="Sprite2D" parent="PlatformNine"]
-texture = ExtResource("12_street")
+texture = ExtResource("13_stone")
 scale = Vector2(6.5625, 0.8125)
+modulate = Color(0.82, 0.85, 0.92, 1)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlatformNine"]
 shape = SubResource("PlatformShape")
 
 [node name="PlatformTen" type="StaticBody2D" parent="."]
 position = Vector2(8100, 820)
 [node name="Visual" type="Sprite2D" parent="PlatformTen"]
-texture = ExtResource("12_street")
+texture = ExtResource("13_stone")
 scale = Vector2(4.0625, 0.625)
+modulate = Color(0.82, 0.85, 0.92, 1)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlatformTen"]
 shape = SubResource("PlatformSmall")
 

@@ -78,46 +78,52 @@ position = Vector2(3200, 1010)
 [node name="Visual" type="Sprite2D" parent="Ground"]
 texture = ExtResource("11_grass")
 scale = Vector2(100, 2)
+modulate = Color(0.4, 0.44, 0.55, 1)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Ground"]
 shape = SubResource("GroundShape")
 
 [node name="PlatformA" type="StaticBody2D" parent="."]
 position = Vector2(920, 770)
 [node name="Visual" type="Sprite2D" parent="PlatformA"]
-texture = ExtResource("11_grass")
+texture = ExtResource("12_stone")
 scale = Vector2(6.6, 0.82)
+modulate = Color(0.82, 0.85, 0.92, 1)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlatformA"]
 shape = SubResource("PlatformA")
 
 [node name="PlatformB" type="StaticBody2D" parent="."]
 position = Vector2(1570, 640)
 [node name="Visual" type="Sprite2D" parent="PlatformB"]
-texture = ExtResource("11_grass")
+texture = ExtResource("12_stone")
 scale = Vector2(5.2, 0.82)
+modulate = Color(0.82, 0.85, 0.92, 1)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlatformB"]
 shape = SubResource("PlatformB")
 
 [node name="PlatformC" type="StaticBody2D" parent="."]
 position = Vector2(2260, 750)
 [node name="Visual" type="Sprite2D" parent="PlatformC"]
-texture = ExtResource("11_grass")
+texture = ExtResource("12_stone")
 scale = Vector2(7.2, 0.82)
+modulate = Color(0.82, 0.85, 0.92, 1)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlatformC"]
 shape = SubResource("PlatformC")
 
 [node name="PlatformD" type="StaticBody2D" parent="."]
 position = Vector2(3180, 650)
 [node name="Visual" type="Sprite2D" parent="PlatformD"]
-texture = ExtResource("11_grass")
+texture = ExtResource("12_stone")
 scale = Vector2(6, 0.82)
+modulate = Color(0.82, 0.85, 0.92, 1)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlatformD"]
 shape = SubResource("PlatformD")
 
 [node name="PlatformE" type="StaticBody2D" parent="."]
 position = Vector2(4050, 730)
 [node name="Visual" type="Sprite2D" parent="PlatformE"]
-texture = ExtResource("11_grass")
+texture = ExtResource("12_stone")
 scale = Vector2(7.8, 0.82)
+modulate = Color(0.82, 0.85, 0.92, 1)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlatformE"]
 shape = SubResource("PlatformE")
 
