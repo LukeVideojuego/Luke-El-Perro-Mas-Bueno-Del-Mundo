@@ -149,7 +149,7 @@ position = Vector2(280, 850)
 position = Vector2(280, 850)
 
 [node name="MissionSign" parent="." instance=ExtResource("7_sign")]
-position = Vector2(510, 865)
+position = Vector2(510, 918)
 interaction_text = "¡Los ladrones andan sueltos por el barrio! Esquívalos o atácalos y llega hasta la bandera verde."
 [node name="ThiefOne" parent="." instance=ExtResource("22_thief")]
 position = Vector2(1300, 850)
@@ -162,7 +162,7 @@ drops_bone_on_defeat = true
 position = Vector2(1900, 865)
 checkpoint_id = "neighborhood_square"
 [node name="Finish" parent="." instance=ExtResource("6_finish")]
-position = Vector2(5120, 850)
+position = Vector2(5120, 918)
 
 [node name="MeatAtStart" parent="." instance=ExtResource("3_meat")]
 position = Vector2(680, 850)
@@ -176,17 +176,17 @@ contents = ExtResource("3_meat")
 position = Vector2(2750, 925)
 
 [node name="CoinA" parent="." instance=ExtResource("17_coin")]
-position = Vector2(920, 700)
+position = Vector2(920, 850)
 [node name="CoinA_L" parent="." instance=ExtResource("17_coin")]
-position = Vector2(860.0, 700.0)
+position = Vector2(860.0, 850.0)
 [node name="CoinA_R" parent="." instance=ExtResource("17_coin")]
-position = Vector2(980.0, 700.0)
+position = Vector2(980.0, 850.0)
 [node name="CoinB" parent="." instance=ExtResource("17_coin")]
-position = Vector2(1570, 570)
+position = Vector2(1570, 850)
 [node name="CoinB_L" parent="." instance=ExtResource("17_coin")]
-position = Vector2(1510.0, 570.0)
+position = Vector2(1510.0, 850.0)
 [node name="CoinB_R" parent="." instance=ExtResource("17_coin")]
-position = Vector2(1630.0, 570.0)
+position = Vector2(1630.0, 850.0)
 [node name="CoinC" parent="." instance=ExtResource("17_coin")]
 position = Vector2(2260, 680)
 [node name="CoinC_L" parent="." instance=ExtResource("17_coin")]

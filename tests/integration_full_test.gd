@@ -104,8 +104,25 @@ func _physics_process(_delta: float) -> void:
 	if frame == 10:
 		_check(main.get_node_or_null("MainMenu") != null, "menú principal presente al arrancar")
 		main.start_game()
-		_phase(1)
+		_phase(10)
 	match phase:
+		10:
+			# "COMENZAR JUEGO" ahora siempre muestra la cinemática de intro
+			# (3 paneles); las apretamos para llegar rápido al nivel 1.
+			if main.intro_cinematic != null and frame - wait_start > 15:
+				main.intro_cinematic.get_node("Panel1/Panel1Button").pressed.emit()
+				_phase(11)
+			elif _waited():
+				_check(false, "cinemática de introducción mostrada")
+				_fail_early()
+		11:
+			if frame - wait_start > 20:
+				main.intro_cinematic.get_node("Panel2/Panel2Button").pressed.emit()
+				_phase(12)
+		12:
+			if frame - wait_start > 20:
+				main.intro_cinematic.get_node("Panel3/Panel3Button").pressed.emit()
+				_phase(1)
 		1:
 			var target: String = CHAIN[chain_index]
 			if _is_stable(target):

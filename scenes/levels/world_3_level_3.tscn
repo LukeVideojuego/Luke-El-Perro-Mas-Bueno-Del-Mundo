@@ -129,7 +129,7 @@ shape = SubResource("BoundaryShape")
 position = Vector2(180, 850)
 
 [node name="MissionSign" parent="." instance=ExtResource("7_sign")]
-position = Vector2(520, 880)
+position = Vector2(520, 873)
 interaction_text = "Recupera el documento del pueblo en la Casa Rosada."
 
 [node name="Luke" parent="." instance=ExtResource("2_luke")]
@@ -239,7 +239,7 @@ texture = ExtResource("17_npc2")
 scale = Vector2(2.767, 2.767)
 
 [node name="Finish" parent="." instance=ExtResource("5_finish")]
-position = Vector2(8700, 850)
+position = Vector2(8700, 873)
 
 
 [node name="CoinA" parent="." instance=ExtResource("18_coin")]

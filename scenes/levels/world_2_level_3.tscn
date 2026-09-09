@@ -130,7 +130,7 @@ shape = SubResource("BoundaryShape")
 position = Vector2(180, 850)
 
 [node name="MissionSign" parent="." instance=ExtResource("7_sign")]
-position = Vector2(520, 880)
+position = Vector2(520, 873)
 interaction_text = "Recupera lo que robaron en la gran tienda."
 
 [node name="Luke" parent="." instance=ExtResource("2_luke")]
@@ -227,7 +227,7 @@ texture = ExtResource("15_fence")
 texture = ExtResource("15_fence")
 
 [node name="Finish" parent="." instance=ExtResource("5_finish")]
-position = Vector2(8700, 850)
+position = Vector2(8700, 873)
 
 [node name="TrafficLight" type="Sprite2D" parent="."]
 position = Vector2(420, 924)

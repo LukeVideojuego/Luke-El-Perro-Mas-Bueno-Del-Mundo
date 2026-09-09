@@ -5,7 +5,7 @@ var main: Node
 var frame := 0
 
 func _ready() -> void:
-	get_window().size = Vector2i(1280, 720)
+	get_window().size = Vector2i(1920, 1080)
 	main = MAIN_SCENE.instantiate()
 	add_child(main)
 

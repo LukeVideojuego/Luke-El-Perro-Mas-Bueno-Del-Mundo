@@ -103,11 +103,11 @@ shape = SubResource("PlatformFourShape")
 
 [node name="FenceA" type="Sprite2D" parent="."]
 texture = ExtResource("11_fence")
-position = Vector2(1030, 884)
+position = Vector2(1030, 928)
 scale = Vector2(2.4, 1)
 [node name="FenceB" type="Sprite2D" parent="."]
 texture = ExtResource("11_fence")
-position = Vector2(3050, 884)
+position = Vector2(3050, 928)
 scale = Vector2(2.4, 1)
 [node name="ExitSign" type="Sprite2D" parent="."]
 texture = ExtResource("20_exit")
@@ -195,7 +195,7 @@ position = Vector2(180, 850)
 [node name="Luke" parent="." instance=ExtResource("2_luke")]
 position = Vector2(180, 850)
 [node name="MissionSign" parent="." instance=ExtResource("14_sign")]
-position = Vector2(470, 870)
+position = Vector2(470, 928)
 interaction_text = "¡Los ladrones merodean el barrio! Cruza las calles y llega hasta la bandera verde."
 [node name="ThiefOne" parent="." instance=ExtResource("3_thief")]
 position = Vector2(1005, 850)
@@ -220,7 +220,7 @@ checkpoint_id = "llegada_barrio"
 [node name="Meat" parent="." instance=ExtResource("6_meat")]
 position = Vector2(1260, 665)
 [node name="MeatFour" parent="." instance=ExtResource("6_meat")]
-position = Vector2(2630, 665)
+position = Vector2(2480, 665)
 [node name="BoxA" parent="." instance=ExtResource("16_box")]
 position = Vector2(1500, 679)
 contents = ExtResource("6_meat")
@@ -228,7 +228,7 @@ contents = ExtResource("6_meat")
 position = Vector2(2700, 679)
 contents = ExtResource("6_meat")
 [node name="Finish" parent="." instance=ExtResource("5_finish")]
-position = Vector2(8080, 850)
+position = Vector2(8080, 928)
 
 [node name="CoinA" parent="." instance=ExtResource("23_coin")]
 position = Vector2(756, 780)

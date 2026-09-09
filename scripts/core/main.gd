@@ -31,20 +31,16 @@ func _ready() -> void:
 ## Punto de entrada de "COMENZAR JUEGO" (partida nueva desde cero).
 ## Se mantiene con este nombre porque la suite de tests automatizados
 ## del proyecto (tests/integration_*_test.gd) lo llama directamente.
+## "COMENZAR JUEGO" siempre muestra la cinemática de introducción: es una
+## partida nueva explícita, no debe depender de si algún guardado previo
+## (incluida una corrida de tests) ya marcó has_seen_intro en true.
 func start_game() -> void:
 	if game_started:
 		return
 	game_started = true
 	GameState.reset_for_new_game()
 	_free_menu()
-	if GameState.has_seen_intro:
-		GameState.current_level_id = "world_1_level_1"
-		GameState.level_begun.emit("world_1_level_1")
-		await transition.fade_to_black()
-		load_level("world_1_level_1")
-		await transition.fade_from_black()
-	else:
-		show_intro_cinematic()
+	show_intro_cinematic()
 
 func _on_continue_requested() -> void:
 	if game_started:
