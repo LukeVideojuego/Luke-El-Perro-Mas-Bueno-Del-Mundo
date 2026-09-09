@@ -4,7 +4,7 @@ extends RefCounted
 ## Registro central de progresión: ampliar aquí evita rutas y lógica duplicadas.
 
 const LEVELS := {
-	"world_1_level_1": {"world": 1, "order": 1, "scene": "res://scenes/levels/test_level.tscn", "next": "world_1_level_2"},
+	"world_1_level_1": {"world": 1, "order": 1, "scene": "res://scenes/levels/world_1_level_1.tscn", "next": "world_1_level_2"},
 	"world_1_level_2": {"world": 1, "order": 2, "scene": "res://scenes/levels/world_1_level_2.tscn", "next": "world_1_level_3"},
 	"world_1_level_3": {"world": 1, "order": 3, "scene": "res://scenes/levels/world_1_level_3.tscn", "next": "world_1_boss"},
 	"world_1_boss": {"world": 1, "order": 4, "scene": "res://scenes/levels/world_1_boss.tscn", "next": "world_2_level_1"},

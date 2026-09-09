@@ -1,6 +1,6 @@
 extends Node2D
 
-const LEVEL := preload("res://scenes/levels/test_level.tscn")
+const LEVEL := preload("res://scenes/levels/world_1_level_1.tscn")
 var level: Node
 var luke: CharacterBody2D
 var frame := 0
