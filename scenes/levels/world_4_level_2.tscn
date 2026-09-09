@@ -286,7 +286,7 @@ bob_amplitude = 26.0
 drops_bone_on_defeat = true
 
 [node name="BoxA" parent="." instance=ExtResource("10_box")]
-position = Vector2(600, 929)
+position = Vector2(600, 679)
 
 [node name="BoxB" parent="." instance=ExtResource("10_box")]
 position = Vector2(2720, 838)

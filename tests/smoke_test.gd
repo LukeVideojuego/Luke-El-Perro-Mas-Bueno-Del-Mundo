@@ -119,7 +119,7 @@ func _physics_process(_delta: float) -> void:
 		8:
 			if frame == 405:
 				GameState.reset_level_state(Vector2(180, 850))
-				luke.global_position = Vector2(1300, 910)
+				luke.global_position = Vector2(1300, 679)
 				luke.velocity = Vector2.ZERO
 				box_under_attack = level.get_node("BoxA")
 			if frame == 408:
@@ -127,11 +127,11 @@ func _physics_process(_delta: float) -> void:
 			if frame == 410:
 				Input.action_press("attack")
 			if frame == 413:
-				luke.global_position = Vector2(1442, 910)
+				luke.global_position = Vector2(1442, 679)
 			if frame == 420:
 				Input.action_release("attack")
 				_check(not is_instance_valid(box_under_attack), "ataque rompe caja de madera")
-				spawned_meat = _find_meat_at(Vector2(1500, 865))
+				spawned_meat = _find_meat_at(Vector2(1500, 615))
 				_check(is_instance_valid(spawned_meat), "la caja rota libera la carnada")
 			if frame == 430:
 				if is_instance_valid(spawned_meat):

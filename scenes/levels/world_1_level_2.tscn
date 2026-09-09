@@ -1,6 +1,6 @@
 [gd_scene load_steps=38 format=3]
 
-[ext_resource type="Script" path="res://scripts/levels/world_1_level_2.gd" id="1_level"]
+[ext_resource type="Script" path="res://scripts/levels/level_base.gd" id="1_level"]
 [ext_resource type="PackedScene" path="res://scenes/player/player.tscn" id="2_luke"]
 [ext_resource type="PackedScene" path="res://scenes/enemies/thief.tscn" id="3_thief"]
 [ext_resource type="PackedScene" path="res://scenes/objects/checkpoint.tscn" id="4_checkpoint"]
@@ -48,6 +48,7 @@ size = Vector2(70, 1080)
 
 [node name="World1Level2" type="Node2D"]
 script = ExtResource("1_level")
+level_id = "world_1_level_2"
 
 [node name="Background" type="Sprite2D" parent="."]
 position = Vector2(0, 0)
@@ -217,10 +218,10 @@ position = Vector2(1260, 665)
 [node name="MeatFour" parent="." instance=ExtResource("6_meat")]
 position = Vector2(2630, 665)
 [node name="BoxA" parent="." instance=ExtResource("16_box")]
-position = Vector2(1500, 929)
+position = Vector2(1500, 679)
 contents = ExtResource("6_meat")
 [node name="BoxB" parent="." instance=ExtResource("16_box")]
-position = Vector2(2700, 929)
+position = Vector2(2700, 679)
 contents = ExtResource("6_meat")
 [node name="Finish" parent="." instance=ExtResource("5_finish")]
 position = Vector2(8080, 850)

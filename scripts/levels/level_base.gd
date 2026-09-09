@@ -32,6 +32,50 @@ func _ready() -> void:
 	if completion_label != null:
 		GameState.level_completed.connect(_on_level_completed)
 	_fall_reset_y = spawn_point.global_position.y + FALL_RESET_MARGIN
+	_apply_camera_limits()
+
+## La cámara de Luke (player.tscn) viene con límites fijos pensados para un
+## solo nivel de referencia; como cada nivel tiene un largo distinto (5100 a
+## 9800px aprox.), ese límite fijo hacía que la cámara dejara de seguir a
+## Luke mucho antes del final de casi todos los niveles (bug de cámara:
+## Luke se salía de cuadro y quedaba invisible en el tramo final). Acá se
+## recalculan los límites en base a la geometría sólida real del nivel
+## (todos los StaticBody2D: piso, plataformas fijas, paredes), en vez de un
+## valor hardcodeado.
+## Solo se ajustan los límites horizontales: los verticales (0..1080) ya
+## están pensados para un nivel de una sola pantalla de alto y tocarlos en
+## base a la altura de las plataformas más altas podría impedir que la
+## cámara suba lo suficiente durante un salto.
+func _apply_camera_limits() -> void:
+	var camera: Camera2D = luke.get_node_or_null("Camera2D")
+	if camera == null:
+		return
+	var bounds := _compute_static_x_bounds(self)
+	if bounds.y <= bounds.x:
+		return
+	camera.limit_left = int(bounds.x)
+	camera.limit_right = int(bounds.y)
+
+## Devuelve Vector2(min_x, max_x) de toda la geometría sólida del nivel.
+func _compute_static_x_bounds(root: Node) -> Vector2:
+	var min_x := INF
+	var max_x := -INF
+	for body in _collect_static_bodies(root):
+		for child in body.get_children():
+			if child is CollisionShape2D and child.shape is RectangleShape2D:
+				var half_x: float = child.shape.size.x * 0.5
+				var gx: float = child.global_position.x
+				min_x = minf(min_x, gx - half_x)
+				max_x = maxf(max_x, gx + half_x)
+	return Vector2(min_x, max_x)
+
+func _collect_static_bodies(node: Node) -> Array:
+	var result: Array = []
+	for child in node.get_children():
+		if child is StaticBody2D:
+			result.append(child)
+		result.append_array(_collect_static_bodies(child))
+	return result
 
 func _physics_process(_delta: float) -> void:
 	if luke.global_position.y > _fall_reset_y:

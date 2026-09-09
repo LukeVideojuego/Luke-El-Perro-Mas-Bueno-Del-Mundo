@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" path="res://scenes/objects/meat_power_up.tscn" id="4_meat"]
 [ext_resource type="PackedScene" path="res://scenes/objects/mission_sign.tscn" id="5_sign"]
 [ext_resource type="PackedScene" path="res://scenes/objects/breakable_box.tscn" id="6_box"]
+[ext_resource type="PackedScene" path="res://scenes/objects/bone_pickup.tscn" id="30_bonepickup"]
 [ext_resource type="Texture2D" path="res://assets/backgrounds/Default/background_solid_sky.png" id="7_sky"]
 [ext_resource type="Texture2D" path="res://assets/backgrounds/Default/background_color_trees.png" id="8_trees"]
 [ext_resource type="Texture2D" path="res://assets/Tiles/Default/terrain_purple_block_top.png" id="9_purple"]
@@ -103,13 +104,17 @@ position = Vector2(180, 850)
 position = Vector2(1000, 780)
 
 [node name="BoxA" parent="." instance=ExtResource("6_box")]
-position = Vector2(300, 929)
+position = Vector2(650, 679)
 
 [node name="BoxB" parent="." instance=ExtResource("6_box")]
-position = Vector2(1700, 929)
+position = Vector2(1700, 679)
 
 [node name="Meat" parent="." instance=ExtResource("4_meat")]
 position = Vector2(1000, 650)
+
+[node name="BoneBox" parent="." instance=ExtResource("6_box")]
+position = Vector2(1350, 679)
+contents = ExtResource("30_bonepickup")
 
 
 [node name="FenceA" type="Sprite2D" parent="."]

@@ -195,10 +195,10 @@ patrol_distance = 150.0
 drops_bone_on_defeat = true
 
 [node name="BoxA" parent="." instance=ExtResource("9_box")]
-position = Vector2(1550, 929)
+position = Vector2(1550, 679)
 
 [node name="BoxB" parent="." instance=ExtResource("9_box")]
-position = Vector2(2700, 929)
+position = Vector2(2700, 679)
 
 [node name="Meat" parent="." instance=ExtResource("6_meat")]
 position = Vector2(700, 655)
