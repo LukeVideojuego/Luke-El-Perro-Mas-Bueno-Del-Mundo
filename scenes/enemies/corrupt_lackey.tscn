@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" path="res://scripts/enemies/enemy_base.gd" id="1_script"]
 [ext_resource type="Texture2D" path="res://assets/Enemies/Reference/ladron_politico.png" id="2_texture"]
+[ext_resource type="Texture2D" path="res://assets/Enemies/Reference/ladron_politico_walk.png" id="4_walk"]
 [ext_resource type="PackedScene" path="res://scenes/objects/briefcase_projectile.tscn" id="3_projectile"]
 
 [sub_resource type="RectangleShape2D" id="BodyShape"]
@@ -16,6 +17,7 @@ collision_mask = 1
 script = ExtResource("1_script")
 patrol_speed = 75.0
 contact_anim = 4
+walk_texture = ExtResource("4_walk")
 can_ranged_attack = true
 ranged_projectile_scene = ExtResource("3_projectile")
 ranged_detect_range = 400.0

@@ -10,6 +10,15 @@ signal boss_defeated
 @export var hp_bar_height := 10.0
 @export var hp_bar_y_offset := -92.0
 
+## Para jefes sin piernas visibles (la Bruja, cuya pollera/capa las tapa; la
+## Serpiente, que no tiene piernas): en vez de alternar 2 poses de caminata
+## como el resto de los personajes, balancea la tela/cuerpo con una leve
+## rotación oscilante mientras se mueve, simulando el movimiento sin
+## necesitar sprites de piernas que no existen.
+@export var sway_enabled := false
+@export var sway_amplitude_deg := 5.0
+@export var sway_speed := 5.0
+
 func _init() -> void:
 	drops_bone_on_defeat = true
 
@@ -29,6 +38,9 @@ func _physics_process(delta: float) -> void:
 	if is_on_floor() and _hop_time >= hop_interval:
 		_hop_time = 0.0
 		velocity.y = hop_strength
+	if sway_enabled and sprite != null:
+		var sway_strength: float = clampf(absf(velocity.x) / maxf(patrol_speed, 1.0), 0.35, 1.0)
+		sprite.rotation = sin(_time * sway_speed) * deg_to_rad(sway_amplitude_deg) * sway_strength
 
 func receive_attack(_attacker: Node) -> void:
 	if is_defeated:

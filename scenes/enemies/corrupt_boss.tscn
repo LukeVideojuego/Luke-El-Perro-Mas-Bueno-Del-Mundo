@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" path="res://scripts/enemies/boss_base.gd" id="1_script"]
 [ext_resource type="Texture2D" path="res://assets/Enemies/Reference/gran_codicia.png" id="2_texture"]
+[ext_resource type="Texture2D" path="res://assets/Enemies/Reference/gran_codicia_walk.png" id="4_walk"]
 [ext_resource type="PackedScene" path="res://scenes/objects/briefcase_projectile.tscn" id="3_projectile"]
 
 [sub_resource type="RectangleShape2D" id="BodyShape"]
@@ -26,6 +27,7 @@ hop_strength = -480.0
 hp_bar_width = 185.0
 hp_bar_y_offset = -385.0
 contact_anim = 4
+walk_texture = ExtResource("4_walk")
 can_ranged_attack = true
 ranged_projectile_scene = ExtResource("3_projectile")
 ranged_detect_range = 500.0

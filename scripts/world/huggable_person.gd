@@ -14,6 +14,11 @@ signal hugged(person: HuggablePerson)
 
 @export var happy_texture: Texture2D
 
+## Segunda pose (piernas separadas) para el ciclo de caminata mientras
+## deambula; sin asignar, no anima piernas (queda con la pose fija).
+@export var walk_texture: Texture2D
+@export var walk_frame_time := 0.22
+
 @export_category("Deambular (minijuego final)")
 @export var wander_enabled := false
 @export var wander_radius := 200.0
@@ -32,10 +37,14 @@ var _base_x := 0.0
 var _target_x := 0.0
 var _jump_timer := 0.0
 var _visual_y := 0.0
+var _idle_texture: Texture2D
+var _walk_cycle_time := 0.0
+var _walk_frame_on := false
 
 func _ready() -> void:
 	_base_x = global_position.x
 	_visual_y = sprite.position.y
+	_idle_texture = sprite.texture
 	if wander_enabled:
 		_pick_new_target()
 		_jump_timer = randf_range(jump_interval_min, jump_interval_max)
@@ -50,9 +59,27 @@ func _handle_wander(delta: float) -> void:
 	var dir := signf(_target_x - global_position.x)
 	if absf(_target_x - global_position.x) <= 4.0:
 		_pick_new_target()
+		_update_walk_animation(0.0, false)
 		return
 	global_position.x += dir * wander_speed * delta
 	sprite.flip_h = dir < 0.0
+	_update_walk_animation(delta, true)
+
+## Mismo ciclo de 2 poses que enemy_base.gd, adaptado a la deambulación
+## (una sola velocidad wander_speed, sin patrol_speed variable).
+func _update_walk_animation(delta: float, moving: bool) -> void:
+	if walk_texture == null:
+		return
+	if not moving:
+		_walk_cycle_time = 0.0
+		_walk_frame_on = false
+		sprite.texture = _idle_texture
+		return
+	_walk_cycle_time += delta
+	if _walk_cycle_time >= walk_frame_time:
+		_walk_cycle_time = 0.0
+		_walk_frame_on = not _walk_frame_on
+		sprite.texture = walk_texture if _walk_frame_on else _idle_texture
 
 func _pick_new_target() -> void:
 	_target_x = _base_x + randf_range(-wander_radius, wander_radius)

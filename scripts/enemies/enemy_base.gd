@@ -51,7 +51,20 @@ signal defeated(enemy: EnemyBase)
 ## Retraso inicial antes del primer disparo (evita que dispare apenas spawnea).
 @export var ranged_initial_delay := 0.6
 
+@export_category("Animación de caminata")
+## Segunda pose (piernas separadas) para simular un ciclo de caminata simple
+## alternando con la textura original (piernas juntas) mientras se desplaza.
+## Si queda sin asignar, el personaje no anima piernas (jefes con lógica
+## propia, voladores, etc).
+@export var walk_texture: Texture2D
+## Segundos de vida útil de cada pose a velocidad de patrulla normal; a
+## mayor patrol_speed, el ciclo se acelera proporcionalmente.
+@export var walk_frame_time := 0.22
+
 var _ranged_cooldown_time := 0.0
+var _idle_texture: Texture2D
+var _walk_cycle_time := 0.0
+var _walk_frame_on := false
 
 var health := 1
 var spawn_x := 0.0
@@ -73,6 +86,8 @@ func _ready() -> void:
 	spawn_x = global_position.x
 	base_y = global_position.y
 	_ranged_cooldown_time = ranged_initial_delay
+	if sprite != null:
+		_idle_texture = sprite.texture
 
 func _physics_process(delta: float) -> void:
 	if is_defeated:
@@ -93,6 +108,26 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 	if sprite != null:
 		sprite.flip_h = patrol_direction > 0.0
+		_update_walk_animation(delta)
+
+## Ciclo de caminata de 2 poses (piernas juntas / piernas separadas),
+## alternadas mientras el personaje se mueve horizontalmente; a mayor
+## patrol_speed, más rápido alterna. Se congela en la pose "quieta" al
+## detenerse (patrullas con paradas, cargas en cooldown, etc).
+func _update_walk_animation(delta: float) -> void:
+	if walk_texture == null:
+		return
+	if absf(velocity.x) < 5.0:
+		_walk_cycle_time = 0.0
+		_walk_frame_on = false
+		sprite.texture = _idle_texture
+		return
+	var speed_ratio: float = absf(velocity.x) / maxf(patrol_speed, 1.0)
+	_walk_cycle_time += delta * maxf(speed_ratio, 0.3)
+	if _walk_cycle_time >= walk_frame_time:
+		_walk_cycle_time = 0.0
+		_walk_frame_on = not _walk_frame_on
+		sprite.texture = walk_texture if _walk_frame_on else _idle_texture
 
 ## Solo invierte la dirección cuando el enemigo se está alejando del punto
 ## de spawn más allá del límite; si ya está volviendo, nunca vuelve a
