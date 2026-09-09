@@ -8,6 +8,7 @@ signal boss_defeated
 
 @export var hp_bar_width := 120.0
 @export var hp_bar_height := 10.0
+@export var hp_bar_y_offset := -92.0
 
 func _init() -> void:
 	drops_bone_on_defeat = true
@@ -53,7 +54,7 @@ func _build_hp_bar() -> void:
 	_hp_back = ColorRect.new()
 	_hp_back.color = Color(0.08, 0.08, 0.12, 0.9)
 	_hp_back.size = Vector2(hp_bar_width, hp_bar_height)
-	_hp_back.position = Vector2(-hp_bar_width / 2.0, -92.0)
+	_hp_back.position = Vector2(-hp_bar_width / 2.0, hp_bar_y_offset)
 	_hp_back.z_index = 5
 	add_child(_hp_back)
 	_hp_front = ColorRect.new()
