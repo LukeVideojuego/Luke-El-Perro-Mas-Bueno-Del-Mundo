@@ -28,6 +28,20 @@ signal hugged(person: HuggablePerson)
 @export var jump_height := 26.0
 @export var jump_duration := 0.35
 
+## Si está activo, además de deambular horizontalmente, la persona salta de
+## verdad entre dos alturas de plataforma (no solo el rebote cosmético de
+## _do_jump), alternando entre platform_low_y y platform_high_y cada
+## platform_hop_interval segundos. Pedido para que el minijuego final tenga
+## más plataformas aéreas por las que también se muevan niños/abuelitas,
+## obligando a Luke a saltar entre ellas para alcanzarlos.
+@export_category("Saltar entre plataformas (minijuego final)")
+@export var platform_hop_enabled := false
+@export var platform_low_y := 0.0
+@export var platform_high_y := 0.0
+@export var platform_hop_interval_min := 2.5
+@export var platform_hop_interval_max := 4.5
+@export var platform_hop_duration := 0.5
+
 @onready var sprite: Sprite2D = $Sprite2D
 @onready var heart: Label = $Heart
 
@@ -41,6 +55,10 @@ var _idle_texture: Texture2D
 var _walk_cycle_time := 0.0
 var _walk_frame_on := false
 
+var _hop_timer := 0.0
+var _hop_on_high := false
+var _hopping := false
+
 func _ready() -> void:
 	_base_x = global_position.x
 	_visual_y = sprite.position.y
@@ -48,12 +66,17 @@ func _ready() -> void:
 	if wander_enabled:
 		_pick_new_target()
 		_jump_timer = randf_range(jump_interval_min, jump_interval_max)
+	if platform_hop_enabled:
+		_hop_on_high = global_position.y <= (platform_low_y + platform_high_y) * 0.5
+		_hop_timer = randf_range(platform_hop_interval_min, platform_hop_interval_max)
 
 func _process(delta: float) -> void:
 	if not wander_enabled or is_hugged:
 		return
 	_handle_wander(delta)
 	_handle_jump(delta)
+	if platform_hop_enabled:
+		_handle_platform_hop(delta)
 
 ## Por debajo de esta velocidad, Luke se considera "quieto": si una persona
 ## que deambula (wander_enabled) camina y choca contra un Luke inmóvil, NO
@@ -112,6 +135,28 @@ func _do_jump() -> void:
 	var tween := create_tween()
 	tween.tween_property(sprite, "position:y", _visual_y - jump_height, jump_duration * 0.5).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 	tween.tween_property(sprite, "position:y", _visual_y, jump_duration * 0.5).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN)
+
+func _handle_platform_hop(delta: float) -> void:
+	if _hopping:
+		return
+	_hop_timer -= delta
+	if _hop_timer <= 0.0:
+		_hop_timer = randf_range(platform_hop_interval_min, platform_hop_interval_max)
+		_do_platform_hop()
+
+## Salto real (cambia global_position.y, no solo la sprite) entre
+## platform_low_y y platform_high_y, con un arco intermedio más alto para
+## que se vea como un salto real y no un ascensor.
+func _do_platform_hop() -> void:
+	_hopping = true
+	var start_y := global_position.y
+	var target_y: float = platform_low_y if _hop_on_high else platform_high_y
+	var arc_y: float = minf(start_y, target_y) - jump_height * 1.5
+	_hop_on_high = not _hop_on_high
+	var tween := create_tween()
+	tween.tween_property(self, "global_position:y", arc_y, platform_hop_duration * 0.5).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+	tween.tween_property(self, "global_position:y", target_y, platform_hop_duration * 0.5).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN)
+	tween.tween_callback(func(): _hopping = false)
 
 func _do_hug(_body: Node2D) -> void:
 	is_hugged = true

@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3]
+[gd_scene load_steps=27 format=3]
 
 [ext_resource type="Script" path="res://scripts/levels/hug_minigame.gd" id="1_level"]
 [ext_resource type="PackedScene" path="res://scenes/player/player.tscn" id="2_luke"]
@@ -35,12 +35,16 @@
 [ext_resource type="Texture2D" path="res://assets/characters/Kids/EndOfWorld1/izan_walk.png" id="36_izan_walk"]
 [ext_resource type="Texture2D" path="res://assets/characters/Kids/EndOfWorld1/fausto_walk.png" id="37_fausto_walk"]
 [ext_resource type="Texture2D" path="res://assets/characters/Reference/anciana_walk.png" id="38_anciana_walk"]
+[ext_resource type="Texture2D" path="res://assets/Tiles/Default/terrain_stone_block.png" id="39_platform_tex"]
 
 [sub_resource type="RectangleShape2D" id="GroundShape"]
-size = Vector2(2000, 110)
+size = Vector2(3000, 110)
 
 [sub_resource type="RectangleShape2D" id="BoundaryShape"]
 size = Vector2(70, 900)
+
+[sub_resource type="RectangleShape2D" id="IslandShape"]
+size = Vector2(300, 50)
 
 [node name="final_screen" type="Node2D"]
 script = ExtResource("1_level")
@@ -48,31 +52,31 @@ level_id = "final_screen"
 mission_text = "¡Abrazá a toda la gente que puedas antes de que se acabe el tiempo!"
 
 [node name="Sky" type="Sprite2D" parent="."]
-position = Vector2(1000, 540)
+position = Vector2(1500, 540)
 texture = ExtResource("6_sky")
 modulate = Color(0.6, 0.85, 1, 1)
-scale = Vector2(9, 5)
+scale = Vector2(13.5, 5)
 
 [node name="Trees" type="Sprite2D" parent="."]
-position = Vector2(1000, 540)
+position = Vector2(1500, 540)
 texture = ExtResource("7_trees")
 modulate = Color(0.55, 0.9, 0.55, 1)
-scale = Vector2(9, 2.7)
+scale = Vector2(13.5, 2.7)
 
 [node name="Ground" type="StaticBody2D" parent="."]
 
 [node name="BlockTop" type="Sprite2D" parent="Ground"]
-position = Vector2(1000, 960)
+position = Vector2(1500, 960)
 texture = ExtResource("8_grass")
-scale = Vector2(36, 2)
+scale = Vector2(54, 2)
 
 [node name="BlockBody" type="Sprite2D" parent="Ground"]
-position = Vector2(1000, 1010)
+position = Vector2(1500, 1010)
 texture = ExtResource("9_stone")
-scale = Vector2(36, 3.2)
+scale = Vector2(54, 3.2)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Ground"]
-position = Vector2(1000, 960)
+position = Vector2(1500, 960)
 shape = SubResource("GroundShape")
 
 [node name="LeftBoundary" type="StaticBody2D" parent="."]
@@ -82,7 +86,7 @@ position = Vector2(-35, 500)
 shape = SubResource("BoundaryShape")
 
 [node name="RightBoundary" type="StaticBody2D" parent="."]
-position = Vector2(2035, 500)
+position = Vector2(3035, 500)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RightBoundary"]
 shape = SubResource("BoundaryShape")
@@ -98,134 +102,198 @@ interaction_text = "¡Abrazá a toda la gente que puedas antes de que se acabe e
 position = Vector2(200, 850)
 
 [node name="PersonPurple" parent="." instance=ExtResource("5_person")]
-position = Vector2(300, 924.72)
+position = Vector2(450, 924.72)
 wander_enabled = true
-wander_radius = 130.0
-wander_speed = 45.0
+wander_radius = 160.0
+wander_speed = 63.0
 walk_texture = ExtResource("38_anciana_walk")
 [node name="Sprite2D" parent="PersonPurple" index="0"]
 texture = ExtResource("26_anciana")
 scale = Vector2(1.2873, 1.2873)
 
 [node name="Diego" parent="." instance=ExtResource("5_person")]
-position = Vector2(450, 913.25)
+position = Vector2(675, 913.25)
 wander_enabled = true
-wander_radius = 150.0
-wander_speed = 95.0
+wander_radius = 180.0
+wander_speed = 133.0
 walk_texture = ExtResource("30_diego_walk")
 [node name="Sprite2D" parent="Diego" index="0"]
 texture = ExtResource("10_diego")
 scale = Vector2(1.5498, 1.5498)
 
 [node name="Roma" parent="." instance=ExtResource("5_person")]
-position = Vector2(600, 870.86)
+position = Vector2(900, 870.86)
 wander_enabled = true
-wander_radius = 150.0
-wander_speed = 55.0
+wander_radius = 180.0
+wander_speed = 77.0
 walk_texture = ExtResource("34_roma_walk")
 [node name="Sprite2D" parent="Roma" index="0"]
 texture = ExtResource("14_roma")
 scale = Vector2(0.8185, 0.8185)
 
 [node name="Lara" parent="." instance=ExtResource("5_person")]
-position = Vector2(750, 851.91)
+position = Vector2(1125, 851.91)
 wander_enabled = true
-wander_radius = 150.0
-wander_speed = 80.0
+wander_radius = 180.0
+wander_speed = 112.0
 walk_texture = ExtResource("31_lara_walk")
 [node name="Sprite2D" parent="Lara" index="0"]
 texture = ExtResource("11_lara")
 scale = Vector2(1.0523, 1.0523)
 
 [node name="Izan" parent="." instance=ExtResource("5_person")]
-position = Vector2(900, 855.07)
+position = Vector2(1350, 855.07)
 wander_enabled = true
-wander_radius = 150.0
-wander_speed = 60.0
+wander_radius = 180.0
+wander_speed = 84.0
 walk_texture = ExtResource("36_izan_walk")
 [node name="Sprite2D" parent="Izan" index="0"]
 texture = ExtResource("24_izan")
 scale = Vector2(1.0193, 1.0193)
 
 [node name="Fausto" parent="." instance=ExtResource("5_person")]
-position = Vector2(1050, 860.26)
+position = Vector2(1575, 860.26)
 wander_enabled = true
-wander_radius = 150.0
-wander_speed = 100.0
+wander_radius = 180.0
+wander_speed = 140.0
 walk_texture = ExtResource("37_fausto_walk")
 [node name="Sprite2D" parent="Fausto" index="0"]
 texture = ExtResource("25_fausto")
 scale = Vector2(0.9718, 0.9718)
 
 [node name="Bauti" parent="." instance=ExtResource("5_person")]
-position = Vector2(1200, 637.16)
+position = Vector2(1800, 637.16)
 wander_enabled = true
-wander_radius = 90.0
-wander_speed = 50.0
+wander_radius = 100.0
+wander_speed = 70.0
 walk_texture = ExtResource("32_bauti_walk")
+platform_hop_enabled = true
+platform_low_y = 637.16
+platform_high_y = 467.16
+platform_hop_interval_min = 2.5
+platform_hop_interval_max = 4.0
 [node name="Sprite2D" parent="Bauti" index="0"]
 texture = ExtResource("12_bauti")
 scale = Vector2(0.9471, 0.9471)
 
 [node name="Mathi" parent="." instance=ExtResource("5_person")]
-position = Vector2(1350, 868.97)
+position = Vector2(2025, 868.97)
 wander_enabled = true
-wander_radius = 150.0
-wander_speed = 70.0
+wander_radius = 180.0
+wander_speed = 98.0
 walk_texture = ExtResource("35_mathi_walk")
 [node name="Sprite2D" parent="Mathi" index="0"]
 texture = ExtResource("15_mathi")
 scale = Vector2(0.8342, 0.8342)
 
 [node name="Zoe" parent="." instance=ExtResource("5_person")]
-position = Vector2(1650, 650.34)
+position = Vector2(2475, 650.34)
 wander_enabled = true
-wander_radius = 90.0
-wander_speed = 85.0
+wander_radius = 100.0
+wander_speed = 119.0
 walk_texture = ExtResource("33_zoe_walk")
+platform_hop_enabled = true
+platform_low_y = 650.34
+platform_high_y = 480.34
+platform_hop_interval_min = 2.5
+platform_hop_interval_max = 4.0
 [node name="Sprite2D" parent="Zoe" index="0"]
 texture = ExtResource("13_zoe")
 scale = Vector2(1.0311, 1.0311)
 
 [node name="PersonGreen" parent="." instance=ExtResource("5_person")]
-position = Vector2(1500, 924.72)
+position = Vector2(2250, 924.72)
 wander_enabled = true
-wander_radius = 130.0
-wander_speed = 65.0
+wander_radius = 160.0
+wander_speed = 91.0
 walk_texture = ExtResource("38_anciana_walk")
 [node name="Sprite2D" parent="PersonGreen" index="0"]
 texture = ExtResource("26_anciana")
 scale = Vector2(1.2873, 1.2873)
 
 [node name="PersonYellow" parent="." instance=ExtResource("5_person")]
-position = Vector2(1800, 924.72)
+position = Vector2(2700, 924.72)
 wander_enabled = true
-wander_radius = 130.0
-wander_speed = 40.0
+wander_radius = 160.0
+wander_speed = 56.0
 walk_texture = ExtResource("38_anciana_walk")
 [node name="Sprite2D" parent="PersonYellow" index="0"]
 texture = ExtResource("26_anciana")
 scale = Vector2(1.2873, 1.2873)
 
 [node name="PersonPink" parent="." instance=ExtResource("5_person")]
-position = Vector2(1950, 924.72)
+position = Vector2(2925, 924.72)
 wander_enabled = true
-wander_radius = 90.0
-wander_speed = 75.0
+wander_radius = 100.0
+wander_speed = 105.0
 walk_texture = ExtResource("38_anciana_walk")
 [node name="Sprite2D" parent="PersonPink" index="0"]
 texture = ExtResource("26_anciana")
 scale = Vector2(1.2873, 1.2873)
 
 [node name="PlatformLove1" parent="." instance=ExtResource("27_platform")]
-position = Vector2(1200, 700)
+position = Vector2(1800, 700)
 travel = Vector2(90, 0)
 speed = 55.0
 
 [node name="PlatformLove2" parent="." instance=ExtResource("27_platform")]
-position = Vector2(1650, 700)
+position = Vector2(2475, 700)
 travel = Vector2(90, 0)
 speed = 55.0
+
+[node name="PlatformUpper1" type="StaticBody2D" parent="."]
+position = Vector2(1800, 550)
+[node name="Visual" type="Sprite2D" parent="PlatformUpper1"]
+texture = ExtResource("39_platform_tex")
+scale = Vector2(4.6875, 0.78125)
+modulate = Color(0.82, 0.85, 0.92, 1)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlatformUpper1"]
+shape = SubResource("IslandShape")
+
+[node name="PlatformUpper2" type="StaticBody2D" parent="."]
+position = Vector2(2475, 550)
+[node name="Visual" type="Sprite2D" parent="PlatformUpper2"]
+texture = ExtResource("39_platform_tex")
+scale = Vector2(4.6875, 0.78125)
+modulate = Color(0.82, 0.85, 0.92, 1)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlatformUpper2"]
+shape = SubResource("IslandShape")
+
+[node name="PlatformIsland1" type="StaticBody2D" parent="."]
+position = Vector2(550, 700)
+[node name="Visual" type="Sprite2D" parent="PlatformIsland1"]
+texture = ExtResource("39_platform_tex")
+scale = Vector2(4.6875, 0.78125)
+modulate = Color(0.82, 0.85, 0.92, 1)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlatformIsland1"]
+shape = SubResource("IslandShape")
+
+[node name="PlatformIsland2" type="StaticBody2D" parent="."]
+position = Vector2(1100, 650)
+[node name="Visual" type="Sprite2D" parent="PlatformIsland2"]
+texture = ExtResource("39_platform_tex")
+scale = Vector2(4.6875, 0.78125)
+modulate = Color(0.82, 0.85, 0.92, 1)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlatformIsland2"]
+shape = SubResource("IslandShape")
+
+[node name="PlatformIsland3" type="StaticBody2D" parent="."]
+position = Vector2(2100, 680)
+[node name="Visual" type="Sprite2D" parent="PlatformIsland3"]
+texture = ExtResource("39_platform_tex")
+scale = Vector2(4.6875, 0.78125)
+modulate = Color(0.82, 0.85, 0.92, 1)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlatformIsland3"]
+shape = SubResource("IslandShape")
+
+[node name="PlatformIsland4" type="StaticBody2D" parent="."]
+position = Vector2(2800, 650)
+[node name="Visual" type="Sprite2D" parent="PlatformIsland4"]
+texture = ExtResource("39_platform_tex")
+scale = Vector2(4.6875, 0.78125)
+modulate = Color(0.82, 0.85, 0.92, 1)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlatformIsland4"]
+shape = SubResource("IslandShape")
 
 [node name="HugHUD" type="CanvasLayer" parent="."]
 layer = 12
