@@ -1,5 +1,6 @@
-[gd_scene load_steps=31 format=3]
+[gd_scene load_steps=32 format=3]
 [ext_resource type="PackedScene" path="res://scenes/enemies/bird.tscn" id="99_bird"]
+[ext_resource type="PackedScene" path="res://scenes/objects/fall_damage_floor.tscn" id="fdf_1"]
 
 [ext_resource type="Script" path="res://scripts/levels/level_base.gd" id="1_level"]
 [ext_resource type="PackedScene" path="res://scenes/player/player.tscn" id="2_luke"]
@@ -493,3 +494,195 @@ modulate = Color(0.95, 0.95, 0.98, 1)
 position = Vector2(8496, 540)
 patrol_distance = 220.0
 modulate = Color(0.95, 0.95, 0.98, 1)
+
+[node name="FallDamageFloor" parent="." instance=ExtResource("fdf_1")]
+position = Vector2(4740, 890)
+scale = Vector2(94.8000, 1)
+
+[node name="SpikeVisualsExtra1" type="Node2D" parent="."]
+[node name="SpikeA" type="Sprite2D" parent="SpikeVisualsExtra1"]
+position = Vector2(600, 928)
+scale = Vector2(1.5, 1)
+texture = ExtResource("14_spikes")
+[node name="SpikeB" type="Sprite2D" parent="SpikeVisualsExtra1"]
+position = Vector2(650, 928)
+scale = Vector2(1.5, 1)
+texture = ExtResource("14_spikes")
+[node name="SpikeC" type="Sprite2D" parent="SpikeVisualsExtra1"]
+position = Vector2(700, 928)
+scale = Vector2(1.5, 1)
+texture = ExtResource("14_spikes")
+[node name="SpikeHazardExtra1" parent="." instance=ExtResource("8_hazard")]
+position = Vector2(650, 920)
+
+[node name="SpikeVisualsExtra2" type="Node2D" parent="."]
+[node name="SpikeA" type="Sprite2D" parent="SpikeVisualsExtra2"]
+position = Vector2(715, 928)
+scale = Vector2(1.5, 1)
+texture = ExtResource("14_spikes")
+[node name="SpikeB" type="Sprite2D" parent="SpikeVisualsExtra2"]
+position = Vector2(765, 928)
+scale = Vector2(1.5, 1)
+texture = ExtResource("14_spikes")
+[node name="SpikeC" type="Sprite2D" parent="SpikeVisualsExtra2"]
+position = Vector2(815, 928)
+scale = Vector2(1.5, 1)
+texture = ExtResource("14_spikes")
+[node name="SpikeHazardExtra2" parent="." instance=ExtResource("8_hazard")]
+position = Vector2(765, 920)
+
+[node name="SpikeVisualsExtra3" type="Node2D" parent="."]
+[node name="SpikeA" type="Sprite2D" parent="SpikeVisualsExtra3"]
+position = Vector2(1105, 928)
+scale = Vector2(1.5, 1)
+texture = ExtResource("14_spikes")
+[node name="SpikeB" type="Sprite2D" parent="SpikeVisualsExtra3"]
+position = Vector2(1155, 928)
+scale = Vector2(1.5, 1)
+texture = ExtResource("14_spikes")
+[node name="SpikeC" type="Sprite2D" parent="SpikeVisualsExtra3"]
+position = Vector2(1205, 928)
+scale = Vector2(1.5, 1)
+texture = ExtResource("14_spikes")
+[node name="SpikeHazardExtra3" parent="." instance=ExtResource("8_hazard")]
+position = Vector2(1155, 920)
+
+[node name="SpikeVisualsExtra4" type="Node2D" parent="."]
+[node name="SpikeA" type="Sprite2D" parent="SpikeVisualsExtra4"]
+position = Vector2(1220, 928)
+scale = Vector2(1.5, 1)
+texture = ExtResource("14_spikes")
+[node name="SpikeB" type="Sprite2D" parent="SpikeVisualsExtra4"]
+position = Vector2(1270, 928)
+scale = Vector2(1.5, 1)
+texture = ExtResource("14_spikes")
+[node name="SpikeC" type="Sprite2D" parent="SpikeVisualsExtra4"]
+position = Vector2(1320, 928)
+scale = Vector2(1.5, 1)
+texture = ExtResource("14_spikes")
+[node name="SpikeHazardExtra4" parent="." instance=ExtResource("8_hazard")]
+position = Vector2(1270, 920)
+
+[node name="SpikeVisualsExtra5" type="Node2D" parent="."]
+[node name="SpikeA" type="Sprite2D" parent="SpikeVisualsExtra5"]
+position = Vector2(1335, 928)
+scale = Vector2(1.5, 1)
+texture = ExtResource("14_spikes")
+[node name="SpikeB" type="Sprite2D" parent="SpikeVisualsExtra5"]
+position = Vector2(1385, 928)
+scale = Vector2(1.5, 1)
+texture = ExtResource("14_spikes")
+[node name="SpikeC" type="Sprite2D" parent="SpikeVisualsExtra5"]
+position = Vector2(1435, 928)
+scale = Vector2(1.5, 1)
+texture = ExtResource("14_spikes")
+[node name="SpikeHazardExtra5" parent="." instance=ExtResource("8_hazard")]
+position = Vector2(1385, 920)
+
+[node name="SpikeVisualsExtra6" type="Node2D" parent="."]
+[node name="SpikeA" type="Sprite2D" parent="SpikeVisualsExtra6"]
+position = Vector2(1450, 928)
+scale = Vector2(1.5, 1)
+texture = ExtResource("14_spikes")
+[node name="SpikeB" type="Sprite2D" parent="SpikeVisualsExtra6"]
+position = Vector2(1500, 928)
+scale = Vector2(1.5, 1)
+texture = ExtResource("14_spikes")
+[node name="SpikeC" type="Sprite2D" parent="SpikeVisualsExtra6"]
+position = Vector2(1550, 928)
+scale = Vector2(1.5, 1)
+texture = ExtResource("14_spikes")
+[node name="SpikeHazardExtra6" parent="." instance=ExtResource("8_hazard")]
+position = Vector2(1500, 920)
+
+[node name="SpikeVisualsExtra7" type="Node2D" parent="."]
+[node name="SpikeA" type="Sprite2D" parent="SpikeVisualsExtra7"]
+position = Vector2(1565, 928)
+scale = Vector2(1.5, 1)
+texture = ExtResource("14_spikes")
+[node name="SpikeB" type="Sprite2D" parent="SpikeVisualsExtra7"]
+position = Vector2(1615, 928)
+scale = Vector2(1.5, 1)
+texture = ExtResource("14_spikes")
+[node name="SpikeC" type="Sprite2D" parent="SpikeVisualsExtra7"]
+position = Vector2(1665, 928)
+scale = Vector2(1.5, 1)
+texture = ExtResource("14_spikes")
+[node name="SpikeHazardExtra7" parent="." instance=ExtResource("8_hazard")]
+position = Vector2(1615, 920)
+
+[node name="SpikeVisualsExtra8" type="Node2D" parent="."]
+[node name="SpikeA" type="Sprite2D" parent="SpikeVisualsExtra8"]
+position = Vector2(1955, 928)
+scale = Vector2(1.5, 1)
+texture = ExtResource("14_spikes")
+[node name="SpikeB" type="Sprite2D" parent="SpikeVisualsExtra8"]
+position = Vector2(2005, 928)
+scale = Vector2(1.5, 1)
+texture = ExtResource("14_spikes")
+[node name="SpikeC" type="Sprite2D" parent="SpikeVisualsExtra8"]
+position = Vector2(2055, 928)
+scale = Vector2(1.5, 1)
+texture = ExtResource("14_spikes")
+[node name="SpikeHazardExtra8" parent="." instance=ExtResource("8_hazard")]
+position = Vector2(2005, 920)
+
+[node name="ThiefExtra1" parent="." instance=ExtResource("3_thief")]
+position = Vector2(2150, 850)
+patrol_distance = 120.0
+
+[node name="ThiefExtra2" parent="." instance=ExtResource("3_thief")]
+position = Vector2(2345, 850)
+patrol_distance = 120.0
+
+[node name="ThiefExtra3" parent="." instance=ExtResource("3_thief")]
+position = Vector2(2640, 850)
+patrol_distance = 120.0
+
+[node name="ThiefExtra4" parent="." instance=ExtResource("3_thief")]
+position = Vector2(3460, 850)
+patrol_distance = 120.0
+
+[node name="ThiefExtra5" parent="." instance=ExtResource("3_thief")]
+position = Vector2(3655, 850)
+patrol_distance = 120.0
+
+[node name="ThiefExtra6" parent="." instance=ExtResource("3_thief")]
+position = Vector2(4050, 850)
+patrol_distance = 120.0
+
+[node name="ThiefExtra7" parent="." instance=ExtResource("3_thief")]
+position = Vector2(4245, 850)
+patrol_distance = 120.0
+
+[node name="ThiefExtra8" parent="." instance=ExtResource("3_thief")]
+position = Vector2(4440, 850)
+patrol_distance = 120.0
+
+[node name="ThiefExtra9" parent="." instance=ExtResource("3_thief")]
+position = Vector2(4635, 850)
+patrol_distance = 120.0
+
+[node name="ThiefExtra10" parent="." instance=ExtResource("3_thief")]
+position = Vector2(4830, 850)
+patrol_distance = 120.0
+
+[node name="ThiefExtra11" parent="." instance=ExtResource("3_thief")]
+position = Vector2(5025, 850)
+patrol_distance = 120.0
+
+[node name="ThiefExtra12" parent="." instance=ExtResource("3_thief")]
+position = Vector2(5220, 850)
+patrol_distance = 120.0
+
+[node name="ThiefExtra13" parent="." instance=ExtResource("3_thief")]
+position = Vector2(5590, 850)
+patrol_distance = 120.0
+
+[node name="ThiefExtra14" parent="." instance=ExtResource("3_thief")]
+position = Vector2(5785, 850)
+patrol_distance = 120.0
+
+[node name="ThiefExtra15" parent="." instance=ExtResource("3_thief")]
+position = Vector2(5980, 850)
+patrol_distance = 120.0

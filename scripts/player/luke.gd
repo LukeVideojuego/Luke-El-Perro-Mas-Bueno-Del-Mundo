@@ -67,14 +67,34 @@ var _invincibility_token := 0
 var _attack_tap_pending := false
 var _attack_tap_timer := 0.0
 
+## Altura neta caída en el último aterrizaje (posición Y de aterrizaje menos
+## la posición Y de la última vez que estuvo en el piso antes de despegar).
+## Saltar y volver a caer en el mismo piso da ~0 (no penaliza el salto
+## normal); solo cae en un valor grande cuando aterriza en un piso más bajo
+## que el que pisaba antes (p. ej. una plataforma aérea). Usado por
+## fall_damage_floor.gd para el riesgo de "Corazones de Oro" (Mundo 2).
+var last_fall_distance := 0.0
+var _air_start_y := 0.0
+
+func _ready() -> void:
+	# Evita un falso "caída enorme" en el primer frame: sin esto,
+	# _air_start_y arrancaba en 0.0 y cualquier spawn con Luke unos pocos
+	# píxeles por encima del piso (lo normal en casi todos los niveles) se
+	# leía como una caída desde y=0, activando fall_damage_floor.gd de pedo.
+	_air_start_y = global_position.y
+
 func _physics_process(delta: float) -> void:
 	var was_on_floor := is_on_floor()
+	if was_on_floor:
+		_air_start_y = global_position.y
 	_apply_gravity(delta)
 	_handle_movement(delta)
 	_handle_jump(was_on_floor)
 	_handle_attack(delta)
 	move_and_slide()
 	if is_on_floor():
+		if not was_on_floor:
+			last_fall_distance = global_position.y - _air_start_y
 		jumps_used = 0
 	_update_animation()
 	if underwater_mode:

@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/world/fall_damage_floor.gd" id="1_script"]
+
+[sub_resource type="RectangleShape2D" id="Shape"]
+size = Vector2(100, 70)
+
+[node name="FallDamageFloor" type="Area2D"]
+collision_layer = 0
+collision_mask = 1
+monitoring = true
+script = ExtResource("1_script")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("Shape")
