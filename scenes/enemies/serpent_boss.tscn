@@ -1,9 +1,11 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=7 format=3]
 
 [ext_resource type="Script" path="res://scripts/enemies/boss_base.gd" id="1_script"]
 [ext_resource type="Texture2D" path="res://assets/Enemies/Reference/serpiente.png" id="2_texture"]
 [ext_resource type="PackedScene" path="res://scenes/objects/venom_bubble_projectile.tscn" id="3_projectile"]
 [ext_resource type="PackedScene" path="res://scenes/objects/venom_bubble_projectile_diagonal.tscn" id="5_projectile_diag"]
+[ext_resource type="Texture2D" path="res://assets/Enemies/Reference/serpiente_jump.png" id="6_jump"]
+[ext_resource type="Texture2D" path="res://assets/Enemies/Reference/serpiente_power.png" id="7_power"]
 
 [sub_resource type="RectangleShape2D" id="BodyShape"]
 size = Vector2(226, 307)
@@ -35,13 +37,14 @@ power_ground_scene = ExtResource("3_projectile")
 power_diagonal_scene = ExtResource("5_projectile_diag")
 power_interval = 0.5
 power_initial_delay = 0.5
+jump_texture = ExtResource("6_jump")
+power_texture = ExtResource("7_power")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
 texture = ExtResource("2_texture")
-modulate = Color(0.7, 1.1, 0.7, 1)
-offset = Vector2(0, -21.41)
-scale = Vector2(10.0174, 10.0174)
+offset = Vector2(0, 0)
+scale = Vector2(1.2315, 1.2315)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 8)

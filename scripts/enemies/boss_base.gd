@@ -34,9 +34,19 @@ signal boss_defeated
 ## puntualmente para la Bruja del Olvido.
 @export var extra_jump_interval := 0.0
 
+@export_category("Poses del jefe (opcional)")
+## Pose alternativa mientras el jefe está en el aire (saltando). Sin asignar,
+## no cambia de textura al saltar (comportamiento anterior).
+@export var jump_texture: Texture2D
+## Pose alternativa que se muestra un instante justo al lanzar un poder
+## (ground o diagonal). Sin asignar, no cambia de textura al atacar.
+@export var power_texture: Texture2D
+@export var power_pose_duration := 0.35
+
 var _power_timer := 0.0
 var _power_use_diagonal := false
 var _extra_jump_timer := 0.0
+var _power_pose_timer := 0.0
 
 func _init() -> void:
 	drops_bone_on_defeat = true
@@ -63,6 +73,24 @@ func _physics_process(delta: float) -> void:
 		var sway_strength: float = clampf(absf(velocity.x) / maxf(patrol_speed, 1.0), 0.35, 1.0)
 		sprite.rotation = sin(_time * sway_speed) * deg_to_rad(sway_amplitude_deg) * sway_strength
 	_handle_boss_powers(delta)
+	_update_pose(delta)
+
+## Cambia la textura del sprite según el estado del jefe: la pose de poder
+## tiene prioridad temporal (power_pose_duration segundos tras disparar),
+## después vuelve a la pose de salto si está en el aire, o a la idle normal.
+## Si jump_texture/power_texture no están asignadas, no hace nada (jefes sin
+## poses alternativas quedan exactamente como antes).
+func _update_pose(delta: float) -> void:
+	if sprite == null:
+		return
+	if _power_pose_timer > 0.0:
+		_power_pose_timer -= delta
+		if _power_pose_timer > 0.0:
+			return
+	if jump_texture != null:
+		sprite.texture = jump_texture if not is_on_floor() else _idle_texture
+	elif power_texture != null and sprite.texture == power_texture:
+		sprite.texture = _idle_texture
 
 ## Alterna entre los dos poderes del jefe cada power_interval segundos, sin
 ## importar la distancia a Luke (a diferencia del ranged attack genérico de
@@ -82,6 +110,9 @@ func _handle_boss_powers(delta: float) -> void:
 				velocity.y = hop_strength
 
 func _fire_power() -> void:
+	if power_texture != null and sprite != null:
+		sprite.texture = power_texture
+		_power_pose_timer = power_pose_duration
 	var scene: PackedScene = power_diagonal_scene if _power_use_diagonal else power_ground_scene
 	if scene == null:
 		return
