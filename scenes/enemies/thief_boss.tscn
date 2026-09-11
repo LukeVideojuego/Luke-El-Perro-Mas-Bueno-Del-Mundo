@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" path="res://assets/Enemies/Reference/don_sombra.png" id="2_texture"]
 [ext_resource type="Texture2D" path="res://assets/Enemies/Reference/don_sombra_walk.png" id="4_walk"]
 [ext_resource type="PackedScene" path="res://scenes/objects/knife_projectile.tscn" id="3_projectile"]
+[ext_resource type="PackedScene" path="res://scenes/objects/knife_projectile_diagonal.tscn" id="5_projectile_diag"]
 
 [sub_resource type="RectangleShape2D" id="BodyShape"]
 size = Vector2(32, 51)
@@ -28,11 +29,11 @@ hp_bar_width = 100.0
 hp_bar_y_offset = -195.0
 contact_anim = 3
 walk_texture = ExtResource("4_walk")
-can_ranged_attack = true
-ranged_projectile_scene = ExtResource("3_projectile")
-ranged_detect_range = 460.0
-ranged_cooldown = 2.0
-ranged_initial_delay = 1.0
+can_ranged_attack = false
+power_ground_scene = ExtResource("3_projectile")
+power_diagonal_scene = ExtResource("5_projectile_diag")
+power_interval = 4.0
+power_initial_delay = 1.5
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1

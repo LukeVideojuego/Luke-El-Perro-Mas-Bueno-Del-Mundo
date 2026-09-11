@@ -3,6 +3,7 @@
 [ext_resource type="Script" path="res://scripts/enemies/boss_base.gd" id="1_script"]
 [ext_resource type="Texture2D" path="res://assets/Enemies/Reference/serpiente.png" id="2_texture"]
 [ext_resource type="PackedScene" path="res://scenes/objects/venom_bubble_projectile.tscn" id="3_projectile"]
+[ext_resource type="PackedScene" path="res://scenes/objects/venom_bubble_projectile_diagonal.tscn" id="5_projectile_diag"]
 
 [sub_resource type="RectangleShape2D" id="BodyShape"]
 size = Vector2(226, 307)
@@ -29,11 +30,11 @@ sway_enabled = true
 sway_amplitude_deg = 6.0
 sway_speed = 7.0
 contact_anim = 2
-can_ranged_attack = true
-ranged_projectile_scene = ExtResource("3_projectile")
-ranged_detect_range = 540.0
-ranged_cooldown = 1.0
-ranged_initial_delay = 1.0
+can_ranged_attack = false
+power_ground_scene = ExtResource("3_projectile")
+power_diagonal_scene = ExtResource("5_projectile_diag")
+power_interval = 1.0
+power_initial_delay = 1.5
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1

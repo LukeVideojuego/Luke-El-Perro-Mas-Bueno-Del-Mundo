@@ -8,6 +8,9 @@ extends Area2D
 
 @export var speed := 340.0
 @export var lifetime := 2.2
+## Si es distinto de 0, el proyectil también viaja en diagonal (negativo =
+## hacia arriba); en 0 se mueve al ras del piso como antes.
+@export var vertical_speed := 0.0
 
 var direction := 1.0
 var _thrower: Node = null
@@ -21,6 +24,8 @@ func launch(from_position: Vector2, dir: float, thrower: Node) -> void:
 
 func _physics_process(delta: float) -> void:
 	position.x += speed * direction * delta
+	if vertical_speed != 0.0:
+		position.y += vertical_speed * delta
 	_time_alive += delta
 	if _time_alive >= lifetime:
 		queue_free()

@@ -19,6 +19,25 @@ signal boss_defeated
 @export var sway_amplitude_deg := 5.0
 @export var sway_speed := 5.0
 
+@export_category("Poderes de jefe")
+## Cada jefe tiene DOS poderes distintos que alterna: uno que viaja al ras
+## del piso (power_ground_scene) y otro en diagonal hacia arriba
+## (power_diagonal_scene). power_interval es cada cuántos segundos dispara
+## (fijo, no depende de la distancia a Luke: jefe 1 = 4s, jefe 2 = 3s,
+## jefe 3 = 2s, jefe 4 = 1s). Reemplaza al sistema genérico de
+## can_ranged_attack de EnemyBase, que queda desactivado en los jefes.
+@export var power_ground_scene: PackedScene
+@export var power_diagonal_scene: PackedScene
+@export var power_interval := 4.0
+@export var power_initial_delay := 1.5
+## Salto extra (además del power) cada N segundos; 0 = desactivado. Pedido
+## puntualmente para la Bruja del Olvido.
+@export var extra_jump_interval := 0.0
+
+var _power_timer := 0.0
+var _power_use_diagonal := false
+var _extra_jump_timer := 0.0
+
 func _init() -> void:
 	drops_bone_on_defeat = true
 
@@ -29,6 +48,8 @@ func _ready() -> void:
 	super()
 	health = max_health
 	_build_hp_bar()
+	_power_timer = power_interval - power_initial_delay
+	_extra_jump_timer = extra_jump_interval * 0.5
 
 func _physics_process(delta: float) -> void:
 	if is_defeated:
@@ -41,6 +62,41 @@ func _physics_process(delta: float) -> void:
 	if sway_enabled and sprite != null:
 		var sway_strength: float = clampf(absf(velocity.x) / maxf(patrol_speed, 1.0), 0.35, 1.0)
 		sprite.rotation = sin(_time * sway_speed) * deg_to_rad(sway_amplitude_deg) * sway_strength
+	_handle_boss_powers(delta)
+
+## Alterna entre los dos poderes del jefe cada power_interval segundos, sin
+## importar la distancia a Luke (a diferencia del ranged attack genérico de
+## EnemyBase). Si extra_jump_interval > 0, también salta periódicamente
+## (pedido para la Bruja del Olvido).
+func _handle_boss_powers(delta: float) -> void:
+	_power_timer += delta
+	if _power_timer >= power_interval:
+		_power_timer = 0.0
+		_fire_power()
+		_power_use_diagonal = not _power_use_diagonal
+	if extra_jump_interval > 0.0:
+		_extra_jump_timer += delta
+		if _extra_jump_timer >= extra_jump_interval:
+			_extra_jump_timer = 0.0
+			if is_on_floor():
+				velocity.y = hop_strength
+
+func _fire_power() -> void:
+	var scene: PackedScene = power_diagonal_scene if _power_use_diagonal else power_ground_scene
+	if scene == null:
+		return
+	var parent := get_parent()
+	if parent == null:
+		return
+	var target := _get_player()
+	var dir := 1.0
+	if target != null:
+		dir = signf(target.global_position.x - global_position.x)
+		if is_zero_approx(dir):
+			dir = 1.0
+	var projectile: Node = scene.instantiate()
+	parent.add_child(projectile)
+	projectile.launch(global_position, dir, self)
 
 func receive_attack(_attacker: Node) -> void:
 	if is_defeated:
