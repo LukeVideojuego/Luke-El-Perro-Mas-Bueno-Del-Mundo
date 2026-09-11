@@ -78,7 +78,7 @@ func _hug_everyone() -> bool:
 	if people.is_empty():
 		return false
 	for person in people:
-		person._on_body_entered(luke)
+		person._do_hug(luke)
 	return true
 
 func _defeat_boss() -> bool:

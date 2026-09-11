@@ -27,5 +27,3 @@ offset_bottom = -90.0
 theme_override_font_sizes/font_size = 36
 text = "💕"
 horizontal_alignment = 1
-
-[connection signal="body_entered" from="." to="." method="_on_body_entered"]

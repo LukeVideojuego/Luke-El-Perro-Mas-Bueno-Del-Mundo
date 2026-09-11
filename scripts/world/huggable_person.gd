@@ -55,6 +55,24 @@ func _process(delta: float) -> void:
 	_handle_wander(delta)
 	_handle_jump(delta)
 
+## Por debajo de esta velocidad, Luke se considera "quieto": si una persona
+## que deambula (wander_enabled) camina y choca contra un Luke inmóvil, NO
+## cuenta como abrazo por sí solo. Se revisa en cada frame de físicas
+## mientras se solapan (no solo en el instante de contacto) para que, si
+## Luke arranca a moverse mientras siguen tocándose, el abrazo sí cuente en
+## cuanto supere el umbral. Sin esto, el objetivo del minijuego podía darse
+## por cumplido sin que el jugador hiciera nada (bug reportado: el cartel de
+## nivel completado aparecía igual aunque Luke no se moviera).
+const MIN_LUKE_SPEED_TO_HUG := 20.0
+
+func _physics_process(_delta: float) -> void:
+	if is_hugged:
+		return
+	for body in get_overlapping_bodies():
+		if body is Luke and body.velocity.length() >= MIN_LUKE_SPEED_TO_HUG:
+			_do_hug(body)
+			return
+
 func _handle_wander(delta: float) -> void:
 	var dir := signf(_target_x - global_position.x)
 	if absf(_target_x - global_position.x) <= 4.0:
@@ -95,9 +113,7 @@ func _do_jump() -> void:
 	tween.tween_property(sprite, "position:y", _visual_y - jump_height, jump_duration * 0.5).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 	tween.tween_property(sprite, "position:y", _visual_y, jump_duration * 0.5).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN)
 
-func _on_body_entered(body: Node2D) -> void:
-	if is_hugged or not body is Luke:
-		return
+func _do_hug(_body: Node2D) -> void:
 	is_hugged = true
 	if happy_texture != null:
 		sprite.texture = happy_texture
