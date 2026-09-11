@@ -134,11 +134,11 @@ position = Vector2(250, 915)
 texture = ExtResource("12_door")
 
 [node name="FenceA" type="Sprite2D" parent="."]
-position = Vector2(500, 915)
+position = Vector2(500, 873)
 texture = ExtResource("11_fence")
 
 [node name="FenceB" type="Sprite2D" parent="."]
-position = Vector2(1500, 915)
+position = Vector2(1500, 873)
 texture = ExtResource("11_fence")
 
 [node name="TrafficLightBoss" type="Sprite2D" parent="."]

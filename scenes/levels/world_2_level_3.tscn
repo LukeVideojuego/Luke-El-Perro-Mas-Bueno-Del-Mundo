@@ -225,9 +225,9 @@ texture = ExtResource("19_npc2")
 scale = Vector2(1.2873, 1.2873)
 
 [node name="FenceA" type="Sprite2D" parent="."]
-position = Vector2(3900, 915)
+position = Vector2(3900, 873)
 [node name="FenceC" type="Sprite2D" parent="."]
-position = Vector2(8500, 915)
+position = Vector2(8500, 873)
 texture = ExtResource("15_fence")
 texture = ExtResource("15_fence")
 

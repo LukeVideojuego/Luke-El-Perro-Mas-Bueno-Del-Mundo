@@ -18,12 +18,12 @@ collision_mask = 1
 script = ExtResource("1_script")
 max_health = 12
 movement_mode = 3
-patrol_speed = 170.0
-charge_speed = 340.0
+patrol_speed = 190.0
+charge_speed = 360.0
 charge_duration = 0.8
-charge_cooldown = 1.1
+charge_cooldown = 1.0
 detect_range = 500.0
-hop_interval = 1.3
+hop_interval = 1.15
 hop_strength = -480.0
 hp_bar_width = 185.0
 hp_bar_y_offset = -385.0
@@ -32,8 +32,8 @@ walk_texture = ExtResource("4_walk")
 can_ranged_attack = false
 power_ground_scene = ExtResource("3_projectile")
 power_diagonal_scene = ExtResource("5_projectile_diag")
-power_interval = 2.0
-power_initial_delay = 2.0
+power_interval = 1.0
+power_initial_delay = 1.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1

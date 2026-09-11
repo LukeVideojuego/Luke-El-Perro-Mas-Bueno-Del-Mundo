@@ -22,6 +22,13 @@ func _ready() -> void:
 	$Panel2/Panel2Button.pressed.connect(_on_button_pressed)
 	$Panel3/Panel3Button.pressed.connect(_on_button_pressed)
 
+## Cada panel tiene su propio timeout de 10s que lo AVANZA al siguiente
+## (nunca termina toda la cinemática de golpe): si el jugador no toca nada,
+## las 3 pantallas igual se muestran una por una en orden, y recién al
+## vencer el timeout del panel 3 se llama a _finish(). Antes _auto_finish()
+## llamaba a finished.emit() directamente sin importar en qué panel
+## estuviera, así que quedarse quieto en el panel 1 saltaba directo al
+## Nivel 1 sin mostrar los paneles 2 y 3.
 func _start_timeout() -> void:
 	_cancel_timeout()
 	_timeout_timer = get_tree().create_timer(10.0)
@@ -30,8 +37,7 @@ func _start_timeout() -> void:
 func _auto_finish() -> void:
 	if _finished:
 		return
-	_finished = true
-	finished.emit()
+	_advance()
 
 func _finish() -> void:
 	if _finished:
@@ -41,20 +47,20 @@ func _finish() -> void:
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_accept"):
-		if current_panel == PANEL_3:
-			_finish()
-		else:
-			_on_button_pressed()
-		_cancel_timeout()
+		_advance()
 
 func _on_button_pressed() -> void:
+	_advance()
+
+func _advance() -> void:
 	if current_panel == PANEL_1:
 		_update_panel(PANEL_2)
 	elif current_panel == PANEL_2:
 		_update_panel(PANEL_3)
 	else:
 		_finish()
-	_cancel_timeout()
+		return
+	_start_timeout()
 
 func _move_to_panel(panel: int) -> void:
 	current_panel = panel

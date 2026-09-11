@@ -9,10 +9,10 @@ extends Node2D
 ## que move_and_slide()/gravedad/is_on_floor() funcionen de verdad.
 
 const BOSSES := [
-	{"path": "res://scenes/enemies/thief_boss.tscn", "name": "Don Sombra (jefe 1)", "interval": 4.0, "extra_jump": 0.0},
-	{"path": "res://scenes/enemies/witch_boss.tscn", "name": "Bruja del Olvido (jefe 2)", "interval": 3.0, "extra_jump": 3.0},
-	{"path": "res://scenes/enemies/corrupt_boss.tscn", "name": "Gran Codicia (jefe 3)", "interval": 2.0, "extra_jump": 0.0},
-	{"path": "res://scenes/enemies/serpent_boss.tscn", "name": "Serpiente (jefe 4)", "interval": 1.0, "extra_jump": 0.0},
+	{"path": "res://scenes/enemies/thief_boss.tscn", "name": "Don Sombra (jefe 1)", "interval": 2.0, "extra_jump": 0.0},
+	{"path": "res://scenes/enemies/witch_boss.tscn", "name": "Bruja del Olvido (jefe 2)", "interval": 1.5, "extra_jump": 2.2},
+	{"path": "res://scenes/enemies/corrupt_boss.tscn", "name": "Gran Codicia (jefe 3)", "interval": 1.0, "extra_jump": 0.0},
+	{"path": "res://scenes/enemies/serpent_boss.tscn", "name": "Serpiente (jefe 4)", "interval": 0.5, "extra_jump": 0.0},
 ]
 
 var fail_count := 0
@@ -35,11 +35,32 @@ func _check(condition: bool, label: String) -> void:
 		print("FAIL: ", label)
 		fail_count += 1
 
+## Punto 6: cada jefe debe ser mas agresivo que el anterior (mas rapido en
+## patrulla/carga, saltos mas frecuentes, poder mas seguido), no solo el
+## ultimo mas dificil que el primero.
+func _check_progression() -> void:
+	var stats := []
+	for cfg in BOSSES:
+		var b: Node = load(cfg.path).instantiate()
+		stats.append({
+			"name": cfg.name, "patrol_speed": b.patrol_speed, "charge_speed": b.charge_speed,
+			"hop_interval": b.hop_interval, "power_interval": b.power_interval,
+		})
+		b.free()
+	for i in range(1, stats.size()):
+		var a: Dictionary = stats[i - 1]
+		var c: Dictionary = stats[i]
+		_check(c.patrol_speed > a.patrol_speed, "%s patrulla mas rapido que %s (%.0f > %.0f)" % [c.name, a.name, c.patrol_speed, a.patrol_speed])
+		_check(c.charge_speed > a.charge_speed, "%s carga mas rapido que %s (%.0f > %.0f)" % [c.name, a.name, c.charge_speed, a.charge_speed])
+		_check(c.hop_interval < a.hop_interval, "%s salta mas seguido que %s (%.2f < %.2f)" % [c.name, a.name, c.hop_interval, a.hop_interval])
+		_check(c.power_interval < a.power_interval, "%s dispara mas seguido que %s (%.2f < %.2f)" % [c.name, a.name, c.power_interval, a.power_interval])
+
 func _start_next() -> void:
 	if arena != null:
 		arena.queue_free()
 	cur_index += 1
 	if cur_index >= BOSSES.size():
+		_check_progression()
 		print("RESULTADO: ", fail_count, " fallos")
 		get_tree().quit()
 		return

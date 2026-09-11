@@ -229,11 +229,11 @@ texture = ExtResource("17_npc2")
 scale = Vector2(1.2873, 1.2873)
 
 [node name="FenceA" type="Sprite2D" parent="."]
-position = Vector2(300, 915)
+position = Vector2(300, 873)
 texture = ExtResource("15_fence")
 
 [node name="FenceB" type="Sprite2D" parent="."]
-position = Vector2(7800, 915)
+position = Vector2(7800, 873)
 texture = ExtResource("15_fence")
 
 [node name="Finish" parent="." instance=ExtResource("5_finish")]

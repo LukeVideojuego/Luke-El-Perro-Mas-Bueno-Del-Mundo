@@ -130,11 +130,11 @@ shape = SubResource("PlatformE")
 [node name="NeighborhoodDecor" type="Node2D" parent="."]
 [node name="FenceA" type="Sprite2D" parent="NeighborhoodDecor"]
 texture = ExtResource("15_fence")
-position = Vector2(1220, 885)
+position = Vector2(1220, 918)
 scale = Vector2(2, 1)
 [node name="FenceB" type="Sprite2D" parent="NeighborhoodDecor"]
 texture = ExtResource("15_fence")
-position = Vector2(2870, 885)
+position = Vector2(2870, 918)
 scale = Vector2(2, 1)
 [node name="ExitSign" type="Sprite2D" parent="NeighborhoodDecor"]
 texture = ExtResource("16_exit_sign")
