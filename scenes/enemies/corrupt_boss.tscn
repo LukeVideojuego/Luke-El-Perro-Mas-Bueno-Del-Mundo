@@ -33,7 +33,7 @@ can_ranged_attack = false
 power_ground_scene = ExtResource("3_projectile")
 power_diagonal_scene = ExtResource("5_projectile_diag")
 power_interval = 2.0
-power_initial_delay = 1.5
+power_initial_delay = 2.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
