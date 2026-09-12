@@ -120,7 +120,7 @@ modulate = Color(0.82, 0.85, 0.92, 1)
 shape = SubResource("PlatformShape")
 
 [node name="PlatformFive" type="StaticBody2D" parent="."]
-position = Vector2(3900, 820)
+position = Vector2(3900, 775)
 
 [node name="Visual" type="Sprite2D" parent="PlatformFive"]
 texture = ExtResource("13_stone")
@@ -665,7 +665,7 @@ position = Vector2(4820, 850)
 patrol_distance = 120.0
 
 [node name="PlatformTwelve" type="StaticBody2D" parent="."]
-position = Vector2(4360, 820)
+position = Vector2(4360, 775)
 [node name="Visual" type="Sprite2D" parent="PlatformTwelve"]
 texture = ExtResource("13_stone")
 scale = Vector2(6.5625, 0.8125)

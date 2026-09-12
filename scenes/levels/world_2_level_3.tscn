@@ -98,7 +98,7 @@ modulate = Color(0.82, 0.85, 0.92, 1)
 shape = SubResource("PlatformShape")
 
 [node name="PlatformThree" type="StaticBody2D" parent="."]
-position = Vector2(2400, 800)
+position = Vector2(2400, 770)
 
 [node name="Visual" type="Sprite2D" parent="PlatformThree"]
 texture = ExtResource("13_stone")
@@ -316,7 +316,7 @@ modulate = Color(0.82, 0.85, 0.92, 1)
 shape = SubResource("PlatformShape")
 
 [node name="PlatformSeven" type="StaticBody2D" parent="."]
-position = Vector2(7000, 800)
+position = Vector2(7000, 770)
 [node name="Visual" type="Sprite2D" parent="PlatformSeven"]
 texture = ExtResource("13_stone")
 scale = Vector2(6.5625, 0.8125)
