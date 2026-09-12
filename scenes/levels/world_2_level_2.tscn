@@ -690,3 +690,21 @@ patrol_distance = 120.0
 [node name="ThiefExtra15" parent="." instance=ExtResource("3_thief")]
 position = Vector2(5980, 850)
 patrol_distance = 120.0
+
+[node name="PlatformEight" type="StaticBody2D" parent="."]
+position = Vector2(3840, 760)
+[node name="Visual" type="Sprite2D" parent="PlatformEight"]
+texture = ExtResource("13_stone")
+scale = Vector2(6.5625, 0.8125)
+modulate = Color(0.82, 0.85, 0.92, 1)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlatformEight"]
+shape = SubResource("PlatformShape")
+
+[node name="PlatformNine" type="StaticBody2D" parent="."]
+position = Vector2(4430, 790)
+[node name="Visual" type="Sprite2D" parent="PlatformNine"]
+texture = ExtResource("13_stone")
+scale = Vector2(6.5625, 0.8125)
+modulate = Color(0.82, 0.85, 0.92, 1)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlatformNine"]
+shape = SubResource("PlatformShape")

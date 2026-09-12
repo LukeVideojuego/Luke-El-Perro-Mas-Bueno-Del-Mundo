@@ -701,3 +701,30 @@ patrol_distance = 120.0
 [node name="ThiefExtra18" parent="." instance=ExtResource("3_thief")]
 position = Vector2(7340, 850)
 patrol_distance = 120.0
+
+[node name="PlatformTen" type="StaticBody2D" parent="."]
+position = Vector2(1900, 765)
+[node name="Visual" type="Sprite2D" parent="PlatformTen"]
+texture = ExtResource("13_stone")
+scale = Vector2(6.5625, 0.8125)
+modulate = Color(0.82, 0.85, 0.92, 1)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlatformTen"]
+shape = SubResource("PlatformShape")
+
+[node name="PlatformEleven" type="StaticBody2D" parent="."]
+position = Vector2(3940, 760)
+[node name="Visual" type="Sprite2D" parent="PlatformEleven"]
+texture = ExtResource("13_stone")
+scale = Vector2(6.5625, 0.8125)
+modulate = Color(0.82, 0.85, 0.92, 1)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlatformEleven"]
+shape = SubResource("PlatformShape")
+
+[node name="PlatformTwelve" type="StaticBody2D" parent="."]
+position = Vector2(4580, 790)
+[node name="Visual" type="Sprite2D" parent="PlatformTwelve"]
+texture = ExtResource("13_stone")
+scale = Vector2(6.5625, 0.8125)
+modulate = Color(0.82, 0.85, 0.92, 1)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlatformTwelve"]
+shape = SubResource("PlatformShape")
