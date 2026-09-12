@@ -9,11 +9,17 @@ extends Node2D
 ## que move_and_slide()/gravedad/is_on_floor() funcionen de verdad.
 
 const BOSSES := [
-	{"path": "res://scenes/enemies/thief_boss.tscn", "name": "Don Sombra (jefe 1)", "interval": 2.0, "extra_jump": 0.0},
-	{"path": "res://scenes/enemies/witch_boss.tscn", "name": "Bruja del Olvido (jefe 2)", "interval": 1.5, "extra_jump": 2.2},
-	{"path": "res://scenes/enemies/corrupt_boss.tscn", "name": "Gran Codicia (jefe 3)", "interval": 1.0, "extra_jump": 0.0},
-	{"path": "res://scenes/enemies/serpent_boss.tscn", "name": "Serpiente (jefe 4)", "interval": 0.5, "extra_jump": 0.0},
+	{"path": "res://scenes/enemies/thief_boss.tscn", "name": "Don Sombra (jefe 1)", "interval": 1.0, "extra_jump": 0.0},
+	{"path": "res://scenes/enemies/witch_boss.tscn", "name": "Bruja del Olvido (jefe 2)", "interval": 0.75, "extra_jump": 1.3},
+	{"path": "res://scenes/enemies/corrupt_boss.tscn", "name": "Gran Codicia (jefe 3)", "interval": 0.5, "extra_jump": 0.0},
+	{"path": "res://scenes/enemies/serpent_boss.tscn", "name": "Serpiente (jefe 4)", "interval": 0.25, "extra_jump": 0.0},
 ]
+
+## power_interval de la ronda anterior (antes de este pedido puntual de
+## "duplicá otra vez la velocidad de poder respecto a como está AHORA").
+## Los valores nuevos deben ser exactamente la mitad de estos.
+const PREVIOUS_ROUND_INTERVALS := [2.0, 1.5, 1.0, 0.5]
+const PREVIOUS_ROUND_PATROL_SPEEDS := [110.0, 140.0, 190.0, 230.0]
 
 var fail_count := 0
 var cur_index := -1
@@ -45,6 +51,7 @@ func _check_progression() -> void:
 		stats.append({
 			"name": cfg.name, "patrol_speed": b.patrol_speed, "charge_speed": b.charge_speed,
 			"hop_interval": b.hop_interval, "power_interval": b.power_interval,
+			"hop_strength": absf(b.hop_strength),
 		})
 		b.free()
 	for i in range(1, stats.size()):
@@ -53,7 +60,14 @@ func _check_progression() -> void:
 		_check(c.patrol_speed > a.patrol_speed, "%s patrulla mas rapido que %s (%.0f > %.0f)" % [c.name, a.name, c.patrol_speed, a.patrol_speed])
 		_check(c.charge_speed > a.charge_speed, "%s carga mas rapido que %s (%.0f > %.0f)" % [c.name, a.name, c.charge_speed, a.charge_speed])
 		_check(c.hop_interval < a.hop_interval, "%s salta mas seguido que %s (%.2f < %.2f)" % [c.name, a.name, c.hop_interval, a.hop_interval])
+		_check(c.hop_strength > a.hop_strength, "%s salta mas alto que %s (%.0f > %.0f)" % [c.name, a.name, c.hop_strength, a.hop_strength])
 		_check(c.power_interval < a.power_interval, "%s dispara mas seguido que %s (%.2f < %.2f)" % [c.name, a.name, c.power_interval, a.power_interval])
+	for i in range(stats.size()):
+		var s: Dictionary = stats[i]
+		var prev_interval: float = PREVIOUS_ROUND_INTERVALS[i]
+		_check(is_equal_approx(s.power_interval, prev_interval / 2.0), "%s: power_interval es exactamente la mitad de la ronda anterior (%.3f, antes %.2f)" % [s.name, s.power_interval, prev_interval])
+		var prev_patrol: float = PREVIOUS_ROUND_PATROL_SPEEDS[i]
+		_check(s.patrol_speed >= prev_patrol * 1.5, "%s: patrol_speed considerablemente mas alto que la ronda anterior (%.0f vs %.0f antes)" % [s.name, s.patrol_speed, prev_patrol])
 
 func _start_next() -> void:
 	if arena != null:
