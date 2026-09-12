@@ -63,7 +63,7 @@ position = Vector2(1000, 960)
 shape = SubResource("GroundShape")
 
 [node name="PlatformOne" type="StaticBody2D" parent="."]
-position = Vector2(600, 790)
+position = Vector2(600, 750)
 
 [node name="Visual" type="Sprite2D" parent="PlatformOne"]
 texture = ExtResource("10_stone")
@@ -74,7 +74,7 @@ modulate = Color(0.2733, 0.2833, 0.3067, 1.0)
 shape = SubResource("PlatformShape")
 
 [node name="PlatformTwo" type="StaticBody2D" parent="."]
-position = Vector2(1400, 790)
+position = Vector2(1400, 750)
 
 [node name="Visual" type="Sprite2D" parent="PlatformTwo"]
 texture = ExtResource("10_stone")
@@ -82,6 +82,50 @@ scale = Vector2(6.5625, 0.8125)
 
 modulate = Color(0.2733, 0.2833, 0.3067, 1.0)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlatformTwo"]
+shape = SubResource("PlatformShape")
+
+[node name="PlatformThree" type="StaticBody2D" parent="."]
+position = Vector2(1000, 610)
+
+[node name="Visual" type="Sprite2D" parent="PlatformThree"]
+texture = ExtResource("10_stone")
+scale = Vector2(6.5625, 0.8125)
+
+modulate = Color(0.2733, 0.2833, 0.3067, 1.0)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlatformThree"]
+shape = SubResource("PlatformShape")
+
+[node name="PlatformFour" type="StaticBody2D" parent="."]
+position = Vector2(500, 480)
+
+[node name="Visual" type="Sprite2D" parent="PlatformFour"]
+texture = ExtResource("10_stone")
+scale = Vector2(6.5625, 0.8125)
+
+modulate = Color(0.2733, 0.2833, 0.3067, 1.0)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlatformFour"]
+shape = SubResource("PlatformShape")
+
+[node name="PlatformFive" type="StaticBody2D" parent="."]
+position = Vector2(1500, 480)
+
+[node name="Visual" type="Sprite2D" parent="PlatformFive"]
+texture = ExtResource("10_stone")
+scale = Vector2(6.5625, 0.8125)
+
+modulate = Color(0.2733, 0.2833, 0.3067, 1.0)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlatformFive"]
+shape = SubResource("PlatformShape")
+
+[node name="PlatformSix" type="StaticBody2D" parent="."]
+position = Vector2(1000, 360)
+
+[node name="Visual" type="Sprite2D" parent="PlatformSix"]
+texture = ExtResource("10_stone")
+scale = Vector2(6.5625, 0.8125)
+
+modulate = Color(0.2733, 0.2833, 0.3067, 1.0)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlatformSix"]
 shape = SubResource("PlatformShape")
 
 [node name="LeftBoundary" type="StaticBody2D" parent="."]
@@ -108,13 +152,6 @@ position = Vector2(180, 850)
 
 [node name="WitchBoss" parent="." instance=ExtResource("3_boss")]
 position = Vector2(1000, 780)
-max_health = 4
-patrol_speed = 140.0
-charge_speed = 300.0
-charge_cooldown = 1.25
-detect_range = 470.0
-hop_interval = 1.5
-Sprite2D/modulate = Color(0.55, 1, 0.55, 1)
 
 [node name="BoxA" parent="." instance=ExtResource("6_box")]
 position = Vector2(650, 679)

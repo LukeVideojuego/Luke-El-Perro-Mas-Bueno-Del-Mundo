@@ -47,6 +47,8 @@ var _power_timer := 0.0
 var _power_use_diagonal := false
 var _extra_jump_timer := 0.0
 var _power_pose_timer := 0.0
+var _base_scale := Vector2.ONE
+var _base_modulate := Color.WHITE
 
 func _init() -> void:
 	drops_bone_on_defeat = true
@@ -60,6 +62,9 @@ func _ready() -> void:
 	_build_hp_bar()
 	_power_timer = power_interval - power_initial_delay
 	_extra_jump_timer = extra_jump_interval * 0.5
+	if sprite != null:
+		_base_scale = sprite.scale
+		_base_modulate = sprite.modulate
 
 func _physics_process(delta: float) -> void:
 	if is_defeated:
@@ -78,19 +83,40 @@ func _physics_process(delta: float) -> void:
 ## Cambia la textura del sprite según el estado del jefe: la pose de poder
 ## tiene prioridad temporal (power_pose_duration segundos tras disparar),
 ## después vuelve a la pose de salto si está en el aire, o a la idle normal.
-## Si jump_texture/power_texture no están asignadas, no hace nada (jefes sin
-## poses alternativas quedan exactamente como antes).
+## Si jump_texture/power_texture no están asignadas, usa un pseudo-pose
+## procedural (squash/stretch en el aire) para que el jefe no se vea como
+## una imagen fija subiendo y bajando aunque no tenga arte extra.
 func _update_pose(delta: float) -> void:
 	if sprite == null:
 		return
 	if _power_pose_timer > 0.0:
 		_power_pose_timer -= delta
+		# Reafirmar la pose de poder todos los frames mientras dure: si el
+		# jefe tiene walk_texture, _update_walk_animation (llamado antes,
+		# desde EnemyBase, cada vez que hay movimiento horizontal) ya
+		# pisó sprite.texture este mismo frame, y sin esto la pose de
+		# ataque nunca llegaría a verse en un jefe que camina y ataca a
+		# la vez (como Gran Codicia).
+		if power_texture != null:
+			sprite.texture = power_texture
 		if _power_pose_timer > 0.0:
 			return
+		elif jump_texture == null and power_texture == null:
+			sprite.scale = _base_scale
 	if jump_texture != null:
-		sprite.texture = jump_texture if not is_on_floor() else _idle_texture
+		if not is_on_floor():
+			sprite.texture = jump_texture
+		elif sprite.texture == jump_texture:
+			# Al aterrizar, soltar la pose de salto y dejar que el ciclo de
+			# caminata (walk_texture) retome el control si corresponde, en
+			# vez de forzar siempre la idle (rompería la animación de
+			# piernas de jefes que tienen ambas poses, como Gran Codicia).
+			sprite.texture = _idle_texture
 	elif power_texture != null and sprite.texture == power_texture:
 		sprite.texture = _idle_texture
+	if jump_texture == null:
+		var stretch := Vector2(0.88, 1.16) if not is_on_floor() else Vector2(1.0, 1.0)
+		sprite.scale = sprite.scale.lerp(_base_scale * stretch, clampf(delta * 10.0, 0.0, 1.0))
 
 ## Alterna entre los dos poderes del jefe cada power_interval segundos, sin
 ## importar la distancia a Luke (a diferencia del ranged attack genérico de
@@ -110,9 +136,19 @@ func _handle_boss_powers(delta: float) -> void:
 				velocity.y = hop_strength
 
 func _fire_power() -> void:
-	if power_texture != null and sprite != null:
-		sprite.texture = power_texture
-		_power_pose_timer = power_pose_duration
+	if sprite != null:
+		if power_texture != null:
+			sprite.texture = power_texture
+			_power_pose_timer = power_pose_duration
+		else:
+			_power_pose_timer = power_pose_duration
+			var pop_scale := _base_scale * 1.18
+			var flash_color := Color(1.0, 0.55, 0.15, 1.0)
+			var tween := create_tween()
+			tween.tween_property(sprite, "scale", pop_scale, power_pose_duration * 0.3).set_trans(Tween.TRANS_BACK)
+			tween.parallel().tween_property(sprite, "modulate", flash_color, power_pose_duration * 0.3)
+			tween.tween_property(sprite, "scale", _base_scale, power_pose_duration * 0.7).set_trans(Tween.TRANS_SINE)
+			tween.parallel().tween_property(sprite, "modulate", _base_modulate, power_pose_duration * 0.7)
 	var scene: PackedScene = power_diagonal_scene if _power_use_diagonal else power_ground_scene
 	if scene == null:
 		return
