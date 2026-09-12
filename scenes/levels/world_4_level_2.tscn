@@ -230,8 +230,10 @@ script = ExtResource("13_damage_script")
 position = Vector2(4600, 1020)
 shape = SubResource("WaterShape")
 
+[connection signal="body_entered" from="WaterHazard" to="WaterHazard" method="_on_body_entered"]
+
 [node name="SeaFloor" type="StaticBody2D" parent="."]
-position = Vector2(4600, 1120)
+position = Vector2(4600, 1000)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SeaFloor"]
 shape = SubResource("SeaFloorShape")
