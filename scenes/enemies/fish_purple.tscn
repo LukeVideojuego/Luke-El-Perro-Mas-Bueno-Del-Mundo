@@ -5,10 +5,10 @@
 [ext_resource type="PackedScene" path="res://scenes/objects/venom_bubble_projectile.tscn" id="3_projectile"]
 
 [sub_resource type="RectangleShape2D" id="BodyShape"]
-size = Vector2(56, 72)
+size = Vector2(44.8, 57.6)
 
 [sub_resource type="RectangleShape2D" id="DamageShape"]
-size = Vector2(70, 86)
+size = Vector2(56, 68.8)
 
 [node name="FishPurple" type="CharacterBody2D"]
 collision_layer = 4
@@ -26,7 +26,7 @@ ranged_cooldown = 2.6
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
 texture = ExtResource("2_texture")
-scale = Vector2(1.8, 1.8)
+scale = Vector2(1.44, 1.44)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 4)
