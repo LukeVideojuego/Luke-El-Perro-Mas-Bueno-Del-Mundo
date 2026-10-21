@@ -59,21 +59,622 @@ centered = false
 z_index = -10
 texture = ExtResource("29_bg")
 scale = Vector2(1.4344, 1.4344)
-region_enabled = true
-region_rect = Rect2(0, 0, 20000, 753)
-texture_repeat = 2
+
+[node name="BackgroundTile2" type="Sprite2D" parent="."]
+position = Vector2(2996.46, 0)
+centered = false
+z_index = -10
+texture = ExtResource("29_bg")
+scale = Vector2(1.4344, 1.4344)
+
+[node name="BackgroundTile3" type="Sprite2D" parent="."]
+position = Vector2(5992.92, 0)
+centered = false
+z_index = -10
+texture = ExtResource("29_bg")
+scale = Vector2(1.4344, 1.4344)
+
+[node name="BackgroundTile4" type="Sprite2D" parent="."]
+position = Vector2(8989.38, 0)
+centered = false
+z_index = -10
+texture = ExtResource("29_bg")
+scale = Vector2(1.4344, 1.4344)
+
+[node name="BackgroundTile5" type="Sprite2D" parent="."]
+position = Vector2(11985.8, 0)
+centered = false
+z_index = -10
+texture = ExtResource("29_bg")
+scale = Vector2(1.4344, 1.4344)
+
 
 [node name="Ground" type="StaticBody2D" parent="."]
 
 [node name="BlockTop" type="Sprite2D" parent="Ground"]
+position = Vector2(-8, 960)
+texture = ExtResource("12_street")
+scale = Vector2(2, 2)
+[node name="BlockTop2" type="Sprite2D" parent="Ground"]
+position = Vector2(120, 960)
+texture = ExtResource("12_street")
+scale = Vector2(2, 2)
+[node name="BlockTop3" type="Sprite2D" parent="Ground"]
+position = Vector2(248, 960)
+texture = ExtResource("12_street")
+scale = Vector2(2, 2)
+[node name="BlockTop4" type="Sprite2D" parent="Ground"]
+position = Vector2(376, 960)
+texture = ExtResource("12_street")
+scale = Vector2(2, 2)
+[node name="BlockTop5" type="Sprite2D" parent="Ground"]
+position = Vector2(504, 960)
+texture = ExtResource("12_street")
+scale = Vector2(2, 2)
+[node name="BlockTop6" type="Sprite2D" parent="Ground"]
+position = Vector2(632, 960)
+texture = ExtResource("12_street")
+scale = Vector2(2, 2)
+[node name="BlockTop7" type="Sprite2D" parent="Ground"]
+position = Vector2(760, 960)
+texture = ExtResource("12_street")
+scale = Vector2(2, 2)
+[node name="BlockTop8" type="Sprite2D" parent="Ground"]
+position = Vector2(888, 960)
+texture = ExtResource("12_street")
+scale = Vector2(2, 2)
+[node name="BlockTop9" type="Sprite2D" parent="Ground"]
+position = Vector2(1016, 960)
+texture = ExtResource("12_street")
+scale = Vector2(2, 2)
+[node name="BlockTop10" type="Sprite2D" parent="Ground"]
+position = Vector2(1144, 960)
+texture = ExtResource("12_street")
+scale = Vector2(2, 2)
+[node name="BlockTop11" type="Sprite2D" parent="Ground"]
+position = Vector2(1272, 960)
+texture = ExtResource("12_street")
+scale = Vector2(2, 2)
+[node name="BlockTop12" type="Sprite2D" parent="Ground"]
+position = Vector2(1400, 960)
+texture = ExtResource("12_street")
+scale = Vector2(2, 2)
+[node name="BlockTop13" type="Sprite2D" parent="Ground"]
+position = Vector2(1528, 960)
+texture = ExtResource("12_street")
+scale = Vector2(2, 2)
+[node name="BlockTop14" type="Sprite2D" parent="Ground"]
+position = Vector2(1656, 960)
+texture = ExtResource("12_street")
+scale = Vector2(2, 2)
+[node name="BlockTop15" type="Sprite2D" parent="Ground"]
+position = Vector2(1784, 960)
+texture = ExtResource("12_street")
+scale = Vector2(2, 2)
+[node name="BlockTop16" type="Sprite2D" parent="Ground"]
+position = Vector2(1912, 960)
+texture = ExtResource("12_street")
+scale = Vector2(2, 2)
+[node name="BlockTop17" type="Sprite2D" parent="Ground"]
+position = Vector2(2040, 960)
+texture = ExtResource("12_street")
+scale = Vector2(2, 2)
+[node name="BlockTop18" type="Sprite2D" parent="Ground"]
+position = Vector2(2168, 960)
+texture = ExtResource("12_street")
+scale = Vector2(2, 2)
+[node name="BlockTop19" type="Sprite2D" parent="Ground"]
+position = Vector2(2296, 960)
+texture = ExtResource("12_street")
+scale = Vector2(2, 2)
+[node name="BlockTop20" type="Sprite2D" parent="Ground"]
+position = Vector2(2424, 960)
+texture = ExtResource("12_street")
+scale = Vector2(2, 2)
+[node name="BlockTop21" type="Sprite2D" parent="Ground"]
+position = Vector2(2552, 960)
+texture = ExtResource("12_street")
+scale = Vector2(2, 2)
+[node name="BlockTop22" type="Sprite2D" parent="Ground"]
+position = Vector2(2680, 960)
+texture = ExtResource("12_street")
+scale = Vector2(2, 2)
+[node name="BlockTop23" type="Sprite2D" parent="Ground"]
+position = Vector2(2808, 960)
+texture = ExtResource("12_street")
+scale = Vector2(2, 2)
+[node name="BlockTop24" type="Sprite2D" parent="Ground"]
+position = Vector2(2936, 960)
+texture = ExtResource("12_street")
+scale = Vector2(2, 2)
+[node name="BlockTop25" type="Sprite2D" parent="Ground"]
+position = Vector2(3064, 960)
+texture = ExtResource("12_street")
+scale = Vector2(2, 2)
+[node name="BlockTop26" type="Sprite2D" parent="Ground"]
+position = Vector2(3192, 960)
+texture = ExtResource("12_street")
+scale = Vector2(2, 2)
+[node name="BlockTop27" type="Sprite2D" parent="Ground"]
+position = Vector2(3320, 960)
+texture = ExtResource("12_street")
+scale = Vector2(2, 2)
+[node name="BlockTop28" type="Sprite2D" parent="Ground"]
+position = Vector2(3448, 960)
+texture = ExtResource("12_street")
+scale = Vector2(2, 2)
+[node name="BlockTop29" type="Sprite2D" parent="Ground"]
+position = Vector2(3576, 960)
+texture = ExtResource("12_street")
+scale = Vector2(2, 2)
+[node name="BlockTop30" type="Sprite2D" parent="Ground"]
+position = Vector2(3704, 960)
+texture = ExtResource("12_street")
+scale = Vector2(2, 2)
+[node name="BlockTop31" type="Sprite2D" parent="Ground"]
+position = Vector2(3832, 960)
+texture = ExtResource("12_street")
+scale = Vector2(2, 2)
+[node name="BlockTop32" type="Sprite2D" parent="Ground"]
+position = Vector2(3960, 960)
+texture = ExtResource("12_street")
+scale = Vector2(2, 2)
+[node name="BlockTop33" type="Sprite2D" parent="Ground"]
+position = Vector2(4088, 960)
+texture = ExtResource("12_street")
+scale = Vector2(2, 2)
+[node name="BlockTop34" type="Sprite2D" parent="Ground"]
+position = Vector2(4216, 960)
+texture = ExtResource("12_street")
+scale = Vector2(2, 2)
+[node name="BlockTop35" type="Sprite2D" parent="Ground"]
+position = Vector2(4344, 960)
+texture = ExtResource("12_street")
+scale = Vector2(2, 2)
+[node name="BlockTop36" type="Sprite2D" parent="Ground"]
+position = Vector2(4472, 960)
+texture = ExtResource("12_street")
+scale = Vector2(2, 2)
+[node name="BlockTop37" type="Sprite2D" parent="Ground"]
 position = Vector2(4600, 960)
 texture = ExtResource("12_street")
-scale = Vector2(143.7500, 2)
-
+scale = Vector2(2, 2)
+[node name="BlockTop38" type="Sprite2D" parent="Ground"]
+position = Vector2(4728, 960)
+texture = ExtResource("12_street")
+scale = Vector2(2, 2)
+[node name="BlockTop39" type="Sprite2D" parent="Ground"]
+position = Vector2(4856, 960)
+texture = ExtResource("12_street")
+scale = Vector2(2, 2)
+[node name="BlockTop40" type="Sprite2D" parent="Ground"]
+position = Vector2(4984, 960)
+texture = ExtResource("12_street")
+scale = Vector2(2, 2)
+[node name="BlockTop41" type="Sprite2D" parent="Ground"]
+position = Vector2(5112, 960)
+texture = ExtResource("12_street")
+scale = Vector2(2, 2)
+[node name="BlockTop42" type="Sprite2D" parent="Ground"]
+position = Vector2(5240, 960)
+texture = ExtResource("12_street")
+scale = Vector2(2, 2)
+[node name="BlockTop43" type="Sprite2D" parent="Ground"]
+position = Vector2(5368, 960)
+texture = ExtResource("12_street")
+scale = Vector2(2, 2)
+[node name="BlockTop44" type="Sprite2D" parent="Ground"]
+position = Vector2(5496, 960)
+texture = ExtResource("12_street")
+scale = Vector2(2, 2)
+[node name="BlockTop45" type="Sprite2D" parent="Ground"]
+position = Vector2(5624, 960)
+texture = ExtResource("12_street")
+scale = Vector2(2, 2)
+[node name="BlockTop46" type="Sprite2D" parent="Ground"]
+position = Vector2(5752, 960)
+texture = ExtResource("12_street")
+scale = Vector2(2, 2)
+[node name="BlockTop47" type="Sprite2D" parent="Ground"]
+position = Vector2(5880, 960)
+texture = ExtResource("12_street")
+scale = Vector2(2, 2)
+[node name="BlockTop48" type="Sprite2D" parent="Ground"]
+position = Vector2(6008, 960)
+texture = ExtResource("12_street")
+scale = Vector2(2, 2)
+[node name="BlockTop49" type="Sprite2D" parent="Ground"]
+position = Vector2(6136, 960)
+texture = ExtResource("12_street")
+scale = Vector2(2, 2)
+[node name="BlockTop50" type="Sprite2D" parent="Ground"]
+position = Vector2(6264, 960)
+texture = ExtResource("12_street")
+scale = Vector2(2, 2)
+[node name="BlockTop51" type="Sprite2D" parent="Ground"]
+position = Vector2(6392, 960)
+texture = ExtResource("12_street")
+scale = Vector2(2, 2)
+[node name="BlockTop52" type="Sprite2D" parent="Ground"]
+position = Vector2(6520, 960)
+texture = ExtResource("12_street")
+scale = Vector2(2, 2)
+[node name="BlockTop53" type="Sprite2D" parent="Ground"]
+position = Vector2(6648, 960)
+texture = ExtResource("12_street")
+scale = Vector2(2, 2)
+[node name="BlockTop54" type="Sprite2D" parent="Ground"]
+position = Vector2(6776, 960)
+texture = ExtResource("12_street")
+scale = Vector2(2, 2)
+[node name="BlockTop55" type="Sprite2D" parent="Ground"]
+position = Vector2(6904, 960)
+texture = ExtResource("12_street")
+scale = Vector2(2, 2)
+[node name="BlockTop56" type="Sprite2D" parent="Ground"]
+position = Vector2(7032, 960)
+texture = ExtResource("12_street")
+scale = Vector2(2, 2)
+[node name="BlockTop57" type="Sprite2D" parent="Ground"]
+position = Vector2(7160, 960)
+texture = ExtResource("12_street")
+scale = Vector2(2, 2)
+[node name="BlockTop58" type="Sprite2D" parent="Ground"]
+position = Vector2(7288, 960)
+texture = ExtResource("12_street")
+scale = Vector2(2, 2)
+[node name="BlockTop59" type="Sprite2D" parent="Ground"]
+position = Vector2(7416, 960)
+texture = ExtResource("12_street")
+scale = Vector2(2, 2)
+[node name="BlockTop60" type="Sprite2D" parent="Ground"]
+position = Vector2(7544, 960)
+texture = ExtResource("12_street")
+scale = Vector2(2, 2)
+[node name="BlockTop61" type="Sprite2D" parent="Ground"]
+position = Vector2(7672, 960)
+texture = ExtResource("12_street")
+scale = Vector2(2, 2)
+[node name="BlockTop62" type="Sprite2D" parent="Ground"]
+position = Vector2(7800, 960)
+texture = ExtResource("12_street")
+scale = Vector2(2, 2)
+[node name="BlockTop63" type="Sprite2D" parent="Ground"]
+position = Vector2(7928, 960)
+texture = ExtResource("12_street")
+scale = Vector2(2, 2)
+[node name="BlockTop64" type="Sprite2D" parent="Ground"]
+position = Vector2(8056, 960)
+texture = ExtResource("12_street")
+scale = Vector2(2, 2)
+[node name="BlockTop65" type="Sprite2D" parent="Ground"]
+position = Vector2(8184, 960)
+texture = ExtResource("12_street")
+scale = Vector2(2, 2)
+[node name="BlockTop66" type="Sprite2D" parent="Ground"]
+position = Vector2(8312, 960)
+texture = ExtResource("12_street")
+scale = Vector2(2, 2)
+[node name="BlockTop67" type="Sprite2D" parent="Ground"]
+position = Vector2(8440, 960)
+texture = ExtResource("12_street")
+scale = Vector2(2, 2)
+[node name="BlockTop68" type="Sprite2D" parent="Ground"]
+position = Vector2(8568, 960)
+texture = ExtResource("12_street")
+scale = Vector2(2, 2)
+[node name="BlockTop69" type="Sprite2D" parent="Ground"]
+position = Vector2(8696, 960)
+texture = ExtResource("12_street")
+scale = Vector2(2, 2)
+[node name="BlockTop70" type="Sprite2D" parent="Ground"]
+position = Vector2(8824, 960)
+texture = ExtResource("12_street")
+scale = Vector2(2, 2)
+[node name="BlockTop71" type="Sprite2D" parent="Ground"]
+position = Vector2(8952, 960)
+texture = ExtResource("12_street")
+scale = Vector2(2, 2)
+[node name="BlockTop72" type="Sprite2D" parent="Ground"]
+position = Vector2(9080, 960)
+texture = ExtResource("12_street")
+scale = Vector2(2, 2)
+[node name="BlockTop73" type="Sprite2D" parent="Ground"]
+position = Vector2(9208, 960)
+texture = ExtResource("12_street")
+scale = Vector2(2, 2)
 [node name="BlockBody" type="Sprite2D" parent="Ground"]
+position = Vector2(-8, 1010)
+texture = ExtResource("13_stone")
+scale = Vector2(2, 2)
+[node name="BlockBody2" type="Sprite2D" parent="Ground"]
+position = Vector2(120, 1010)
+texture = ExtResource("13_stone")
+scale = Vector2(2, 2)
+[node name="BlockBody3" type="Sprite2D" parent="Ground"]
+position = Vector2(248, 1010)
+texture = ExtResource("13_stone")
+scale = Vector2(2, 2)
+[node name="BlockBody4" type="Sprite2D" parent="Ground"]
+position = Vector2(376, 1010)
+texture = ExtResource("13_stone")
+scale = Vector2(2, 2)
+[node name="BlockBody5" type="Sprite2D" parent="Ground"]
+position = Vector2(504, 1010)
+texture = ExtResource("13_stone")
+scale = Vector2(2, 2)
+[node name="BlockBody6" type="Sprite2D" parent="Ground"]
+position = Vector2(632, 1010)
+texture = ExtResource("13_stone")
+scale = Vector2(2, 2)
+[node name="BlockBody7" type="Sprite2D" parent="Ground"]
+position = Vector2(760, 1010)
+texture = ExtResource("13_stone")
+scale = Vector2(2, 2)
+[node name="BlockBody8" type="Sprite2D" parent="Ground"]
+position = Vector2(888, 1010)
+texture = ExtResource("13_stone")
+scale = Vector2(2, 2)
+[node name="BlockBody9" type="Sprite2D" parent="Ground"]
+position = Vector2(1016, 1010)
+texture = ExtResource("13_stone")
+scale = Vector2(2, 2)
+[node name="BlockBody10" type="Sprite2D" parent="Ground"]
+position = Vector2(1144, 1010)
+texture = ExtResource("13_stone")
+scale = Vector2(2, 2)
+[node name="BlockBody11" type="Sprite2D" parent="Ground"]
+position = Vector2(1272, 1010)
+texture = ExtResource("13_stone")
+scale = Vector2(2, 2)
+[node name="BlockBody12" type="Sprite2D" parent="Ground"]
+position = Vector2(1400, 1010)
+texture = ExtResource("13_stone")
+scale = Vector2(2, 2)
+[node name="BlockBody13" type="Sprite2D" parent="Ground"]
+position = Vector2(1528, 1010)
+texture = ExtResource("13_stone")
+scale = Vector2(2, 2)
+[node name="BlockBody14" type="Sprite2D" parent="Ground"]
+position = Vector2(1656, 1010)
+texture = ExtResource("13_stone")
+scale = Vector2(2, 2)
+[node name="BlockBody15" type="Sprite2D" parent="Ground"]
+position = Vector2(1784, 1010)
+texture = ExtResource("13_stone")
+scale = Vector2(2, 2)
+[node name="BlockBody16" type="Sprite2D" parent="Ground"]
+position = Vector2(1912, 1010)
+texture = ExtResource("13_stone")
+scale = Vector2(2, 2)
+[node name="BlockBody17" type="Sprite2D" parent="Ground"]
+position = Vector2(2040, 1010)
+texture = ExtResource("13_stone")
+scale = Vector2(2, 2)
+[node name="BlockBody18" type="Sprite2D" parent="Ground"]
+position = Vector2(2168, 1010)
+texture = ExtResource("13_stone")
+scale = Vector2(2, 2)
+[node name="BlockBody19" type="Sprite2D" parent="Ground"]
+position = Vector2(2296, 1010)
+texture = ExtResource("13_stone")
+scale = Vector2(2, 2)
+[node name="BlockBody20" type="Sprite2D" parent="Ground"]
+position = Vector2(2424, 1010)
+texture = ExtResource("13_stone")
+scale = Vector2(2, 2)
+[node name="BlockBody21" type="Sprite2D" parent="Ground"]
+position = Vector2(2552, 1010)
+texture = ExtResource("13_stone")
+scale = Vector2(2, 2)
+[node name="BlockBody22" type="Sprite2D" parent="Ground"]
+position = Vector2(2680, 1010)
+texture = ExtResource("13_stone")
+scale = Vector2(2, 2)
+[node name="BlockBody23" type="Sprite2D" parent="Ground"]
+position = Vector2(2808, 1010)
+texture = ExtResource("13_stone")
+scale = Vector2(2, 2)
+[node name="BlockBody24" type="Sprite2D" parent="Ground"]
+position = Vector2(2936, 1010)
+texture = ExtResource("13_stone")
+scale = Vector2(2, 2)
+[node name="BlockBody25" type="Sprite2D" parent="Ground"]
+position = Vector2(3064, 1010)
+texture = ExtResource("13_stone")
+scale = Vector2(2, 2)
+[node name="BlockBody26" type="Sprite2D" parent="Ground"]
+position = Vector2(3192, 1010)
+texture = ExtResource("13_stone")
+scale = Vector2(2, 2)
+[node name="BlockBody27" type="Sprite2D" parent="Ground"]
+position = Vector2(3320, 1010)
+texture = ExtResource("13_stone")
+scale = Vector2(2, 2)
+[node name="BlockBody28" type="Sprite2D" parent="Ground"]
+position = Vector2(3448, 1010)
+texture = ExtResource("13_stone")
+scale = Vector2(2, 2)
+[node name="BlockBody29" type="Sprite2D" parent="Ground"]
+position = Vector2(3576, 1010)
+texture = ExtResource("13_stone")
+scale = Vector2(2, 2)
+[node name="BlockBody30" type="Sprite2D" parent="Ground"]
+position = Vector2(3704, 1010)
+texture = ExtResource("13_stone")
+scale = Vector2(2, 2)
+[node name="BlockBody31" type="Sprite2D" parent="Ground"]
+position = Vector2(3832, 1010)
+texture = ExtResource("13_stone")
+scale = Vector2(2, 2)
+[node name="BlockBody32" type="Sprite2D" parent="Ground"]
+position = Vector2(3960, 1010)
+texture = ExtResource("13_stone")
+scale = Vector2(2, 2)
+[node name="BlockBody33" type="Sprite2D" parent="Ground"]
+position = Vector2(4088, 1010)
+texture = ExtResource("13_stone")
+scale = Vector2(2, 2)
+[node name="BlockBody34" type="Sprite2D" parent="Ground"]
+position = Vector2(4216, 1010)
+texture = ExtResource("13_stone")
+scale = Vector2(2, 2)
+[node name="BlockBody35" type="Sprite2D" parent="Ground"]
+position = Vector2(4344, 1010)
+texture = ExtResource("13_stone")
+scale = Vector2(2, 2)
+[node name="BlockBody36" type="Sprite2D" parent="Ground"]
+position = Vector2(4472, 1010)
+texture = ExtResource("13_stone")
+scale = Vector2(2, 2)
+[node name="BlockBody37" type="Sprite2D" parent="Ground"]
 position = Vector2(4600, 1010)
 texture = ExtResource("13_stone")
-scale = Vector2(143.7500, 3.2)
+scale = Vector2(2, 2)
+[node name="BlockBody38" type="Sprite2D" parent="Ground"]
+position = Vector2(4728, 1010)
+texture = ExtResource("13_stone")
+scale = Vector2(2, 2)
+[node name="BlockBody39" type="Sprite2D" parent="Ground"]
+position = Vector2(4856, 1010)
+texture = ExtResource("13_stone")
+scale = Vector2(2, 2)
+[node name="BlockBody40" type="Sprite2D" parent="Ground"]
+position = Vector2(4984, 1010)
+texture = ExtResource("13_stone")
+scale = Vector2(2, 2)
+[node name="BlockBody41" type="Sprite2D" parent="Ground"]
+position = Vector2(5112, 1010)
+texture = ExtResource("13_stone")
+scale = Vector2(2, 2)
+[node name="BlockBody42" type="Sprite2D" parent="Ground"]
+position = Vector2(5240, 1010)
+texture = ExtResource("13_stone")
+scale = Vector2(2, 2)
+[node name="BlockBody43" type="Sprite2D" parent="Ground"]
+position = Vector2(5368, 1010)
+texture = ExtResource("13_stone")
+scale = Vector2(2, 2)
+[node name="BlockBody44" type="Sprite2D" parent="Ground"]
+position = Vector2(5496, 1010)
+texture = ExtResource("13_stone")
+scale = Vector2(2, 2)
+[node name="BlockBody45" type="Sprite2D" parent="Ground"]
+position = Vector2(5624, 1010)
+texture = ExtResource("13_stone")
+scale = Vector2(2, 2)
+[node name="BlockBody46" type="Sprite2D" parent="Ground"]
+position = Vector2(5752, 1010)
+texture = ExtResource("13_stone")
+scale = Vector2(2, 2)
+[node name="BlockBody47" type="Sprite2D" parent="Ground"]
+position = Vector2(5880, 1010)
+texture = ExtResource("13_stone")
+scale = Vector2(2, 2)
+[node name="BlockBody48" type="Sprite2D" parent="Ground"]
+position = Vector2(6008, 1010)
+texture = ExtResource("13_stone")
+scale = Vector2(2, 2)
+[node name="BlockBody49" type="Sprite2D" parent="Ground"]
+position = Vector2(6136, 1010)
+texture = ExtResource("13_stone")
+scale = Vector2(2, 2)
+[node name="BlockBody50" type="Sprite2D" parent="Ground"]
+position = Vector2(6264, 1010)
+texture = ExtResource("13_stone")
+scale = Vector2(2, 2)
+[node name="BlockBody51" type="Sprite2D" parent="Ground"]
+position = Vector2(6392, 1010)
+texture = ExtResource("13_stone")
+scale = Vector2(2, 2)
+[node name="BlockBody52" type="Sprite2D" parent="Ground"]
+position = Vector2(6520, 1010)
+texture = ExtResource("13_stone")
+scale = Vector2(2, 2)
+[node name="BlockBody53" type="Sprite2D" parent="Ground"]
+position = Vector2(6648, 1010)
+texture = ExtResource("13_stone")
+scale = Vector2(2, 2)
+[node name="BlockBody54" type="Sprite2D" parent="Ground"]
+position = Vector2(6776, 1010)
+texture = ExtResource("13_stone")
+scale = Vector2(2, 2)
+[node name="BlockBody55" type="Sprite2D" parent="Ground"]
+position = Vector2(6904, 1010)
+texture = ExtResource("13_stone")
+scale = Vector2(2, 2)
+[node name="BlockBody56" type="Sprite2D" parent="Ground"]
+position = Vector2(7032, 1010)
+texture = ExtResource("13_stone")
+scale = Vector2(2, 2)
+[node name="BlockBody57" type="Sprite2D" parent="Ground"]
+position = Vector2(7160, 1010)
+texture = ExtResource("13_stone")
+scale = Vector2(2, 2)
+[node name="BlockBody58" type="Sprite2D" parent="Ground"]
+position = Vector2(7288, 1010)
+texture = ExtResource("13_stone")
+scale = Vector2(2, 2)
+[node name="BlockBody59" type="Sprite2D" parent="Ground"]
+position = Vector2(7416, 1010)
+texture = ExtResource("13_stone")
+scale = Vector2(2, 2)
+[node name="BlockBody60" type="Sprite2D" parent="Ground"]
+position = Vector2(7544, 1010)
+texture = ExtResource("13_stone")
+scale = Vector2(2, 2)
+[node name="BlockBody61" type="Sprite2D" parent="Ground"]
+position = Vector2(7672, 1010)
+texture = ExtResource("13_stone")
+scale = Vector2(2, 2)
+[node name="BlockBody62" type="Sprite2D" parent="Ground"]
+position = Vector2(7800, 1010)
+texture = ExtResource("13_stone")
+scale = Vector2(2, 2)
+[node name="BlockBody63" type="Sprite2D" parent="Ground"]
+position = Vector2(7928, 1010)
+texture = ExtResource("13_stone")
+scale = Vector2(2, 2)
+[node name="BlockBody64" type="Sprite2D" parent="Ground"]
+position = Vector2(8056, 1010)
+texture = ExtResource("13_stone")
+scale = Vector2(2, 2)
+[node name="BlockBody65" type="Sprite2D" parent="Ground"]
+position = Vector2(8184, 1010)
+texture = ExtResource("13_stone")
+scale = Vector2(2, 2)
+[node name="BlockBody66" type="Sprite2D" parent="Ground"]
+position = Vector2(8312, 1010)
+texture = ExtResource("13_stone")
+scale = Vector2(2, 2)
+[node name="BlockBody67" type="Sprite2D" parent="Ground"]
+position = Vector2(8440, 1010)
+texture = ExtResource("13_stone")
+scale = Vector2(2, 2)
+[node name="BlockBody68" type="Sprite2D" parent="Ground"]
+position = Vector2(8568, 1010)
+texture = ExtResource("13_stone")
+scale = Vector2(2, 2)
+[node name="BlockBody69" type="Sprite2D" parent="Ground"]
+position = Vector2(8696, 1010)
+texture = ExtResource("13_stone")
+scale = Vector2(2, 2)
+[node name="BlockBody70" type="Sprite2D" parent="Ground"]
+position = Vector2(8824, 1010)
+texture = ExtResource("13_stone")
+scale = Vector2(2, 2)
+[node name="BlockBody71" type="Sprite2D" parent="Ground"]
+position = Vector2(8952, 1010)
+texture = ExtResource("13_stone")
+scale = Vector2(2, 2)
+[node name="BlockBody72" type="Sprite2D" parent="Ground"]
+position = Vector2(9080, 1010)
+texture = ExtResource("13_stone")
+scale = Vector2(2, 2)
+[node name="BlockBody73" type="Sprite2D" parent="Ground"]
+position = Vector2(9208, 1010)
+texture = ExtResource("13_stone")
+scale = Vector2(2, 2)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Ground"]
 position = Vector2(4600, 960)
@@ -300,7 +901,7 @@ theme_override_constants/outline_size = 8
 position = Vector2(3300, 620)
 
 [node name="PlatformFive" type="StaticBody2D" parent="."]
-position = Vector2(5220, 820)
+position = Vector2(5220, 775)
 [node name="Visual" type="Sprite2D" parent="PlatformFive"]
 texture = ExtResource("13_stone")
 scale = Vector2(6.5625, 0.8125)

@@ -1,3 +1,4 @@
 [
-  {"level":"res://scenes/levels/world_1_level_1.tscn","x":1930,"y":890,"zoom":2.0,"out":"shotB1_calib_checkpoint.png","luke_x":2010,"luke_y":880,"wait":40}
+  {"level":"res://scenes/levels/world_1_level_1.tscn","x":1900,"y":880,"zoom":2.5,"out":"shotE2_before_checkpoint.png","wait":30},
+  {"level":"res://scenes/levels/world_2_level_1.tscn","x":520,"y":860,"zoom":2.5,"out":"shotE2_before_missionsign.png","wait":30}
 ]

@@ -56,9 +56,35 @@ centered = false
 z_index = -10
 texture = ExtResource("22_bg")
 scale = Vector2(1.7763, 1.7763)
-region_enabled = true
-region_rect = Rect2(0, 0, 20000, 608)
-texture_repeat = 2
+
+[node name="BackgroundTile2" type="Sprite2D" parent="."]
+position = Vector2(3069.45, 0)
+centered = false
+z_index = -10
+texture = ExtResource("22_bg")
+scale = Vector2(1.7763, 1.7763)
+
+[node name="BackgroundTile3" type="Sprite2D" parent="."]
+position = Vector2(6138.89, 0)
+centered = false
+z_index = -10
+texture = ExtResource("22_bg")
+scale = Vector2(1.7763, 1.7763)
+
+[node name="BackgroundTile4" type="Sprite2D" parent="."]
+position = Vector2(9208.34, 0)
+centered = false
+z_index = -10
+texture = ExtResource("22_bg")
+scale = Vector2(1.7763, 1.7763)
+
+[node name="BackgroundTile5" type="Sprite2D" parent="."]
+position = Vector2(12277.8, 0)
+centered = false
+z_index = -10
+texture = ExtResource("22_bg")
+scale = Vector2(1.7763, 1.7763)
+
 
 [node name="StartPad" type="StaticBody2D" parent="."]
 position = Vector2(400, 960)

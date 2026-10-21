@@ -78,8 +78,13 @@ func _collect_platforms(level: Node) -> Array:
 	for child in level.get_children():
 		if not (child is StaticBody2D):
 			continue
-		# Las cajas rompibles son un bonus opcional, no parte de la ruta.
-		if child.name.ends_with("Boundary") or child.name == "SeaFloor" or child is BreakableBox:
+		# Las cajas rompibles y la escalera secreta de la vida extra (C2) son
+		# un bonus OPCIONAL fuera de la ruta principal forzada (su propia
+		# alcanzabilidad la verifica tests/diag_secret_life.gd por separado);
+		# si se las deja entrar aca, se cuelan en medio de la cadena de islas
+		# principal y generan un salto que no es el que el jugador tiene que
+		# hacer para terminar el nivel.
+		if child.name.ends_with("Boundary") or child.name == "SeaFloor" or child is BreakableBox 				or child.name.begins_with("Secret"):
 			continue
 		var shape_node: CollisionShape2D = child.get_node_or_null("CollisionShape2D")
 		if shape_node == null or not (shape_node.shape is RectangleShape2D):

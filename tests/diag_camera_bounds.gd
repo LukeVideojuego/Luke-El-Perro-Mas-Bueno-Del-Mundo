@@ -50,17 +50,36 @@ func _ready() -> void:
 			level.queue_free()
 			await get_tree().process_frame
 			continue
-		var bg: Sprite2D = level.get_node_or_null("Background")
-		if bg == null:
-			bg = level.get_node_or_null("Sky")
-		if bg == null or bg.texture == null:
+		# E1: el fondo de un nivel normal ya no es UN sprite (eso se rompia de
+		# verdad en el renderer con region_rect gigante simulando tiling
+		# infinito, confirmado con captura real); ahora son VARIAS instancias
+		# ("Background", "BackgroundTile2"...) una al lado de la otra. Hay que
+		# juntar el rectangulo de TODAS, si no esta prueba mide solo el ancho
+		# de la primera copia y reporta un falso recorte de camara.
+		var tiles: Array[Sprite2D] = []
+		for child in level.get_children():
+			if child is Sprite2D and (child.name == "Background" or String(child.name).begins_with("BackgroundTile")):
+				tiles.append(child)
+		if tiles.is_empty():
+			var sky := level.get_node_or_null("Sky") as Sprite2D
+			if sky != null:
+				tiles.append(sky)
+		if tiles.is_empty():
 			print("SKIP: ", path.get_file(), " (sin fondo propio)")
 			level.queue_free()
 			await get_tree().process_frame
 			continue
-		var size: Vector2 = bg.region_rect.size if bg.region_enabled else bg.texture.get_size()
-		size *= bg.global_scale
-		var origin: Vector2 = bg.global_position - (size * 0.5 if bg.centered else Vector2.ZERO)
+		var origin := Vector2.INF
+		var bottom_right := -Vector2.INF
+		for tile in tiles:
+			if tile.texture == null:
+				continue
+			var tsize: Vector2 = tile.region_rect.size if tile.region_enabled else tile.texture.get_size()
+			tsize *= tile.global_scale
+			var torigin: Vector2 = tile.global_position - (tsize * 0.5 if tile.centered else Vector2.ZERO)
+			origin = origin.min(torigin)
+			bottom_right = bottom_right.max(torigin + tsize)
+		var size: Vector2 = bottom_right - origin
 		var ok_left: bool = float(cam.limit_left) >= origin.x - 0.5
 		var ok_right: bool = float(cam.limit_right) <= origin.x + size.x + 0.5
 		var ok_top: bool = float(cam.limit_top) >= origin.y - 0.5

@@ -61,15 +61,299 @@ centered = false
 z_index = -10
 texture = ExtResource("32_bg")
 scale = Vector2(1.4344, 1.4344)
-region_enabled = true
-region_rect = Rect2(0, 0, 20000, 753)
-texture_repeat = 2
+
+[node name="BackgroundTile2" type="Sprite2D" parent="."]
+position = Vector2(2996.46, 0)
+centered = false
+z_index = -10
+texture = ExtResource("32_bg")
+scale = Vector2(1.4344, 1.4344)
+
+[node name="BackgroundTile3" type="Sprite2D" parent="."]
+position = Vector2(5992.92, 0)
+centered = false
+z_index = -10
+texture = ExtResource("32_bg")
+scale = Vector2(1.4344, 1.4344)
+
+[node name="BackgroundTile4" type="Sprite2D" parent="."]
+position = Vector2(8989.38, 0)
+centered = false
+z_index = -10
+texture = ExtResource("32_bg")
+scale = Vector2(1.4344, 1.4344)
+
 
 [node name="Ground" type="StaticBody2D" parent="."]
 position = Vector2(4200, 1015)
 [node name="Visual" type="Sprite2D" parent="Ground"]
+position = Vector2(-4224, 0)
 texture = ExtResource("9_grass")
-scale = Vector2(131.25, 1.85)
+scale = Vector2(2, 2)
+[node name="Visual2" type="Sprite2D" parent="Ground"]
+position = Vector2(-4096, 0)
+texture = ExtResource("9_grass")
+scale = Vector2(2, 2)
+[node name="Visual3" type="Sprite2D" parent="Ground"]
+position = Vector2(-3968, 0)
+texture = ExtResource("9_grass")
+scale = Vector2(2, 2)
+[node name="Visual4" type="Sprite2D" parent="Ground"]
+position = Vector2(-3840, 0)
+texture = ExtResource("9_grass")
+scale = Vector2(2, 2)
+[node name="Visual5" type="Sprite2D" parent="Ground"]
+position = Vector2(-3712, 0)
+texture = ExtResource("9_grass")
+scale = Vector2(2, 2)
+[node name="Visual6" type="Sprite2D" parent="Ground"]
+position = Vector2(-3584, 0)
+texture = ExtResource("9_grass")
+scale = Vector2(2, 2)
+[node name="Visual7" type="Sprite2D" parent="Ground"]
+position = Vector2(-3456, 0)
+texture = ExtResource("9_grass")
+scale = Vector2(2, 2)
+[node name="Visual8" type="Sprite2D" parent="Ground"]
+position = Vector2(-3328, 0)
+texture = ExtResource("9_grass")
+scale = Vector2(2, 2)
+[node name="Visual9" type="Sprite2D" parent="Ground"]
+position = Vector2(-3200, 0)
+texture = ExtResource("9_grass")
+scale = Vector2(2, 2)
+[node name="Visual10" type="Sprite2D" parent="Ground"]
+position = Vector2(-3072, 0)
+texture = ExtResource("9_grass")
+scale = Vector2(2, 2)
+[node name="Visual11" type="Sprite2D" parent="Ground"]
+position = Vector2(-2944, 0)
+texture = ExtResource("9_grass")
+scale = Vector2(2, 2)
+[node name="Visual12" type="Sprite2D" parent="Ground"]
+position = Vector2(-2816, 0)
+texture = ExtResource("9_grass")
+scale = Vector2(2, 2)
+[node name="Visual13" type="Sprite2D" parent="Ground"]
+position = Vector2(-2688, 0)
+texture = ExtResource("9_grass")
+scale = Vector2(2, 2)
+[node name="Visual14" type="Sprite2D" parent="Ground"]
+position = Vector2(-2560, 0)
+texture = ExtResource("9_grass")
+scale = Vector2(2, 2)
+[node name="Visual15" type="Sprite2D" parent="Ground"]
+position = Vector2(-2432, 0)
+texture = ExtResource("9_grass")
+scale = Vector2(2, 2)
+[node name="Visual16" type="Sprite2D" parent="Ground"]
+position = Vector2(-2304, 0)
+texture = ExtResource("9_grass")
+scale = Vector2(2, 2)
+[node name="Visual17" type="Sprite2D" parent="Ground"]
+position = Vector2(-2176, 0)
+texture = ExtResource("9_grass")
+scale = Vector2(2, 2)
+[node name="Visual18" type="Sprite2D" parent="Ground"]
+position = Vector2(-2048, 0)
+texture = ExtResource("9_grass")
+scale = Vector2(2, 2)
+[node name="Visual19" type="Sprite2D" parent="Ground"]
+position = Vector2(-1920, 0)
+texture = ExtResource("9_grass")
+scale = Vector2(2, 2)
+[node name="Visual20" type="Sprite2D" parent="Ground"]
+position = Vector2(-1792, 0)
+texture = ExtResource("9_grass")
+scale = Vector2(2, 2)
+[node name="Visual21" type="Sprite2D" parent="Ground"]
+position = Vector2(-1664, 0)
+texture = ExtResource("9_grass")
+scale = Vector2(2, 2)
+[node name="Visual22" type="Sprite2D" parent="Ground"]
+position = Vector2(-1536, 0)
+texture = ExtResource("9_grass")
+scale = Vector2(2, 2)
+[node name="Visual23" type="Sprite2D" parent="Ground"]
+position = Vector2(-1408, 0)
+texture = ExtResource("9_grass")
+scale = Vector2(2, 2)
+[node name="Visual24" type="Sprite2D" parent="Ground"]
+position = Vector2(-1280, 0)
+texture = ExtResource("9_grass")
+scale = Vector2(2, 2)
+[node name="Visual25" type="Sprite2D" parent="Ground"]
+position = Vector2(-1152, 0)
+texture = ExtResource("9_grass")
+scale = Vector2(2, 2)
+[node name="Visual26" type="Sprite2D" parent="Ground"]
+position = Vector2(-1024, 0)
+texture = ExtResource("9_grass")
+scale = Vector2(2, 2)
+[node name="Visual27" type="Sprite2D" parent="Ground"]
+position = Vector2(-896, 0)
+texture = ExtResource("9_grass")
+scale = Vector2(2, 2)
+[node name="Visual28" type="Sprite2D" parent="Ground"]
+position = Vector2(-768, 0)
+texture = ExtResource("9_grass")
+scale = Vector2(2, 2)
+[node name="Visual29" type="Sprite2D" parent="Ground"]
+position = Vector2(-640, 0)
+texture = ExtResource("9_grass")
+scale = Vector2(2, 2)
+[node name="Visual30" type="Sprite2D" parent="Ground"]
+position = Vector2(-512, 0)
+texture = ExtResource("9_grass")
+scale = Vector2(2, 2)
+[node name="Visual31" type="Sprite2D" parent="Ground"]
+position = Vector2(-384, 0)
+texture = ExtResource("9_grass")
+scale = Vector2(2, 2)
+[node name="Visual32" type="Sprite2D" parent="Ground"]
+position = Vector2(-256, 0)
+texture = ExtResource("9_grass")
+scale = Vector2(2, 2)
+[node name="Visual33" type="Sprite2D" parent="Ground"]
+position = Vector2(-128, 0)
+texture = ExtResource("9_grass")
+scale = Vector2(2, 2)
+[node name="Visual34" type="Sprite2D" parent="Ground"]
+position = Vector2(0, 0)
+texture = ExtResource("9_grass")
+scale = Vector2(2, 2)
+[node name="Visual35" type="Sprite2D" parent="Ground"]
+position = Vector2(128, 0)
+texture = ExtResource("9_grass")
+scale = Vector2(2, 2)
+[node name="Visual36" type="Sprite2D" parent="Ground"]
+position = Vector2(256, 0)
+texture = ExtResource("9_grass")
+scale = Vector2(2, 2)
+[node name="Visual37" type="Sprite2D" parent="Ground"]
+position = Vector2(384, 0)
+texture = ExtResource("9_grass")
+scale = Vector2(2, 2)
+[node name="Visual38" type="Sprite2D" parent="Ground"]
+position = Vector2(512, 0)
+texture = ExtResource("9_grass")
+scale = Vector2(2, 2)
+[node name="Visual39" type="Sprite2D" parent="Ground"]
+position = Vector2(640, 0)
+texture = ExtResource("9_grass")
+scale = Vector2(2, 2)
+[node name="Visual40" type="Sprite2D" parent="Ground"]
+position = Vector2(768, 0)
+texture = ExtResource("9_grass")
+scale = Vector2(2, 2)
+[node name="Visual41" type="Sprite2D" parent="Ground"]
+position = Vector2(896, 0)
+texture = ExtResource("9_grass")
+scale = Vector2(2, 2)
+[node name="Visual42" type="Sprite2D" parent="Ground"]
+position = Vector2(1024, 0)
+texture = ExtResource("9_grass")
+scale = Vector2(2, 2)
+[node name="Visual43" type="Sprite2D" parent="Ground"]
+position = Vector2(1152, 0)
+texture = ExtResource("9_grass")
+scale = Vector2(2, 2)
+[node name="Visual44" type="Sprite2D" parent="Ground"]
+position = Vector2(1280, 0)
+texture = ExtResource("9_grass")
+scale = Vector2(2, 2)
+[node name="Visual45" type="Sprite2D" parent="Ground"]
+position = Vector2(1408, 0)
+texture = ExtResource("9_grass")
+scale = Vector2(2, 2)
+[node name="Visual46" type="Sprite2D" parent="Ground"]
+position = Vector2(1536, 0)
+texture = ExtResource("9_grass")
+scale = Vector2(2, 2)
+[node name="Visual47" type="Sprite2D" parent="Ground"]
+position = Vector2(1664, 0)
+texture = ExtResource("9_grass")
+scale = Vector2(2, 2)
+[node name="Visual48" type="Sprite2D" parent="Ground"]
+position = Vector2(1792, 0)
+texture = ExtResource("9_grass")
+scale = Vector2(2, 2)
+[node name="Visual49" type="Sprite2D" parent="Ground"]
+position = Vector2(1920, 0)
+texture = ExtResource("9_grass")
+scale = Vector2(2, 2)
+[node name="Visual50" type="Sprite2D" parent="Ground"]
+position = Vector2(2048, 0)
+texture = ExtResource("9_grass")
+scale = Vector2(2, 2)
+[node name="Visual51" type="Sprite2D" parent="Ground"]
+position = Vector2(2176, 0)
+texture = ExtResource("9_grass")
+scale = Vector2(2, 2)
+[node name="Visual52" type="Sprite2D" parent="Ground"]
+position = Vector2(2304, 0)
+texture = ExtResource("9_grass")
+scale = Vector2(2, 2)
+[node name="Visual53" type="Sprite2D" parent="Ground"]
+position = Vector2(2432, 0)
+texture = ExtResource("9_grass")
+scale = Vector2(2, 2)
+[node name="Visual54" type="Sprite2D" parent="Ground"]
+position = Vector2(2560, 0)
+texture = ExtResource("9_grass")
+scale = Vector2(2, 2)
+[node name="Visual55" type="Sprite2D" parent="Ground"]
+position = Vector2(2688, 0)
+texture = ExtResource("9_grass")
+scale = Vector2(2, 2)
+[node name="Visual56" type="Sprite2D" parent="Ground"]
+position = Vector2(2816, 0)
+texture = ExtResource("9_grass")
+scale = Vector2(2, 2)
+[node name="Visual57" type="Sprite2D" parent="Ground"]
+position = Vector2(2944, 0)
+texture = ExtResource("9_grass")
+scale = Vector2(2, 2)
+[node name="Visual58" type="Sprite2D" parent="Ground"]
+position = Vector2(3072, 0)
+texture = ExtResource("9_grass")
+scale = Vector2(2, 2)
+[node name="Visual59" type="Sprite2D" parent="Ground"]
+position = Vector2(3200, 0)
+texture = ExtResource("9_grass")
+scale = Vector2(2, 2)
+[node name="Visual60" type="Sprite2D" parent="Ground"]
+position = Vector2(3328, 0)
+texture = ExtResource("9_grass")
+scale = Vector2(2, 2)
+[node name="Visual61" type="Sprite2D" parent="Ground"]
+position = Vector2(3456, 0)
+texture = ExtResource("9_grass")
+scale = Vector2(2, 2)
+[node name="Visual62" type="Sprite2D" parent="Ground"]
+position = Vector2(3584, 0)
+texture = ExtResource("9_grass")
+scale = Vector2(2, 2)
+[node name="Visual63" type="Sprite2D" parent="Ground"]
+position = Vector2(3712, 0)
+texture = ExtResource("9_grass")
+scale = Vector2(2, 2)
+[node name="Visual64" type="Sprite2D" parent="Ground"]
+position = Vector2(3840, 0)
+texture = ExtResource("9_grass")
+scale = Vector2(2, 2)
+[node name="Visual65" type="Sprite2D" parent="Ground"]
+position = Vector2(3968, 0)
+texture = ExtResource("9_grass")
+scale = Vector2(2, 2)
+[node name="Visual66" type="Sprite2D" parent="Ground"]
+position = Vector2(4096, 0)
+texture = ExtResource("9_grass")
+scale = Vector2(2, 2)
+[node name="Visual67" type="Sprite2D" parent="Ground"]
+position = Vector2(4224, 0)
+texture = ExtResource("9_grass")
+scale = Vector2(2, 2)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Ground"]
 shape = SubResource("GroundShape")
 

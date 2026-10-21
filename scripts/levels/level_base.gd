@@ -84,21 +84,45 @@ func _apply_camera_limits() -> void:
 	camera.limit_left = int(bounds.x)
 	camera.limit_right = int(bounds.y)
 
-## Rect global del fondo del nivel (Sprite2D "Background", sin centrar y con
-## region_rect). Rect2() vacío si el nivel no tiene fondo propio.
+## Rect global del fondo del nivel. Rect2() vacío si el nivel no tiene
+## fondo propio.
+##
+## E1: el fondo de los niveles normales ya NO es un solo Sprite2D con un
+## region_rect gigante simulando tiling infinito (esa tecnica se rompia de
+## verdad en el renderer: mas alla de ~3 repeticiones reales necesarias,
+## dejaba de dibujar y aparecia la franja gris del motor, confirmado con
+## captura real). Ahora son VARIAS instancias Sprite2D normales
+## ("Background", "BackgroundTile2", "BackgroundTile3"...) puestas una al
+## lado de la otra, cada una con su copia completa de la textura. Esta
+## funcion junta el rectangulo de TODAS para seguir dando el ancho real
+## cubierto (si solo mirara "Background", el límite de cámara quedaría
+## recortado al ancho de una sola copia de la textura).
 func _compute_background_rect() -> Rect2:
-	var background := get_node_or_null("Background") as Sprite2D
-	if background == null:
+	var tiles: Array[Sprite2D] = []
+	for child in get_children():
+		if child is Sprite2D and (child.name == "Background" or String(child.name).begins_with("BackgroundTile")):
+			tiles.append(child)
+	if tiles.is_empty():
 		# El minijuego final no tiene "Background": su fondo es "Sky".
-		background = get_node_or_null("Sky") as Sprite2D
-	if background == null or background.texture == null:
+		var sky := get_node_or_null("Sky") as Sprite2D
+		if sky != null:
+			tiles.append(sky)
+	if tiles.is_empty():
 		return Rect2()
-	var size: Vector2 = background.region_rect.size if background.region_enabled else background.texture.get_size()
-	size *= background.global_scale
-	var origin: Vector2 = background.global_position
-	if background.centered:
-		origin -= size * 0.5
-	return Rect2(origin, size)
+	var result := Rect2()
+	var first := true
+	for tile in tiles:
+		if tile.texture == null:
+			continue
+		var size: Vector2 = tile.region_rect.size if tile.region_enabled else tile.texture.get_size()
+		size *= tile.global_scale
+		var origin: Vector2 = tile.global_position
+		if tile.centered:
+			origin -= size * 0.5
+		var rect := Rect2(origin, size)
+		result = rect if first else result.merge(rect)
+		first = false
+	return result
 
 ## Devuelve Vector2(min_x, max_x) de toda la geometría sólida del nivel.
 func _compute_static_x_bounds(root: Node) -> Vector2:
