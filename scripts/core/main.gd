@@ -186,16 +186,15 @@ func load_level(level_id: String) -> void:
 		set_paused(false)
 	_update_music_for_level(level_id)
 
-## La música de cada mundo se elige por el mundo del nivel (LevelProgression),
-## con pista propia y mas tenebrosa para las peleas de jefe, y 3 variantes
-## para el Mundo 4 según el sub-ambiente (selva/mar/India). "final_screen"
-## comparte la pista triunfal con las cinemáticas de cierre.
+## D1: cada uno de los 16 niveles jugables tiene su PROPIA pista (antes
+## compartian una sola por mundo, mas una "boss" generica para los 4 jefes).
+## Las de un mismo mundo son la misma familia de instrumentos/tonalidad
+## (generadas juntas, ver D1 en el resumen); el jefe de cada mundo usa la
+## version mas rapida y oscura de esa familia. "final_screen" sigue
+## compartiendo la pista triunfal con las cinematicas de cierre.
 func _update_music_for_level(level_id: String) -> void:
 	if level_id == "final_screen":
 		AudioDirector.play_music("final")
-		return
-	if level_id.ends_with("_boss"):
-		AudioDirector.play_music("boss")
 		return
 	match level_id:
 		"world_4_level_1":
@@ -207,9 +206,17 @@ func _update_music_for_level(level_id: String) -> void:
 		"world_4_level_3":
 			AudioDirector.play_music("world4_india")
 			return
+		"world_4_boss":
+			AudioDirector.play_music("world4_boss")
+			return
 	var world := LevelProgression.get_world(level_id)
-	if world >= 1 and world <= 3:
-		AudioDirector.play_music("world%d" % world)
+	var order := LevelProgression.get_order(level_id)
+	if world < 1 or world > 4:
+		return
+	if order >= 4:
+		AudioDirector.play_music("world%d_boss" % world)
+	else:
+		AudioDirector.play_music("world%d_level%d" % [world, order])
 
 func _on_level_completed(level_id: String) -> void:
 	if is_transitioning:

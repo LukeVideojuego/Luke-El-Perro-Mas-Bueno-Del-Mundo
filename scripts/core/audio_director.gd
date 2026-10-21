@@ -26,17 +26,29 @@ const SFX_FILES := {
 	&"pause": "pause.wav",
 }
 
+## D1: una pista POR NIVEL (16 en total), no una por mundo. Cada mundo es
+## una familia (misma tonalidad/instrumentos) con el jefe en version mas
+## rapida y oscura; mantienen el mismo mapeo menu/intro/final de antes.
 const MUSIC_FILES := {
 	"menu": "menu.wav",
-	"world1": "world1.wav",
-	"world2": "world2.wav",
-	"world3": "world3.wav",
+	"intro": "intro.wav",
+	"final": "final.wav",
+	"world1_level1": "world1_level1.wav",
+	"world1_level2": "world1_level2.wav",
+	"world1_level3": "world1_level3.wav",
+	"world1_boss": "world1_boss.wav",
+	"world2_level1": "world2_level1.wav",
+	"world2_level2": "world2_level2.wav",
+	"world2_level3": "world2_level3.wav",
+	"world2_boss": "world2_boss.wav",
+	"world3_level1": "world3_level1.wav",
+	"world3_level2": "world3_level2.wav",
+	"world3_level3": "world3_level3.wav",
+	"world3_boss": "world3_boss.wav",
 	"world4_selva": "world4_selva.wav",
 	"world4_mar": "world4_mar.wav",
 	"world4_india": "world4_india.wav",
-	"boss": "boss.wav",
-	"intro": "intro.wav",
-	"final": "final.wav",
+	"world4_boss": "world4_boss.wav",
 }
 
 const SFX_POOL_SIZE := 6
