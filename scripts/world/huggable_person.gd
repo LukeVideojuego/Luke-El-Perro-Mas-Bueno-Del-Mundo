@@ -169,3 +169,13 @@ func _do_hug(_body: Node2D) -> void:
 	tween.tween_property(sprite, "scale", sprite.scale, 0.12)
 	AudioDirector.play_event(&"hug")
 	hugged.emit(self)
+
+## E4: vuelve a la pose/estado de "sin abrazar" para reintentar el minijuego
+## sin tener que recargar todo el nivel (deambular/saltar se retoma solo en
+## el próximo _process, ya que is_hugged pasa a false).
+func reset_hug() -> void:
+	is_hugged = false
+	sprite.texture = _idle_texture
+	heart.visible = false
+	if wander_enabled:
+		_pick_new_target()

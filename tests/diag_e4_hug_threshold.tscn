@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://tests/diag_e4_hug_threshold.gd" id="1_script"]
+
+[node name="DiagE4HugThreshold" type="Node2D"]
+script = ExtResource("1_script")

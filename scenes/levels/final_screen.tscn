@@ -560,6 +560,42 @@ theme_override_colors/font_color = Color(0, 0, 0, 0)
 value = 0.0
 show_percentage = false
 
+[node name="RetryHUD" type="CanvasLayer" parent="."]
+layer = 13
+visible = false
+
+[node name="Backdrop" type="ColorRect" parent="RetryHUD"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0.03, 0.03, 0.06, 0.72)
+
+[node name="TimeUpLabel" type="Label" parent="RetryHUD"]
+position = Vector2(300, 300)
+text = "¡SE ACABÓ EL TIEMPO!"
+horizontal_alignment = 1
+theme_override_font_sizes/font_size = 56
+theme_override_colors/font_color = Color(1, 0.75, 0.2, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 8
+
+[node name="DetailLabel" type="Label" parent="RetryHUD"]
+position = Vector2(300, 400)
+text = "Abrazaste a poca gente. ¡Probá de nuevo!"
+horizontal_alignment = 1
+theme_override_font_sizes/font_size = 26
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+
+[node name="RetryButton" type="Button" parent="RetryHUD"]
+offset_left = 550.0
+offset_top = 480.0
+offset_right = 750.0
+offset_bottom = 540.0
+theme_override_font_sizes/font_size = 28
+text = "REINTENTAR"
+
 [node name="CompletionLabel" type="Label" parent="."]
 visible = false
 position = Vector2(300, 360)
