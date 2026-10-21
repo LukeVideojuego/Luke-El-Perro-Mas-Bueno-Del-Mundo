@@ -19,7 +19,7 @@ extends CharacterBody2D
 @onready var attack_visual: Polygon2D = $AttackVisual
 @onready var aura_visual: Polygon2D = $AuraVisual
 @onready var hat_sprite: Sprite2D = $Hat
-@onready var cape_sprite: Sprite2D = $Cape
+@onready var cape_ribbon: CapeRibbon = $Cape
 @onready var suit_sprite: Sprite2D = $Suit
 
 @export_category("Power-ups")
@@ -45,8 +45,6 @@ const HAT_TEXTURES := {
 	"hat_tophat": preload("res://assets/items/Shop/hat_tophat.png"),
 	"hat_crown": preload("res://assets/items/Shop/hat_crown.png"),
 }
-const CAPE_FOLDED := preload("res://assets/items/Shop/cape_folded.png")
-const CAPE_OPEN := preload("res://assets/items/Shop/cape_open.png")
 const SUIT_BODY := preload("res://assets/items/Shop/suit_body.png")
 ## Posicion del sombrero (borde inferior, centrado) por animacion, en
 ## coordenadas locales de Luke.
@@ -55,12 +53,6 @@ const HAT_ANCHOR := {
 	"walk": Vector2(18.5, -44.9),
 	"jump": Vector2(17.2, -50.4),
 	"attack": Vector2(14.1, -27.1),
-}
-const CAPE_ANCHOR := {
-	"idle": Vector2(-16.0, 2.0),
-	"walk": Vector2(-17.0, -3.0),
-	"jump": Vector2(-18.0, 3.0),
-	"attack": Vector2(-20.0, -10.0),
 }
 ## Medido sobre el lomo real de Luke (borde superior opaco de la mitad
 ## trasera del sprite en cada pose).
@@ -370,20 +362,17 @@ func _update_cosmetics() -> void:
 
 	var wears_suit: bool = GameState.suit_equipped
 	suit_sprite.visible = wears_suit
-	cape_sprite.visible = wears_suit
+	# E3: la capa ya no es un sprite de 2 poses; es scripts/player/
+	# cape_ribbon.gd, una tira simulada (Verlet) que sigue el lomo de Luke
+	# con inercia propia -- el movimiento real (colgar/flamear/estirarse/
+	# ondular) sale solo de la fisica, no hace falta elegir pose aca.
+	cape_ribbon.visible = wears_suit
 	if wears_suit:
 		var suit_anchor: Vector2 = SUIT_ANCHOR.get(anim, SUIT_ANCHOR["idle"])
 		suit_sprite.texture = SUIT_BODY
 		suit_sprite.position = Vector2(suit_anchor.x * facing_direction, suit_anchor.y + bob)
 		suit_sprite.flip_h = flipped
 		suit_sprite.modulate = animated_sprite.modulate
-		var cape_tex: Texture2D = CAPE_OPEN if not is_on_floor() else CAPE_FOLDED
-		var cape_anchor: Vector2 = CAPE_ANCHOR.get(anim, CAPE_ANCHOR["idle"])
-		cape_sprite.texture = cape_tex
-		cape_sprite.offset = Vector2(0.0, cape_tex.get_height() * 0.5)
-		cape_sprite.position = Vector2(cape_anchor.x * facing_direction, cape_anchor.y + bob)
-		cape_sprite.flip_h = flipped
-		cape_sprite.modulate = animated_sprite.modulate
 
 func _handle_underwater_effects(delta: float) -> void:
 	_idle_time += delta
