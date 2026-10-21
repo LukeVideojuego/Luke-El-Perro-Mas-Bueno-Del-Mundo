@@ -27,6 +27,15 @@ func _physics_process(delta: float) -> void:
 		queue_free()
 
 func _on_body_entered(body: Node2D) -> void:
-	if body.has_method("receive_attack"):
-		body.receive_attack(_thrower)
+	_try_hit(body)
+
+## B7: la caja receptora de los jefes es un Area2D (no un cuerpo), porque el
+## cuerpo fisico del jefe es chico y esta abajo de todo. Sin esto el huesito
+## solo le pegaba al jefe en las piernas.
+func _on_area_entered(area: Area2D) -> void:
+	_try_hit(area)
+
+func _try_hit(target: Node) -> void:
+	if target != null and target.has_method("receive_attack"):
+		target.receive_attack(_thrower)
 		queue_free()

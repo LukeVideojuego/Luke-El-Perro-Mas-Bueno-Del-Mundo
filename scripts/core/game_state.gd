@@ -10,10 +10,18 @@ signal coins_changed(total_coins: int)
 signal speed_boost_changed(is_active: bool)
 signal invincibility_changed(is_active: bool)
 signal bone_throw_unlocked_changed(is_unlocked: bool)
+## C1: se quedo sin vidas. El nivel NO se reinicia solo: main.gd muestra la
+## pantalla negra de "Te has quedado sin vidas" con CONTINUAR / GAME OVER.
+signal out_of_lives(level_id: String)
+signal continues_changed(remaining: int)
 
 const DEFAULT_LIVES := 3
+## C1: continues totales por partida (no por nivel).
+const DEFAULT_CONTINUES := 3
 
 var lives := DEFAULT_LIVES
+## C1: cuantos CONTINUAR le quedan al jugador en esta partida.
+var continues_left := DEFAULT_CONTINUES
 var aura_active := false
 var checkpoint_position := Vector2.ZERO
 var checkpoint_id := ""
@@ -94,6 +102,38 @@ func lose_life() -> bool:
 	SaveManager.save_game()
 	return lives > 0
 
+## C1: lo llama level_base cuando Luke perdio la ultima vida. Se protege de
+## emitir dos veces seguidas (el nivel sigue vivo unos frames mas).
+var _out_of_lives_pending := false
+
+func report_out_of_lives() -> void:
+	if _out_of_lives_pending:
+		return
+	_out_of_lives_pending = true
+	SaveManager.save_game()
+	out_of_lives.emit(current_level_id)
+
+## C1: gasta un continue y deja el estado listo para reiniciar el nivel con
+## 3 vidas desde el principio. Devuelve false si ya no quedaban.
+func use_continue() -> bool:
+	if continues_left <= 0:
+		return false
+	continues_left -= 1
+	continues_changed.emit(continues_left)
+	lives = DEFAULT_LIVES
+	aura_active = false
+	checkpoint_position = Vector2.ZERO
+	checkpoint_id = ""
+	is_level_complete = false
+	_out_of_lives_pending = false
+	lives_changed.emit(lives)
+	aura_changed.emit(aura_active)
+	SaveManager.save_game()
+	return true
+
+func clear_out_of_lives() -> void:
+	_out_of_lives_pending = false
+
 func reset_level_state(spawn_position: Vector2) -> void:
 	lives = DEFAULT_LIVES
 	aura_active = false
@@ -123,6 +163,9 @@ func prepare_next_level() -> void:
 ## una vez vistos.
 func reset_for_new_game() -> void:
 	lives = DEFAULT_LIVES
+	continues_left = DEFAULT_CONTINUES
+	_out_of_lives_pending = false
+	continues_changed.emit(continues_left)
 	aura_active = false
 	checkpoint_position = Vector2.ZERO
 	checkpoint_id = ""

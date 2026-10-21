@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=6 format=3]
 
 [ext_resource type="Script" path="res://scripts/enemies/boss_base.gd" id="1_script"]
+[ext_resource type="Script" path="res://scripts/enemies/boss_hurtbox.gd" id="90_hurtbox"]
 [ext_resource type="Texture2D" path="res://assets/Enemies/Reference/don_sombra.png" id="2_texture"]
 [ext_resource type="Texture2D" path="res://assets/Enemies/Reference/don_sombra_walk.png" id="4_walk"]
 [ext_resource type="PackedScene" path="res://scenes/objects/knife_projectile.tscn" id="3_projectile"]
@@ -44,6 +45,13 @@ scale = Vector2(1.2662, 1.2662)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 8)
 shape = SubResource("BodyShape")
+
+[node name="HurtBox" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 0
+monitoring = false
+monitorable = true
+script = ExtResource("90_hurtbox")
 
 [node name="DamageArea" type="Area2D" parent="."]
 collision_layer = 0

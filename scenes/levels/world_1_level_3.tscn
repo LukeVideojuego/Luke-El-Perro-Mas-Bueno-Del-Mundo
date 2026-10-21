@@ -301,8 +301,8 @@ position = Vector2(3150, 600)
 [node name="Grandma1" type="Sprite2D" parent="."]
 texture_filter = 1
 texture = ExtResource("21_grandma")
-position = Vector2(935, 898.42)
-scale = Vector2(1.2873, 1.2873)
+position = Vector2(935, 886.21)
+scale = Vector2(1.5292, 1.5292)
 [node name="Streetlamp1" type="Sprite2D" parent="."]
 texture = ExtResource("22_lamp")
 position = Vector2(600, 895)
@@ -324,7 +324,7 @@ position = Vector2(1600, 900)
 scale = Vector2(1.3, 1.3)
 [node name="WoodCrate1" type="Sprite2D" parent="."]
 texture = ExtResource("24_crate")
-position = Vector2(2450, 900)
+position = Vector2(2450, 853.00)
 scale = Vector2(1.3, 1.3)
 
 [node name="PlatformSix" type="StaticBody2D" parent="."]
@@ -437,14 +437,14 @@ position = Vector2(8740, 920)
 [node name="LookoutOne" type="Sprite2D" parent="."]
 texture_filter = 1
 texture = ExtResource("26_lookout_texture")
-position = Vector2(7500, 985)
-scale = Vector2(0.9, 0.9)
+position = Vector2(7500, 822.7)
+scale = Vector2(1.9595, 1.9595)
 modulate = Color(0.25, 0.12, 0.12, 1)
 [node name="LookoutTwo" type="Sprite2D" parent="."]
 texture_filter = 1
 texture = ExtResource("26_lookout_texture")
-position = Vector2(8800, 985)
-scale = Vector2(0.9, 0.9)
+position = Vector2(8800, 822.7)
+scale = Vector2(1.9595, 1.9595)
 flip_h = true
 modulate = Color(0.25, 0.12, 0.12, 1)
 

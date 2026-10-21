@@ -1,9 +1,3 @@
 [
-  {"level":"res://scenes/levels/world_4_level_2.tscn","x":1100,"y":800,"zoom":1.0,"out":"shotA_w4l2_islas.png"},
-  {"level":"res://scenes/levels/world_4_level_2.tscn","x":4500,"y":800,"zoom":0.6,"out":"shotA_w4l2_huecoviejo.png"},
-  {"level":"res://scenes/levels/world_4_level_2.tscn","x":800,"y":860,"zoom":2.2,"out":"shotA_w4l2_medusa_cerca.png"},
-  {"level":"res://scenes/levels/world_4_level_2.tscn","x":8450,"y":800,"zoom":1.0,"out":"shotA_w4l2_meta.png"},
-  {"level":"res://scenes/levels/world_2_level_1.tscn","x":7950,"y":830,"zoom":1.0,"out":"shotA_w2l1_antes_meta.png"},
-  {"level":"res://scenes/levels/world_2_level_1.tscn","x":5600,"y":850,"zoom":1.0,"out":"shotA_w2l1_piso_medio.png"},
-  {"level":"res://scenes/levels/world_2_level_2.tscn","x":6000,"y":850,"zoom":1.0,"out":"shotA_w2l2_piso.png"}
+  {"level":"res://scenes/levels/world_1_level_1.tscn","x":1930,"y":890,"zoom":2.0,"out":"shotB1_calib_checkpoint.png","luke_x":2010,"luke_y":880,"wait":40}
 ]

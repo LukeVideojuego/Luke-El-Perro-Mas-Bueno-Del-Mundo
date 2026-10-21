@@ -60,11 +60,16 @@ func _next_shot() -> void:
 		var luke: Node2D = level.get_node_or_null("Luke")
 		if luke != null:
 			luke.global_position = Vector2(float(shot.luke_x), float(shot.get("luke_y", 820.0)))
-	cam = Camera2D.new()
-	cam.zoom = Vector2(float(shot.get("zoom", 1.0)), float(shot.get("zoom", 1.0)))
-	cam.position = Vector2(float(shot.x), float(shot.y))
-	add_child(cam)
-	cam.make_current()
+	if bool(shot.get("luke_camera", false)):
+		# Usa la camara REAL de Luke (con los limites que calcula level_base),
+		# que es lo unico que sirve para verificar el borde del encuadre.
+		cam = null
+	else:
+		cam = Camera2D.new()
+		cam.zoom = Vector2(float(shot.get("zoom", 1.0)), float(shot.get("zoom", 1.0)))
+		cam.position = Vector2(float(shot.x), float(shot.y))
+		add_child(cam)
+		cam.make_current()
 	wait_frames = int(shot.get("wait", 12))
 	frame = 0
 

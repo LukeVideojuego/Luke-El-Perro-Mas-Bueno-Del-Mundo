@@ -205,9 +205,9 @@ position = Vector2(3000, 655)
 
 [node name="ElderA" type="Sprite2D" parent="."]
 texture_filter = 1
-position = Vector2(2350, 863.63)
+position = Vector2(2350, 856.53)
 texture = ExtResource("16_npc1")
-scale = Vector2(1.5241, 1.5241)
+scale = Vector2(1.6874, 1.6874)
 
 [node name="ElderB" type="Sprite2D" parent="."]
 texture_filter = 1
@@ -348,9 +348,9 @@ position = Vector2(7500, 860)
 
 [node name="ElderC" type="Sprite2D" parent="."]
 texture_filter = 1
-position = Vector2(6550, 863.63)
+position = Vector2(6550, 856.53)
 texture = ExtResource("16_npc1")
-scale = Vector2(1.5241, 1.5241)
+scale = Vector2(1.6874, 1.6874)
 [node name="ElderD" type="Sprite2D" parent="."]
 texture_filter = 1
 position = Vector2(7850, 845.99)

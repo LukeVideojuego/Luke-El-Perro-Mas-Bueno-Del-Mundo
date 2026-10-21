@@ -20,7 +20,7 @@
 [ext_resource type="Texture2D" path="res://assets/Tiles/Default/window.png" id="17_window"]
 [ext_resource type="Texture2D" path="res://assets/Tiles/Default/door_closed.png" id="18_door"]
 [ext_resource type="Texture2D" path="res://assets/characters/Reference/transeunte3.png" id="19_person_c"]
-[ext_resource type="Texture2D" path="res://assets/Tiles/Default/sign_exit.png" id="20_exit"]
+[ext_resource type="PackedScene" path="res://scenes/objects/exit_sign.tscn" id="20_exit"]
 [ext_resource type="Texture2D" path="res://assets/Tiles/Default/spikes.png" id="21_spikes"]
 [ext_resource type="Texture2D" path="res://assets/Tiles/Default/bush.png" id="22_bush"]
 [ext_resource type="PackedScene" path="res://scenes/objects/coin.tscn" id="23_coin"]
@@ -113,16 +113,15 @@ scale = Vector2(2.4, 1)
 texture = ExtResource("11_fence")
 position = Vector2(3050, 928)
 scale = Vector2(2.4, 1)
-[node name="ExitSign" type="Sprite2D" parent="."]
-texture = ExtResource("20_exit")
+[node name="ExitSign" parent="." instance=ExtResource("20_exit")]
 position = Vector2(7850, 855)
 scale = Vector2(1.2, 1.2)
 
 [node name="PersonGreen" type="Sprite2D" parent="."]
 texture_filter = 1
 texture = ExtResource("12_person_a")
-position = Vector2(430, 850.31)
-scale = Vector2(1.5241, 1.5241)
+position = Vector2(430, 843.21)
+scale = Vector2(1.6874, 1.6874)
 [node name="PersonPink" type="Sprite2D" parent="."]
 texture_filter = 1
 texture = ExtResource("13_person_b")
@@ -276,13 +275,13 @@ position = Vector2(1910, 500)
 [node name="Grandma1" type="Sprite2D" parent="."]
 texture_filter = 1
 texture = ExtResource("27_grandma")
-position = Vector2(930, 898.42)
-scale = Vector2(1.2873, 1.2873)
+position = Vector2(930, 886.21)
+scale = Vector2(1.5292, 1.5292)
 [node name="Grandma2" type="Sprite2D" parent="."]
 texture_filter = 1
 texture = ExtResource("27_grandma")
-position = Vector2(3160, 898.42)
-scale = Vector2(1.2873, 1.2873)
+position = Vector2(3160, 886.21)
+scale = Vector2(1.5292, 1.5292)
 [node name="Streetlamp1" type="Sprite2D" parent="."]
 texture = ExtResource("28_lamp")
 position = Vector2(600, 895)
@@ -308,7 +307,7 @@ position = Vector2(2900, 900)
 scale = Vector2(1.3, 1.3)
 [node name="WoodCrate1" type="Sprite2D" parent="."]
 texture = ExtResource("30_crate")
-position = Vector2(2050, 900)
+position = Vector2(2050, 908.00)
 scale = Vector2(1.3, 1.3)
 
 [node name="PlatformFive" type="StaticBody2D" parent="."]
@@ -422,8 +421,8 @@ position = Vector2(7788.0, 780.0)
 [node name="Grandma3" type="Sprite2D" parent="."]
 texture_filter = 1
 texture = ExtResource("27_grandma")
-position = Vector2(5130, 898.42)
-scale = Vector2(1.2873, 1.2873)
+position = Vector2(5130, 886.21)
+scale = Vector2(1.5292, 1.5292)
 [node name="Streetlamp4" type="Sprite2D" parent="."]
 texture = ExtResource("28_lamp")
 position = Vector2(4800, 895)
@@ -440,7 +439,7 @@ position = Vector2(5700, 900)
 scale = Vector2(1.3, 1.3)
 [node name="WoodCrate2" type="Sprite2D" parent="."]
 texture = ExtResource("30_crate")
-position = Vector2(6250, 900)
+position = Vector2(6250, 908.00)
 scale = Vector2(1.3, 1.3)
 
 [node name="Bird1" parent="." instance=ExtResource("99_bird")]

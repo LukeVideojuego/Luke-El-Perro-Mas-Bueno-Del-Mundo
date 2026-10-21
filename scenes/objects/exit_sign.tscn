@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Texture2D" path="res://assets/Tiles/Default/sign_exit.png" id="1_sign"]
+[ext_resource type="Script" path="res://scripts/world/wood_post.gd" id="2_post"]
+
+[node name="ExitSign" type="Node2D"]
+
+[node name="Sign" type="Sprite2D" parent="."]
+texture = ExtResource("1_sign")
+
+[node name="WoodPost" type="Node2D" parent="."]
+script = ExtResource("2_post")
+post_top = 26.0
+post_width = 16.0
+base_width = 44.0

@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3]
+[gd_scene load_steps=5 format=3]
 
 [ext_resource type="Script" path="res://scripts/world/level_finish.gd" id="1_script"]
 [ext_resource type="Texture2D" path="res://assets/Tiles/Default/flag_green_a.png" id="2_flag"]
+[ext_resource type="Script" path="res://scripts/world/wood_post.gd" id="3_post"]
 
 [sub_resource type="RectangleShape2D" id="FinishShape"]
 size = Vector2(90, 150)
@@ -14,6 +15,13 @@ script = ExtResource("1_script")
 
 [node name="Flag" type="Sprite2D" parent="."]
 texture = ExtResource("2_flag")
+
+[node name="WoodPost" type="Node2D" parent="."]
+script = ExtResource("3_post")
+post_top = 24.0
+post_width = 12.0
+post_offset_x = -22.0
+base_width = 36.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("FinishShape")

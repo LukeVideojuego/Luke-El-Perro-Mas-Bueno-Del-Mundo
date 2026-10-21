@@ -16,6 +16,7 @@ func save_game() -> void:
 		"checkpoint_x": GameState.checkpoint_position.x,
 		"checkpoint_y": GameState.checkpoint_position.y,
 		"lives": GameState.lives,
+		"continues_left": GameState.continues_left,
 		"coins": GameState.coins,
 		"has_seen_intro": GameState.has_seen_intro,
 		"has_seen_world1_cheer": GameState.has_seen_world1_cheer,
@@ -52,6 +53,7 @@ func load_game() -> bool:
 		float(data.get("checkpoint_y", 0.0))
 	)
 	GameState.lives = int(data.get("lives", GameState.DEFAULT_LIVES))
+	GameState.continues_left = clampi(int(data.get("continues_left", GameState.DEFAULT_CONTINUES)), 0, GameState.DEFAULT_CONTINUES)
 	GameState.coins = int(data.get("coins", 0))
 	GameState.has_seen_intro = bool(data.get("has_seen_intro", false))
 	GameState.has_seen_world1_cheer = bool(data.get("has_seen_world1_cheer", false))
@@ -59,6 +61,7 @@ func load_game() -> bool:
 	GameState.bone_throw_unlocked = bool(data.get("bone_throw_unlocked", false))
 	GameState.is_level_complete = false
 	GameState.resume_at_checkpoint = true
+	GameState.clear_out_of_lives()
 	return true
 
 ## Solo lee has_seen_intro sin tocar el resto del estado; se usa al arrancar

@@ -3,6 +3,7 @@ extends Node
 @onready var level_container: Node = $LevelContainer
 @onready var transition: CanvasLayer = $LevelTransition
 @onready var hud: CanvasLayer = $HUD
+@onready var pause_screen: CanvasLayer = $PauseScreen
 
 var active_level: Node
 var is_transitioning := false
@@ -11,10 +12,12 @@ var intro_cinematic: Node = null
 var final_cinematic: Node = null
 var world1_cheer_screen: Node = null
 var world_map: Node = null
+var game_over_screen: Node = null
 
 func _ready() -> void:
 	hud.visible = false
 	GameState.level_completed.connect(_on_level_completed)
+	GameState.out_of_lives.connect(_on_out_of_lives)
 	GameState.has_seen_intro = SaveManager.peek_has_seen_intro()
 	GameState.has_seen_world1_cheer = SaveManager.peek_has_seen_world1_cheer()
 	GameState.highest_order_reached = SaveManager.peek_highest_order_reached()
@@ -174,6 +177,9 @@ func load_level(level_id: String) -> void:
 	active_level = packed_scene.instantiate()
 	level_container.add_child(active_level)
 	hud.visible = true
+	GameState.clear_out_of_lives()
+	if get_tree().paused:
+		set_paused(false)
 	_update_music_for_level(level_id)
 
 ## La música de cada mundo se elige por el mundo del nivel (LevelProgression),
@@ -226,7 +232,60 @@ func _advance_after_level(level_id: String) -> void:
 		load_level(next_level_id)
 		transition.fade_out()
 
+## B4: ESC pausa y despausa DURANTE LA PARTIDA. Solo tiene efecto si hay un
+## nivel cargado (en el menu, el mapa o las cinematicas no hace nada, para no
+## dejar el juego pausado en una pantalla sin cartel de pausa que lo explique).
+## Main ya corre con process_mode = ALWAYS, asi que sigue recibiendo el input
+## con el arbol pausado y se puede volver a apretar ESC para reanudar.
+## C1: al perder la ultima vida se sale del nivel a una pantalla negra con
+## CONTINUAR (reinicia ESTE nivel con 3 vidas, gastando uno de los 3 continues
+## de la partida) y GAME OVER (vuelve al menu principal). Si no quedan
+## continues, CONTINUAR aparece deshabilitado.
+func _on_out_of_lives(level_id: String) -> void:
+	if game_over_screen != null:
+		return
+	set_paused(false)
+	hud.visible = false
+	AudioDirector.stop_music()
+	var scene := load("res://scenes/ui/game_over_screen.tscn") as PackedScene
+	game_over_screen = scene.instantiate()
+	add_child(game_over_screen)
+	game_over_screen.setup(GameState.continues_left)
+	game_over_screen.continue_requested.connect(_on_continue_level.bind(level_id))
+	game_over_screen.game_over_requested.connect(_on_return_to_main_menu)
+
+func _on_continue_level(level_id: String) -> void:
+	if not GameState.use_continue():
+		return
+	_free_game_over_screen()
+	await transition.fade_to_black()
+	load_level(level_id)
+	await transition.fade_from_black()
+
+func _on_return_to_main_menu() -> void:
+	_free_game_over_screen()
+	GameState.clear_out_of_lives()
+	get_tree().paused = false
+	AudioDirector.stop_music()
+	get_tree().reload_current_scene()
+
+func _free_game_over_screen() -> void:
+	if game_over_screen != null:
+		game_over_screen.queue_free()
+		game_over_screen = null
+
 func _unhandled_input(event: InputEvent) -> void:
-	if event.is_action_pressed("pause"):
-		get_tree().paused = not get_tree().paused
-		AudioDirector.play_event(&"pause")
+	if not event.is_action_pressed("pause"):
+		return
+	if active_level == null or not is_instance_valid(active_level):
+		return
+	set_paused(not get_tree().paused)
+
+func set_paused(value: bool) -> void:
+	get_tree().paused = value
+	if pause_screen != null:
+		if value:
+			pause_screen.show_paused()
+		else:
+			pause_screen.hide_paused()
+	AudioDirector.play_event(&"pause")

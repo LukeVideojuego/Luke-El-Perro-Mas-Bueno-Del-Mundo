@@ -64,8 +64,9 @@ var has_invincibility := false
 
 var _speed_boost_token := 0
 var _invincibility_token := 0
-var _attack_tap_pending := false
 var _attack_tap_timer := 0.0
+var _attack_query := PhysicsShapeQueryParameters2D.new()
+var _hit_this_swing: Array[int] = []
 
 ## Altura neta caída en el último aterrizaje (posición Y de aterrizaje menos
 ## la posición Y de la última vez que estuvo en el piso antes de despegar).
@@ -77,6 +78,12 @@ var last_fall_distance := 0.0
 var _air_start_y := 0.0
 
 func _ready() -> void:
+	# Consulta reutilizable para el golpe cuerpo a cuerpo (ver _apply_melee_hits).
+	_attack_query.shape = attack_shape.shape
+	_attack_query.collision_mask = attack_area.collision_mask
+	# collide_with_areas: la caja receptora de los jefes (B7) es un Area2D.
+	_attack_query.collide_with_areas = true
+	_attack_query.collide_with_bodies = true
 	# Evita un falso "caída enorme" en el primer frame: sin esto,
 	# _air_start_y arrancaba en 0.0 y cualquier spawn con Luke unos pocos
 	# píxeles por encima del piso (lo normal en casi todos los niveles) se
@@ -128,33 +135,60 @@ func _handle_jump(was_on_floor: bool) -> void:
 		jumps_used = 2
 		AudioDirector.play_event(&"jump")
 
-## Un solo toque de "attack" = golpe cuerpo a cuerpo inmediato (sin retraso,
-## comportamiento original intacto). Con el huesito desbloqueado, un doble
-## tap dentro de double_tap_window lanza el ataque a distancia en su lugar;
-## el primer toque espera esa ventana antes de confirmarse como golpe simple.
+## B5 (lag del golpe): antes, con el huesito desbloqueado, CADA toque simple
+## esperaba los 0.28s enteros de la ventana de doble tap antes de pegar, para
+## recien ahi "confirmarse" como golpe simple. Eso son ~17 frames de retraso
+## en absolutamente todos los golpes del juego, que es exactamente el lag que
+## se sentia.
+##
+## Ahora el golpe sale SIEMPRE en el mismo frame en que se aprieta la tecla, y
+## la ventana de doble tap solo decide si un SEGUNDO toque rapido agrega
+## ademas el huesito a distancia. El doble tap sigue funcionando igual y ya no
+## le cuesta nada al golpe normal.
 func _handle_attack(delta: float) -> void:
-	if not GameState.bone_throw_unlocked:
-		if Input.is_action_just_pressed("attack") and not is_attacking:
-			_start_attack()
-	else:
-		if Input.is_action_just_pressed("attack"):
-			if _attack_tap_pending:
-				_attack_tap_pending = false
-				if not is_attacking and not is_throwing:
-					_start_bone_throw()
-			else:
-				_attack_tap_pending = true
-				_attack_tap_timer = double_tap_window
-		elif _attack_tap_pending:
-			_attack_tap_timer -= delta
-			if _attack_tap_timer <= 0.0:
-				_attack_tap_pending = false
-				if not is_attacking and not is_throwing:
-					_start_attack()
+	if Input.is_action_just_pressed("attack"):
+		if GameState.bone_throw_unlocked and _attack_tap_timer > 0.0:
+			_attack_tap_timer = 0.0
+			if not is_throwing:
+				_start_bone_throw()
+		else:
+			_attack_tap_timer = double_tap_window
+			if not is_attacking:
+				_start_attack()
+	elif _attack_tap_timer > 0.0:
+		_attack_tap_timer = maxf(0.0, _attack_tap_timer - delta)
 	if is_attacking:
-		for body in attack_area.get_overlapping_bodies():
-			if body.has_method("receive_attack"):
-				body.receive_attack(self)
+		_apply_melee_hits()
+
+## Deteccion de impacto del golpe cuerpo a cuerpo.
+##
+## No se usa get_overlapping_bodies() del Area2D porque habilitar su forma va
+## por set_deferred(), asi que en el primer frame del golpe el area todavia no
+## existe para el motor y se perdia un frame mas. Una consulta directa al
+## espacio fisico con la misma forma y en la misma posicion pega ya en el
+## frame cero.
+##
+## B7: la consulta devuelve TODOS los cuerpos solapados (no solo el primero) y
+## los jefes tienen su hurtbox cubriendo toda la silueta, asi que cuenta el
+## impacto en cualquier parte del cuerpo.
+func _apply_melee_hits() -> void:
+	if _attack_query.shape == null:
+		return
+	_attack_query.transform = Transform2D(0.0, global_position + Vector2(58.0 * facing_direction, 0.0))
+	for hit in get_world_2d().direct_space_state.intersect_shape(_attack_query, 16):
+		var body: Object = hit.get("collider")
+		if body == null or not body.has_method("receive_attack"):
+			continue
+		# Un golpe = un impacto por objetivo. El hitbox queda activo ~11
+		# frames y antes se llamaba receive_attack() en cada uno de ellos:
+		# con la hurtbox de jefe nueva (que cubre toda la silueta) eso
+		# significaria vaciarle la vida de una sola tecla. Deduplicar
+		# mantiene el dano por golpe exactamente como estaba pensado (1).
+		var id: int = body.get_instance_id()
+		if _hit_this_swing.has(id):
+			continue
+		_hit_this_swing.append(id)
+		body.receive_attack(self)
 
 func _start_bone_throw() -> void:
 	is_throwing = true
@@ -173,6 +207,7 @@ func _start_bone_throw() -> void:
 
 func _start_attack() -> void:
 	is_attacking = true
+	_hit_this_swing.clear()
 	attack_visual.visible = true
 	attack_visual.scale.x = facing_direction
 	attack_shape.position.x = 58.0 * facing_direction
