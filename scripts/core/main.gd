@@ -168,8 +168,18 @@ func _on_final_finished() -> void:
 	if final_cinematic != null:
 		final_cinematic.queue_free()
 		final_cinematic = null
-	load_level("final_screen")
-	await transition.fade_from_black()
+	# E5: ya no hay "final_screen" despues de la cinematica (ahora se juega
+	# el minijuego ANTES, ver _on_level_completed) -- esto es el final real
+	# del juego, asi que se limpia el nivel/HUD y se muestra el cartel de
+	# cierre encima de donde quedo la cinematica (nunca solo, sobre negro) y
+	# despues se vuelve al menu en vez de dejar la pantalla trabada.
+	if active_level != null:
+		active_level.queue_free()
+		active_level = null
+	hud.visible = false
+	await transition.play_completion("")
+	await get_tree().create_timer(2.5).timeout
+	get_tree().reload_current_scene()
 
 func load_level(level_id: String) -> void:
 	var scene_path := LevelProgression.get_scene_path(level_id)
@@ -222,15 +232,21 @@ func _on_level_completed(level_id: String) -> void:
 	if is_transitioning:
 		return
 	is_transitioning = true
-	if level_id == "world_4_boss":
-		# La cinemática final decide cuándo terminar (el jugador la mira o
-		# se auto-completa); _on_final_finished() se encarga de cargar
-		# final_screen cuando corresponda, no hay transición genérica acá.
-		show_final_cinematic()
-		is_transitioning = false
-		return
 	if level_id == "world_1_boss" and not GameState.has_seen_world1_cheer:
 		show_world1_cheer_screen()
+		return
+	# E5: orden correcto es minijuego de abrazos -> cinemática final (sus 2
+	# paneles) -> fin. Antes la cinemática se mostraba ANTES de "final_screen"
+	# (al vencer a world_4_boss) y, al completar el minijuego, caía en el
+	# flujo genérico de _advance_after_level con next_level_id vacío, que
+	# mostraba el cartel "¡JUEGO COMPLETADO!" y nunca llamaba a fade_out()
+	# (solo pasa dentro del "if not next_level_id.is_empty()"), quedando
+	# una pantalla negra trabada para siempre. world_4_boss ahora sigue el
+	# flujo normal (su "next" en LevelProgression ya es "final_screen"), y
+	# recién al completar "final_screen" se dispara la cinemática real.
+	if level_id == "final_screen":
+		show_final_cinematic()
+		is_transitioning = false
 		return
 	await _advance_after_level(level_id)
 	is_transitioning = false

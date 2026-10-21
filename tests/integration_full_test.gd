@@ -141,14 +141,37 @@ func _physics_process(_delta: float) -> void:
 			elif _waited():
 				_check(false, "nivel cargado: " + target)
 				_fail_early()
+		# E5: orden correcto es minijuego -> cinemática final (2 paneles) ->
+		# cartel de cierre (nunca un cartel de "completado" solo, sin pasar
+		# antes por la cinemática). Las fases 2 y 3 clickean cada panel igual
+		# que la intro (fases 10-12), y la 4 espera el cartel final de
+		# verdad, DESPUÉS de la cinemática.
 		2:
-			if not main.is_transitioning and _transition().get_node("Overlay").visible:
-				var title: String = _transition().get_node("Overlay/Center/Title").text
-				_check(title == "¡JUEGO COMPLETADO!", "overlay de '¡JUEGO COMPLETADO!' mostrado tras la pantalla final")
+			if main.final_cinematic != null and frame - wait_start > 15:
+				main.final_cinematic.get_node("Panel1/Panel1Button").pressed.emit()
+				_phase(3)
+			elif _waited():
+				_check(false, "cinemática final (panel 1) mostrada tras el minijuego")
+				_fail_early()
+		3:
+			if frame - wait_start > 15:
+				main.final_cinematic.get_node("Panel2/Panel2Button").pressed.emit()
+				_phase(4)
+		4:
+			# El overlay puede quedar visible ANTES de tiempo durante el
+			# fade_to_black previo de _on_final_finished (con el titulo
+			# todavia stale de la pantalla "nivel completado" anterior,
+			# oculto pero sin borrar su texto) -- hay que esperar a que el
+			# titulo realmente diga "completado" antes de chequear, no solo
+			# a que el overlay este visible.
+			var overlay_visible: bool = _transition().get_node("Overlay").visible
+			var title: String = _transition().get_node("Overlay/Center/Title").text
+			if overlay_visible and title == "¡JUEGO COMPLETADO!":
+				_check(true, "overlay de '¡JUEGO COMPLETADO!' mostrado DESPUÉS de la cinemática final")
 				print("RESULTADO: ", 0 if failures == 0 else failures, " fallos")
 				get_tree().quit(failures)
 			elif _waited():
-				_check(false, "juego completado mostrado")
+				_check(false, "juego completado mostrado (ultimo titulo visto: '%s', overlay.visible=%s)" % [title, overlay_visible])
 				_fail_early()
 
 func _fail_early() -> void:
