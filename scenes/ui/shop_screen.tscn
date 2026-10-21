@@ -1,0 +1,80 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/ui/shop_screen.gd" id="1_script"]
+
+[node name="ShopScreen" type="CanvasLayer"]
+process_mode = 3
+layer = 50
+script = ExtResource("1_script")
+
+[node name="Backdrop" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0.05, 0.07, 0.13, 1)
+
+[node name="Panel" type="VBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 90.0
+offset_top = 36.0
+offset_right = -90.0
+offset_bottom = -30.0
+theme_override_constants/separation = 12
+
+[node name="Header" type="HBoxContainer" parent="Panel"]
+layout_mode = 2
+theme_override_constants/separation = 24
+
+[node name="Title" type="Label" parent="Panel/Header"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(1, 0.86, 0.45, 1)
+theme_override_colors/font_outline_color = Color(0.05, 0.05, 0.08, 1)
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 54
+text = "TIENDA DE LUKE"
+
+[node name="LevelLabel" type="Label" parent="Panel/Header"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.75, 0.84, 1, 1)
+theme_override_font_sizes/font_size = 22
+text = "Antes de entrar al nivel"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="CoinsLabel" type="Label" parent="Panel/Header"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.93, 0.5, 1)
+theme_override_font_sizes/font_size = 34
+text = "MONEDAS: 0"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="Scroll" type="ScrollContainer" parent="Panel"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="List" type="VBoxContainer" parent="Panel/Scroll"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 6
+
+[node name="Footer" type="HBoxContainer" parent="Panel"]
+layout_mode = 2
+theme_override_constants/separation = 24
+
+[node name="StatusLabel" type="Label" parent="Panel/Footer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.85, 0.92, 1, 1)
+theme_override_font_sizes/font_size = 24
+text = "Gastá tus monedas o entrá directo al nivel."
+vertical_alignment = 1
+
+[node name="SkipButton" type="Button" parent="Panel/Footer"]
+custom_minimum_size = Vector2(380, 72)
+layout_mode = 2
+theme_override_font_sizes/font_size = 28
+text = "JUGAR EL NIVEL"

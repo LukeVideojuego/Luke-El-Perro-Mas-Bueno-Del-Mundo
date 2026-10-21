@@ -22,6 +22,14 @@ func save_game() -> void:
 		"has_seen_world1_cheer": GameState.has_seen_world1_cheer,
 		"highest_order_reached": GameState.highest_order_reached,
 		"bone_throw_unlocked": GameState.bone_throw_unlocked,
+		"owned_items": GameState.owned_items,
+		"equipped_hat": GameState.equipped_hat,
+		"suit_equipped": GameState.suit_equipped,
+		"pending_star": GameState.pending_star,
+		"pending_boots": GameState.pending_boots,
+		"pending_aura": GameState.pending_aura,
+		"pending_hearts": GameState.pending_hearts,
+		"bark_ammo": GameState.bark_ammo,
 	}
 	var file := FileAccess.open(SAVE_PATH, FileAccess.WRITE)
 	if file == null:
@@ -59,6 +67,16 @@ func load_game() -> bool:
 	GameState.has_seen_world1_cheer = bool(data.get("has_seen_world1_cheer", false))
 	GameState.highest_order_reached = maxi(1, int(data.get("highest_order_reached", 1)))
 	GameState.bone_throw_unlocked = bool(data.get("bone_throw_unlocked", false))
+	GameState.owned_items.clear()
+	for entry in data.get("owned_items", []):
+		GameState.owned_items.append(String(entry))
+	GameState.equipped_hat = String(data.get("equipped_hat", ""))
+	GameState.suit_equipped = bool(data.get("suit_equipped", false))
+	GameState.pending_star = bool(data.get("pending_star", false))
+	GameState.pending_boots = bool(data.get("pending_boots", false))
+	GameState.pending_aura = bool(data.get("pending_aura", false))
+	GameState.pending_hearts = int(data.get("pending_hearts", 0))
+	GameState.bark_ammo = maxi(0, int(data.get("bark_ammo", 0)))
 	GameState.is_level_complete = false
 	GameState.resume_at_checkpoint = true
 	GameState.clear_out_of_lives()

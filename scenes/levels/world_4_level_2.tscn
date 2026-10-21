@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3]
+[gd_scene load_steps=33 format=3]
 [ext_resource type="PackedScene" path="res://scenes/objects/fishhook_spawner.tscn" id="99_fishhook"]
 
 [ext_resource type="Script" path="res://scripts/levels/level_base.gd" id="1_level"]
@@ -25,6 +25,7 @@
 [ext_resource type="PackedScene" path="res://scenes/enemies/barnacle.tscn" id="23_barnacle"]
 [ext_resource type="Texture2D" path="res://assets/backgrounds/Worlds/world4_mar.jpg" id="22_bg"]
 [ext_resource type="PackedScene" path="res://scenes/objects/jellyfish_island.tscn" id="90_jelly"]
+[ext_resource type="PackedScene" path="res://scenes/objects/extra_life.tscn" id="c2_life"]
 
 [sub_resource type="RectangleShape2D" id="StartPadShape"]
 size = Vector2(300, 110)
@@ -40,6 +41,9 @@ size = Vector2(9200, 120)
 
 [sub_resource type="RectangleShape2D" id="SeaFloorShape"]
 size = Vector2(9200, 50)
+
+[sub_resource type="RectangleShape2D" id="C2PlatShape"]
+size = Vector2(180, 36)
 
 [node name="world_4_level_2" type="Node2D"]
 script = ExtResource("1_level")
@@ -279,7 +283,6 @@ position = Vector2(3000, 680)
 [node name="Finish" parent="." instance=ExtResource("7_finish")]
 position = Vector2(8550, 735)
 
-
 [node name="CoinA" parent="." instance=ExtResource("17_coin")]
 position = Vector2(828, 780)
 [node name="CoinA_L" parent="." instance=ExtResource("17_coin")]
@@ -453,11 +456,10 @@ visible = false
 position = Vector2(1350, 360)
 text = "¡MAR CRUZADO!"
 horizontal_alignment = 1
-add_theme_font_size_override("font_size", 56)
-add_theme_color_override("font_color", Color(0.1, 0.65, 0.15, 1))
-add_theme_color_override("font_outline_color", Color(1, 1, 1, 1))
-add_theme_constant_override("outline_size", 8)
-
+theme_override_font_sizes/font_size = 56
+theme_override_colors/font_color = Color(0.1, 0.65, 0.15, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 8
 [node name="HiddenBone" parent="." instance=ExtResource("21_bonepickup")]
 position = Vector2(2150, 520)
 
@@ -686,3 +688,35 @@ initial_delay = 1.00
 [node name="FishHookSpawner22" parent="." instance=ExtResource("99_fishhook")]
 position = Vector2(7970, 20)
 initial_delay = 1.70
+
+[node name="SecretPlatA" type="StaticBody2D" parent="."]
+position = Vector2(5650, 770)
+[node name="Visual" type="Sprite2D" parent="SecretPlatA"]
+texture = ExtResource("16_stone")
+scale = Vector2(2.8125, 0.5625)
+modulate = Color(0.82, 0.85, 0.92, 1)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SecretPlatA"]
+shape = SubResource("C2PlatShape")
+
+[node name="SecretPlatB" type="StaticBody2D" parent="."]
+position = Vector2(5900, 670)
+[node name="Visual" type="Sprite2D" parent="SecretPlatB"]
+texture = ExtResource("16_stone")
+scale = Vector2(2.8125, 0.5625)
+modulate = Color(0.82, 0.85, 0.92, 1)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SecretPlatB"]
+shape = SubResource("C2PlatShape")
+
+[node name="SecretPlatC" type="StaticBody2D" parent="."]
+position = Vector2(6150, 570)
+[node name="Visual" type="Sprite2D" parent="SecretPlatC"]
+texture = ExtResource("16_stone")
+scale = Vector2(2.8125, 0.5625)
+modulate = Color(0.82, 0.85, 0.92, 1)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SecretPlatC"]
+shape = SubResource("C2PlatShape")
+
+[node name="SecretLifeBox" parent="." instance=ExtResource("10_box")]
+position = Vector2(6205, 521)
+contents = ExtResource("c2_life")
+contents_offset = Vector2(0, -70)

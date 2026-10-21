@@ -34,6 +34,25 @@ func _ready() -> void:
 		GameState.level_completed.connect(_on_level_completed)
 	_fall_reset_y = spawn_point.global_position.y + FALL_RESET_MARGIN
 	_apply_camera_limits()
+	_apply_shop_purchases()
+
+## C3: aplica lo comprado en la tienda al arrancar el nivel. Los consumibles
+## se gastan acá (una compra = un nivel); los cosméticos los dibuja Luke solo
+## leyendo GameState.
+func _apply_shop_purchases() -> void:
+	if GameState.pending_hearts > 0:
+		GameState.add_life(GameState.pending_hearts)
+		GameState.pending_hearts = 0
+	if GameState.pending_aura:
+		GameState.pending_aura = false
+		luke.set_protective_aura(true)
+	if GameState.pending_boots:
+		GameState.pending_boots = false
+		luke.grant_speed_boost()
+	if GameState.pending_star:
+		GameState.pending_star = false
+		luke.grant_invincibility(12.0)
+	SaveManager.save_game()
 
 ## La cámara de Luke (player.tscn) viene con límites fijos pensados para un
 ## solo nivel de referencia; como cada nivel tiene un largo distinto (5100 a

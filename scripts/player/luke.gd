@@ -18,6 +18,9 @@ extends CharacterBody2D
 @onready var attack_shape: CollisionShape2D = $AttackArea/CollisionShape2D
 @onready var attack_visual: Polygon2D = $AttackVisual
 @onready var aura_visual: Polygon2D = $AuraVisual
+@onready var hat_sprite: Sprite2D = $Hat
+@onready var cape_sprite: Sprite2D = $Cape
+@onready var suit_sprite: Sprite2D = $Suit
 
 @export_category("Power-ups")
 @export var speed_boost_multiplier := 1.5
@@ -30,6 +33,43 @@ extends CharacterBody2D
 @export var throw_offset := Vector2(46.0, -6.0)
 
 const THROWN_BONE_SCENE := preload("res://scenes/objects/thrown_bone.tscn")
+const BARK_WAVE_SCENE := preload("res://scenes/objects/bark_wave.tscn")
+
+@export_category("Cosmeticos de la tienda (C3)")
+## Sombreros comprables. Se dibujan sobre la cabeza en TODAS las animaciones:
+## el ancla de cada pose se midio sobre el arte real de Luke (tope de la
+## cabeza y centro de las orejas en cada textura).
+const HAT_TEXTURES := {
+	"hat_beanie": preload("res://assets/items/Shop/hat_beanie.png"),
+	"hat_explorer": preload("res://assets/items/Shop/hat_explorer.png"),
+	"hat_tophat": preload("res://assets/items/Shop/hat_tophat.png"),
+	"hat_crown": preload("res://assets/items/Shop/hat_crown.png"),
+}
+const CAPE_FOLDED := preload("res://assets/items/Shop/cape_folded.png")
+const CAPE_OPEN := preload("res://assets/items/Shop/cape_open.png")
+const SUIT_BODY := preload("res://assets/items/Shop/suit_body.png")
+## Posicion del sombrero (borde inferior, centrado) por animacion, en
+## coordenadas locales de Luke.
+const HAT_ANCHOR := {
+	"idle": Vector2(16.6, -44.9),
+	"walk": Vector2(18.5, -44.9),
+	"jump": Vector2(17.2, -50.4),
+	"attack": Vector2(14.1, -27.1),
+}
+const CAPE_ANCHOR := {
+	"idle": Vector2(-16.0, 2.0),
+	"walk": Vector2(-17.0, -3.0),
+	"jump": Vector2(-18.0, 3.0),
+	"attack": Vector2(-20.0, -10.0),
+}
+## Medido sobre el lomo real de Luke (borde superior opaco de la mitad
+## trasera del sprite en cada pose).
+const SUIT_ANCHOR := {
+	"idle": Vector2(-25.8, 12.0),
+	"walk": Vector2(-27.1, 7.0),
+	"jump": Vector2(-27.7, 14.0),
+	"attack": Vector2(-25.2, 0.0),
+}
 
 @export_category("Bajo el agua")
 ## Activado por instancia en los niveles acuáticos: agrega burbujas al
@@ -150,7 +190,7 @@ func _handle_attack(delta: float) -> void:
 		if GameState.bone_throw_unlocked and _attack_tap_timer > 0.0:
 			_attack_tap_timer = 0.0
 			if not is_throwing:
-				_start_bone_throw()
+				_start_ranged_attack()
 		else:
 			_attack_tap_timer = double_tap_window
 			if not is_attacking:
@@ -190,17 +230,21 @@ func _apply_melee_hits() -> void:
 		_hit_this_swing.append(id)
 		body.receive_attack(self)
 
-func _start_bone_throw() -> void:
+## C3: el doble tap lanza el ladrido de onda expansiva si quedan cargas
+## compradas en la tienda (es mas rapido y atraviesa), y si no, el huesito de
+## siempre, que es municion infinita.
+func _start_ranged_attack() -> void:
 	is_throwing = true
 	attack_visual.visible = true
 	attack_visual.scale.x = facing_direction
 	attack_started.emit()
 	AudioDirector.play_event(&"attack")
-	var bone := THROWN_BONE_SCENE.instantiate()
+	var use_bark: bool = GameState.consume_bark()
+	var projectile: Node2D = (BARK_WAVE_SCENE if use_bark else THROWN_BONE_SCENE).instantiate()
 	var parent := get_parent()
 	if parent != null:
-		parent.add_child(bone)
-		bone.launch(global_position + throw_offset * Vector2(facing_direction, 1.0), float(facing_direction), self)
+		parent.add_child(projectile)
+		projectile.launch(global_position + throw_offset * Vector2(facing_direction, 1.0), float(facing_direction), self)
 	await get_tree().create_timer(0.15).timeout
 	attack_visual.visible = false
 	is_throwing = false
@@ -260,14 +304,17 @@ func grant_speed_boost() -> void:
 		speed_boost_changed.emit(false)
 		GameState.set_speed_boost(false)
 
-func grant_invincibility() -> void:
+## duration_override: la estrella de la tienda (C3) dura mas que el power-up
+## suelto del nivel.
+func grant_invincibility(duration_override: float = -1.0) -> void:
 	_invincibility_token += 1
 	var my_token := _invincibility_token
 	if not has_invincibility:
 		has_invincibility = true
 		invincibility_changed.emit(true)
 		GameState.set_invincibility(true)
-	await get_tree().create_timer(invincibility_duration).timeout
+	var duration: float = invincibility_duration if duration_override <= 0.0 else duration_override
+	await get_tree().create_timer(duration).timeout
 	if my_token == _invincibility_token:
 		has_invincibility = false
 		invincibility_changed.emit(false)
@@ -299,6 +346,44 @@ func _update_animation() -> void:
 		animated_sprite.position.y = _sprite_base_y + sin(_idle_time * idle_bob_speed) * idle_bob_amplitude
 	else:
 		animated_sprite.position.y = _sprite_base_y
+	_update_cosmetics()
+
+## C3: dibuja lo comprado en la tienda encima de Luke. El sombrero acompana
+## la cabeza en las 4 animaciones y la capa se despliega cuando esta en el
+## aire (es decir, cada vez que salta).
+func _update_cosmetics() -> void:
+	var anim := String(animated_sprite.animation)
+	var flipped := facing_direction < 0
+	var bob: float = animated_sprite.position.y - _sprite_base_y
+
+	var hat_id: String = GameState.equipped_hat
+	var has_hat: bool = HAT_TEXTURES.has(hat_id)
+	hat_sprite.visible = has_hat
+	if has_hat:
+		var tex: Texture2D = HAT_TEXTURES[hat_id]
+		var anchor: Vector2 = HAT_ANCHOR.get(anim, HAT_ANCHOR["idle"])
+		hat_sprite.texture = tex
+		hat_sprite.offset = Vector2(0.0, -tex.get_height() * 0.5 + 12.0)
+		hat_sprite.position = Vector2(anchor.x * facing_direction, anchor.y + bob)
+		hat_sprite.flip_h = flipped
+		hat_sprite.modulate = animated_sprite.modulate
+
+	var wears_suit: bool = GameState.suit_equipped
+	suit_sprite.visible = wears_suit
+	cape_sprite.visible = wears_suit
+	if wears_suit:
+		var suit_anchor: Vector2 = SUIT_ANCHOR.get(anim, SUIT_ANCHOR["idle"])
+		suit_sprite.texture = SUIT_BODY
+		suit_sprite.position = Vector2(suit_anchor.x * facing_direction, suit_anchor.y + bob)
+		suit_sprite.flip_h = flipped
+		suit_sprite.modulate = animated_sprite.modulate
+		var cape_tex: Texture2D = CAPE_OPEN if not is_on_floor() else CAPE_FOLDED
+		var cape_anchor: Vector2 = CAPE_ANCHOR.get(anim, CAPE_ANCHOR["idle"])
+		cape_sprite.texture = cape_tex
+		cape_sprite.offset = Vector2(0.0, cape_tex.get_height() * 0.5)
+		cape_sprite.position = Vector2(cape_anchor.x * facing_direction, cape_anchor.y + bob)
+		cape_sprite.flip_h = flipped
+		cape_sprite.modulate = animated_sprite.modulate
 
 func _handle_underwater_effects(delta: float) -> void:
 	_idle_time += delta

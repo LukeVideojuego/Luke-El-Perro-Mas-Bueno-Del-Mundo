@@ -60,6 +60,7 @@ func _teleport_to_finish() -> void:
 
 func _physics_process(_delta: float) -> void:
 	frame += 1
+	_skip_shop_if_open()
 	match phase:
 		0:
 			if frame == 10:
@@ -125,3 +126,18 @@ func _physics_process(_delta: float) -> void:
 func _fail_early() -> void:
 	print("RESULTADO: 1 fallo")
 	get_tree().quit(1)
+
+## C3: la tienda aparece antes de cada nivel a partir del nivel 2 y espera a
+## que el jugador entre. El test la saltea igual que el boton "JUGAR EL
+## NIVEL", para seguir midiendo el avance de niveles de punta a punta.
+var _shop_dismissed: Node = null
+
+func _skip_shop_if_open() -> void:
+	var shop: Node = main.shop_screen if main != null else null
+	if shop == null:
+		_shop_dismissed = null
+		return
+	if shop == _shop_dismissed:
+		return
+	_shop_dismissed = shop
+	shop.closed.emit()

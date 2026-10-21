@@ -31,6 +31,22 @@ var coins := 0
 var has_seen_intro := false
 var has_seen_world1_cheer := false
 
+## --- C3: TIENDA ---
+## Cosmeticos permanentes ya comprados (ids de ShopCatalog).
+var owned_items: Array[String] = []
+## Sombrero equipado ("" = ninguno) y si el traje con capa esta puesto.
+var equipped_hat := ""
+var suit_equipped := false
+## Comprados en la tienda y pendientes de aplicarse al empezar el nivel.
+var pending_star := false
+var pending_boots := false
+var pending_aura := false
+var pending_hearts := 0
+## Municion del ladrido de onda expansiva (reemplaza al huesito mientras haya).
+var bark_ammo := 0
+
+signal shop_changed
+
 ## Permanente una vez conseguido el primer huesito: desbloquea el ataque a
 ## distancia de Luke (doble tap del botón de ataque). Nunca se desactiva.
 var bone_throw_unlocked := false
@@ -87,6 +103,64 @@ func set_invincibility(active: bool) -> void:
 func add_coins(amount: int = 1) -> void:
 	coins += amount
 	coins_changed.emit(coins)
+	SaveManager.save_game()
+
+## C3: intenta comprar un item de la tienda. Devuelve false si no alcanza la
+## plata o si es un cosmetico que ya tiene.
+func buy_item(item_id: String) -> bool:
+	var item := ShopCatalog.get_item(item_id)
+	if item.is_empty():
+		return false
+	if ShopCatalog.is_permanent(item) and owned_items.has(item_id):
+		return false
+	var price: int = int(item.price)
+	if coins < price:
+		return false
+	coins -= price
+	match item.kind:
+		ShopCatalog.Kind.HAT:
+			owned_items.append(item_id)
+			equipped_hat = item_id
+		ShopCatalog.Kind.SUIT:
+			owned_items.append(item_id)
+			suit_equipped = true
+		ShopCatalog.Kind.AMMO:
+			bark_ammo += int(item.get("amount", 1))
+		ShopCatalog.Kind.CONSUMABLE:
+			match item_id:
+				"star": pending_star = true
+				"boots": pending_boots = true
+				"aura": pending_aura = true
+				"heart": pending_hearts += 1
+	coins_changed.emit(coins)
+	shop_changed.emit()
+	SaveManager.save_game()
+	return true
+
+## C3: ponerse/sacarse un sombrero ya comprado, o el traje.
+func toggle_equipped(item_id: String) -> void:
+	var item := ShopCatalog.get_item(item_id)
+	if item.is_empty() or not owned_items.has(item_id):
+		return
+	if item.kind == ShopCatalog.Kind.HAT:
+		equipped_hat = "" if equipped_hat == item_id else item_id
+	elif item.kind == ShopCatalog.Kind.SUIT:
+		suit_equipped = not suit_equipped
+	shop_changed.emit()
+	SaveManager.save_game()
+
+## C3: gasta un ladrido. Devuelve false si no queda municion.
+func consume_bark() -> bool:
+	if bark_ammo <= 0:
+		return false
+	bark_ammo -= 1
+	shop_changed.emit()
+	return true
+
+## C2: vida extra de las cajas escondidas.
+func add_life(amount: int = 1) -> void:
+	lives += amount
+	lives_changed.emit(lives)
 	SaveManager.save_game()
 
 func unlock_bone_throw() -> void:
@@ -174,3 +248,12 @@ func reset_for_new_game() -> void:
 	coins = 0
 	resume_at_checkpoint = false
 	highest_order_reached = 1
+	owned_items = []
+	equipped_hat = ""
+	suit_equipped = false
+	pending_star = false
+	pending_boots = false
+	pending_aura = false
+	pending_hearts = 0
+	bark_ammo = 0
+	shop_changed.emit()

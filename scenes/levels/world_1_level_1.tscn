@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3]
+[gd_scene load_steps=34 format=3]
 [ext_resource type="PackedScene" path="res://scenes/enemies/bird.tscn" id="99_bird"]
 
 [ext_resource type="Script" path="res://scripts/levels/level_base.gd" id="1_level"]
@@ -24,6 +24,7 @@
 [ext_resource type="Texture2D" path="res://assets/props/wood_crate.png" id="21_crate"]
 [ext_resource type="PackedScene" path="res://scenes/enemies/thief.tscn" id="22_thief"]
 [ext_resource type="Texture2D" path="res://assets/backgrounds/Worlds/world1_final.png" id="23_bg"]
+[ext_resource type="PackedScene" path="res://scenes/objects/extra_life.tscn" id="c2_life"]
 
 [sub_resource type="RectangleShape2D" id="GroundShape"]
 size = Vector2(6400, 120)
@@ -39,6 +40,9 @@ size = Vector2(380, 52)
 size = Vector2(500, 52)
 [sub_resource type="RectangleShape2D" id="BoundaryShape"]
 size = Vector2(80, 1080)
+
+[sub_resource type="RectangleShape2D" id="C2PlatShape"]
+size = Vector2(180, 36)
 
 [node name="World1Neighborhood" type="Node2D"]
 script = ExtResource("1_level")
@@ -235,3 +239,35 @@ modulate = Color(0.28, 0.28, 0.32, 1)
 position = Vector2(3715, 540)
 patrol_distance = 220.0
 modulate = Color(0.28, 0.28, 0.32, 1)
+
+[node name="SecretPlatA" type="StaticBody2D" parent="."]
+position = Vector2(4423, 630)
+[node name="Visual" type="Sprite2D" parent="SecretPlatA"]
+texture = ExtResource("12_stone")
+scale = Vector2(2.8125, 0.5625)
+modulate = Color(0.82, 0.85, 0.92, 1)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SecretPlatA"]
+shape = SubResource("C2PlatShape")
+
+[node name="SecretPlatB" type="StaticBody2D" parent="."]
+position = Vector2(4673, 530)
+[node name="Visual" type="Sprite2D" parent="SecretPlatB"]
+texture = ExtResource("12_stone")
+scale = Vector2(2.8125, 0.5625)
+modulate = Color(0.82, 0.85, 0.92, 1)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SecretPlatB"]
+shape = SubResource("C2PlatShape")
+
+[node name="SecretPlatC" type="StaticBody2D" parent="."]
+position = Vector2(4923, 430)
+[node name="Visual" type="Sprite2D" parent="SecretPlatC"]
+texture = ExtResource("12_stone")
+scale = Vector2(2.8125, 0.5625)
+modulate = Color(0.82, 0.85, 0.92, 1)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SecretPlatC"]
+shape = SubResource("C2PlatShape")
+
+[node name="SecretLifeBox" parent="." instance=ExtResource("4_box")]
+position = Vector2(4978, 381)
+contents = ExtResource("c2_life")
+contents_offset = Vector2(0, -70)

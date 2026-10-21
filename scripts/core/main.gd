@@ -13,6 +13,7 @@ var final_cinematic: Node = null
 var world1_cheer_screen: Node = null
 var world_map: Node = null
 var game_over_screen: Node = null
+var shop_screen: Node = null
 
 func _ready() -> void:
 	hud.visible = false
@@ -55,6 +56,7 @@ func _on_continue_requested() -> void:
 		show_intro_cinematic()
 		return
 	await transition.fade_to_black()
+	await show_shop_if_needed(GameState.current_level_id)
 	load_level(GameState.current_level_id)
 	await transition.fade_from_black()
 
@@ -67,6 +69,7 @@ func _on_password_requested(level_id: String) -> void:
 	GameState.current_level_id = level_id
 	GameState.level_begun.emit(level_id)
 	await transition.fade_to_black()
+	await show_shop_if_needed(level_id)
 	load_level(level_id)
 	await transition.fade_from_black()
 
@@ -97,6 +100,7 @@ func _on_map_level_selected(level_id: String) -> void:
 	GameState.current_level_id = level_id
 	GameState.level_begun.emit(level_id)
 	await transition.fade_to_black()
+	await show_shop_if_needed(level_id)
 	load_level(level_id)
 	await transition.fade_from_black()
 
@@ -229,8 +233,29 @@ func _advance_after_level(level_id: String) -> void:
 	await transition.play_completion(next_level_id)
 	if not next_level_id.is_empty() and not LevelProgression.get_scene_path(next_level_id).is_empty():
 		GameState.prepare_next_level()
+		await show_shop_if_needed(next_level_id)
 		load_level(next_level_id)
 		transition.fade_out()
+
+## C3: la tienda aparece antes de cada nivel a partir del nivel 2 (orden
+## global 2 a 16). Se dibuja en una capa por encima del fundido negro de la
+## transicion, asi que el nivel siguiente queda tapado hasta que el jugador
+## decide entrar. Siempre se puede saltear con "JUGAR EL NIVEL".
+func should_show_shop(level_id: String) -> bool:
+	return LevelProgression.get_global_order(level_id) >= 2
+
+func show_shop_if_needed(level_id: String) -> void:
+	if not should_show_shop(level_id) or shop_screen != null:
+		return
+	hud.visible = false
+	AudioDirector.play_music("menu")
+	var scene := load("res://scenes/ui/shop_screen.tscn") as PackedScene
+	shop_screen = scene.instantiate()
+	add_child(shop_screen)
+	shop_screen.setup(level_id)
+	await shop_screen.closed
+	shop_screen.queue_free()
+	shop_screen = null
 
 ## B4: ESC pausa y despausa DURANTE LA PARTIDA. Solo tiene efecto si hay un
 ## nivel cargado (en el menu, el mapa o las cinematicas no hace nada, para no

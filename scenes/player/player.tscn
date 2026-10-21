@@ -49,6 +49,24 @@ scale = Vector2(1.23, 1.23)
 position = Vector2(0, 8)
 shape = SubResource("Shape_luke")
 
+[node name="Cape" type="Sprite2D" parent="."]
+visible = false
+texture_filter = 1
+z_index = -1
+scale = Vector2(1, 1)
+
+[node name="Suit" type="Sprite2D" parent="."]
+visible = false
+texture_filter = 1
+z_index = 1
+scale = Vector2(0.85, 0.85)
+
+[node name="Hat" type="Sprite2D" parent="."]
+visible = false
+texture_filter = 1
+z_index = 2
+scale = Vector2(1.23, 1.23)
+
 [node name="AuraVisual" type="Polygon2D" parent="."]
 visible = false
 polygon = PackedVector2Array(-62, 0, -44, -42, 0, -58, 44, -42, 62, 0, 44, 42, 0, 58, -44, 42)
