@@ -6,7 +6,9 @@
 [node name="ExitSign" type="Node2D"]
 
 [node name="Sign" type="Sprite2D" parent="."]
+position = Vector2(0, -32)
 texture = ExtResource("1_sign")
+scale = Vector2(2, 2)
 
 [node name="WoodPost" type="Node2D" parent="."]
 script = ExtResource("2_post")

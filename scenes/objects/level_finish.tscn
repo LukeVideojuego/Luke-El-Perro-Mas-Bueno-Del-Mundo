@@ -5,7 +5,7 @@
 [ext_resource type="Script" path="res://scripts/world/wood_post.gd" id="3_post"]
 
 [sub_resource type="RectangleShape2D" id="FinishShape"]
-size = Vector2(90, 150)
+size = Vector2(90, 210)
 
 [node name="LevelFinish" type="Area2D"]
 collision_layer = 0
@@ -14,7 +14,9 @@ monitoring = true
 script = ExtResource("1_script")
 
 [node name="Flag" type="Sprite2D" parent="."]
+position = Vector2(0, -32)
 texture = ExtResource("2_flag")
+scale = Vector2(2, 2)
 
 [node name="WoodPost" type="Node2D" parent="."]
 script = ExtResource("3_post")

@@ -5,7 +5,7 @@
 [ext_resource type="Script" path="res://scripts/world/wood_post.gd" id="3_post"]
 
 [sub_resource type="RectangleShape2D" id="SignShape"]
-size = Vector2(100, 110)
+size = Vector2(100, 170)
 
 [node name="MissionSign" type="Area2D"]
 collision_layer = 0
@@ -15,7 +15,9 @@ interaction_text = "Ayuda al barrio: llega a la bandera verde."
 script = ExtResource("1_script")
 
 [node name="Sign" type="Sprite2D" parent="."]
+position = Vector2(0, -32)
 texture = ExtResource("2_sign")
+scale = Vector2(2, 2)
 
 [node name="WoodPost" type="Node2D" parent="."]
 script = ExtResource("3_post")
@@ -29,9 +31,9 @@ shape = SubResource("SignShape")
 [node name="HintLabel" type="Label" parent="."]
 visible = false
 offset_left = -330.0
-offset_top = -205.0
+offset_top = -237.0
 offset_right = 330.0
-offset_bottom = -155.0
+offset_bottom = -187.0
 theme_override_colors/font_color = Color(1, 0.96, 0.8, 1)
 theme_override_colors/font_outline_color = Color(0.05, 0.08, 0.14, 1)
 theme_override_constants/outline_size = 7
