@@ -16,6 +16,20 @@ extends Area2D
 ## al rectangulo opaco real de la textura que el jefe este mostrando, asi
 ## acompana automaticamente las poses (quieto, caminando, saltando, atacando),
 ## que tienen tamanos y encuadres distintos.
+##
+## E6: el CharacterBody2D del jefe (su cuerpo FISICO) tenia collision_layer=4
+## igual que esta hurtbox, que es la misma layer que escuchan el golpe
+## cuerpo a cuerpo, el huesito y el ladrido de onda. Eso hacia que un solo
+## golpe cuerpo a cuerpo contara 3 VECES contra el mismo jefe: una por la
+## señal body_entered del AttackArea de Luke contra el cuerpo fisico, y dos
+## mas porque intersect_shape() (collide_with_bodies Y collide_with_areas)
+## encontraba AMBOS colisionadores (cuerpo fisico + esta hurtbox) en la
+## misma consulta -- cada uno con su propio instance_id, asi que el
+## deduplicado de Luke (uno por id) no los agarraba como repetidos. Medido:
+## 15 de vida -> 12 con UN solo golpe. El huesito no tenia el bug (se
+## autodestruye en el primer impacto). Fix: el cuerpo fisico del jefe ya NO
+## esta en layer 4 (ver cada escena de jefe) -- SOLO esta hurtbox lo esta,
+## asi que cualquier ataque pega una unica vez por golpe, como corresponde.
 
 @export var sprite_path: NodePath = ^"../Sprite2D"
 ## Margen extra alrededor de la silueta, en pixeles de pantalla.

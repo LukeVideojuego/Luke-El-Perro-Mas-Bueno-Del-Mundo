@@ -18,6 +18,7 @@
 [ext_resource type="Texture2D" path="res://assets/Tiles/Default/bush.png" id="15_bush"]
 [ext_resource type="Texture2D" path="res://assets/backgrounds/Worlds/world4_india.jpg" id="16_bg"]
 [ext_resource type="PackedScene" path="res://scenes/objects/extra_life.tscn" id="c2_life"]
+[ext_resource type="PackedScene" path="res://scenes/objects/bark_pickup.tscn" id="e6_bark"]
 
 [sub_resource type="RectangleShape2D" id="GroundShape"]
 size = Vector2(2000, 110)
@@ -27,6 +28,9 @@ size = Vector2(420, 52)
 
 [sub_resource type="RectangleShape2D" id="BoundaryShape"]
 size = Vector2(70, 900)
+
+[sub_resource type="RectangleShape2D" id="StepShape"]
+size = Vector2(120, 36)
 
 [node name="world_4_boss" type="Node2D"]
 script = ExtResource("1_level")
@@ -227,6 +231,36 @@ scale = Vector2(2, 2)
 position = Vector2(1000, 960)
 shape = SubResource("GroundShape")
 
+[node name="StepStoneR1" type="StaticBody2D" parent="."]
+position = Vector2(1800, 763)
+
+[node name="Visual" type="Sprite2D" parent="StepStoneR1"]
+texture = ExtResource("10_stone")
+scale = Vector2(1.875, 0.5625)
+modulate = Color(0.2733, 0.2833, 0.3067, 1.0)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StepStoneR1"]
+shape = SubResource("StepShape")
+
+[node name="StepStoneR2" type="StaticBody2D" parent="."]
+position = Vector2(1950, 603)
+
+[node name="Visual" type="Sprite2D" parent="StepStoneR2"]
+texture = ExtResource("10_stone")
+scale = Vector2(1.875, 0.5625)
+modulate = Color(0.2733, 0.2833, 0.3067, 1.0)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StepStoneR2"]
+shape = SubResource("StepShape")
+
+[node name="StepStoneR3" type="StaticBody2D" parent="."]
+position = Vector2(1800, 443)
+
+[node name="Visual" type="Sprite2D" parent="StepStoneR3"]
+texture = ExtResource("10_stone")
+scale = Vector2(1.875, 0.5625)
+modulate = Color(0.2733, 0.2833, 0.3067, 1.0)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StepStoneR3"]
+shape = SubResource("StepShape")
+
 [node name="PlatformOne" type="StaticBody2D" parent="."]
 position = Vector2(600, 500)
 
@@ -331,6 +365,11 @@ position = Vector2(1000, 650)
 position = Vector2(1350, 540)
 contents = ExtResource("30_bonepickup")
 
+[node name="BarkBox" parent="." instance=ExtResource("6_box")]
+position = Vector2(1000, 300)
+contents = ExtResource("e6_bark")
+contents_offset = Vector2(0, -70)
+
 [node name="Door" type="Sprite2D" parent="."]
 position = Vector2(250, 915)
 texture = ExtResource("12_door")
@@ -389,5 +428,15 @@ theme_override_constants/outline_size = 8
 
 [node name="SecretLifeBox" parent="." instance=ExtResource("6_box")]
 position = Vector2(1130, 53)
+contents = ExtResource("c2_life")
+contents_offset = Vector2(0, -70)
+
+[node name="SecretLifeBox2" parent="." instance=ExtResource("6_box")]
+position = Vector2(560, 175)
+contents = ExtResource("c2_life")
+contents_offset = Vector2(0, -70)
+
+[node name="SecretLifeBox3" parent="." instance=ExtResource("6_box")]
+position = Vector2(1560, 175)
 contents = ExtResource("c2_life")
 contents_offset = Vector2(0, -70)

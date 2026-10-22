@@ -13,7 +13,6 @@ size = Vector2(44, 72)
 size = Vector2(62, 65)
 
 [node name="WitchBoss" type="CharacterBody2D"]
-collision_layer = 4
 collision_mask = 1
 script = ExtResource("1_script")
 max_health = 9

@@ -16,7 +16,6 @@ size = Vector2(64, 94)
 size = Vector2(87, 85)
 
 [node name="CorruptBoss" type="CharacterBody2D"]
-collision_layer = 4
 collision_mask = 1
 script = ExtResource("1_script")
 max_health = 12

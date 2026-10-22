@@ -184,16 +184,24 @@ func _check_cosmetics_render() -> void:
 	for anim in ["idle", "walk", "jump", "attack"]:
 		luke.animated_sprite.animation = anim
 		luke._update_cosmetics()
-		all_visible = all_visible and luke.hat_sprite.visible and luke.suit_sprite.visible and luke.cape_sprite.visible
+		all_visible = all_visible and luke.hat_sprite.visible and luke.suit_sprite.visible and luke.cape_ribbon.visible
 		positions[anim] = luke.hat_sprite.position
 	_check(all_visible, "el sombrero, el traje y la capa se dibujan en las 4 animaciones")
 	_check(positions["jump"] != positions["idle"] and positions["attack"] != positions["idle"],
 		"el sombrero acompana la cabeza en cada pose (idle=%s jump=%s attack=%s)" % [
 			positions["idle"], positions["jump"], positions["attack"]])
-	luke.cape_sprite.texture = null
-	luke.velocity.y = -100.0
-	luke._update_cosmetics()
-	var cape_air: Texture2D = luke.cape_sprite.texture
-	_check(cape_air == Luke.CAPE_OPEN, "en el aire la capa se despliega (usa cape_open)")
+	# E3: la capa ya no es un sprite de 2 poses (cape_open/cape_folded), es
+	# una tira simulada con fisica (cape_ribbon.gd) que reacciona sola al
+	# movimiento real de Luke; en vez de pedir una textura puntual, se
+	# confirma que la cadena de puntos SE MUEVE cuando Luke tiene velocidad
+	# (el extremo de la capa se separa de su posicion en reposo).
+	for i in range(10):
+		await get_tree().physics_frame
+	var rest_tip: Vector2 = luke.cape_ribbon._points[luke.cape_ribbon._points.size() - 1]
+	luke.velocity = Vector2(0.0, -400.0)
+	for i in range(8):
+		await get_tree().physics_frame
+	var moved_tip: Vector2 = luke.cape_ribbon._points[luke.cape_ribbon._points.size() - 1]
+	_check(moved_tip.distance_to(rest_tip) > 5.0, "la capa reacciona (se mueve) cuando Luke cambia de velocidad")
 	luke.queue_free()
 	await get_tree().process_frame
