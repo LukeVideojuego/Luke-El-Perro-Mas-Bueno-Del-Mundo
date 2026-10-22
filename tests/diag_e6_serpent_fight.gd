@@ -131,6 +131,12 @@ func _fight_bone_only() -> void:
 	level.queue_free()
 	await get_tree().process_frame
 
+## E6 (corrección pedida): el ladrido pega el TRIPLE que el huesito (3 de
+## vida en vez de 1), para que valga la pena gastar una de las 5 cargas
+## limitadas. Esta pelea mide: (a) el total de golpes usando las 5 cargas
+## y despues huesito -- tiene que ser MENOS que los 15 de huesito solo,
+## y (b) que el jefe NO caiga antes de la 5ta carga de ladrido (si
+## cayera en la 4ta, el ladrido se habria vuelto demasiado fuerte).
 func _fight_bark_plus_bone() -> void:
 	print("--- Pelea combinada: ladrido de onda (5 cargas) + huesito ---")
 	var level := _spawn_level()
@@ -142,6 +148,7 @@ func _fight_bark_plus_bone() -> void:
 	const BARK_SCENE := preload("res://scenes/objects/bark_wave.tscn")
 	var hits := 0
 	var bark_used := 0
+	var defeated_before_5th_bark := false
 	var target_y: float = boss.global_position.y
 	var target_x: float = boss.global_position.x
 	for attempt in range(40):
@@ -160,11 +167,14 @@ func _fight_bark_plus_bone() -> void:
 				break
 			if use_bark and not is_instance_valid(projectile):
 				break
+		if use_bark and bark_used < 5 and (not is_instance_valid(boss) or boss.is_defeated):
+			defeated_before_5th_bark = true
 	var defeated := not is_instance_valid(boss) or boss.is_defeated
 	print("COMBINADO: golpes totales = ", hits, " (", bark_used, " con ladrido, ", hits - bark_used, " con huesito)")
 	_check(defeated, "combinado: el jefe termina derrotado")
-	_check(bark_used == 5, "combinado: se gastaron exactamente las 5 cargas de ladrido (uso %d)" % bark_used)
-	_check(hits >= 10, "combinado: siguen haciendo falta al menos 10 golpes en total (midio %d) -- el ladrido no acorta la pelea porque pega lo mismo que el huesito" % hits)
+	_check(bark_used == 5, "combinado: se gastaron las 5 cargas de ladrido (uso %d)" % bark_used)
+	_check(hits < 15, "combinado: el total (%d golpes) es MENOR que pelear solo con huesito (15), confirmando que el ladrido pega mas fuerte" % hits)
+	_check(not defeated_before_5th_bark, "el ladrido NO mata al jefe en menos de 5 usos (no murio antes de la carga numero 5)")
 	level.queue_free()
 	GameState.bark_ammo = 0
 	await get_tree().process_frame

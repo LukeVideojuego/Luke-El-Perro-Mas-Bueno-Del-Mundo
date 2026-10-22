@@ -58,13 +58,14 @@ func _ready() -> void:
 func _physics_process(_delta: float) -> void:
 	_fit_to_sprite()
 
-## Reenvia el golpe al jefe. Luke y el huesito llaman receive_attack() sobre
-## lo que impactan sin preguntar de que tipo es, asi que alcanza con tener el
-## metodo aca.
-func receive_attack(attacker: Node = null) -> void:
+## Reenvia el golpe al jefe. Luke, el huesito y el ladrido de onda llaman
+## receive_attack() sobre lo que impactan sin preguntar de que tipo es, asi
+## que alcanza con tener el metodo aca. amount se reenvia tal cual (el
+## ladrido manda 3, el resto no manda nada y cae en el 1 default).
+func receive_attack(attacker: Node = null, amount: int = 1) -> void:
 	var boss := get_parent()
 	if boss != null and boss.has_method("receive_attack"):
-		boss.receive_attack(attacker)
+		boss.receive_attack(attacker, amount)
 
 func _fit_to_sprite() -> void:
 	if _sprite == null or _sprite.texture == null or _rect == null:

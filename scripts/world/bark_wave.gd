@@ -3,8 +3,10 @@ extends Area2D
 
 ## C3: "Ladrido de onda expansiva", el poder de ataque nuevo que se compra en
 ## la tienda. Comparado con el huesito: va mucho mas rapido (980 contra 620),
-## atraviesa en vez de desaparecer con el primer impacto, y pega a todo lo que
-## toca en el camino (incluidas las cajas y la hurtbox de los jefes).
+## atraviesa en vez de desaparecer con el primer impacto, pega a todo lo que
+## toca en el camino (incluidas las cajas y la hurtbox de los jefes), y
+## E6: hace el TRIPLE de daño por impacto (DAMAGE) -- mas fuerte que el
+## huesito a proposito, para que valga la pena usar una carga limitada.
 ##
 ## Tiene municion limitada: cada disparo gasta una carga comprada, y cuando se
 ## acaban Luke vuelve a tirar huesitos.
@@ -13,6 +15,11 @@ extends Area2D
 @export var lifetime := 0.85
 ## Crece mientras avanza, como una onda que se expande.
 @export var growth := 1.6
+## El huesito y el golpe cuerpo a cuerpo pegan 1 de daño; esto es a proposito
+## el triple (receive_attack() de jefes/enemigos acepta un "amount" opcional
+## para esto exactamente). Numero real de golpes medido con el jefe final en
+## tests/diag_e6_serpent_fight.gd (ver GRUPO E6 en el resumen de progreso).
+const DAMAGE := 3
 
 var direction := 1.0
 var _thrower: Node = null
@@ -48,4 +55,4 @@ func _try_hit(target: Node) -> void:
 	if _already_hit.has(id):
 		return
 	_already_hit.append(id)
-	target.receive_attack(_thrower)
+	target.receive_attack(_thrower, DAMAGE)

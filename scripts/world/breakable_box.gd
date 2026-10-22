@@ -7,7 +7,7 @@ extends StaticBody2D
 
 var is_broken := false
 
-func receive_attack(_attacker: Node) -> void:
+func receive_attack(_attacker: Node, _amount: int = 1) -> void:
 	if is_broken:
 		return
 	is_broken = true

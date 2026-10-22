@@ -165,10 +165,14 @@ func _fire_power() -> void:
 	parent.add_child(projectile)
 	projectile.launch(global_position, dir, self)
 
-func receive_attack(_attacker: Node) -> void:
+## E6 (corrección): el ladrido de onda debe pegar MAS fuerte que el huesito
+## (el triple), no igual -- amount lo pasa el que ataca (bark_wave.gd manda
+## 3; el golpe cuerpo a cuerpo y el huesito no mandan nada y usan el 1 de
+## siempre).
+func receive_attack(_attacker: Node, amount: int = 1) -> void:
 	if is_defeated:
 		return
-	health -= 1
+	health -= amount
 	_update_hp_bar()
 	AudioDirector.play_event(&"boss_hit")
 	if health <= 0:

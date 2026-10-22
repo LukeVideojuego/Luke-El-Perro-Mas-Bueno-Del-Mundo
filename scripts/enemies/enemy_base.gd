@@ -220,10 +220,14 @@ func _get_player() -> Luke:
 		return null
 	return parent.get_node_or_null("Luke")
 
-func receive_attack(_attacker: Node) -> void:
+## amount: el ladrido de onda (bark_wave.gd) manda 3 (pega mas fuerte que el
+## huesito); el resto de los ataques no manda nada y usa el 1 de siempre.
+## La mayoria de los enemigos comunes tienen max_health=1, asi que en la
+## practica mueren igual de un golpe con cualquier ataque.
+func receive_attack(_attacker: Node, amount: int = 1) -> void:
 	if is_defeated:
 		return
-	health -= 1
+	health -= amount
 	if health <= 0:
 		is_defeated = true
 		$CollisionShape2D.set_deferred("disabled", true)
