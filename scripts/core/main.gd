@@ -15,6 +15,9 @@ var world_map: Node = null
 var album_screen: Node = null
 var game_over_screen: Node = null
 var shop_screen: Node = null
+## B1: bonus secreto de cavar, activo mientras Luke esta adentro.
+var active_bonus: Node = null
+var _bonus_return_position := Vector2.ZERO
 
 func _ready() -> void:
 	hud.visible = false
@@ -109,6 +112,53 @@ func _on_album_closed() -> void:
 	if album_screen != null:
 		album_screen.queue_free()
 		album_screen = null
+
+## B1: reparenta al Luke REAL (mismas estadisticas/cosmeticos, no una copia)
+## adentro del nivel bonus. El nivel de origen se desactiva entero
+## (process_mode=DISABLED, congela villanos/plataformas moviles/timers) y se
+## oculta mientras tanto, para que no siga de fondo.
+func _on_bonus_requested(bonus_scene_path: String, return_position: Vector2) -> void:
+	if active_bonus != null or active_level == null:
+		return
+	var luke: Luke = active_level.get_node_or_null("Luke")
+	if luke == null:
+		return
+	var bonus_scene := load(bonus_scene_path) as PackedScene
+	if bonus_scene == null:
+		return
+	_bonus_return_position = return_position
+	active_bonus = bonus_scene.instantiate()
+	add_child(active_bonus)
+	active_level.process_mode = Node.PROCESS_MODE_DISABLED
+	active_level.visible = false
+	active_level.remove_child(luke)
+	# El nivel real de Luke (Camera2D propia, con limit_left/right/top/bottom
+	# calculados para ESE nivel) no sirve adentro del bonus -- se apaga y la
+	# camara propia del bonus (BonusLevel.camera) toma el control.
+	var luke_camera: Camera2D = luke.get_node_or_null("Camera2D")
+	if luke_camera != null:
+		luke_camera.enabled = false
+	active_bonus.add_child(luke)
+	active_bonus.start(luke)
+	active_bonus.finished.connect(_on_bonus_finished)
+
+func _on_bonus_finished() -> void:
+	if active_bonus == null or active_level == null:
+		return
+	var luke: Luke = active_bonus.get_node("Luke") as Luke
+	active_bonus.remove_child(luke)
+	active_level.add_child(luke)
+	luke.global_position = _bonus_return_position
+	luke.velocity = Vector2.ZERO
+	luke.jumps_used = 0
+	var luke_camera: Camera2D = luke.get_node_or_null("Camera2D")
+	if luke_camera != null:
+		luke_camera.enabled = true
+		luke_camera.make_current()
+	active_level.process_mode = Node.PROCESS_MODE_INHERIT
+	active_level.visible = true
+	active_bonus.queue_free()
+	active_bonus = null
 
 func _on_map_level_selected(level_id: String) -> void:
 	if game_started:
@@ -211,6 +261,8 @@ func load_level(level_id: String) -> void:
 	var packed_scene := load(scene_path) as PackedScene
 	active_level = packed_scene.instantiate()
 	level_container.add_child(active_level)
+	if active_level is LevelBase:
+		active_level.bonus_requested.connect(_on_bonus_requested)
 	hud.visible = true
 	GameState.clear_out_of_lives()
 	if get_tree().paused:

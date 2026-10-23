@@ -31,6 +31,7 @@ func save_game() -> void:
 		"paws_found": GameState.paws_found,
 		"paw_reward_claimed": GameState.paw_reward_claimed,
 		"golden_collar_unlocked": GameState.golden_collar_unlocked,
+		"dig_spots_used": GameState.dig_spots_used,
 		"pending_star": GameState.pending_star,
 		"pending_boots": GameState.pending_boots,
 		"pending_aura": GameState.pending_aura,
@@ -87,6 +88,11 @@ func load_game() -> bool:
 	GameState.socks_equipped = bool(data.get("socks_equipped", false))
 	GameState.collar_equipped = bool(data.get("collar_equipped", false))
 	GameState.golden_collar_unlocked = bool(data.get("golden_collar_unlocked", false))
+	GameState.dig_spots_used = {}
+	var raw_digs = data.get("dig_spots_used", {})
+	if typeof(raw_digs) == TYPE_DICTIONARY:
+		for level_id in raw_digs:
+			GameState.dig_spots_used[String(level_id)] = bool(raw_digs[level_id])
 	GameState.paws_found = {}
 	var raw_paws = data.get("paws_found", {})
 	if typeof(raw_paws) == TYPE_DICTIONARY:

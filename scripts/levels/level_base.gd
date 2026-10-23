@@ -4,6 +4,10 @@ extends Node2D
 ## Base común para todos los niveles: registra el nivel en GameState,
 ## conecta la derrota de Luke y opcionalmente muestra un cartel de fin.
 
+## B1: cualquier DigSpot hijo del nivel burbujea su pedido de bonus hacia
+## arriba (main.gd escucha esto en load_level()).
+signal bonus_requested(bonus_scene_path: String, return_position: Vector2)
+
 ## Si Luke cae más abajo del punto de spawn que este margen (p. ej. atraviesa
 ## un hueco de agua sin tocar fondo), se lo trata como una derrota en vez de
 ## dejarlo caer para siempre.
@@ -32,9 +36,15 @@ func _ready() -> void:
 		mission_sign.hint_label.text = mission_sign.interaction_text
 	if completion_label != null:
 		GameState.level_completed.connect(_on_level_completed)
+	for child in get_children():
+		if child is DigSpot:
+			child.bonus_triggered.connect(_on_dig_bonus_triggered)
 	_fall_reset_y = spawn_point.global_position.y + FALL_RESET_MARGIN
 	_apply_camera_limits()
 	_apply_shop_purchases()
+
+func _on_dig_bonus_triggered(bonus_scene_path: String, return_position: Vector2) -> void:
+	bonus_requested.emit(bonus_scene_path, return_position)
 
 ## C3: aplica lo comprado en la tienda al arrancar el nivel. Los consumibles
 ## se gastan acá (una compra = un nivel); los cosméticos los dibuja Luke solo

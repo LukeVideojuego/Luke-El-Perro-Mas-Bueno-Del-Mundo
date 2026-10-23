@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=3]
+[gd_scene load_steps=42 format=3]
 [ext_resource type="PackedScene" path="res://scenes/objects/fishhook_spawner.tscn" id="99_fishhook"]
 
 [ext_resource type="Script" path="res://scripts/levels/level_base.gd" id="1_level"]
@@ -34,6 +34,7 @@
 [ext_resource type="PackedScene" path="res://scenes/objects/golden_paw.tscn" id="92_paw"]
 [ext_resource type="Texture2D" path="res://assets/Tiles/Default/bush.png" id="93_decobush"]
 [ext_resource type="Texture2D" path="res://assets/Tiles/Default/rock.png" id="95_decorock"]
+[ext_resource type="PackedScene" path="res://scenes/objects/dig_spot.tscn" id="98_dig"]
 
 [sub_resource type="RectangleShape2D" id="StartPadShape"]
 size = Vector2(300, 110)
@@ -1402,3 +1403,8 @@ z_index = -5
 scale = Vector2(1.8, 1.8)
 modulate = Color(0.4, 0.75, 0.8, 1)
 texture = ExtResource("93_decobush")
+
+[node name="DigSpot" parent="." instance=ExtResource("98_dig")]
+position = Vector2(280, 895)
+level_id = "world_4_level_2"
+bonus_scene_path = "res://scenes/levels/bonus_world_4.tscn"

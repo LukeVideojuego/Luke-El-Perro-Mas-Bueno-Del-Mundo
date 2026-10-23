@@ -1,0 +1,151 @@
+[gd_scene load_steps=9 format=3]
+
+[ext_resource type="Script" path="res://scripts/levels/bonus_level.gd" id="r1"]
+[ext_resource type="Texture2D" path="res://assets/backgrounds/Bonus/bonus_beach.png" id="r2"]
+[ext_resource type="PackedScene" path="res://scenes/objects/bonus_bar.tscn" id="r3"]
+[ext_resource type="PackedScene" path="res://scenes/objects/moving_platform.tscn" id="r4"]
+[ext_resource type="PackedScene" path="res://scenes/objects/disappearing_bar.tscn" id="r5"]
+[ext_resource type="PackedScene" path="res://scenes/objects/bonus_reward.tscn" id="r6"]
+
+[sub_resource type="RectangleShape2D" id="FallShape"]
+size = Vector2(5050.0, 200.0)
+
+[sub_resource type="RectangleShape2D" id="FinishShape"]
+size = Vector2(120.0, 300.0)
+
+[node name="Bonus2" type="Node2D"]
+script = ExtResource("r1")
+
+[node name="Background1" type="Sprite2D" parent="."]
+position = Vector2(0.0, 460.0)
+centered = false
+z_index = -10
+texture = ExtResource("r2")
+scale = Vector2(2.4, 2.4)
+
+[node name="Background2" type="Sprite2D" parent="."]
+position = Vector2(1639.2, 460.0)
+centered = false
+z_index = -10
+texture = ExtResource("r2")
+scale = Vector2(2.4, 2.4)
+
+[node name="Background3" type="Sprite2D" parent="."]
+position = Vector2(3278.4, 460.0)
+centered = false
+z_index = -10
+texture = ExtResource("r2")
+scale = Vector2(2.4, 2.4)
+
+[node name="Background4" type="Sprite2D" parent="."]
+position = Vector2(4917.6, 460.0)
+centered = false
+z_index = -10
+texture = ExtResource("r2")
+scale = Vector2(2.4, 2.4)
+
+[node name="LukeStart" type="Marker2D" parent="."]
+position = Vector2(200.0, 850.0)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(200.0, 900.0)
+
+[node name="StartPad" parent="." instance=ExtResource("r3")]
+position = Vector2(200.0, 900.0)
+scale = Vector2(3.3333, 1.0)
+
+[node name="Bar1" parent="." instance=ExtResource("r3")]
+position = Vector2(705.0, 880.0)
+scale = Vector2(1.2500, 1.0)
+
+[node name="Bar1Reward" parent="." instance=ExtResource("r6")]
+position = Vector2(705.0, 825.0)
+reward_type = 0
+
+[node name="Bar2" parent="." instance=ExtResource("r3")]
+position = Vector2(1110.0, 910.0)
+scale = Vector2(1.1667, 1.0)
+
+[node name="Bar2Reward" parent="." instance=ExtResource("r6")]
+position = Vector2(1110.0, 855.0)
+reward_type = 0
+
+[node name="Bar3" parent="." instance=ExtResource("r4")]
+position = Vector2(1535.0, 880.0)
+scale = Vector2(1.0833, 1.0)
+travel = Vector2(-55.0, 0.0)
+speed = 55.0
+
+[node name="Bar3Reward" parent="." instance=ExtResource("r6")]
+position = Vector2(1535.0, 825.0)
+reward_type = 1
+coin_amount = 3
+
+[node name="Bar4" parent="." instance=ExtResource("r4")]
+position = Vector2(1970.0, 910.0)
+scale = Vector2(1.0000, 1.0)
+travel = Vector2(-55.0, 0.0)
+speed = 55.0
+
+[node name="Bar4Reward" parent="." instance=ExtResource("r6")]
+position = Vector2(1970.0, 855.0)
+reward_type = 1
+coin_amount = 3
+
+[node name="Bar5" parent="." instance=ExtResource("r4")]
+position = Vector2(2415.0, 875.0)
+scale = Vector2(0.9167, 1.0)
+travel = Vector2(-55.0, 0.0)
+speed = 55.0
+
+[node name="Bar5Reward" parent="." instance=ExtResource("r6")]
+position = Vector2(2415.0, 820.0)
+reward_type = 1
+coin_amount = 3
+
+[node name="Bar6" parent="." instance=ExtResource("r4")]
+position = Vector2(2870.0, 910.0)
+scale = Vector2(0.8333, 1.0)
+travel = Vector2(-55.0, 0.0)
+speed = 55.0
+
+[node name="Bar6Reward" parent="." instance=ExtResource("r6")]
+position = Vector2(2870.0, 855.0)
+reward_type = 1
+coin_amount = 3
+
+[node name="Bar7" parent="." instance=ExtResource("r3")]
+position = Vector2(3335.0, 870.0)
+scale = Vector2(0.7500, 1.0)
+
+[node name="Bar7Reward" parent="." instance=ExtResource("r6")]
+position = Vector2(3335.0, 815.0)
+reward_type = 2
+item_id = "hat_tophat"
+
+[node name="Bar8" parent="." instance=ExtResource("r3")]
+position = Vector2(3810.0, 910.0)
+scale = Vector2(0.6667, 1.0)
+
+[node name="Bar8Reward" parent="." instance=ExtResource("r6")]
+position = Vector2(3810.0, 855.0)
+reward_type = 2
+item_id = "socks_yellow_black"
+
+[node name="FallBoundary" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 1
+monitoring = true
+position = Vector2(2125.0, 1410.0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FallBoundary"]
+shape = SubResource("FallShape")
+
+[node name="FinishMarker" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 1
+monitoring = true
+position = Vector2(3930.0, 870.0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FinishMarker"]
+shape = SubResource("FinishShape")

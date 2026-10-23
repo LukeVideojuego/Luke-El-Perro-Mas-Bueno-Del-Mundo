@@ -130,6 +130,18 @@ func collect_paw(level_id: String, index: int) -> void:
 		golden_collar_unlocked_changed.emit()
 	SaveManager.save_game()
 
+## --- B1: BONUS SECRETO DE CAVAR ---
+## level_id -> true si el pozo de ese nivel ya se uso (no se puede volver a
+## entrar hasta un CONTINUAR real, ver use_continue() mas arriba).
+var dig_spots_used: Dictionary = {}
+
+func is_dig_spot_used(level_id: String) -> bool:
+	return bool(dig_spots_used.get(level_id, false))
+
+func set_dig_spot_used(level_id: String, used: bool) -> void:
+	dig_spots_used[level_id] = used
+	SaveManager.save_game()
+
 ## Permanente una vez conseguido el primer huesito: desbloquea el ataque a
 ## distancia de Luke (doble tap del botón de ataque). Nunca se desactiva.
 var bone_throw_unlocked := false
@@ -277,6 +289,9 @@ func report_out_of_lives() -> void:
 
 ## C1: gasta un continue y deja el estado listo para reiniciar el nivel con
 ## 3 vidas desde el principio. Devuelve false si ya no quedaban.
+## B1: tambien es el UNICO camino que reactiva el pozo de cavar del nivel
+## donde se murio (perder una vida sola y respawnear en el checkpoint NO lo
+## reactiva, a proposito).
 func use_continue() -> bool:
 	if continues_left <= 0:
 		return false
@@ -288,6 +303,8 @@ func use_continue() -> bool:
 	checkpoint_id = ""
 	is_level_complete = false
 	_out_of_lives_pending = false
+	if not current_level_id.is_empty():
+		set_dig_spot_used(current_level_id, false)
 	lives_changed.emit(lives)
 	aura_changed.emit(aura_active)
 	SaveManager.save_game()
@@ -348,6 +365,7 @@ func reset_for_new_game(new_difficulty: String = "normal") -> void:
 	paws_found = {}
 	paw_reward_claimed = {}
 	golden_collar_unlocked = false
+	dig_spots_used = {}
 	pending_star = false
 	pending_boots = false
 	pending_aura = false

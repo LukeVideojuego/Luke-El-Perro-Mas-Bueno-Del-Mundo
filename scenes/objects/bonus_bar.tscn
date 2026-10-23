@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Texture2D" path="res://assets/Tiles/Default/terrain_stone_block.png" id="1_texture"]
+
+[sub_resource type="RectangleShape2D" id="BarShape"]
+size = Vector2(120, 32)
+
+[node name="BonusBar" type="StaticBody2D"]
+collision_layer = 1
+collision_mask = 0
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_texture")
+modulate = Color(0.82, 0.85, 0.92, 1)
+scale = Vector2(1.875, 0.5)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("BarShape")

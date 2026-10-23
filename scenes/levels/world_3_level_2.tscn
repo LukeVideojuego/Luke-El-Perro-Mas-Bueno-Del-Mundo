@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=3]
+[gd_scene load_steps=45 format=3]
 [ext_resource type="PackedScene" path="res://scenes/enemies/bird.tscn" id="99_bird"]
 
 [ext_resource type="Script" path="res://scripts/levels/level_base.gd" id="1_level"]
@@ -37,6 +37,7 @@
 [ext_resource type="Texture2D" path="res://assets/Tiles/Default/bush.png" id="93_decobush"]
 [ext_resource type="Texture2D" path="res://assets/Tiles/Default/fence.png" id="94_decofence"]
 [ext_resource type="Texture2D" path="res://assets/Tiles/Default/rock.png" id="95_decorock"]
+[ext_resource type="PackedScene" path="res://scenes/objects/dig_spot.tscn" id="98_dig"]
 
 [sub_resource type="RectangleShape2D" id="GroundShape"]
 size = Vector2(9480, 110)
@@ -1298,3 +1299,8 @@ z_index = -5
 scale = Vector2(2.2, 2.2)
 modulate = Color(0.55, 0.75, 0.55, 1)
 texture = ExtResource("93_decobush")
+
+[node name="DigSpot" parent="." instance=ExtResource("98_dig")]
+position = Vector2(2600, 895)
+level_id = "world_3_level_2"
+bonus_scene_path = "res://scenes/levels/bonus_world_3.tscn"
