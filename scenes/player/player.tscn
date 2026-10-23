@@ -60,6 +60,12 @@ texture_filter = 1
 z_index = 1
 scale = Vector2(0.85, 0.85)
 
+[node name="Socks" type="Sprite2D" parent="."]
+visible = false
+texture_filter = 1
+z_index = 1
+scale = Vector2(1.23, 1.23)
+
 [node name="Hat" type="Sprite2D" parent="."]
 visible = false
 texture_filter = 1

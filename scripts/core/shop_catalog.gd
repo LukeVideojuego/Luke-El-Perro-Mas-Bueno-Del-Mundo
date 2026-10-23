@@ -17,6 +17,7 @@ extends RefCounted
 enum Kind {
 	HAT,        ## cosmetico permanente, se equipa en la cabeza
 	SUIT,       ## cosmetico permanente, traje + capa
+	SOCKS,      ## cosmetico permanente, se equipa en las 4 patas
 	CONSUMABLE, ## se gasta al empezar el proximo nivel
 	AMMO,       ## suma municion del ataque especial
 }
@@ -46,6 +47,11 @@ const ITEMS := [
 		"id": "suit_cape", "icon": "res://assets/items/Shop/cape_open.png", "kind": Kind.SUIT, "price": 90,
 		"name": "Traje rojo con capa",
 		"desc": "Cosmetico. La capa se despliega sola cada vez que saltas.",
+	},
+	{
+		"id": "socks_yellow_black", "icon": "res://assets/items/Shop/socks_yellow_black.png", "kind": Kind.SOCKS, "price": 45,
+		"name": "Medias aurinegras",
+		"desc": "Cosmetico. Medias a rayas amarillas y negras en las 4 patas.",
 	},
 	{
 		"id": "star", "icon": "res://assets/Tiles/Default/star.png", "kind": Kind.CONSUMABLE, "price": 20,
@@ -83,4 +89,4 @@ static func get_item(id: String) -> Dictionary:
 ## Los sombreros y el traje se compran una sola vez; despues se equipan y se
 ## sacan gratis.
 static func is_permanent(item: Dictionary) -> bool:
-	return item.kind == Kind.HAT or item.kind == Kind.SUIT
+	return item.kind == Kind.HAT or item.kind == Kind.SUIT or item.kind == Kind.SOCKS

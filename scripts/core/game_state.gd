@@ -37,6 +37,7 @@ var owned_items: Array[String] = []
 ## Sombrero equipado ("" = ninguno) y si el traje con capa esta puesto.
 var equipped_hat := ""
 var suit_equipped := false
+var socks_equipped := false
 ## Comprados en la tienda y pendientes de aplicarse al empezar el nivel.
 var pending_star := false
 var pending_boots := false
@@ -124,6 +125,9 @@ func buy_item(item_id: String) -> bool:
 		ShopCatalog.Kind.SUIT:
 			owned_items.append(item_id)
 			suit_equipped = true
+		ShopCatalog.Kind.SOCKS:
+			owned_items.append(item_id)
+			socks_equipped = true
 		ShopCatalog.Kind.AMMO:
 			bark_ammo += int(item.get("amount", 1))
 		ShopCatalog.Kind.CONSUMABLE:
@@ -146,6 +150,8 @@ func toggle_equipped(item_id: String) -> void:
 		equipped_hat = "" if equipped_hat == item_id else item_id
 	elif item.kind == ShopCatalog.Kind.SUIT:
 		suit_equipped = not suit_equipped
+	elif item.kind == ShopCatalog.Kind.SOCKS:
+		socks_equipped = not socks_equipped
 	shop_changed.emit()
 	SaveManager.save_game()
 
@@ -251,6 +257,7 @@ func reset_for_new_game() -> void:
 	owned_items = []
 	equipped_hat = ""
 	suit_equipped = false
+	socks_equipped = false
 	pending_star = false
 	pending_boots = false
 	pending_aura = false

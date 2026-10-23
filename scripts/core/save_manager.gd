@@ -25,6 +25,7 @@ func save_game() -> void:
 		"owned_items": GameState.owned_items,
 		"equipped_hat": GameState.equipped_hat,
 		"suit_equipped": GameState.suit_equipped,
+		"socks_equipped": GameState.socks_equipped,
 		"pending_star": GameState.pending_star,
 		"pending_boots": GameState.pending_boots,
 		"pending_aura": GameState.pending_aura,
@@ -72,6 +73,7 @@ func load_game() -> bool:
 		GameState.owned_items.append(String(entry))
 	GameState.equipped_hat = String(data.get("equipped_hat", ""))
 	GameState.suit_equipped = bool(data.get("suit_equipped", false))
+	GameState.socks_equipped = bool(data.get("socks_equipped", false))
 	GameState.pending_star = bool(data.get("pending_star", false))
 	GameState.pending_boots = bool(data.get("pending_boots", false))
 	GameState.pending_aura = bool(data.get("pending_aura", false))

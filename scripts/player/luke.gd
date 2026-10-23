@@ -21,6 +21,7 @@ extends CharacterBody2D
 @onready var hat_sprite: Sprite2D = $Hat
 @onready var cape_ribbon: CapeRibbon = $Cape
 @onready var suit_sprite: Sprite2D = $Suit
+@onready var socks_sprite: Sprite2D = $Socks
 
 @export_category("Power-ups")
 @export var speed_boost_multiplier := 1.5
@@ -46,6 +47,20 @@ const HAT_TEXTURES := {
 	"hat_crown": preload("res://assets/items/Shop/hat_crown.png"),
 }
 const SUIT_BODY := preload("res://assets/items/Shop/suit_body.png")
+## F5: medias aurinegras. Son un calco exacto (mismo lienzo y pixeles) de
+## cada textura real de Luke con solo el pelaje claro de las 4 patas
+## repintado a rayas, asi que alcanza con copiar la posicion/escala/flip del
+## AnimatedSprite2D sin anclas por pose: quedan pegadas a las patas en todas
+## las animaciones, incluidos los 2 cuadros alternados de "walk".
+const SOCKS_TEXTURES := {
+	"idle": [preload("res://assets/characters/Luke/luke_socks_idle.png")],
+	"walk": [
+		preload("res://assets/characters/Luke/luke_socks_walk.png"),
+		preload("res://assets/characters/Luke/luke_socks_walk_b.png"),
+	],
+	"jump": [preload("res://assets/characters/Luke/luke_socks_jump.png")],
+	"attack": [preload("res://assets/characters/Luke/luke_socks_attack.png")],
+}
 ## Posicion del sombrero (borde inferior, centrado) por animacion, en
 ## coordenadas locales de Luke.
 const HAT_ANCHOR := {
@@ -373,6 +388,16 @@ func _update_cosmetics() -> void:
 		suit_sprite.position = Vector2(suit_anchor.x * facing_direction, suit_anchor.y + bob)
 		suit_sprite.flip_h = flipped
 		suit_sprite.modulate = animated_sprite.modulate
+
+	var wears_socks: bool = GameState.socks_equipped
+	socks_sprite.visible = wears_socks
+	if wears_socks:
+		var frames: Array = SOCKS_TEXTURES.get(anim, SOCKS_TEXTURES["idle"])
+		var frame_idx: int = animated_sprite.frame if animated_sprite.frame < frames.size() else 0
+		socks_sprite.texture = frames[frame_idx]
+		socks_sprite.position = animated_sprite.position
+		socks_sprite.flip_h = flipped
+		socks_sprite.modulate = animated_sprite.modulate
 
 func _handle_underwater_effects(delta: float) -> void:
 	_idle_time += delta

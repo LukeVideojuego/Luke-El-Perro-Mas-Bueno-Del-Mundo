@@ -120,6 +120,8 @@ func _is_equipped(item: Dictionary) -> bool:
 		return GameState.equipped_hat == item.id
 	if item.kind == ShopCatalog.Kind.SUIT:
 		return GameState.suit_equipped
+	if item.kind == ShopCatalog.Kind.SOCKS:
+		return GameState.socks_equipped
 	return false
 
 func _refresh() -> void:
