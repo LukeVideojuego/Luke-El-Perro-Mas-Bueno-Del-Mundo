@@ -38,8 +38,8 @@ power_initial_delay = 1.0
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
 texture = ExtResource("2_texture")
-position = Vector2(0, -58.4)
-scale = Vector2(1.2662, 1.2662)
+position = Vector2(0, -55.53)
+scale = Vector2(1.2039, 1.2039)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 8)

@@ -44,7 +44,7 @@ power_texture = ExtResource("7_power")
 texture_filter = 1
 texture = ExtResource("2_texture")
 offset = Vector2(0, 0)
-scale = Vector2(1.2315, 1.2315)
+scale = Vector2(1.1250, 1.1250)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 8)
