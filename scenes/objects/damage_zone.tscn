@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" path="res://assets/Tiles/Default/spikes.png" id="2_spikes"]
 
 [sub_resource type="RectangleShape2D" id="HazardShape"]
-size = Vector2(150, 30)
+size = Vector2(150, 70)
 
 [node name="DamageZone" type="Area2D"]
 collision_layer = 0
@@ -32,6 +32,7 @@ scale = Vector2(1.5, 1)
 texture = ExtResource("2_spikes")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -20)
 shape = SubResource("HazardShape")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

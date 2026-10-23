@@ -30,13 +30,23 @@ func _ready() -> void:
 	if not body_entered.is_connected(_on_body_entered):
 		body_entered.connect(_on_body_entered)
 
+## F2: el area letal y los pinchos visibles se dibujaban hacia ABAJO desde el
+## origen (pensado como "la superficie del piso"), es decir, HACIA ADENTRO
+## del piso solido. Luke, parado o caminando, apoya los pies EXACTAMENTE en
+## la superficie (nunca la atraviesa, el piso solido se lo impide), asi que
+## el area letal y el origen quedaban tocandose en el borde sin solaparse
+## nunca de verdad -- confirmado con fisica real (tests/diag_f2_spike_probe.
+## gd): Luke se quedaba parado sobre pinchos sin perder vida nunca. Ahora
+## todo el dibujo (pinchos, fondo oscuro, area letal) se espeja hacia
+## ARRIBA desde la superficie, para que la punta del pincho entre de verdad
+## en el espacio que ocupan los pies de Luke al pisarlo.
 func _build() -> void:
 	var half := strip_width * 0.5
 	if draw_backing:
 		var backing := Polygon2D.new()
 		backing.polygon = PackedVector2Array([
-			Vector2(-half, 2.0), Vector2(half, 2.0),
-			Vector2(half, hazard_height), Vector2(-half, hazard_height)])
+			Vector2(-half, -2.0), Vector2(half, -2.0),
+			Vector2(half, -hazard_height), Vector2(-half, -hazard_height)])
 		backing.color = Color(0.15, 0.13, 0.13, 1.0)
 		backing.z_index = -1
 		add_child(backing)
@@ -46,13 +56,13 @@ func _build() -> void:
 		var spike := Sprite2D.new()
 		spike.texture = SPIKE_TEXTURE
 		spike.scale = spike_scale
-		spike.position = Vector2(-half + step * (float(i) + 0.5), 23.0)
+		spike.position = Vector2(-half + step * (float(i) + 0.5), -23.0)
 		add_child(spike)
 	var shape_node := CollisionShape2D.new()
 	var rect := RectangleShape2D.new()
 	rect.size = Vector2(strip_width, hazard_height)
 	shape_node.shape = rect
-	shape_node.position = Vector2(0.0, hazard_height * 0.5)
+	shape_node.position = Vector2(0.0, -hazard_height * 0.5)
 	add_child(shape_node)
 
 func _on_body_entered(body: Node2D) -> void:
