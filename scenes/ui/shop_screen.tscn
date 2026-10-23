@@ -73,6 +73,12 @@ theme_override_font_sizes/font_size = 24
 text = "Gastá tus monedas o entrá directo al nivel."
 vertical_alignment = 1
 
+[node name="SaveButton" type="Button" parent="Panel/Footer"]
+custom_minimum_size = Vector2(260, 72)
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "GUARDAR PARTIDA"
+
 [node name="SkipButton" type="Button" parent="Panel/Footer"]
 custom_minimum_size = Vector2(380, 72)
 layout_mode = 2

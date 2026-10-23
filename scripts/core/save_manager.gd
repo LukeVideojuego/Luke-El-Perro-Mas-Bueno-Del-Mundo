@@ -78,7 +78,13 @@ func load_game() -> bool:
 	GameState.pending_hearts = int(data.get("pending_hearts", 0))
 	GameState.bark_ammo = maxi(0, int(data.get("bark_ammo", 0)))
 	GameState.is_level_complete = false
-	GameState.resume_at_checkpoint = true
+	# F4: si se guardo desde la tienda (antes de entrar a un nivel, nunca a
+	# mitad de uno), checkpoint_position queda en (0,0) a proposito -- igual
+	# que prepare_next_level() antes de cualquier nivel nuevo normal. Sin
+	# este chequeo, resume_at_checkpoint=true a secas hacia que
+	# begin_level() reubicara a Luke literalmente en el origen del mundo
+	# (0,0) en vez de en el SpawnPoint real del nivel.
+	GameState.resume_at_checkpoint = GameState.checkpoint_position != Vector2.ZERO
 	GameState.clear_out_of_lives()
 	return true
 

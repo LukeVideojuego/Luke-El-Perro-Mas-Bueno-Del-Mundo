@@ -13,25 +13,46 @@ signal closed
 @onready var level_label: Label = $Panel/Header/LevelLabel
 @onready var list: VBoxContainer = $Panel/Scroll/List
 @onready var skip_button: Button = $Panel/Footer/SkipButton
+@onready var save_button: Button = $Panel/Footer/SaveButton
 @onready var status_label: Label = $Panel/Footer/StatusLabel
 
 var _rows: Array = []
+## F4: nivel al que se va a entrar DESPUES de la tienda (el que recibe
+## setup()). GameState.current_level_id todavia apunta al nivel recien
+## completado mientras la tienda esta abierta (recien se actualiza cuando
+## el nivel siguiente arranca de verdad, en level_base._ready() ->
+## begin_level()) -- "GUARDAR PARTIDA" desde aca tiene que guardar ESTE,
+## no el viejo, para que "CARGAR PARTIDA" vuelva al punto correcto.
+var _next_level_id := ""
 
 func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	skip_button.pressed.connect(func() -> void: closed.emit())
+	save_button.pressed.connect(_on_save_pressed)
 	GameState.shop_changed.connect(_refresh)
 	_build_rows()
 	_refresh()
 	skip_button.grab_focus()
 
 func setup(level_id: String) -> void:
+	_next_level_id = level_id
 	var world := LevelProgression.get_world(level_id)
 	var order := LevelProgression.get_order(level_id)
 	var where := "%s · NIVEL %d" % [LevelProgression.get_world_name(world), order]
 	if order >= 4:
 		where = "%s · %s" % [LevelProgression.get_world_name(world), LevelProgression.get_boss_name(world)]
 	level_label.text = "Antes de entrar a %s" % where
+
+## F4: guarda el progreso tal cual esta en la tienda (monedas, vidas,
+## continues, compras, sombrero equipado) apuntando al nivel que la tienda
+## esta por mostrar, no al que ya se completo.
+func _on_save_pressed() -> void:
+	GameState.current_level_id = _next_level_id
+	GameState.checkpoint_id = "start"
+	GameState.checkpoint_position = Vector2.ZERO
+	SaveManager.save_game()
+	AudioDirector.play_event(&"coin_pickup")
+	_set_status("Partida guardada")
 
 func _build_rows() -> void:
 	for item in ShopCatalog.ITEMS:
