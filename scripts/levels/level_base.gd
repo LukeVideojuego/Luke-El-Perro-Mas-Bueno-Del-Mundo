@@ -168,6 +168,35 @@ func _on_luke_defeated() -> void:
 	luke.velocity = Vector2.ZERO
 	GameState.report_out_of_lives()
 
+var _password_label: Label = null
+
+## A5: muestra la contraseña del nivel recien completado (para poder saltar
+## directo a el mas adelante desde el menu) justo debajo del cartel de
+## "nivel completado" que ya existia. Se crea en runtime (no se toca cada
+## escena de nivel a mano) para no tener que editar los 16 niveles.
 func _on_level_completed(completed_id: String) -> void:
 	if completion_label != null and completed_id == level_id:
 		completion_label.visible = true
+		_show_password_hint()
+
+func _show_password_hint() -> void:
+	var code := LevelProgression.get_password_for_level(level_id)
+	if code.is_empty():
+		return
+	if _password_label == null:
+		_password_label = Label.new()
+		_password_label.custom_minimum_size = Vector2(500, 0)
+		_password_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+		_password_label.add_theme_font_size_override("font_size", 26)
+		_password_label.add_theme_color_override("font_color", Color(1, 1, 1, 1))
+		_password_label.add_theme_color_override("font_outline_color", Color(0, 0, 0, 1))
+		_password_label.add_theme_constant_override("outline_size", 6)
+		add_child(_password_label)
+	_password_label.text = "Contraseña de este nivel: %s" % code
+	var anchor: Vector2 = completion_label.position
+	if completion_label.size.x > 0.0:
+		anchor.x += completion_label.size.x * 0.5 - _password_label.custom_minimum_size.x * 0.5
+	else:
+		anchor.x -= _password_label.custom_minimum_size.x * 0.5 - 150.0
+	_password_label.position = anchor + Vector2(0.0, 90.0)
+	_password_label.visible = true

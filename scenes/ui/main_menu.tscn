@@ -175,7 +175,7 @@ autowrap_mode = 2
 [node name="PasswordInput" type="LineEdit" parent="PasswordPanel/Center"]
 custom_minimum_size = Vector2(0, 48)
 theme_override_font_sizes/font_size = 26
-placeholder_text = "LUKE01"
+placeholder_text = "HUESO3"
 max_length = 12
 alignment = 1
 

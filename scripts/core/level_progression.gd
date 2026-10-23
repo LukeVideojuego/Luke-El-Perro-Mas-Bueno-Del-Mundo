@@ -71,26 +71,29 @@ static func get_level_id_for_global_order(global_order: int) -> String:
 			return level_id
 	return ""
 
-## Contraseñas simples y ampliables: "LUKE" + número de orden global de dos
-## dígitos (01..16). Pensadas para que un jugador pueda saltar directo a
-## cualquier nivel sin tener que jugar los anteriores.
+## A5: antes eran "LUKE" + el numero de orden global (LUKE01..LUKE16), asi
+## que cualquiera podia adivinar la del jefe final (LUKE16) sin jugar nada.
+## Ahora son 16 palabras cortas del universo del juego + un digito SIN
+## relacion con el orden del nivel ni entre si (ver el resumen del commit
+## para la lista completa) -- faciles de leer para un chico, pero ya no
+## adivinables por patron.
 const PASSWORDS := {
-	"LUKE01": "world_1_level_1",
-	"LUKE02": "world_1_level_2",
-	"LUKE03": "world_1_level_3",
-	"LUKE04": "world_1_boss",
-	"LUKE05": "world_2_level_1",
-	"LUKE06": "world_2_level_2",
-	"LUKE07": "world_2_level_3",
-	"LUKE08": "world_2_boss",
-	"LUKE09": "world_3_level_1",
-	"LUKE10": "world_3_level_2",
-	"LUKE11": "world_3_level_3",
-	"LUKE12": "world_3_boss",
-	"LUKE13": "world_4_level_1",
-	"LUKE14": "world_4_level_2",
-	"LUKE15": "world_4_level_3",
-	"LUKE16": "world_4_boss",
+	"PATA8": "world_1_level_1",
+	"HUESO3": "world_1_level_2",
+	"CAPA5": "world_1_level_3",
+	"NOBLE2": "world_1_boss",
+	"AMOR9": "world_2_level_1",
+	"FIEL1": "world_2_level_2",
+	"GORRO6": "world_2_level_3",
+	"VALOR4": "world_2_boss",
+	"COLA7": "world_3_level_1",
+	"BUENO3": "world_3_level_2",
+	"SALTO9": "world_3_level_3",
+	"HEROE1": "world_3_boss",
+	"AMIGO5": "world_4_level_1",
+	"CORRE2": "world_4_level_2",
+	"PERRO8": "world_4_level_3",
+	"PELO6": "world_4_boss",
 }
 
 ## Devuelve el level_id asociado a una contraseña, o "" si no es válida.
@@ -98,3 +101,11 @@ const PASSWORDS := {
 static func get_level_id_from_password(code: String) -> String:
 	var normalized := code.strip_edges().to_upper()
 	return String(PASSWORDS.get(normalized, ""))
+
+## A5: busqueda inversa (level_id -> contraseña), usada por level_base.gd
+## para mostrar en pantalla la contraseña del nivel recien completado.
+static func get_password_for_level(level_id: String) -> String:
+	for code in PASSWORDS:
+		if PASSWORDS[code] == level_id:
+			return String(code)
+	return ""
