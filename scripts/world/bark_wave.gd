@@ -5,21 +5,25 @@ extends Area2D
 ## la tienda. Comparado con el huesito: va mucho mas rapido (980 contra 620),
 ## atraviesa en vez de desaparecer con el primer impacto, pega a todo lo que
 ## toca en el camino (incluidas las cajas y la hurtbox de los jefes), y
-## E6: hace el TRIPLE de daño por impacto (DAMAGE) -- mas fuerte que el
-## huesito a proposito, para que valga la pena usar una carga limitada.
+## E6/A2: hace el TRIPLE de daño por impacto del HUESITO (no del golpe cuerpo
+## a cuerpo) -- mas fuerte a proposito, para que valga la pena usar una carga
+## limitada.
 ##
 ## Tiene municion limitada: cada disparo gasta una carga comprada, y cuando se
 ## acaban Luke vuelve a tirar huesitos.
+
+const ThrownBoneScript := preload("res://scripts/world/thrown_bone.gd")
 
 @export var speed := 980.0
 @export var lifetime := 0.85
 ## Crece mientras avanza, como una onda que se expande.
 @export var growth := 1.6
-## El huesito y el golpe cuerpo a cuerpo pegan 1 de daño; esto es a proposito
-## el triple (receive_attack() de jefes/enemigos acepta un "amount" opcional
-## para esto exactamente). Numero real de golpes medido con el jefe final en
-## tests/diag_e6_serpent_fight.gd (ver GRUPO E6 en el resumen de progreso).
-const DAMAGE := 3
+## A2: derivado de ThrownBone.DAMAGE (no un "3" suelto) para que la relacion
+## "el triple del huesito" quede garantizada por el codigo, no por
+## coincidencia con que el golpe cuerpo a cuerpo tambien valga 1 hoy. Numero
+## real de golpes medido con el jefe final en tests/diag_e6_serpent_fight.gd
+## (ver GRUPO E6 en el resumen de progreso).
+const DAMAGE := 3 * ThrownBoneScript.DAMAGE
 
 var direction := 1.0
 var _thrower: Node = null
