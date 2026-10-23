@@ -3,6 +3,7 @@
 [ext_resource type="Script" path="res://scripts/enemies/enemy_base.gd" id="1_script"]
 [ext_resource type="Texture2D" path="res://assets/Enemies/Reference/medusa.png" id="2_texture"]
 [ext_resource type="PackedScene" path="res://scenes/objects/venom_bubble_projectile.tscn" id="3_projectile"]
+[ext_resource type="Texture2D" path="res://assets/Enemies/Reference/medusa_walk.png" id="4_walk"]
 
 [sub_resource type="RectangleShape2D" id="BodyShape"]
 size = Vector2(44.8, 57.6)
@@ -22,6 +23,7 @@ can_ranged_attack = true
 ranged_projectile_scene = ExtResource("3_projectile")
 ranged_detect_range = 380.0
 ranged_cooldown = 2.6
+walk_texture = ExtResource("4_walk")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1

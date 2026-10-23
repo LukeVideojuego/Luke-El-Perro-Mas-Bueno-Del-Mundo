@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" path="res://scripts/enemies/bird.gd" id="1_script"]
 [ext_resource type="Texture2D" path="res://assets/Enemies/Reference/bird.png" id="2_texture"]
+[ext_resource type="Texture2D" path="res://assets/Enemies/Reference/bird_walk.png" id="3_walk"]
 
 [sub_resource type="RectangleShape2D" id="BodyShape"]
 size = Vector2(60, 34)
@@ -19,6 +20,8 @@ patrol_distance = 300.0
 bob_amplitude = 14.0
 bob_frequency = 1.8
 contact_anim = 0
+walk_texture = ExtResource("3_walk")
+walk_frame_time = 0.12
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1

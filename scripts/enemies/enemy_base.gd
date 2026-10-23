@@ -110,19 +110,26 @@ func _physics_process(delta: float) -> void:
 		sprite.flip_h = patrol_direction > 0.0
 		_update_walk_animation(delta)
 
-## Ciclo de caminata de 2 poses (piernas juntas / piernas separadas),
-## alternadas mientras el personaje se mueve horizontalmente; a mayor
+## Ciclo de 2 poses (piernas juntas/separadas en tierra; aletas/tentaculos
+## en los que nadan), alternadas mientras el personaje se mueve; a mayor
 ## patrol_speed, más rápido alterna. Se congela en la pose "quieta" al
 ## detenerse (patrullas con paradas, cargas en cooldown, etc).
+##
+## F8: BOB_VERTICAL (medusa que nada subiendo y bajando en el lugar, sin
+## velocidad horizontal nunca) no tiene "velocity.x" que mirar -- sin esto
+## se quedaba siempre en la pose quieta aunque tuviera walk_texture puesto.
+## Para ese modo se anima siempre, al ritmo de su propio bob_frequency, en
+## vez de mirar la velocidad.
 func _update_walk_animation(delta: float) -> void:
 	if walk_texture == null:
 		return
-	if absf(velocity.x) < 5.0:
+	var always_animate: bool = movement_mode == MovementMode.BOB_VERTICAL
+	if not always_animate and absf(velocity.x) < 5.0:
 		_walk_cycle_time = 0.0
 		_walk_frame_on = false
 		sprite.texture = _idle_texture
 		return
-	var speed_ratio: float = absf(velocity.x) / maxf(patrol_speed, 1.0)
+	var speed_ratio: float = 1.0 if always_animate else absf(velocity.x) / maxf(patrol_speed, 1.0)
 	_walk_cycle_time += delta * maxf(speed_ratio, 0.3)
 	if _walk_cycle_time >= walk_frame_time:
 		_walk_cycle_time = 0.0

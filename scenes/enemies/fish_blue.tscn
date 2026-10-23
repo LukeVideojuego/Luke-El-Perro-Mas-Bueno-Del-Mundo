@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" path="res://scripts/enemies/enemy_base.gd" id="1_script"]
 [ext_resource type="Texture2D" path="res://assets/Enemies/Reference/tiburon.png" id="2_texture"]
+[ext_resource type="Texture2D" path="res://assets/Enemies/Reference/tiburon_walk.png" id="3_walk"]
 
 [sub_resource type="RectangleShape2D" id="BodyShape"]
 size = Vector2(96, 64)
@@ -18,6 +19,7 @@ patrol_speed = 95.0
 patrol_distance = 190.0
 bob_amplitude = 0.0
 contact_anim = 1
+walk_texture = ExtResource("3_walk")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
