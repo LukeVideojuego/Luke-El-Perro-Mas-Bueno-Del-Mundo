@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3]
+[gd_scene load_steps=38 format=3]
 [ext_resource type="PackedScene" path="res://scenes/objects/fishhook_spawner.tscn" id="99_fishhook"]
 
 [ext_resource type="Script" path="res://scripts/levels/level_base.gd" id="1_level"]
@@ -29,6 +29,8 @@
 [ext_resource type="Texture2D" path="res://assets/Tiles/Default/terrain_sand_block_top.png" id="91_sand"]
 [ext_resource type="Texture2D" path="res://assets/Enemies/Reference/crab.png" id="92_crab"]
 [ext_resource type="Texture2D" path="res://assets/Enemies/Reference/crab_walk.png" id="93_crabwalk"]
+[ext_resource type="PackedScene" path="res://scenes/objects/kid_npc.tscn" id="90_kidnpc"]
+[ext_resource type="Texture2D" path="res://assets/characters/Kids/EndOfWorld1/bauti.png" id="91_kidtex"]
 
 [sub_resource type="RectangleShape2D" id="StartPadShape"]
 size = Vector2(300, 110)
@@ -51,7 +53,7 @@ size = Vector2(180, 36)
 [node name="world_4_level_2" type="Node2D"]
 script = ExtResource("1_level")
 level_id = "world_4_level_2"
-mission_text = "Cruza el mar saltando de isla en isla."
+mission_text = "Bauti: Hola Luke, cruza el mar saltando de medusa en medusa. Cuidado con los tiburones y no toques el fondo marino."
 
 [node name="Background" type="Sprite2D" parent="."]
 position = Vector2(0, 0)
@@ -822,9 +824,14 @@ texture = ExtResource("92_crab")
 [node name="SpawnPoint" type="Marker2D" parent="."]
 position = Vector2(400, 850)
 
-[node name="MissionSign" parent="." instance=ExtResource("9_sign")]
-position = Vector2(400, 880)
-interaction_text = "Cruza el mar saltando de isla en isla."
+[node name="MissionSign" parent="." instance=ExtResource("90_kidnpc")]
+position = Vector2(400, 861.43)
+kid_name = "Bauti"
+interaction_text = "Bauti: Hola Luke, cruza el mar saltando de medusa en medusa. Cuidado con los tiburones y no toques el fondo marino."
+
+[node name="Sprite2D" parent="MissionSign"]
+texture = ExtResource("91_kidtex")
+scale = Vector2(0.9471, 0.9471)
 
 [node name="Luke" parent="." instance=ExtResource("2_luke")]
 position = Vector2(400, 850)

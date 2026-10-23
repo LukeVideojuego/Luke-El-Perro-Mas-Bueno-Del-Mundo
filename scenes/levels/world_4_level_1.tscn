@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3]
+[gd_scene load_steps=36 format=3]
 [ext_resource type="PackedScene" path="res://scenes/enemies/bird.tscn" id="99_bird"]
 
 [ext_resource type="Script" path="res://scripts/levels/level_base.gd" id="1_level"]
@@ -27,6 +27,8 @@
 [ext_resource type="Texture2D" path="res://assets/characters/Default/character_beige_idle.png" id="24_lookout_texture"]
 [ext_resource type="Texture2D" path="res://assets/backgrounds/Worlds/world4_selva.jpg" id="25_bg"]
 [ext_resource type="PackedScene" path="res://scenes/objects/extra_life.tscn" id="c2_life"]
+[ext_resource type="PackedScene" path="res://scenes/objects/kid_npc.tscn" id="90_kidnpc"]
+[ext_resource type="Texture2D" path="res://assets/characters/Kids/EndOfWorld1/mathi.png" id="91_kidtex"]
 
 [sub_resource type="RectangleShape2D" id="GroundShape"]
 size = Vector2(9480, 110)
@@ -49,7 +51,7 @@ size = Vector2(180, 36)
 [node name="world_4_level_1" type="Node2D"]
 script = ExtResource("1_level")
 level_id = "world_4_level_1"
-mission_text = "Cruza la jungla y evita el dengue."
+mission_text = "Mathi: Hola Luke, cruza la jungla y evita el dengue. Vas a encontrar abejas, moscas, ranas, babosas, caracoles y arañas en el camino."
 
 [node name="Background" type="Sprite2D" parent="."]
 position = Vector2(0, 0)
@@ -761,9 +763,14 @@ shape = SubResource("BoundaryShape")
 [node name="SpawnPoint" type="Marker2D" parent="."]
 position = Vector2(180, 850)
 
-[node name="MissionSign" parent="." instance=ExtResource("10_sign")]
-position = Vector2(520, 873)
-interaction_text = "Cruza la jungla y evita el dengue."
+[node name="MissionSign" parent="." instance=ExtResource("90_kidnpc")]
+position = Vector2(520, 869.96)
+kid_name = "Mathi"
+interaction_text = "Mathi: Hola Luke, cruza la jungla y evita el dengue. Vas a encontrar abejas, moscas, ranas, babosas, caracoles y arañas en el camino."
+
+[node name="Sprite2D" parent="MissionSign"]
+texture = ExtResource("91_kidtex")
+scale = Vector2(0.8342, 0.8342)
 
 [node name="Luke" parent="." instance=ExtResource("2_luke")]
 position = Vector2(180, 850)

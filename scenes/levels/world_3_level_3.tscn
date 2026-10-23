@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3]
+[gd_scene load_steps=37 format=3]
 [ext_resource type="PackedScene" path="res://scenes/enemies/bird.tscn" id="99_bird"]
 
 [ext_resource type="Script" path="res://scripts/levels/level_base.gd" id="1_level"]
@@ -29,6 +29,8 @@
 [ext_resource type="Texture2D" path="res://assets/Enemies/Reference/guardia.png" id="25_guard"]
 [ext_resource type="Texture2D" path="res://assets/backgrounds/Worlds/world3_final.png" id="28_bg"]
 [ext_resource type="PackedScene" path="res://scenes/objects/extra_life.tscn" id="c2_life"]
+[ext_resource type="PackedScene" path="res://scenes/objects/kid_npc.tscn" id="90_kidnpc"]
+[ext_resource type="Texture2D" path="res://assets/characters/Kids/EndOfWorld1/zoe.png" id="91_kidtex"]
 
 [sub_resource type="RectangleShape2D" id="GroundShape"]
 size = Vector2(9200, 110)
@@ -48,7 +50,7 @@ size = Vector2(180, 36)
 [node name="world_3_level_3" type="Node2D"]
 script = ExtResource("1_level")
 level_id = "world_3_level_3"
-mission_text = "Recupera el documento del pueblo en la Casa Rosada."
+mission_text = "Zoe: Hola Luke, recupera el documento del pueblo en la Casa Rosada. Cuidado con los politicos corruptos y sus ayudantes."
 
 [node name="Background" type="Sprite2D" parent="."]
 position = Vector2(0, 0)
@@ -809,9 +811,14 @@ shape = SubResource("BoundaryShape")
 [node name="SpawnPoint" type="Marker2D" parent="."]
 position = Vector2(180, 850)
 
-[node name="MissionSign" parent="." instance=ExtResource("7_sign")]
-position = Vector2(520, 873)
-interaction_text = "Recupera el documento del pueblo en la Casa Rosada."
+[node name="MissionSign" parent="." instance=ExtResource("90_kidnpc")]
+position = Vector2(520, 852.93)
+kid_name = "Zoe"
+interaction_text = "Zoe: Hola Luke, recupera el documento del pueblo en la Casa Rosada. Cuidado con los politicos corruptos y sus ayudantes."
+
+[node name="Sprite2D" parent="MissionSign"]
+texture = ExtResource("91_kidtex")
+scale = Vector2(1.0311, 1.0311)
 
 [node name="Luke" parent="." instance=ExtResource("2_luke")]
 position = Vector2(180, 850)

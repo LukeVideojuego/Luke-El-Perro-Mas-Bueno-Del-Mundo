@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3]
+[gd_scene load_steps=36 format=3]
 [ext_resource type="PackedScene" path="res://scenes/enemies/bird.tscn" id="99_bird"]
 
 [ext_resource type="Script" path="res://scripts/levels/level_base.gd" id="1_level"]
@@ -25,6 +25,8 @@
 [ext_resource type="PackedScene" path="res://scenes/enemies/thief.tscn" id="22_thief"]
 [ext_resource type="Texture2D" path="res://assets/backgrounds/Worlds/world1_final.png" id="23_bg"]
 [ext_resource type="PackedScene" path="res://scenes/objects/extra_life.tscn" id="c2_life"]
+[ext_resource type="PackedScene" path="res://scenes/objects/kid_npc.tscn" id="90_kidnpc"]
+[ext_resource type="Texture2D" path="res://assets/characters/Kids/EndOfWorld1/zoe.png" id="91_kidtex"]
 
 [sub_resource type="RectangleShape2D" id="GroundShape"]
 size = Vector2(6400, 120)
@@ -47,6 +49,7 @@ size = Vector2(180, 36)
 [node name="World1Neighborhood" type="Node2D"]
 script = ExtResource("1_level")
 level_id = "world_1_level_1"
+mission_text = "Zoe: Hola Luke, los ladrones andan sueltos por el barrio. Esquiva o ataca a los ladrones y a las aves, y llega hasta la bandera verde."
 
 [node name="Background" type="Sprite2D" parent="."]
 position = Vector2(0, 0)
@@ -432,9 +435,14 @@ position = Vector2(280, 850)
 [node name="Luke" parent="." instance=ExtResource("2_player")]
 position = Vector2(280, 850)
 
-[node name="MissionSign" parent="." instance=ExtResource("7_sign")]
-position = Vector2(510, 918)
-interaction_text = "¡Los ladrones andan sueltos por el barrio! Esquívalos o atácalos y llega hasta la bandera verde."
+[node name="MissionSign" parent="." instance=ExtResource("90_kidnpc")]
+position = Vector2(510, 897.93)
+kid_name = "Zoe"
+interaction_text = "Zoe: Hola Luke, los ladrones andan sueltos por el barrio. Esquiva o ataca a los ladrones y a las aves, y llega hasta la bandera verde."
+
+[node name="Sprite2D" parent="MissionSign"]
+texture = ExtResource("91_kidtex")
+scale = Vector2(1.0311, 1.0311)
 [node name="ThiefOne" parent="." instance=ExtResource("22_thief")]
 position = Vector2(1300, 850)
 patrol_distance = 100.0

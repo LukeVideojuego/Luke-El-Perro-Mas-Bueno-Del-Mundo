@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3]
+[gd_scene load_steps=40 format=3]
 [ext_resource type="PackedScene" path="res://scenes/enemies/bird.tscn" id="99_bird"]
 [ext_resource type="PackedScene" path="res://scenes/objects/ground_spike_field.tscn" id="gsf_1"]
 
@@ -31,6 +31,8 @@
 [ext_resource type="Texture2D" path="res://assets/backgrounds/Worlds/world2_final.png" id="29_bg"]
 [ext_resource type="PackedScene" path="res://scenes/objects/moving_platform.tscn" id="29_movingplatform"]
 [ext_resource type="PackedScene" path="res://scenes/objects/extra_life.tscn" id="c2_life"]
+[ext_resource type="PackedScene" path="res://scenes/objects/kid_npc.tscn" id="90_kidnpc"]
+[ext_resource type="Texture2D" path="res://assets/characters/Kids/EndOfWorld1/lara.png" id="91_kidtex"]
 
 [sub_resource type="RectangleShape2D" id="GroundShape"]
 size = Vector2(9480, 110)
@@ -53,7 +55,7 @@ size = Vector2(180, 36)
 [node name="world_2_level_2" type="Node2D"]
 script = ExtResource("1_level")
 level_id = "world_2_level_2"
-mission_text = "Limpia el cruce para que la gente mayor cruce segura."
+mission_text = "Lara: Hola Luke, hay que limpiar el cruce para que la gente mayor pueda cruzar segura. Derrota a los carteristas y esquiva los pinchos del piso."
 
 [node name="Background" type="Sprite2D" parent="."]
 position = Vector2(0, 0)
@@ -765,9 +767,14 @@ shape = SubResource("BoundaryShape")
 [node name="SpawnPoint" type="Marker2D" parent="."]
 position = Vector2(180, 850)
 
-[node name="MissionSign" parent="." instance=ExtResource("7_sign")]
-position = Vector2(520, 873)
-interaction_text = "Limpia el cruce para que la gente mayor cruce segura."
+[node name="MissionSign" parent="." instance=ExtResource("90_kidnpc")]
+position = Vector2(520, 850.81)
+kid_name = "Lara"
+interaction_text = "Lara: Hola Luke, hay que limpiar el cruce para que la gente mayor pueda cruzar segura. Derrota a los carteristas y esquiva los pinchos del piso."
+
+[node name="Sprite2D" parent="MissionSign"]
+texture = ExtResource("91_kidtex")
+scale = Vector2(1.0523, 1.0523)
 
 [node name="Luke" parent="." instance=ExtResource("2_luke")]
 position = Vector2(180, 850)

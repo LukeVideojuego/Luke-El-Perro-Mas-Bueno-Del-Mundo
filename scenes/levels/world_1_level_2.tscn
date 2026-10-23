@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=3]
+[gd_scene load_steps=44 format=3]
 [ext_resource type="PackedScene" path="res://scenes/enemies/bird.tscn" id="99_bird"]
 
 [ext_resource type="Script" path="res://scripts/levels/level_base.gd" id="1_level"]
@@ -34,6 +34,8 @@
 [ext_resource type="PackedScene" path="res://scenes/objects/moving_platform.tscn" id="31_movingplatform"]
 [ext_resource type="Texture2D" path="res://assets/backgrounds/Worlds/world1_final.png" id="32_bg"]
 [ext_resource type="PackedScene" path="res://scenes/objects/extra_life.tscn" id="c2_life"]
+[ext_resource type="PackedScene" path="res://scenes/objects/kid_npc.tscn" id="90_kidnpc"]
+[ext_resource type="Texture2D" path="res://assets/characters/Kids/EndOfWorld1/mathi.png" id="91_kidtex"]
 
 [sub_resource type="RectangleShape2D" id="GroundShape"]
 size = Vector2(8400, 110)
@@ -54,6 +56,7 @@ size = Vector2(180, 36)
 [node name="World1Level2" type="Node2D"]
 script = ExtResource("1_level")
 level_id = "world_1_level_2"
+mission_text = "Mathi: Hola Luke, los ladrones siguen merodeando el barrio. Cruza las calles esquivando a los ladrones y las aves hasta la bandera verde."
 
 [node name="Background" type="Sprite2D" parent="."]
 position = Vector2(0, 0)
@@ -485,9 +488,14 @@ shape = SubResource("WallShape")
 position = Vector2(180, 850)
 [node name="Luke" parent="." instance=ExtResource("2_luke")]
 position = Vector2(180, 850)
-[node name="MissionSign" parent="." instance=ExtResource("14_sign")]
-position = Vector2(470, 928)
-interaction_text = "¡Los ladrones merodean el barrio! Cruza las calles y llega hasta la bandera verde."
+[node name="MissionSign" parent="." instance=ExtResource("90_kidnpc")]
+position = Vector2(470, 924.96)
+kid_name = "Mathi"
+interaction_text = "Mathi: Hola Luke, los ladrones siguen merodeando el barrio. Cruza las calles esquivando a los ladrones y las aves hasta la bandera verde."
+
+[node name="Sprite2D" parent="MissionSign"]
+texture = ExtResource("91_kidtex")
+scale = Vector2(0.8342, 0.8342)
 [node name="ThiefOne" parent="." instance=ExtResource("3_thief")]
 position = Vector2(1005, 850)
 patrol_distance = 90.0

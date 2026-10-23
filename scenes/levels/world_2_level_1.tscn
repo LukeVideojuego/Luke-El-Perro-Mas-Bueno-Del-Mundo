@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3]
+[gd_scene load_steps=38 format=3]
 [ext_resource type="PackedScene" path="res://scenes/enemies/bird.tscn" id="99_bird"]
 [ext_resource type="PackedScene" path="res://scenes/objects/ground_spike_field.tscn" id="gsf_1"]
 
@@ -29,6 +29,8 @@
 [ext_resource type="Texture2D" path="res://assets/backgrounds/Worlds/world2_final.png" id="27_bg"]
 [ext_resource type="PackedScene" path="res://scenes/objects/moving_platform.tscn" id="27_movingplatform"]
 [ext_resource type="PackedScene" path="res://scenes/objects/extra_life.tscn" id="c2_life"]
+[ext_resource type="PackedScene" path="res://scenes/objects/kid_npc.tscn" id="90_kidnpc"]
+[ext_resource type="Texture2D" path="res://assets/characters/Kids/EndOfWorld1/roma.png" id="91_kidtex"]
 
 [sub_resource type="RectangleShape2D" id="GroundShape"]
 size = Vector2(8400, 110)
@@ -51,7 +53,7 @@ size = Vector2(180, 36)
 [node name="world_2_level_1" type="Node2D"]
 script = ExtResource("1_level")
 level_id = "world_2_level_1"
-mission_text = "Ayuda a la señora Mayor a cruzar el mercado."
+mission_text = "Roma: Hola Luke, ayuda a la señora Mayor a cruzar el mercado. Cuidado con los carteristas y las aves que te van a salir al cruce."
 
 [node name="Background" type="Sprite2D" parent="."]
 position = Vector2(0, 0)
@@ -695,9 +697,14 @@ shape = SubResource("BoundaryShape")
 [node name="SpawnPoint" type="Marker2D" parent="."]
 position = Vector2(180, 850)
 
-[node name="MissionSign" parent="." instance=ExtResource("7_sign")]
-position = Vector2(520, 873)
-interaction_text = "Ayuda a la señora Mayor a cruzar el mercado."
+[node name="MissionSign" parent="." instance=ExtResource("90_kidnpc")]
+position = Vector2(520, 870.21)
+kid_name = "Roma"
+interaction_text = "Roma: Hola Luke, ayuda a la señora Mayor a cruzar el mercado. Cuidado con los carteristas y las aves que te van a salir al cruce."
+
+[node name="Sprite2D" parent="MissionSign"]
+texture = ExtResource("91_kidtex")
+scale = Vector2(0.8185, 0.8185)
 
 [node name="Luke" parent="." instance=ExtResource("2_luke")]
 position = Vector2(180, 850)
