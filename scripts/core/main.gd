@@ -17,6 +17,8 @@ var shop_screen: Node = null
 
 func _ready() -> void:
 	hud.visible = false
+	pause_screen.resume_requested.connect(func() -> void: set_paused(false))
+	pause_screen.exit_requested.connect(_on_pause_exit_requested)
 	GameState.level_completed.connect(_on_level_completed)
 	GameState.out_of_lives.connect(_on_out_of_lives)
 	GameState.has_seen_intro = SaveManager.peek_has_seen_intro()
@@ -337,3 +339,14 @@ func set_paused(value: bool) -> void:
 		else:
 			pause_screen.hide_paused()
 	AudioDirector.play_event(&"pause")
+
+## F6: "SALIR AL MENU PRINCIPAL" desde la pausa. Mismo patron que
+## _on_return_to_main_menu() (game over): recargar la escena deja todo en
+## un estado limpio y conocido -- GameState (autoload) sobrevive la
+## recarga, asi que el progreso guardado no se pierde, solo se sale del
+## nivel actual sin guardarlo (igual que cerrar y volver a abrir el menu).
+func _on_pause_exit_requested() -> void:
+	pause_screen.hide_paused()
+	get_tree().paused = false
+	AudioDirector.stop_music()
+	get_tree().reload_current_scene()

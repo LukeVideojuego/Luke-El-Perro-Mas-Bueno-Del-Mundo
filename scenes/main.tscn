@@ -11,6 +11,7 @@ process_mode = 3
 script = ExtResource("1_main")
 
 [node name="LevelContainer" type="Node" parent="."]
+process_mode = 1
 
 [node name="HUD" parent="." instance=ExtResource("2_hud")]
 
