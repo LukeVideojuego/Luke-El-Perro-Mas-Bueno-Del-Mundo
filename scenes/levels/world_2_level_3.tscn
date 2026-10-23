@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=3]
+[gd_scene load_steps=44 format=3]
 [ext_resource type="PackedScene" path="res://scenes/enemies/bird.tscn" id="99_bird"]
 [ext_resource type="PackedScene" path="res://scenes/objects/ground_spike_field.tscn" id="gsf_1"]
 
@@ -35,6 +35,9 @@
 [ext_resource type="PackedScene" path="res://scenes/objects/kid_npc.tscn" id="90_kidnpc"]
 [ext_resource type="Texture2D" path="res://assets/characters/Kids/EndOfWorld1/fausto.png" id="91_kidtex"]
 [ext_resource type="PackedScene" path="res://scenes/objects/golden_paw.tscn" id="92_paw"]
+[ext_resource type="Texture2D" path="res://assets/Tiles/Default/bush.png" id="93_decobush"]
+[ext_resource type="Texture2D" path="res://assets/Tiles/Default/fence.png" id="94_decofence"]
+[ext_resource type="Texture2D" path="res://assets/Tiles/Default/rock.png" id="95_decorock"]
 
 [sub_resource type="RectangleShape2D" id="GroundShape"]
 size = Vector2(9200, 110)
@@ -1383,3 +1386,51 @@ paw_index = 1
 position = Vector2(7900, 664)
 level_id = "world_2_level_3"
 paw_index = 2
+
+[node name="DecoSeam1_L" type="Sprite2D" parent="."]
+position = Vector2(2776.5, 890.0)
+z_index = -5
+scale = Vector2(2.0, 2.0)
+texture = ExtResource("93_decobush")
+
+[node name="DecoSeam1_R" type="Sprite2D" parent="."]
+position = Vector2(3216.5, 890.0)
+z_index = -5
+scale = Vector2(1.3, 1.3)
+texture = ExtResource("94_decofence")
+
+[node name="DecoSeam2_L" type="Sprite2D" parent="."]
+position = Vector2(5772.9, 890.0)
+z_index = -5
+scale = Vector2(1.8, 1.8)
+texture = ExtResource("95_decorock")
+
+[node name="DecoSeam2_R" type="Sprite2D" parent="."]
+position = Vector2(6212.9, 890.0)
+z_index = -5
+scale = Vector2(2.0, 2.0)
+texture = ExtResource("93_decobush")
+
+[node name="DecoSeam3_L" type="Sprite2D" parent="."]
+position = Vector2(8769.4, 890.0)
+z_index = -5
+scale = Vector2(1.3, 1.3)
+texture = ExtResource("94_decofence")
+
+[node name="DecoSeam3_R" type="Sprite2D" parent="."]
+position = Vector2(9209.4, 890.0)
+z_index = -5
+scale = Vector2(1.8, 1.8)
+texture = ExtResource("95_decorock")
+
+[node name="DecoSeam4_L" type="Sprite2D" parent="."]
+position = Vector2(11765.8, 890.0)
+z_index = -5
+scale = Vector2(2.0, 2.0)
+texture = ExtResource("93_decobush")
+
+[node name="DecoSeam4_R" type="Sprite2D" parent="."]
+position = Vector2(12205.8, 890.0)
+z_index = -5
+scale = Vector2(1.3, 1.3)
+texture = ExtResource("94_decofence")

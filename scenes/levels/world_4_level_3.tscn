@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3]
+[gd_scene load_steps=38 format=3]
 [ext_resource type="PackedScene" path="res://scenes/enemies/bird.tscn" id="99_bird"]
 
 [ext_resource type="Script" path="res://scripts/levels/level_base.gd" id="1_level"]
@@ -29,6 +29,9 @@
 [ext_resource type="PackedScene" path="res://scenes/objects/kid_npc.tscn" id="90_kidnpc"]
 [ext_resource type="Texture2D" path="res://assets/characters/Kids/EndOfWorld1/roma.png" id="91_kidtex"]
 [ext_resource type="PackedScene" path="res://scenes/objects/golden_paw.tscn" id="92_paw"]
+[ext_resource type="Texture2D" path="res://assets/Tiles/Default/bush.png" id="93_decobush"]
+[ext_resource type="Texture2D" path="res://assets/Tiles/Default/mushroom_brown.png" id="97_decomushbrown"]
+[ext_resource type="Texture2D" path="res://assets/Tiles/Default/rock.png" id="95_decorock"]
 
 [sub_resource type="RectangleShape2D" id="GroundShape"]
 size = Vector2(8800, 110)
@@ -1147,3 +1150,54 @@ paw_index = 1
 position = Vector2(6750, 734)
 level_id = "world_4_level_3"
 paw_index = 2
+
+[node name="DecoSeam1_L" type="Sprite2D" parent="."]
+position = Vector2(2849.4, 890.0)
+z_index = -5
+scale = Vector2(2.3, 2.3)
+modulate = Color(0.55, 0.85, 0.5, 1)
+texture = ExtResource("93_decobush")
+
+[node name="DecoSeam1_R" type="Sprite2D" parent="."]
+position = Vector2(3289.4, 890.0)
+z_index = -5
+scale = Vector2(1.8, 1.8)
+texture = ExtResource("97_decomushbrown")
+
+[node name="DecoSeam2_L" type="Sprite2D" parent="."]
+position = Vector2(5918.9, 890.0)
+z_index = -5
+scale = Vector2(1.8, 1.8)
+texture = ExtResource("95_decorock")
+
+[node name="DecoSeam2_R" type="Sprite2D" parent="."]
+position = Vector2(6358.9, 890.0)
+z_index = -5
+scale = Vector2(2.3, 2.3)
+modulate = Color(0.55, 0.85, 0.5, 1)
+texture = ExtResource("93_decobush")
+
+[node name="DecoSeam3_L" type="Sprite2D" parent="."]
+position = Vector2(8988.3, 890.0)
+z_index = -5
+scale = Vector2(1.8, 1.8)
+texture = ExtResource("97_decomushbrown")
+
+[node name="DecoSeam3_R" type="Sprite2D" parent="."]
+position = Vector2(9428.3, 890.0)
+z_index = -5
+scale = Vector2(1.8, 1.8)
+texture = ExtResource("95_decorock")
+
+[node name="DecoSeam4_L" type="Sprite2D" parent="."]
+position = Vector2(12057.8, 890.0)
+z_index = -5
+scale = Vector2(2.3, 2.3)
+modulate = Color(0.55, 0.85, 0.5, 1)
+texture = ExtResource("93_decobush")
+
+[node name="DecoSeam4_R" type="Sprite2D" parent="."]
+position = Vector2(12497.8, 890.0)
+z_index = -5
+scale = Vector2(1.8, 1.8)
+texture = ExtResource("97_decomushbrown")
