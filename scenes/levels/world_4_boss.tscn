@@ -350,7 +350,7 @@ interaction_text = "¡Vence al Rey Serpiente!"
 position = Vector2(180, 850)
 
 [node name="SerpentBoss" parent="." instance=ExtResource("3_boss")]
-position = Vector2(1000, 780)
+position = Vector2(1000, -77.5)
 
 [node name="BoxA" parent="." instance=ExtResource("6_box")]
 position = Vector2(650, 540)

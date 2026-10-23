@@ -19,6 +19,21 @@ signal boss_defeated
 @export var sway_amplitude_deg := 5.0
 @export var sway_speed := 5.0
 
+## F9: la Serpiente ahora arranca en la plataforma MAS ALTA de su arena (ver
+## world_4_boss.tscn), que tiene varias plataformas intermedias apiladas
+## debajo (Six/Four-Cinco/Three/One-Two) antes de llegar al piso real. Con
+## hop_strength/hop_interval fuertes (necesarios para que siga "saltando
+## mas alto y mas seguido" que los jefes anteriores, ver diag_boss_powers),
+## el jefe rebotaba en cadena de plataforma en plataforma sin bajar nunca
+## del todo (cada aterrizaje en CUALQUIER plataforma disparaba otro salto
+## fuerte antes de que la gravedad lo bajara mas) -- confirmado con un
+## trace de posicion real. hop_min_y restringe el salto a cuando el jefe ya
+## esta cerca de SU PROPIO piso real (por defecto -INF = sin restriccion,
+## compatible con los otros 3 jefes tal cual estaban), dejando que la
+## gravedad lo haga caer de corrido por las plataformas intermedias sin
+## relanzarlo cada vez que las toca.
+@export var hop_min_y := -INF
+
 @export_category("Poderes de jefe")
 ## Cada jefe tiene DOS poderes distintos que alterna: uno que viaja al ras
 ## del piso (power_ground_scene) y otro en diagonal hacia arriba
@@ -71,7 +86,7 @@ func _physics_process(delta: float) -> void:
 		return
 	super(delta)
 	_hop_time += delta
-	if is_on_floor() and _hop_time >= hop_interval:
+	if is_on_floor() and _hop_time >= hop_interval and global_position.y >= hop_min_y:
 		_hop_time = 0.0
 		velocity.y = hop_strength
 	if sway_enabled and sprite != null:

@@ -26,6 +26,7 @@ charge_cooldown = 0.6
 detect_range = 5000.0
 hop_interval = 0.35
 hop_strength = -890.0
+hop_min_y = 700.0
 hp_bar_width = 180.0
 hp_bar_y_offset = -495.0
 sway_enabled = true
