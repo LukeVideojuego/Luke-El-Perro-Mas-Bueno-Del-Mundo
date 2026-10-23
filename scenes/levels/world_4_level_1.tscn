@@ -24,7 +24,7 @@
 [ext_resource type="Texture2D" path="res://assets/Tiles/Default/bush.png" id="21_bush"]
 [ext_resource type="PackedScene" path="res://scenes/objects/bone_pickup.tscn" id="22_bonepickup"]
 [ext_resource type="PackedScene" path="res://scenes/objects/moving_platform.tscn" id="23_movingplatform"]
-[ext_resource type="Texture2D" path="res://assets/Enemies/Reference/serpiente.png" id="24_lookout_texture"]
+[ext_resource type="Texture2D" path="res://assets/characters/Default/character_beige_idle.png" id="24_lookout_texture"]
 [ext_resource type="Texture2D" path="res://assets/backgrounds/Worlds/world4_selva.jpg" id="25_bg"]
 [ext_resource type="PackedScene" path="res://scenes/objects/extra_life.tscn" id="c2_life"]
 
@@ -1058,14 +1058,14 @@ position = Vector2(8410, 920)
 [node name="LookoutOne" type="Sprite2D" parent="."]
 texture_filter = 1
 texture = ExtResource("24_lookout_texture")
-position = Vector2(7300, 649.5)
-scale = Vector2(1.2313, 1.2313)
+position = Vector2(7300, 792.6)
+scale = Vector2(1.757, 1.757)
 modulate = Color(0.06, 0.06, 0.08, 0.82)
 [node name="LookoutTwo" type="Sprite2D" parent="."]
 texture_filter = 1
 texture = ExtResource("24_lookout_texture")
-position = Vector2(8400, 649.5)
-scale = Vector2(1.2313, 1.2313)
+position = Vector2(8400, 792.6)
+scale = Vector2(1.757, 1.757)
 flip_h = true
 modulate = Color(0.06, 0.06, 0.08, 0.82)
 

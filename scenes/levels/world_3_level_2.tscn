@@ -26,7 +26,7 @@
 [ext_resource type="Texture2D" path="res://assets/props/temple.png" id="22_temple"]
 [ext_resource type="PackedScene" path="res://scenes/objects/bone_pickup.tscn" id="23_bonepickup"]
 [ext_resource type="PackedScene" path="res://scenes/objects/moving_platform.tscn" id="24_movingplatform"]
-[ext_resource type="Texture2D" path="res://assets/Enemies/Reference/politico_corrupto.png" id="25_lookout_texture"]
+[ext_resource type="Texture2D" path="res://assets/characters/Default/character_beige_idle.png" id="25_lookout_texture"]
 [ext_resource type="Texture2D" path="res://assets/props/limousine.png" id="26_limo"]
 [ext_resource type="Texture2D" path="res://assets/Enemies/Reference/guardia.png" id="27_guard"]
 [ext_resource type="Texture2D" path="res://assets/backgrounds/Worlds/world3_final.png" id="28_bg"]
@@ -1086,14 +1086,14 @@ position = Vector2(8410, 920)
 [node name="LookoutOne" type="Sprite2D" parent="."]
 texture_filter = 1
 texture = ExtResource("25_lookout_texture")
-position = Vector2(7200, 816.1)
-scale = Vector2(1.8331, 1.8331)
+position = Vector2(7200, 792.6)
+scale = Vector2(1.757, 1.757)
 modulate = Color(0.06, 0.06, 0.08, 0.82)
 [node name="LookoutTwo" type="Sprite2D" parent="."]
 texture_filter = 1
 texture = ExtResource("25_lookout_texture")
-position = Vector2(8500, 816.1)
-scale = Vector2(1.8331, 1.8331)
+position = Vector2(8500, 792.6)
+scale = Vector2(1.757, 1.757)
 flip_h = true
 modulate = Color(0.06, 0.06, 0.08, 0.82)
 
