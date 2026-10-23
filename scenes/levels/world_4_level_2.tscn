@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3]
+[gd_scene load_steps=36 format=3]
 [ext_resource type="PackedScene" path="res://scenes/objects/fishhook_spawner.tscn" id="99_fishhook"]
 
 [ext_resource type="Script" path="res://scripts/levels/level_base.gd" id="1_level"]
@@ -26,6 +26,9 @@
 [ext_resource type="Texture2D" path="res://assets/backgrounds/Worlds/world4_mar.jpg" id="22_bg"]
 [ext_resource type="PackedScene" path="res://scenes/objects/jellyfish_island.tscn" id="90_jelly"]
 [ext_resource type="PackedScene" path="res://scenes/objects/extra_life.tscn" id="c2_life"]
+[ext_resource type="Texture2D" path="res://assets/Tiles/Default/terrain_sand_block_top.png" id="91_sand"]
+[ext_resource type="Texture2D" path="res://assets/Enemies/Reference/crab.png" id="92_crab"]
+[ext_resource type="Texture2D" path="res://assets/Enemies/Reference/crab_walk.png" id="93_crabwalk"]
 
 [sub_resource type="RectangleShape2D" id="StartPadShape"]
 size = Vector2(300, 110)
@@ -243,6 +246,578 @@ position = Vector2(4600, 1000)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SeaFloor"]
 shape = SubResource("SeaFloorShape")
+
+[node name="SeaFloorDecor" type="Node2D" parent="."]
+
+[node name="SandStrip1" type="Sprite2D" parent="SeaFloorDecor"]
+position = Vector2(440.0, 980.0)
+scale = Vector2(12.5000, 0.9)
+modulate = Color(0.42, 0.52, 0.6, 1)
+texture = ExtResource("91_sand")
+
+[node name="SandStrip2" type="Sprite2D" parent="SeaFloorDecor"]
+position = Vector2(1240.0, 980.0)
+scale = Vector2(12.5000, 0.9)
+modulate = Color(0.42, 0.52, 0.6, 1)
+texture = ExtResource("91_sand")
+
+[node name="SandStrip3" type="Sprite2D" parent="SeaFloorDecor"]
+position = Vector2(2040.0, 980.0)
+scale = Vector2(12.5000, 0.9)
+modulate = Color(0.42, 0.52, 0.6, 1)
+texture = ExtResource("91_sand")
+
+[node name="SandStrip4" type="Sprite2D" parent="SeaFloorDecor"]
+position = Vector2(2840.0, 980.0)
+scale = Vector2(12.5000, 0.9)
+modulate = Color(0.42, 0.52, 0.6, 1)
+texture = ExtResource("91_sand")
+
+[node name="SandStrip5" type="Sprite2D" parent="SeaFloorDecor"]
+position = Vector2(3640.0, 980.0)
+scale = Vector2(12.5000, 0.9)
+modulate = Color(0.42, 0.52, 0.6, 1)
+texture = ExtResource("91_sand")
+
+[node name="SandStrip6" type="Sprite2D" parent="SeaFloorDecor"]
+position = Vector2(4440.0, 980.0)
+scale = Vector2(12.5000, 0.9)
+modulate = Color(0.42, 0.52, 0.6, 1)
+texture = ExtResource("91_sand")
+
+[node name="SandStrip7" type="Sprite2D" parent="SeaFloorDecor"]
+position = Vector2(5240.0, 980.0)
+scale = Vector2(12.5000, 0.9)
+modulate = Color(0.42, 0.52, 0.6, 1)
+texture = ExtResource("91_sand")
+
+[node name="SandStrip8" type="Sprite2D" parent="SeaFloorDecor"]
+position = Vector2(6040.0, 980.0)
+scale = Vector2(12.5000, 0.9)
+modulate = Color(0.42, 0.52, 0.6, 1)
+texture = ExtResource("91_sand")
+
+[node name="SandStrip9" type="Sprite2D" parent="SeaFloorDecor"]
+position = Vector2(6840.0, 980.0)
+scale = Vector2(12.5000, 0.9)
+modulate = Color(0.42, 0.52, 0.6, 1)
+texture = ExtResource("91_sand")
+
+[node name="SandStrip10" type="Sprite2D" parent="SeaFloorDecor"]
+position = Vector2(7640.0, 980.0)
+scale = Vector2(12.5000, 0.9)
+modulate = Color(0.42, 0.52, 0.6, 1)
+texture = ExtResource("91_sand")
+
+[node name="SandStrip11" type="Sprite2D" parent="SeaFloorDecor"]
+position = Vector2(8440.0, 980.0)
+scale = Vector2(12.5000, 0.9)
+modulate = Color(0.42, 0.52, 0.6, 1)
+texture = ExtResource("91_sand")
+
+[node name="SandStrip12" type="Sprite2D" parent="SeaFloorDecor"]
+position = Vector2(8760.0, 980.0)
+scale = Vector2(12.5000, 0.9)
+modulate = Color(0.42, 0.52, 0.6, 1)
+texture = ExtResource("91_sand")
+
+[node name="FloorRock1" type="Sprite2D" parent="SeaFloorDecor"]
+position = Vector2(310.1, 963.2)
+scale = Vector2(0.918, 0.918)
+modulate = Color(0.5, 0.56, 0.62, 1)
+texture = ExtResource("16_stone")
+
+[node name="FloorRock2" type="Sprite2D" parent="SeaFloorDecor"]
+position = Vector2(766.8, 966.4)
+scale = Vector2(1.416, 1.416)
+modulate = Color(0.5, 0.56, 0.62, 1)
+texture = ExtResource("16_stone")
+
+[node name="FloorRock3" type="Sprite2D" parent="SeaFloorDecor"]
+position = Vector2(1353.7, 964.4)
+scale = Vector2(0.961, 0.961)
+modulate = Color(0.5, 0.56, 0.62, 1)
+texture = ExtResource("16_stone")
+
+[node name="FloorRock4" type="Sprite2D" parent="SeaFloorDecor"]
+position = Vector2(1756.9, 965.0)
+scale = Vector2(1.053, 1.053)
+modulate = Color(0.5, 0.56, 0.62, 1)
+texture = ExtResource("16_stone")
+
+[node name="FloorRock5" type="Sprite2D" parent="SeaFloorDecor"]
+position = Vector2(2263.2, 966.2)
+scale = Vector2(1.039, 1.039)
+modulate = Color(0.5, 0.56, 0.62, 1)
+texture = ExtResource("16_stone")
+
+[node name="FloorRock6" type="Sprite2D" parent="SeaFloorDecor"]
+position = Vector2(2832.1, 965.7)
+scale = Vector2(1.054, 1.054)
+modulate = Color(0.5, 0.56, 0.62, 1)
+texture = ExtResource("16_stone")
+
+[node name="FloorRock7" type="Sprite2D" parent="SeaFloorDecor"]
+position = Vector2(3370.5, 967.4)
+scale = Vector2(0.905, 0.905)
+modulate = Color(0.5, 0.56, 0.62, 1)
+texture = ExtResource("16_stone")
+
+[node name="FloorRock8" type="Sprite2D" parent="SeaFloorDecor"]
+position = Vector2(3863.8, 962.2)
+scale = Vector2(1.138, 1.138)
+modulate = Color(0.5, 0.56, 0.62, 1)
+texture = ExtResource("16_stone")
+
+[node name="FloorRock9" type="Sprite2D" parent="SeaFloorDecor"]
+position = Vector2(4401.5, 961.7)
+scale = Vector2(1.136, 1.136)
+modulate = Color(0.5, 0.56, 0.62, 1)
+texture = ExtResource("16_stone")
+
+[node name="FloorRock10" type="Sprite2D" parent="SeaFloorDecor"]
+position = Vector2(4804.9, 965.8)
+scale = Vector2(1.493, 1.493)
+modulate = Color(0.5, 0.56, 0.62, 1)
+texture = ExtResource("16_stone")
+
+[node name="FloorRock11" type="Sprite2D" parent="SeaFloorDecor"]
+position = Vector2(5396.9, 965.3)
+scale = Vector2(1.411, 1.411)
+modulate = Color(0.5, 0.56, 0.62, 1)
+texture = ExtResource("16_stone")
+
+[node name="FloorRock12" type="Sprite2D" parent="SeaFloorDecor"]
+position = Vector2(5923.4, 965.4)
+scale = Vector2(1.165, 1.165)
+modulate = Color(0.5, 0.56, 0.62, 1)
+texture = ExtResource("16_stone")
+
+[node name="FloorRock13" type="Sprite2D" parent="SeaFloorDecor"]
+position = Vector2(6412.9, 967.9)
+scale = Vector2(1.333, 1.333)
+modulate = Color(0.5, 0.56, 0.62, 1)
+texture = ExtResource("16_stone")
+
+[node name="FloorRock14" type="Sprite2D" parent="SeaFloorDecor"]
+position = Vector2(6889.3, 961.4)
+scale = Vector2(1.393, 1.393)
+modulate = Color(0.5, 0.56, 0.62, 1)
+texture = ExtResource("16_stone")
+
+[node name="FloorRock15" type="Sprite2D" parent="SeaFloorDecor"]
+position = Vector2(7354.0, 961.6)
+scale = Vector2(1.103, 1.103)
+modulate = Color(0.5, 0.56, 0.62, 1)
+texture = ExtResource("16_stone")
+
+[node name="FloorRock16" type="Sprite2D" parent="SeaFloorDecor"]
+position = Vector2(7861.3, 963.2)
+scale = Vector2(0.971, 0.971)
+modulate = Color(0.5, 0.56, 0.62, 1)
+texture = ExtResource("16_stone")
+
+[node name="FloorRock17" type="Sprite2D" parent="SeaFloorDecor"]
+position = Vector2(8416.3, 964.0)
+scale = Vector2(1.155, 1.155)
+modulate = Color(0.5, 0.56, 0.62, 1)
+texture = ExtResource("16_stone")
+
+[node name="FloorRock18" type="Sprite2D" parent="SeaFloorDecor"]
+position = Vector2(8871.8, 968.5)
+scale = Vector2(1.087, 1.087)
+modulate = Color(0.5, 0.56, 0.62, 1)
+texture = ExtResource("16_stone")
+
+[node name="Algae1" type="Sprite2D" parent="SeaFloorDecor"]
+position = Vector2(197.5, 961.2)
+scale = Vector2(-0.905, 0.905)
+modulate = Color(0.25, 0.5, 0.4, 1)
+texture = ExtResource("19_bush")
+
+[node name="Algae2" type="Sprite2D" parent="SeaFloorDecor"]
+position = Vector2(597.1, 963.9)
+scale = Vector2(0.831, 0.831)
+modulate = Color(0.25, 0.5, 0.4, 1)
+texture = ExtResource("19_bush")
+
+[node name="Algae3" type="Sprite2D" parent="SeaFloorDecor"]
+position = Vector2(1108.4, 963.1)
+scale = Vector2(0.878, 0.878)
+modulate = Color(0.25, 0.5, 0.4, 1)
+texture = ExtResource("19_bush")
+
+[node name="Algae4" type="Sprite2D" parent="SeaFloorDecor"]
+position = Vector2(1583.4, 962.8)
+scale = Vector2(-0.715, 0.715)
+modulate = Color(0.25, 0.5, 0.4, 1)
+texture = ExtResource("19_bush")
+
+[node name="Algae5" type="Sprite2D" parent="SeaFloorDecor"]
+position = Vector2(1987.0, 959.3)
+scale = Vector2(0.633, 0.633)
+modulate = Color(0.25, 0.5, 0.4, 1)
+texture = ExtResource("19_bush")
+
+[node name="Algae6" type="Sprite2D" parent="SeaFloorDecor"]
+position = Vector2(2456.7, 958.9)
+scale = Vector2(1.042, 1.042)
+modulate = Color(0.25, 0.5, 0.4, 1)
+texture = ExtResource("19_bush")
+
+[node name="Algae7" type="Sprite2D" parent="SeaFloorDecor"]
+position = Vector2(2862.3, 962.5)
+scale = Vector2(0.972, 0.972)
+modulate = Color(0.25, 0.5, 0.4, 1)
+texture = ExtResource("19_bush")
+
+[node name="Algae8" type="Sprite2D" parent="SeaFloorDecor"]
+position = Vector2(3358.8, 959.3)
+scale = Vector2(0.892, 0.892)
+modulate = Color(0.25, 0.5, 0.4, 1)
+texture = ExtResource("19_bush")
+
+[node name="Algae9" type="Sprite2D" parent="SeaFloorDecor"]
+position = Vector2(3894.5, 962.5)
+scale = Vector2(-0.855, 0.855)
+modulate = Color(0.25, 0.5, 0.4, 1)
+texture = ExtResource("19_bush")
+
+[node name="Algae10" type="Sprite2D" parent="SeaFloorDecor"]
+position = Vector2(4331.4, 962.8)
+scale = Vector2(-0.676, 0.676)
+modulate = Color(0.25, 0.5, 0.4, 1)
+texture = ExtResource("19_bush")
+
+[node name="Algae11" type="Sprite2D" parent="SeaFloorDecor"]
+position = Vector2(4725.9, 961.6)
+scale = Vector2(0.632, 0.632)
+modulate = Color(0.25, 0.5, 0.4, 1)
+texture = ExtResource("19_bush")
+
+[node name="Algae12" type="Sprite2D" parent="SeaFloorDecor"]
+position = Vector2(5188.3, 962.1)
+scale = Vector2(-0.726, 0.726)
+modulate = Color(0.25, 0.5, 0.4, 1)
+texture = ExtResource("19_bush")
+
+[node name="Algae13" type="Sprite2D" parent="SeaFloorDecor"]
+position = Vector2(5594.8, 962.6)
+scale = Vector2(1.042, 1.042)
+modulate = Color(0.25, 0.5, 0.4, 1)
+texture = ExtResource("19_bush")
+
+[node name="Algae14" type="Sprite2D" parent="SeaFloorDecor"]
+position = Vector2(6082.4, 960.7)
+scale = Vector2(-0.747, 0.747)
+modulate = Color(0.25, 0.5, 0.4, 1)
+texture = ExtResource("19_bush")
+
+[node name="Algae15" type="Sprite2D" parent="SeaFloorDecor"]
+position = Vector2(6624.3, 963.8)
+scale = Vector2(1.038, 1.038)
+modulate = Color(0.25, 0.5, 0.4, 1)
+texture = ExtResource("19_bush")
+
+[node name="Algae16" type="Sprite2D" parent="SeaFloorDecor"]
+position = Vector2(7053.5, 963.2)
+scale = Vector2(-0.854, 0.854)
+modulate = Color(0.25, 0.5, 0.4, 1)
+texture = ExtResource("19_bush")
+
+[node name="Algae17" type="Sprite2D" parent="SeaFloorDecor"]
+position = Vector2(7444.6, 958.9)
+scale = Vector2(-0.919, 0.919)
+modulate = Color(0.25, 0.5, 0.4, 1)
+texture = ExtResource("19_bush")
+
+[node name="Algae18" type="Sprite2D" parent="SeaFloorDecor"]
+position = Vector2(7965.6, 961.6)
+scale = Vector2(-0.870, 0.870)
+modulate = Color(0.25, 0.5, 0.4, 1)
+texture = ExtResource("19_bush")
+
+[node name="Algae19" type="Sprite2D" parent="SeaFloorDecor"]
+position = Vector2(8383.2, 963.3)
+scale = Vector2(0.656, 0.656)
+modulate = Color(0.25, 0.5, 0.4, 1)
+texture = ExtResource("19_bush")
+
+[node name="Algae20" type="Sprite2D" parent="SeaFloorDecor"]
+position = Vector2(8887.2, 959.4)
+scale = Vector2(-0.754, 0.754)
+modulate = Color(0.25, 0.5, 0.4, 1)
+texture = ExtResource("19_bush")
+
+[node name="Crab1" type="Sprite2D" parent="SeaFloorDecor"]
+position = Vector2(130.5, 964.8)
+scale = Vector2(-1.839, 1.839)
+texture = ExtResource("93_crabwalk")
+
+[node name="Crab2" type="Sprite2D" parent="SeaFloorDecor"]
+position = Vector2(336.4, 969.3)
+scale = Vector2(1.475, 1.475)
+texture = ExtResource("92_crab")
+
+[node name="Crab3" type="Sprite2D" parent="SeaFloorDecor"]
+position = Vector2(502.4, 965.7)
+scale = Vector2(1.717, 1.717)
+texture = ExtResource("92_crab")
+
+[node name="Crab4" type="Sprite2D" parent="SeaFloorDecor"]
+position = Vector2(672.9, 973.3)
+scale = Vector2(-1.853, 1.853)
+texture = ExtResource("93_crabwalk")
+
+[node name="Crab5" type="Sprite2D" parent="SeaFloorDecor"]
+position = Vector2(819.2, 968.0)
+scale = Vector2(1.803, 1.803)
+texture = ExtResource("92_crab")
+
+[node name="Crab6" type="Sprite2D" parent="SeaFloorDecor"]
+position = Vector2(963.3, 969.2)
+scale = Vector2(-1.473, 1.473)
+texture = ExtResource("92_crab")
+
+[node name="Crab7" type="Sprite2D" parent="SeaFloorDecor"]
+position = Vector2(1098.5, 964.2)
+scale = Vector2(-1.732, 1.732)
+texture = ExtResource("93_crabwalk")
+
+[node name="Crab8" type="Sprite2D" parent="SeaFloorDecor"]
+position = Vector2(1262.3, 971.1)
+scale = Vector2(-1.435, 1.435)
+texture = ExtResource("92_crab")
+
+[node name="Crab9" type="Sprite2D" parent="SeaFloorDecor"]
+position = Vector2(1512.0, 972.6)
+scale = Vector2(-1.443, 1.443)
+texture = ExtResource("92_crab")
+
+[node name="Crab10" type="Sprite2D" parent="SeaFloorDecor"]
+position = Vector2(1624.5, 968.9)
+scale = Vector2(1.724, 1.724)
+texture = ExtResource("93_crabwalk")
+
+[node name="Crab11" type="Sprite2D" parent="SeaFloorDecor"]
+position = Vector2(1790.2, 968.7)
+scale = Vector2(-1.644, 1.644)
+texture = ExtResource("92_crab")
+
+[node name="Crab12" type="Sprite2D" parent="SeaFloorDecor"]
+position = Vector2(1945.9, 968.3)
+scale = Vector2(1.654, 1.654)
+texture = ExtResource("92_crab")
+
+[node name="Crab13" type="Sprite2D" parent="SeaFloorDecor"]
+position = Vector2(2183.9, 964.5)
+scale = Vector2(-1.792, 1.792)
+texture = ExtResource("93_crabwalk")
+
+[node name="Crab14" type="Sprite2D" parent="SeaFloorDecor"]
+position = Vector2(2280.5, 971.3)
+scale = Vector2(-1.880, 1.880)
+texture = ExtResource("92_crab")
+
+[node name="Crab15" type="Sprite2D" parent="SeaFloorDecor"]
+position = Vector2(2466.3, 965.9)
+scale = Vector2(1.669, 1.669)
+texture = ExtResource("92_crab")
+
+[node name="Crab16" type="Sprite2D" parent="SeaFloorDecor"]
+position = Vector2(2629.3, 968.6)
+scale = Vector2(-1.925, 1.925)
+texture = ExtResource("93_crabwalk")
+
+[node name="Crab17" type="Sprite2D" parent="SeaFloorDecor"]
+position = Vector2(2821.5, 972.6)
+scale = Vector2(-1.730, 1.730)
+texture = ExtResource("92_crab")
+
+[node name="Crab18" type="Sprite2D" parent="SeaFloorDecor"]
+position = Vector2(3009.2, 969.4)
+scale = Vector2(-1.409, 1.409)
+texture = ExtResource("92_crab")
+
+[node name="Crab19" type="Sprite2D" parent="SeaFloorDecor"]
+position = Vector2(3202.8, 972.5)
+scale = Vector2(1.500, 1.500)
+texture = ExtResource("93_crabwalk")
+
+[node name="Crab20" type="Sprite2D" parent="SeaFloorDecor"]
+position = Vector2(3331.7, 972.6)
+scale = Vector2(-1.941, 1.941)
+texture = ExtResource("92_crab")
+
+[node name="Crab21" type="Sprite2D" parent="SeaFloorDecor"]
+position = Vector2(3491.3, 973.9)
+scale = Vector2(1.559, 1.559)
+texture = ExtResource("92_crab")
+
+[node name="Crab22" type="Sprite2D" parent="SeaFloorDecor"]
+position = Vector2(3651.8, 971.0)
+scale = Vector2(1.838, 1.838)
+texture = ExtResource("93_crabwalk")
+
+[node name="Crab23" type="Sprite2D" parent="SeaFloorDecor"]
+position = Vector2(3808.9, 967.0)
+scale = Vector2(-1.981, 1.981)
+texture = ExtResource("92_crab")
+
+[node name="Crab24" type="Sprite2D" parent="SeaFloorDecor"]
+position = Vector2(4031.2, 964.6)
+scale = Vector2(-1.751, 1.751)
+texture = ExtResource("92_crab")
+
+[node name="Crab25" type="Sprite2D" parent="SeaFloorDecor"]
+position = Vector2(4137.9, 969.1)
+scale = Vector2(-1.911, 1.911)
+texture = ExtResource("93_crabwalk")
+
+[node name="Crab26" type="Sprite2D" parent="SeaFloorDecor"]
+position = Vector2(4355.2, 970.8)
+scale = Vector2(-1.541, 1.541)
+texture = ExtResource("92_crab")
+
+[node name="Crab27" type="Sprite2D" parent="SeaFloorDecor"]
+position = Vector2(4555.3, 969.7)
+scale = Vector2(-1.747, 1.747)
+texture = ExtResource("92_crab")
+
+[node name="Crab28" type="Sprite2D" parent="SeaFloorDecor"]
+position = Vector2(4695.2, 968.2)
+scale = Vector2(1.750, 1.750)
+texture = ExtResource("93_crabwalk")
+
+[node name="Crab29" type="Sprite2D" parent="SeaFloorDecor"]
+position = Vector2(4892.5, 966.0)
+scale = Vector2(-1.830, 1.830)
+texture = ExtResource("92_crab")
+
+[node name="Crab30" type="Sprite2D" parent="SeaFloorDecor"]
+position = Vector2(5001.1, 965.3)
+scale = Vector2(1.787, 1.787)
+texture = ExtResource("92_crab")
+
+[node name="Crab31" type="Sprite2D" parent="SeaFloorDecor"]
+position = Vector2(5174.6, 971.5)
+scale = Vector2(1.444, 1.444)
+texture = ExtResource("93_crabwalk")
+
+[node name="Crab32" type="Sprite2D" parent="SeaFloorDecor"]
+position = Vector2(5370.9, 969.6)
+scale = Vector2(-1.460, 1.460)
+texture = ExtResource("92_crab")
+
+[node name="Crab33" type="Sprite2D" parent="SeaFloorDecor"]
+position = Vector2(5529.4, 965.3)
+scale = Vector2(-1.609, 1.609)
+texture = ExtResource("92_crab")
+
+[node name="Crab34" type="Sprite2D" parent="SeaFloorDecor"]
+position = Vector2(5731.9, 967.7)
+scale = Vector2(1.495, 1.495)
+texture = ExtResource("93_crabwalk")
+
+[node name="Crab35" type="Sprite2D" parent="SeaFloorDecor"]
+position = Vector2(5876.7, 973.9)
+scale = Vector2(-1.792, 1.792)
+texture = ExtResource("92_crab")
+
+[node name="Crab36" type="Sprite2D" parent="SeaFloorDecor"]
+position = Vector2(6050.7, 969.5)
+scale = Vector2(-1.959, 1.959)
+texture = ExtResource("92_crab")
+
+[node name="Crab37" type="Sprite2D" parent="SeaFloorDecor"]
+position = Vector2(6243.9, 965.3)
+scale = Vector2(-1.469, 1.469)
+texture = ExtResource("93_crabwalk")
+
+[node name="Crab38" type="Sprite2D" parent="SeaFloorDecor"]
+position = Vector2(6395.2, 965.6)
+scale = Vector2(-1.569, 1.569)
+texture = ExtResource("92_crab")
+
+[node name="Crab39" type="Sprite2D" parent="SeaFloorDecor"]
+position = Vector2(6561.8, 966.0)
+scale = Vector2(1.781, 1.781)
+texture = ExtResource("92_crab")
+
+[node name="Crab40" type="Sprite2D" parent="SeaFloorDecor"]
+position = Vector2(6711.6, 966.5)
+scale = Vector2(-1.945, 1.945)
+texture = ExtResource("93_crabwalk")
+
+[node name="Crab41" type="Sprite2D" parent="SeaFloorDecor"]
+position = Vector2(6843.3, 968.2)
+scale = Vector2(-1.566, 1.566)
+texture = ExtResource("92_crab")
+
+[node name="Crab42" type="Sprite2D" parent="SeaFloorDecor"]
+position = Vector2(7033.9, 965.3)
+scale = Vector2(-1.988, 1.988)
+texture = ExtResource("92_crab")
+
+[node name="Crab43" type="Sprite2D" parent="SeaFloorDecor"]
+position = Vector2(7239.5, 969.5)
+scale = Vector2(-1.657, 1.657)
+texture = ExtResource("93_crabwalk")
+
+[node name="Crab44" type="Sprite2D" parent="SeaFloorDecor"]
+position = Vector2(7351.7, 973.5)
+scale = Vector2(-1.815, 1.815)
+texture = ExtResource("92_crab")
+
+[node name="Crab45" type="Sprite2D" parent="SeaFloorDecor"]
+position = Vector2(7559.7, 972.3)
+scale = Vector2(-1.750, 1.750)
+texture = ExtResource("92_crab")
+
+[node name="Crab46" type="Sprite2D" parent="SeaFloorDecor"]
+position = Vector2(7718.1, 964.4)
+scale = Vector2(-1.619, 1.619)
+texture = ExtResource("93_crabwalk")
+
+[node name="Crab47" type="Sprite2D" parent="SeaFloorDecor"]
+position = Vector2(7929.2, 966.1)
+scale = Vector2(-1.550, 1.550)
+texture = ExtResource("92_crab")
+
+[node name="Crab48" type="Sprite2D" parent="SeaFloorDecor"]
+position = Vector2(8049.1, 969.6)
+scale = Vector2(-1.925, 1.925)
+texture = ExtResource("92_crab")
+
+[node name="Crab49" type="Sprite2D" parent="SeaFloorDecor"]
+position = Vector2(8269.4, 966.4)
+scale = Vector2(-1.498, 1.498)
+texture = ExtResource("93_crabwalk")
+
+[node name="Crab50" type="Sprite2D" parent="SeaFloorDecor"]
+position = Vector2(8434.3, 964.2)
+scale = Vector2(1.842, 1.842)
+texture = ExtResource("92_crab")
+
+[node name="Crab51" type="Sprite2D" parent="SeaFloorDecor"]
+position = Vector2(8594.3, 968.1)
+scale = Vector2(-1.802, 1.802)
+texture = ExtResource("92_crab")
+
+[node name="Crab52" type="Sprite2D" parent="SeaFloorDecor"]
+position = Vector2(8716.8, 971.9)
+scale = Vector2(-1.465, 1.465)
+texture = ExtResource("93_crabwalk")
+
+[node name="Crab53" type="Sprite2D" parent="SeaFloorDecor"]
+position = Vector2(8938.9, 966.2)
+scale = Vector2(1.890, 1.890)
+texture = ExtResource("92_crab")
+
+[node name="Crab54" type="Sprite2D" parent="SeaFloorDecor"]
+position = Vector2(9062.0, 972.2)
+scale = Vector2(-1.923, 1.923)
+texture = ExtResource("92_crab")
 
 [node name="SpawnPoint" type="Marker2D" parent="."]
 position = Vector2(400, 850)
