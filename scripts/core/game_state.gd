@@ -19,6 +19,25 @@ const DEFAULT_LIVES := 3
 ## C1: continues totales por partida (no por nivel).
 const DEFAULT_CONTINUES := 3
 
+## A4: modo FACIL (elegido al arrancar partida nueva desde "COMENZAR JUEGO")
+## da mas corazones por nivel y continues que en la practica nunca se
+## agotan. No se representa como un bool "sin limite" aparte porque eso
+## obligaria a tocar cada chequeo de continues_left<=0 del codigo (incluida
+## la pantalla de Game Over, que esta pantalla no se puede tocar en este
+## bloque) -- un numero bien grande logra lo mismo sin tocar nada mas.
+const UNLIMITED_CONTINUES := 999999
+const LIVES_BY_DIFFICULTY := {"normal": DEFAULT_LIVES, "facil": 5}
+const CONTINUES_BY_DIFFICULTY := {"normal": DEFAULT_CONTINUES, "facil": UNLIMITED_CONTINUES}
+## "normal" o "facil". Se guarda con la partida (SaveManager) y se respeta
+## al cargar.
+var difficulty := "normal"
+
+func default_lives() -> int:
+	return int(LIVES_BY_DIFFICULTY.get(difficulty, DEFAULT_LIVES))
+
+func default_continues() -> int:
+	return int(CONTINUES_BY_DIFFICULTY.get(difficulty, DEFAULT_CONTINUES))
+
 var lives := DEFAULT_LIVES
 ## C1: cuantos CONTINUAR le quedan al jugador en esta partida.
 var continues_left := DEFAULT_CONTINUES
@@ -200,7 +219,7 @@ func use_continue() -> bool:
 		return false
 	continues_left -= 1
 	continues_changed.emit(continues_left)
-	lives = DEFAULT_LIVES
+	lives = default_lives()
 	aura_active = false
 	checkpoint_position = Vector2.ZERO
 	checkpoint_id = ""
@@ -215,7 +234,7 @@ func clear_out_of_lives() -> void:
 	_out_of_lives_pending = false
 
 func reset_level_state(spawn_position: Vector2) -> void:
-	lives = DEFAULT_LIVES
+	lives = default_lives()
 	aura_active = false
 	checkpoint_position = spawn_position
 	checkpoint_id = "start"
@@ -240,10 +259,14 @@ func prepare_next_level() -> void:
 
 ## Reinicia todo el progreso para una partida nueva desde cero.
 ## has_seen_intro y has_seen_world1_cheer NO se tocan: son permanentes
-## una vez vistos.
-func reset_for_new_game() -> void:
-	lives = DEFAULT_LIVES
-	continues_left = DEFAULT_CONTINUES
+## una vez vistos. new_difficulty: "normal" (default, usado por los
+## caminos que no preguntan dificultad -- contraseña, mapa, "cargar
+## partida" sin archivo) o "facil" (elegido en el selector de A4 al
+## apretar "COMENZAR JUEGO").
+func reset_for_new_game(new_difficulty: String = "normal") -> void:
+	difficulty = new_difficulty if LIVES_BY_DIFFICULTY.has(new_difficulty) else "normal"
+	lives = default_lives()
+	continues_left = default_continues()
 	_out_of_lives_pending = false
 	continues_changed.emit(continues_left)
 	aura_active = false

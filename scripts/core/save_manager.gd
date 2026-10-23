@@ -17,6 +17,7 @@ func save_game() -> void:
 		"checkpoint_y": GameState.checkpoint_position.y,
 		"lives": GameState.lives,
 		"continues_left": GameState.continues_left,
+		"difficulty": GameState.difficulty,
 		"coins": GameState.coins,
 		"has_seen_intro": GameState.has_seen_intro,
 		"has_seen_world1_cheer": GameState.has_seen_world1_cheer,
@@ -61,8 +62,14 @@ func load_game() -> bool:
 		float(data.get("checkpoint_x", 0.0)),
 		float(data.get("checkpoint_y", 0.0))
 	)
-	GameState.lives = int(data.get("lives", GameState.DEFAULT_LIVES))
-	GameState.continues_left = clampi(int(data.get("continues_left", GameState.DEFAULT_CONTINUES)), 0, GameState.DEFAULT_CONTINUES)
+	# A4: la dificultad tiene que quedar seteada ANTES de usar default_lives()/
+	# default_continues() como tope del clamp de abajo -- si no, una partida
+	# en FACIL guardada con continues_left muy alto (sin limite real) se
+	# recortaria de vuelta a 3 al cargarla.
+	var saved_difficulty := String(data.get("difficulty", "normal"))
+	GameState.difficulty = saved_difficulty if GameState.LIVES_BY_DIFFICULTY.has(saved_difficulty) else "normal"
+	GameState.lives = int(data.get("lives", GameState.default_lives()))
+	GameState.continues_left = clampi(int(data.get("continues_left", GameState.default_continues())), 0, GameState.default_continues())
 	GameState.coins = int(data.get("coins", 0))
 	GameState.has_seen_intro = bool(data.get("has_seen_intro", false))
 	GameState.has_seen_world1_cheer = bool(data.get("has_seen_world1_cheer", false))

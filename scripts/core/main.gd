@@ -36,15 +36,17 @@ func _ready() -> void:
 
 ## Punto de entrada de "COMENZAR JUEGO" (partida nueva desde cero).
 ## Se mantiene con este nombre porque la suite de tests automatizados
-## del proyecto (tests/integration_*_test.gd) lo llama directamente.
+## del proyecto (tests/integration_*_test.gd) lo llama directamente (sin
+## argumento, de ahi el default "normal" -- A4 solo agrega la dificultad
+## elegida en el selector nuevo del menu, no cambia este contrato).
 ## "COMENZAR JUEGO" siempre muestra la cinemática de introducción: es una
 ## partida nueva explícita, no debe depender de si algún guardado previo
 ## (incluida una corrida de tests) ya marcó has_seen_intro en true.
-func start_game() -> void:
+func start_game(difficulty: String = "normal") -> void:
 	if game_started:
 		return
 	game_started = true
-	GameState.reset_for_new_game()
+	GameState.reset_for_new_game(difficulty)
 	_free_menu()
 	show_intro_cinematic()
 

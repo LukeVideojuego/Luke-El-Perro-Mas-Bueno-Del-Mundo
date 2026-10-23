@@ -2,13 +2,15 @@ extends CanvasLayer
 
 ## Menú principal: Comenzar juego / Cargar partida / Contraseña de nivel.
 
-signal new_game_requested
+## A4: ahora lleva la dificultad elegida ("normal" o "facil").
+signal new_game_requested(difficulty: String)
 signal continue_requested
 signal password_requested(level_id: String)
 signal map_requested
 
 @onready var menu_panel: Control = $MenuPanel
 @onready var password_panel: Control = $PasswordPanel
+@onready var difficulty_panel: Control = $DifficultyPanel
 @onready var new_game_button: Button = $MenuPanel/Center/NewGameButton
 @onready var continue_button: Button = $MenuPanel/Center/ContinueButton
 @onready var password_button: Button = $MenuPanel/Center/PasswordButton
@@ -17,6 +19,9 @@ signal map_requested
 @onready var password_error: Label = $PasswordPanel/Center/ErrorLabel
 @onready var password_submit: Button = $PasswordPanel/Center/SubmitButton
 @onready var password_back: Button = $PasswordPanel/Center/BackButton
+@onready var normal_button: Button = $DifficultyPanel/Center/NormalButton
+@onready var easy_button: Button = $DifficultyPanel/Center/EasyButton
+@onready var difficulty_back: Button = $DifficultyPanel/Center/BackButton
 
 func _ready() -> void:
 	continue_button.disabled = not SaveManager.has_save()
@@ -27,10 +32,25 @@ func _ready() -> void:
 	password_submit.pressed.connect(_on_password_submit)
 	password_back.pressed.connect(_on_password_back)
 	password_input.text_submitted.connect(func(_text: String) -> void: _on_password_submit())
+	normal_button.pressed.connect(func() -> void: _on_difficulty_chosen("normal"))
+	easy_button.pressed.connect(func() -> void: _on_difficulty_chosen("facil"))
+	difficulty_back.pressed.connect(_on_difficulty_back)
 	new_game_button.grab_focus()
 
+## A4: "COMENZAR JUEGO" ya no arranca directo -- primero pregunta dificultad,
+## igual que "CONTRASEÑA" ya mostraba su propio panel.
 func _on_new_game_pressed() -> void:
-	new_game_requested.emit()
+	menu_panel.visible = false
+	difficulty_panel.visible = true
+	normal_button.grab_focus()
+
+func _on_difficulty_chosen(difficulty: String) -> void:
+	new_game_requested.emit(difficulty)
+
+func _on_difficulty_back() -> void:
+	difficulty_panel.visible = false
+	menu_panel.visible = true
+	new_game_button.grab_focus()
 
 func _on_continue_pressed() -> void:
 	if continue_button.disabled:
