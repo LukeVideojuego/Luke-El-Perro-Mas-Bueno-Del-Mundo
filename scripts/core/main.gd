@@ -12,6 +12,7 @@ var intro_cinematic: Node = null
 var final_cinematic: Node = null
 var world1_cheer_screen: Node = null
 var world_map: Node = null
+var album_screen: Node = null
 var game_over_screen: Node = null
 var shop_screen: Node = null
 
@@ -30,6 +31,7 @@ func _ready() -> void:
 		menu.continue_requested.connect(_on_continue_requested)
 		menu.password_requested.connect(_on_password_requested)
 		menu.map_requested.connect(_on_map_requested)
+		menu.album_requested.connect(_on_album_requested)
 		AudioDirector.play_music("menu")
 	else:
 		start_game()
@@ -92,6 +94,21 @@ func _on_map_closed() -> void:
 	if world_map != null:
 		world_map.queue_free()
 		world_map = null
+
+## A7: mismo patron que el mapa del mundo -- se superpone al menu, "VOLVER"
+## lo cierra sin perder el menu de fondo.
+func _on_album_requested() -> void:
+	if album_screen != null:
+		return
+	var album_scene := load("res://scenes/ui/album_screen.tscn") as PackedScene
+	album_screen = album_scene.instantiate()
+	add_child(album_screen)
+	album_screen.closed.connect(_on_album_closed)
+
+func _on_album_closed() -> void:
+	if album_screen != null:
+		album_screen.queue_free()
+		album_screen = null
 
 func _on_map_level_selected(level_id: String) -> void:
 	if game_started:

@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=3]
+[gd_scene load_steps=41 format=3]
 [ext_resource type="PackedScene" path="res://scenes/enemies/bird.tscn" id="99_bird"]
 
 [ext_resource type="Script" path="res://scripts/levels/level_base.gd" id="1_level"]
@@ -33,6 +33,7 @@
 [ext_resource type="PackedScene" path="res://scenes/objects/extra_life.tscn" id="c2_life"]
 [ext_resource type="PackedScene" path="res://scenes/objects/kid_npc.tscn" id="90_kidnpc"]
 [ext_resource type="Texture2D" path="res://assets/characters/Kids/EndOfWorld1/franca.png" id="91_kidtex"]
+[ext_resource type="PackedScene" path="res://scenes/objects/golden_paw.tscn" id="92_paw"]
 
 [sub_resource type="RectangleShape2D" id="GroundShape"]
 size = Vector2(9480, 110)
@@ -1225,3 +1226,18 @@ shape = SubResource("C2PlatShape")
 position = Vector2(6688, 381)
 contents = ExtResource("c2_life")
 contents_offset = Vector2(0, -70)
+
+[node name="GoldenPaw1" parent="." instance=ExtResource("92_paw")]
+position = Vector2(620, 754)
+level_id = "world_3_level_2"
+paw_index = 0
+
+[node name="GoldenPaw2" parent="." instance=ExtResource("92_paw")]
+position = Vector2(3250, 664)
+level_id = "world_3_level_2"
+paw_index = 1
+
+[node name="GoldenPaw3" parent="." instance=ExtResource("92_paw")]
+position = Vector2(5800, 664)
+level_id = "world_3_level_2"
+paw_index = 2

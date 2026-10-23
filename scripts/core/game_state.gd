@@ -57,6 +57,9 @@ var owned_items: Array[String] = []
 var equipped_hat := ""
 var suit_equipped := false
 var socks_equipped := false
+## A7: collar dorado, cosmetico EXCLUSIVO que no se compra -- se desbloquea
+## solo (y se pone solo) al juntar las 36 huellas doradas.
+var collar_equipped := false
 ## Comprados en la tienda y pendientes de aplicarse al empezar el nivel.
 var pending_star := false
 var pending_boots := false
@@ -66,6 +69,66 @@ var pending_hearts := 0
 var bark_ammo := 0
 
 signal shop_changed
+
+## --- A7: COLECCIONABLES (album de huellas doradas) ---
+## level_id -> Array[int] con los indices (0,1,2) de huella ya encontrados
+## en ESE nivel. 12 niveles regulares x 3 huellas = 36 en total.
+var paws_found: Dictionary = {}
+## level_id -> true una vez que ya se pagaron las 10 monedas por juntar las
+## 3 huellas de ese nivel (evita pagar de nuevo si por algun motivo se
+## vuelve a llamar collect_paw con las 3 ya guardadas).
+var paw_reward_claimed: Dictionary = {}
+var golden_collar_unlocked := false
+
+const PAWS_PER_LEVEL := 3
+const PAW_LEVELS := [
+	"world_1_level_1", "world_1_level_2", "world_1_level_3",
+	"world_2_level_1", "world_2_level_2", "world_2_level_3",
+	"world_3_level_1", "world_3_level_2", "world_3_level_3",
+	"world_4_level_1", "world_4_level_2", "world_4_level_3",
+]
+const PAW_LEVEL_REWARD_COINS := 10
+
+signal paw_collected(level_id: String, total_in_level: int)
+signal golden_collar_unlocked_changed
+
+func has_paw(level_id: String, index: int) -> bool:
+	var found: Array = paws_found.get(level_id, [])
+	return found.has(index)
+
+func paws_found_in_level(level_id: String) -> int:
+	var found: Array = paws_found.get(level_id, [])
+	return found.size()
+
+func total_paws_found() -> int:
+	var total := 0
+	for level_id in paws_found:
+		total += (paws_found[level_id] as Array).size()
+	return total
+
+func total_paws_possible() -> int:
+	return PAW_LEVELS.size() * PAWS_PER_LEVEL
+
+## Llamado por golden_paw.gd al tocar una huella. Idempotente: tocar la
+## misma huella (mismo level_id+index) dos veces no paga de nuevo.
+func collect_paw(level_id: String, index: int) -> void:
+	if has_paw(level_id, index):
+		return
+	if not paws_found.has(level_id):
+		paws_found[level_id] = []
+	(paws_found[level_id] as Array).append(index)
+	var in_level := paws_found_in_level(level_id)
+	paw_collected.emit(level_id, in_level)
+	if in_level >= PAWS_PER_LEVEL and not paw_reward_claimed.get(level_id, false):
+		paw_reward_claimed[level_id] = true
+		add_coins(PAW_LEVEL_REWARD_COINS)
+	if not golden_collar_unlocked and total_paws_found() >= total_paws_possible():
+		golden_collar_unlocked = true
+		if not owned_items.has("collar_dorado"):
+			owned_items.append("collar_dorado")
+		collar_equipped = true
+		golden_collar_unlocked_changed.emit()
+	SaveManager.save_game()
 
 ## Permanente una vez conseguido el primer huesito: desbloquea el ataque a
 ## distancia de Luke (doble tap del botón de ataque). Nunca se desactiva.
@@ -281,6 +344,10 @@ func reset_for_new_game(new_difficulty: String = "normal") -> void:
 	equipped_hat = ""
 	suit_equipped = false
 	socks_equipped = false
+	collar_equipped = false
+	paws_found = {}
+	paw_reward_claimed = {}
+	golden_collar_unlocked = false
 	pending_star = false
 	pending_boots = false
 	pending_aura = false

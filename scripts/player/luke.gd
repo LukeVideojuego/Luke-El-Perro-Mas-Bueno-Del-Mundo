@@ -22,6 +22,7 @@ extends CharacterBody2D
 @onready var cape_ribbon: CapeRibbon = $Cape
 @onready var suit_sprite: Sprite2D = $Suit
 @onready var socks_sprite: Sprite2D = $Socks
+@onready var collar_sprite: Sprite2D = $Collar
 
 @export_category("Power-ups")
 @export var speed_boost_multiplier := 1.5
@@ -76,6 +77,16 @@ const SUIT_ANCHOR := {
 	"walk": Vector2(-27.1, 7.0),
 	"jump": Vector2(-27.7, 14.0),
 	"attack": Vector2(-25.2, 0.0),
+}
+## A7: collar dorado, premio EXCLUSIVO de juntar las 36 huellas (no se
+## compra). Ancla al cuello, un poco debajo del ancla del sombrero en cada
+## pose (mismo criterio de medicion que HAT_ANCHOR).
+const COLLAR_TEXTURE := preload("res://assets/items/Shop/collar_dorado.png")
+const COLLAR_ANCHOR := {
+	"idle": Vector2(5.5, 19.7),
+	"walk": Vector2(3.7, 19.7),
+	"jump": Vector2(3.1, 1.8),
+	"attack": Vector2(-4.9, 4.3),
 }
 
 @export_category("Bajo el agua")
@@ -398,6 +409,15 @@ func _update_cosmetics() -> void:
 		socks_sprite.position = animated_sprite.position
 		socks_sprite.flip_h = flipped
 		socks_sprite.modulate = animated_sprite.modulate
+
+	var wears_collar: bool = GameState.collar_equipped
+	collar_sprite.visible = wears_collar
+	if wears_collar:
+		var collar_anchor: Vector2 = COLLAR_ANCHOR.get(anim, COLLAR_ANCHOR["idle"])
+		collar_sprite.texture = COLLAR_TEXTURE
+		collar_sprite.position = Vector2(collar_anchor.x * facing_direction, collar_anchor.y + bob)
+		collar_sprite.flip_h = flipped
+		collar_sprite.modulate = animated_sprite.modulate
 
 func _handle_underwater_effects(delta: float) -> void:
 	_idle_time += delta

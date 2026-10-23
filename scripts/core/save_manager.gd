@@ -27,6 +27,10 @@ func save_game() -> void:
 		"equipped_hat": GameState.equipped_hat,
 		"suit_equipped": GameState.suit_equipped,
 		"socks_equipped": GameState.socks_equipped,
+		"collar_equipped": GameState.collar_equipped,
+		"paws_found": GameState.paws_found,
+		"paw_reward_claimed": GameState.paw_reward_claimed,
+		"golden_collar_unlocked": GameState.golden_collar_unlocked,
 		"pending_star": GameState.pending_star,
 		"pending_boots": GameState.pending_boots,
 		"pending_aura": GameState.pending_aura,
@@ -81,6 +85,21 @@ func load_game() -> bool:
 	GameState.equipped_hat = String(data.get("equipped_hat", ""))
 	GameState.suit_equipped = bool(data.get("suit_equipped", false))
 	GameState.socks_equipped = bool(data.get("socks_equipped", false))
+	GameState.collar_equipped = bool(data.get("collar_equipped", false))
+	GameState.golden_collar_unlocked = bool(data.get("golden_collar_unlocked", false))
+	GameState.paws_found = {}
+	var raw_paws = data.get("paws_found", {})
+	if typeof(raw_paws) == TYPE_DICTIONARY:
+		for level_id in raw_paws:
+			var indices: Array = []
+			for v in raw_paws[level_id]:
+				indices.append(int(v))
+			GameState.paws_found[String(level_id)] = indices
+	GameState.paw_reward_claimed = {}
+	var raw_claimed = data.get("paw_reward_claimed", {})
+	if typeof(raw_claimed) == TYPE_DICTIONARY:
+		for level_id in raw_claimed:
+			GameState.paw_reward_claimed[String(level_id)] = bool(raw_claimed[level_id])
 	GameState.pending_star = bool(data.get("pending_star", false))
 	GameState.pending_boots = bool(data.get("pending_boots", false))
 	GameState.pending_aura = bool(data.get("pending_aura", false))

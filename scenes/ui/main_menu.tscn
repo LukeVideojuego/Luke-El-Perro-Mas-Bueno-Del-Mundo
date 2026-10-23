@@ -50,7 +50,7 @@ anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
 offset_left = -280.0
-offset_top = -430.0
+offset_top = -498.0
 offset_right = 280.0
 offset_bottom = -20.0
 grow_horizontal = 2
@@ -64,7 +64,7 @@ anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
 offset_left = -250.0
-offset_top = -400.0
+offset_top = -468.0
 offset_right = 250.0
 offset_bottom = -40.0
 grow_horizontal = 2
@@ -126,6 +126,19 @@ theme_override_styles/hover = SubResource("ButtonStyle")
 theme_override_styles/pressed = SubResource("ButtonStyle")
 theme_override_styles/focus = SubResource("ButtonStyle")
 text = "MAPA DEL MUNDO"
+
+[node name="AlbumButton" type="Button" parent="MenuPanel/Center"]
+custom_minimum_size = Vector2(360, 60)
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/font_size = 28
+theme_override_styles/normal = SubResource("ButtonStyle")
+theme_override_styles/hover = SubResource("ButtonStyle")
+theme_override_styles/pressed = SubResource("ButtonStyle")
+theme_override_styles/focus = SubResource("ButtonStyle")
+text = "ÁLBUM DE LUKE"
 
 [node name="Spacer2" type="Control" parent="MenuPanel/Center"]
 custom_minimum_size = Vector2(0, 12)
