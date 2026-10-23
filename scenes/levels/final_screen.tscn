@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3]
+[gd_scene load_steps=32 format=3]
 
 [ext_resource type="Script" path="res://scripts/levels/hug_minigame.gd" id="1_level"]
 [ext_resource type="PackedScene" path="res://scenes/player/player.tscn" id="2_luke"]
@@ -36,6 +36,11 @@
 [ext_resource type="Texture2D" path="res://assets/characters/Kids/EndOfWorld1/fausto_walk.png" id="37_fausto_walk"]
 [ext_resource type="Texture2D" path="res://assets/characters/Reference/anciana_walk.png" id="38_anciana_walk"]
 [ext_resource type="Texture2D" path="res://assets/Tiles/Default/terrain_stone_block.png" id="39_platform_tex"]
+[ext_resource type="Texture2D" path="res://assets/backgrounds/Bonus/bonus_final_kids_abuelas.png" id="40_bonusbg"]
+[ext_resource type="PackedScene" path="res://scenes/objects/breakable_box.tscn" id="41_box"]
+[ext_resource type="PackedScene" path="res://scenes/objects/coin.tscn" id="42_coin"]
+[ext_resource type="PackedScene" path="res://scenes/objects/meat_power_up.tscn" id="43_meat"]
+[ext_resource type="PackedScene" path="res://scenes/objects/extra_life.tscn" id="44_life"]
 
 [sub_resource type="RectangleShape2D" id="GroundShape"]
 size = Vector2(3000, 110)
@@ -51,17 +56,26 @@ script = ExtResource("1_level")
 level_id = "final_screen"
 mission_text = "¡Abrazá a toda la gente que puedas antes de que se acabe el tiempo!"
 
-[node name="Sky" type="Sprite2D" parent="."]
-position = Vector2(1500, 540)
-texture = ExtResource("6_sky")
-modulate = Color(0.6, 0.85, 1, 1)
-scale = Vector2(13.5, 5)
+[node name="BonusBackground1" type="Sprite2D" parent="."]
+position = Vector2(-100.0, 460.0)
+centered = false
+z_index = -10
+texture = ExtResource("40_bonusbg")
+scale = Vector2(2.4, 2.4)
 
-[node name="Trees" type="Sprite2D" parent="."]
-position = Vector2(1500, 540)
-texture = ExtResource("7_trees")
-modulate = Color(0.55, 0.9, 0.55, 1)
-scale = Vector2(13.5, 2.7)
+[node name="BonusBackground2" type="Sprite2D" parent="."]
+position = Vector2(1539.2, 460.0)
+centered = false
+z_index = -10
+texture = ExtResource("40_bonusbg")
+scale = Vector2(2.4, 2.4)
+
+[node name="BonusBackground3" type="Sprite2D" parent="."]
+position = Vector2(3178.4, 460.0)
+centered = false
+z_index = -10
+texture = ExtResource("40_bonusbg")
+scale = Vector2(2.4, 2.4)
 
 [node name="Ground" type="StaticBody2D" parent="."]
 
@@ -605,3 +619,36 @@ theme_override_font_sizes/font_size = 72
 theme_override_colors/font_color = Color(0.95, 0.7, 0.1, 1)
 theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
 theme_override_constants/outline_size = 10
+
+[node name="PlatformIsland5" type="StaticBody2D" parent="."]
+position = Vector2(1600, 760)
+[node name="Visual" type="Sprite2D" parent="PlatformIsland5"]
+texture = ExtResource("39_platform_tex")
+scale = Vector2(4.6875, 0.78125)
+modulate = Color(0.82, 0.85, 0.92, 1)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlatformIsland5"]
+shape = SubResource("IslandShape")
+
+[node name="PlatformIsland6" type="StaticBody2D" parent="."]
+position = Vector2(2950, 760)
+[node name="Visual" type="Sprite2D" parent="PlatformIsland6"]
+texture = ExtResource("39_platform_tex")
+scale = Vector2(4.6875, 0.78125)
+modulate = Color(0.82, 0.85, 0.92, 1)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlatformIsland6"]
+shape = SubResource("IslandShape")
+
+[node name="PrizeBoxCoins" parent="." instance=ExtResource("41_box")]
+position = Vector2(550, 630)
+contents = ExtResource("42_coin")
+contents_offset = Vector2(0, -60)
+
+[node name="PrizeBoxMeat" parent="." instance=ExtResource("41_box")]
+position = Vector2(1600, 690)
+contents = ExtResource("43_meat")
+contents_offset = Vector2(0, -60)
+
+[node name="PrizeBoxLife" parent="." instance=ExtResource("41_box")]
+position = Vector2(2950, 690)
+contents = ExtResource("44_life")
+contents_offset = Vector2(0, -70)
