@@ -1,0 +1,2 @@
+# Evita que Godot importe/exporte los mp3 originales de licencia libre; las
+# copias realmente usadas por el juego viven en assets/audio/music/.

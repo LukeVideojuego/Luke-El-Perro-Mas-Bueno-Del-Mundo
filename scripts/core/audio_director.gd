@@ -1,11 +1,22 @@
 extends Node
 
 ## Punto único de audio: efectos de sonido puntuales (play_event) y música de
-## fondo en loop por pantalla/mundo (play_music). Los archivos son WAV
-## sintetizados en assets/audio/{sfx,music}/ (ver referencia_visual/ para el
-## resto del arte; el audio no tuvo una referencia real provista, así que se
-## generó en estilo chiptune/8-bit acorde al pixel art del juego).
-
+## fondo en loop por pantalla/mundo (play_music). Los efectos siguen siendo
+## WAV sintetizados en assets/audio/sfx/. La música (A1) son pistas reales de
+## licencia libre elegidas por el usuario (originales en musica_candidata/ en
+## la raíz del proyecto, con .gdignore para que Godot no las importe/exporte
+## desde ahí); las copias realmente usadas por el juego viven en
+## assets/audio/music/ como .mp3 (Godot 4 lo importa nativamente, no hace
+## falta reconvertir).
+##
+## Solo habia 9 pistas para 19 pantallas, asi que varias pantallas comparten
+## archivo a proposito: los nombres de los .mp3 originales ya indican que
+## mundo1_nivelN y mundo2_nivelN (misma N) estan pensados para compartir
+## tema, igual que los 2 jefes entre si. El Mundo 3 tiene las 4 pistas
+## propias. El Mundo 4 y las pantallas sin musica dedicada (menu, intro) no
+## tenian ninguna pista candidata: se reusan las mas cercanas (Mundo 3 para
+## el Mundo 4, Mundo 1 -el mas tranquilo- para menu/intro). Ver el resumen
+## del commit para la tabla completa asignacion -> archivo.
 const SFX_DIR := "res://assets/audio/sfx/"
 const MUSIC_DIR := "res://assets/audio/music/"
 
@@ -26,29 +37,29 @@ const SFX_FILES := {
 	&"pause": "pause.wav",
 }
 
-## D1: una pista POR NIVEL (16 en total), no una por mundo. Cada mundo es
-## una familia (misma tonalidad/instrumentos) con el jefe en version mas
-## rapida y oscura; mantienen el mismo mapeo menu/intro/final de antes.
+## A1: pista real por pantalla. Varias pantallas comparten archivo a
+## proposito (ver comentario mas arriba) -- es el mismo .mp3 cargado bajo
+## mas de una clave, no un problema.
 const MUSIC_FILES := {
-	"menu": "menu.wav",
-	"intro": "intro.wav",
-	"final": "final.wav",
-	"world1_level1": "world1_level1.wav",
-	"world1_level2": "world1_level2.wav",
-	"world1_level3": "world1_level3.wav",
-	"world1_boss": "world1_boss.wav",
-	"world2_level1": "world2_level1.wav",
-	"world2_level2": "world2_level2.wav",
-	"world2_level3": "world2_level3.wav",
-	"world2_boss": "world2_boss.wav",
-	"world3_level1": "world3_level1.wav",
-	"world3_level2": "world3_level2.wav",
-	"world3_level3": "world3_level3.wav",
-	"world3_boss": "world3_boss.wav",
-	"world4_selva": "world4_selva.wav",
-	"world4_mar": "world4_mar.wav",
-	"world4_india": "world4_india.wav",
-	"world4_boss": "world4_boss.wav",
+	"menu": "world1_1_world2_1.mp3",
+	"intro": "world1_2_world2_2.mp3",
+	"final": "final_real.mp3",
+	"world1_level1": "world1_1_world2_1.mp3",
+	"world1_level2": "world1_2_world2_2.mp3",
+	"world1_level3": "world1_3_world2_3.mp3",
+	"world1_boss": "world1_boss_world2_boss.mp3",
+	"world2_level1": "world1_1_world2_1.mp3",
+	"world2_level2": "world1_2_world2_2.mp3",
+	"world2_level3": "world1_3_world2_3.mp3",
+	"world2_boss": "world1_boss_world2_boss.mp3",
+	"world3_level1": "world3_1.mp3",
+	"world3_level2": "world3_2.mp3",
+	"world3_level3": "world3_3.mp3",
+	"world3_boss": "world3_boss.mp3",
+	"world4_selva": "world3_1.mp3",
+	"world4_mar": "world3_2.mp3",
+	"world4_india": "world3_3.mp3",
+	"world4_boss": "world3_boss.mp3",
 }
 
 const SFX_POOL_SIZE := 6
@@ -93,7 +104,15 @@ func _ready() -> void:
 	for key in SFX_FILES:
 		_sfx_streams[key] = load(SFX_DIR + SFX_FILES[key])
 	for key in MUSIC_FILES:
-		_music_streams[key] = load(MUSIC_DIR + MUSIC_FILES[key])
+		var stream: AudioStream = load(MUSIC_DIR + MUSIC_FILES[key])
+		# A1: que el motor loopee la pista el mismo (gapless) en vez de
+		# depender solo de reiniciar al recibir la señal "finished" --
+		# eso ultimo deja un hueco de hasta un buffer de audio en cada
+		# vuelta, que con musica real (no un loop de 1-2s como el chiptune
+		# anterior) se nota mucho mas.
+		if stream is AudioStreamMP3:
+			(stream as AudioStreamMP3).loop = true
+		_music_streams[key] = stream
 	for i in SFX_POOL_SIZE:
 		var p := AudioStreamPlayer.new()
 		p.volume_db = sfx_volume_db
