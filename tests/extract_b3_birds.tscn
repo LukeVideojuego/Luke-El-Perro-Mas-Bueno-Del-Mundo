@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://tests/extract_b3_birds.gd" id="1"]
+
+[node name="ExtractB3Birds" type="Node"]
+script = ExtResource("1")
