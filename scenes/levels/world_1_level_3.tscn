@@ -798,7 +798,7 @@ shape = SubResource("BoundaryShape")
 position = Vector2(180, 850)
 
 [node name="MissionSign" parent="." instance=ExtResource("90_kidnpc")]
-position = Vector2(520, 861.43)
+position = Vector2(340, 861.43)
 kid_name = "Bauti"
 interaction_text = "Bauti: Hola Luke, tenes que cruzar las azoteas del barrio. Esquiva a las aves y derrota a los ladrones que encuentres en el camino."
 

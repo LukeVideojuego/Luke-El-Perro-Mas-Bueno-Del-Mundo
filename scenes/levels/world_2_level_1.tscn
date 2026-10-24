@@ -702,7 +702,7 @@ shape = SubResource("BoundaryShape")
 position = Vector2(180, 850)
 
 [node name="MissionSign" parent="." instance=ExtResource("90_kidnpc")]
-position = Vector2(520, 870.21)
+position = Vector2(340, 870.21)
 kid_name = "Roma"
 interaction_text = "Roma: Hola Luke, ayuda a la señora Mayor a cruzar el mercado. Cuidado con los carteristas y las aves que te van a salir al cruce."
 
@@ -980,11 +980,11 @@ scale = Vector2(6, 1)
 texture = ExtResource("21_crosswalk")
 
 [node name="CoinE" parent="." instance=ExtResource("20_coin")]
-position = Vector2(4900, 780)
+position = Vector2(4900, 709)
 [node name="CoinE_L" parent="." instance=ExtResource("20_coin")]
-position = Vector2(4840.0, 780.0)
+position = Vector2(4840.0, 709.0)
 [node name="CoinE_R" parent="." instance=ExtResource("20_coin")]
-position = Vector2(4960.0, 780.0)
+position = Vector2(4960.0, 709.0)
 [node name="CoinF" parent="." instance=ExtResource("20_coin")]
 position = Vector2(5800, 780)
 [node name="CoinF_L" parent="." instance=ExtResource("20_coin")]

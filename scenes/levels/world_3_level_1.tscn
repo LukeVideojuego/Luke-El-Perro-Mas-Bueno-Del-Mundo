@@ -687,7 +687,7 @@ shape = SubResource("BoundaryShape")
 position = Vector2(180, 850)
 
 [node name="MissionSign" parent="." instance=ExtResource("90_kidnpc")]
-position = Vector2(520, 854.03)
+position = Vector2(340, 854.03)
 kid_name = "Izan"
 interaction_text = "Izan: Hola Luke, hay que limpiar los pasillos de la Casa Blanca. Derrota a los politicos corruptos y a sus ayudantes."
 
