@@ -1,7 +1,8 @@
 extends Node2D
 
-## E3: capturas reales de la capa en las 4 fases pedidas (quieto, corriendo,
-## subiendo, cayendo), usando fisica real de Luke (no poses forzadas).
+## B2: capturas reales de la capa (2 poses fijas: reposo/salto) en las 4
+## fases pedidas (quieto, corriendo, subiendo, cayendo), usando fisica
+## real de Luke (no poses forzadas).
 const LUKE_SCENE := preload("res://scenes/player/player.tscn")
 
 var luke: Luke
@@ -40,7 +41,7 @@ func _ready() -> void:
 
 	cam = Camera2D.new()
 	cam.position = Vector2(440, 580)
-	cam.zoom = Vector2(2.0, 2.0)
+	cam.zoom = Vector2(4.0, 4.0)
 	add_child(cam)
 	cam.make_current()
 
@@ -96,10 +97,9 @@ func _save_and_advance() -> void:
 	await RenderingServer.frame_post_draw
 	var path := "res://../shotE3_%s.png" % PHASES[phase]
 	get_viewport().get_texture().get_image().save_png(path)
-	var anchor: Vector2 = luke.cape_ribbon._points[0]
-	var tip: Vector2 = luke.cape_ribbon._points[luke.cape_ribbon._points.size() - 1]
-	print("GUARDADA ", path, "  vel=", luke.velocity,
-		"  anchor=", anchor, " tip=", tip, " tip-anchor=", tip - anchor)
+	print("GUARDADA ", path, "  vel=", luke.velocity, " on_floor=", luke.is_on_floor(),
+		"  rest_a=", luke.cape_sprite.rest_sprite.modulate.a,
+		" jump_a=", luke.cape_sprite.jump_sprite.modulate.a)
 	phase += 1
 	phase_frame = 0
 	if phase >= PHASES.size():

@@ -19,7 +19,7 @@ extends CharacterBody2D
 @onready var attack_visual: Polygon2D = $AttackVisual
 @onready var aura_visual: Polygon2D = $AuraVisual
 @onready var hat_sprite: Sprite2D = $Hat
-@onready var cape_ribbon: CapeRibbon = $Cape
+@onready var cape_sprite: CapeSprite = $Cape
 @onready var suit_sprite: Sprite2D = $Suit
 @onready var socks_sprite: Sprite2D = $Socks
 @onready var collar_sprite: Sprite2D = $Collar
@@ -78,6 +78,11 @@ const SUIT_ANCHOR := {
 	"jump": Vector2(-27.7, 14.0),
 	"attack": Vector2(-25.2, 0.0),
 }
+## B2: ancla de la capa (2 poses fijas, no 4 por animacion -- "reposo"
+## cubre tanto quieto como caminando, "salto" cubre tanto subir como caer).
+## Medida igual que SUIT_ANCHOR, sobre el lomo/cuello real de Luke.
+const CAPE_ANCHOR_REST := Vector2(-25.8, 12.0)
+const CAPE_ANCHOR_JUMP := Vector2(-27.7, 14.0)
 ## A7: collar dorado, premio EXCLUSIVO de juntar las 36 huellas (no se
 ## compra). Ancla al cuello, un poco debajo del ancla del sombrero en cada
 ## pose (mismo criterio de medicion que HAT_ANCHOR).
@@ -388,12 +393,19 @@ func _update_cosmetics() -> void:
 
 	var wears_suit: bool = GameState.suit_equipped
 	suit_sprite.visible = wears_suit
-	# E3: la capa ya no es un sprite de 2 poses; es scripts/player/
-	# cape_ribbon.gd, una tira simulada (Verlet) que sigue el lomo de Luke
-	# con inercia propia -- el movimiento real (colgar/flamear/estirarse/
-	# ondular) sale solo de la fisica, no hace falta elegir pose aca.
-	cape_ribbon.visible = wears_suit
+	# B2: la capa vuelve a ser 2 sprites fijos (reposo/salto, ver
+	# cape_sprite.gd) con un fade cruzado entre ambos -- "en el aire"
+	# (saltando O cayendo) usa la pose desplegada, en el piso (quieto o
+	# caminando) usa la pose apoyada.
+	cape_sprite.visible = wears_suit
 	if wears_suit:
+		var deployed: bool = not is_on_floor()
+		cape_sprite.set_deployed(deployed)
+		var cape_anchor: Vector2 = CAPE_ANCHOR_JUMP if deployed else CAPE_ANCHOR_REST
+		cape_sprite.position = Vector2(cape_anchor.x * facing_direction, cape_anchor.y + bob)
+		cape_sprite.scale = Vector2(facing_direction, 1.0)
+		cape_sprite.set_tint(animated_sprite.modulate)
+
 		var suit_anchor: Vector2 = SUIT_ANCHOR.get(anim, SUIT_ANCHOR["idle"])
 		suit_sprite.texture = SUIT_BODY
 		suit_sprite.position = Vector2(suit_anchor.x * facing_direction, suit_anchor.y + bob)

@@ -184,24 +184,36 @@ func _check_cosmetics_render() -> void:
 	for anim in ["idle", "walk", "jump", "attack"]:
 		luke.animated_sprite.animation = anim
 		luke._update_cosmetics()
-		all_visible = all_visible and luke.hat_sprite.visible and luke.suit_sprite.visible and luke.cape_ribbon.visible
+		all_visible = all_visible and luke.hat_sprite.visible and luke.suit_sprite.visible and luke.cape_sprite.visible
 		positions[anim] = luke.hat_sprite.position
 	_check(all_visible, "el sombrero, el traje y la capa se dibujan en las 4 animaciones")
 	_check(positions["jump"] != positions["idle"] and positions["attack"] != positions["idle"],
 		"el sombrero acompana la cabeza en cada pose (idle=%s jump=%s attack=%s)" % [
 			positions["idle"], positions["jump"], positions["attack"]])
-	# E3: la capa ya no es un sprite de 2 poses (cape_open/cape_folded), es
-	# una tira simulada con fisica (cape_ribbon.gd) que reacciona sola al
-	# movimiento real de Luke; en vez de pedir una textura puntual, se
-	# confirma que la cadena de puntos SE MUEVE cuando Luke tiene velocidad
-	# (el extremo de la capa se separa de su posicion en reposo).
-	for i in range(10):
+	# B2: la capa es de nuevo 2 sprites fijos (reposo/salto, cape_sprite.gd)
+	# en vez de la tira simulada con fisica de la ronda anterior. Prueba el
+	# CapeSprite directamente (sin piso real, Luke nunca esta on_floor, asi
+	# que se apaga su _physics_process para que no pise el estado con su
+	# propio _update_cosmetics() de cada frame mientras se maneja a mano):
+	# arranca en reposo, y set_deployed(true) hace un fade cruzado hacia
+	# la pose de salto (no un corte seco: durante la transicion ambas
+	# texturas coexisten con opacidad intermedia).
+	luke.set_physics_process(false)
+	luke.cape_sprite.set_deployed(false)
+	for i in range(15):
 		await get_tree().physics_frame
-	var rest_tip: Vector2 = luke.cape_ribbon._points[luke.cape_ribbon._points.size() - 1]
-	luke.velocity = Vector2(0.0, -400.0)
-	for i in range(8):
+	_check(luke.cape_sprite.rest_sprite.modulate.a > 0.9 and luke.cape_sprite.jump_sprite.modulate.a < 0.1,
+		"la capa vuelve a la pose de reposo")
+	luke.cape_sprite.set_deployed(true)
+	for i in range(3):
 		await get_tree().physics_frame
-	var moved_tip: Vector2 = luke.cape_ribbon._points[luke.cape_ribbon._points.size() - 1]
-	_check(moved_tip.distance_to(rest_tip) > 5.0, "la capa reacciona (se mueve) cuando Luke cambia de velocidad")
+	var mid_rest: float = luke.cape_sprite.rest_sprite.modulate.a
+	var mid_jump: float = luke.cape_sprite.jump_sprite.modulate.a
+	_check(mid_rest < 0.9 and mid_jump > 0.1 and mid_jump < 0.9,
+		"la transicion a la pose de salto es un fade cruzado, no un corte seco (reposo=%.2f salto=%.2f)" % [mid_rest, mid_jump])
+	for i in range(15):
+		await get_tree().physics_frame
+	_check(luke.cape_sprite.jump_sprite.modulate.a > 0.9 and luke.cape_sprite.rest_sprite.modulate.a < 0.1,
+		"la capa termina de desplegarse en la pose de salto")
 	luke.queue_free()
 	await get_tree().process_frame
