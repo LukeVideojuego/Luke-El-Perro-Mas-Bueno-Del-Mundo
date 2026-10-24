@@ -18,6 +18,10 @@ const LEVELS := [
 	"res://scenes/levels/world_4_level_1.tscn",
 	"res://scenes/levels/world_4_level_2.tscn",
 	"res://scenes/levels/world_4_level_3.tscn",
+	"res://scenes/levels/bonus_world_1.tscn",
+	"res://scenes/levels/bonus_world_2.tscn",
+	"res://scenes/levels/bonus_world_3.tscn",
+	"res://scenes/levels/bonus_world_4.tscn",
 ]
 
 const TEST_FRAMES := 240

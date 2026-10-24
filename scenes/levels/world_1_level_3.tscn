@@ -1029,6 +1029,7 @@ position = Vector2(5020, 770)
 patrol_distance = 130.0
 [node name="SkaterThiefTwo" parent="." instance=ExtResource("97_skater")]
 position = Vector2(6950, 850)
+patrol_distance = 150.0
 
 [node name="ThiefFour" parent="." instance=ExtResource("3_thief")]
 position = Vector2(6700, 850)
@@ -1052,36 +1053,41 @@ position = Vector2(6220.0, 780.0)
 [node name="PrecisionPlat1" type="StaticBody2D" parent="."]
 position = Vector2(7300, 850)
 [node name="Visual" type="Sprite2D" parent="PrecisionPlat1"]
-texture = ExtResource("12_grass")
+texture = ExtResource("13_stone")
 scale = Vector2(4.0625, 0.625)
+modulate = Color(0.82, 0.85, 0.92, 1)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PrecisionPlat1"]
 shape = SubResource("PlatformSmall")
 [node name="PrecisionPlat2" type="StaticBody2D" parent="."]
 position = Vector2(7780, 760)
 [node name="Visual" type="Sprite2D" parent="PrecisionPlat2"]
-texture = ExtResource("12_grass")
+texture = ExtResource("13_stone")
 scale = Vector2(4.0625, 0.625)
+modulate = Color(0.82, 0.85, 0.92, 1)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PrecisionPlat2"]
 shape = SubResource("PlatformSmall")
 [node name="PrecisionPlat3" type="StaticBody2D" parent="."]
 position = Vector2(8260, 850)
 [node name="Visual" type="Sprite2D" parent="PrecisionPlat3"]
-texture = ExtResource("12_grass")
+texture = ExtResource("13_stone")
 scale = Vector2(4.0625, 0.625)
+modulate = Color(0.82, 0.85, 0.92, 1)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PrecisionPlat3"]
 shape = SubResource("PlatformSmall")
 [node name="PrecisionPlat4" type="StaticBody2D" parent="."]
 position = Vector2(8740, 740)
 [node name="Visual" type="Sprite2D" parent="PrecisionPlat4"]
-texture = ExtResource("12_grass")
+texture = ExtResource("13_stone")
 scale = Vector2(4.0625, 0.625)
+modulate = Color(0.82, 0.85, 0.92, 1)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PrecisionPlat4"]
 shape = SubResource("PlatformSmall")
 [node name="PrecisionPlat5" type="StaticBody2D" parent="."]
 position = Vector2(9220, 850)
 [node name="Visual" type="Sprite2D" parent="PrecisionPlat5"]
-texture = ExtResource("12_grass")
+texture = ExtResource("13_stone")
 scale = Vector2(4.0625, 0.625)
+modulate = Color(0.82, 0.85, 0.92, 1)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PrecisionPlat5"]
 shape = SubResource("PlatformSmall")
 [node name="PitSpikesVisual" type="Node2D" parent="."]
