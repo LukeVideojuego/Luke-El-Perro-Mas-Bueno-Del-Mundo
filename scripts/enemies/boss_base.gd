@@ -58,12 +58,46 @@ signal boss_defeated
 @export var power_texture: Texture2D
 @export var power_pose_duration := 0.35
 
+@export_category("Mecanica unica por jefe (B3)")
+## Don Sombra: cada tanto se funde en las sombras (semitransparente e
+## invulnerable un rato) y reaparece cerca de Luke. shadow_warning_duration
+## es el aviso visual (parpadeo oscuro) ANTES de desaparecer, para que sea
+## justo pegarle antes de que se esfume.
+@export var shadow_fade_enabled := false
+@export var shadow_fade_interval := 7.0
+@export var shadow_warning_duration := 0.6
+@export var shadow_duration := 2.0
+
+## La Bruja del Olvido: se teletransporta entre plataformas de la arena con
+## una nube de humo, avisando teleport_warning_duration segundos antes
+## ADONDE va a aparecer (la nube sale ahi primero, vacia).
+@export var teleport_enabled := false
+@export var teleport_points: Array[Vector2] = []
+@export var teleport_interval := 8.0
+@export var teleport_warning_duration := 1.0
+
+## El Gran Codicia: al llegar a la mitad de la vida, llama (una sola vez) a
+## N ayudantes.
+@export var summon_allies_scene: PackedScene
+@export var summon_allies_count := 2
+@export var summon_allies_offset := 130.0
+
+const SMOKE_PUFF_SCENE := preload("res://scenes/effects/smoke_puff.tscn")
+
 var _power_timer := 0.0
 var _power_use_diagonal := false
 var _extra_jump_timer := 0.0
 var _power_pose_timer := 0.0
 var _base_scale := Vector2.ONE
 var _base_modulate := Color.WHITE
+
+## B3: invulnerabilidad temporal (Don Sombra fundido en las sombras). No es
+## lo mismo que is_defeated -- el jefe sigue vivo y procesando, solo que
+## receive_attack() lo ignora mientras dure.
+var _is_shadow_invulnerable := false
+var _shadow_timer := 0.0
+var _teleport_timer := 0.0
+var _allies_summoned := false
 
 func _init() -> void:
 	drops_bone_on_defeat = true
@@ -77,6 +111,10 @@ func _ready() -> void:
 	_build_hp_bar()
 	_power_timer = power_interval - power_initial_delay
 	_extra_jump_timer = extra_jump_interval * 0.5
+	# Escalonados a la mitad de su propio intervalo para que no coincidan con
+	# el primer power (y entre si) apenas arranca la pelea.
+	_shadow_timer = shadow_fade_interval * 0.5
+	_teleport_timer = teleport_interval * 0.5
 	if sprite != null:
 		_base_scale = sprite.scale
 		_base_modulate = sprite.modulate
@@ -94,6 +132,8 @@ func _physics_process(delta: float) -> void:
 		sprite.rotation = sin(_time * sway_speed) * deg_to_rad(sway_amplitude_deg) * sway_strength
 	_handle_boss_powers(delta)
 	_update_pose(delta)
+	_handle_shadow_fade(delta)
+	_handle_teleport(delta)
 
 ## Cambia la textura del sprite según el estado del jefe: la pose de poder
 ## tiene prioridad temporal (power_pose_duration segundos tras disparar),
@@ -184,8 +224,12 @@ func _fire_power() -> void:
 ## (el triple), no igual -- amount lo pasa el que ataca (bark_wave.gd manda
 ## 3; el golpe cuerpo a cuerpo y el huesito no mandan nada y usan el 1 de
 ## siempre).
+## B3: Don Sombra ignora el daño entero mientras esta fundido en las
+## sombras (_is_shadow_invulnerable) -- el aviso previo (shadow_warning_
+## duration) es justamente la ventana donde SI se lo puede golpear antes de
+## que se vuelva invulnerable.
 func receive_attack(_attacker: Node, amount: int = 1) -> void:
-	if is_defeated:
+	if is_defeated or _is_shadow_invulnerable:
 		return
 	health -= amount
 	_update_hp_bar()
@@ -203,6 +247,25 @@ func receive_attack(_attacker: Node, amount: int = 1) -> void:
 		await get_tree().create_timer(0.12).timeout
 		if is_instance_valid(self):
 			modulate = Color.WHITE
+		_check_summon_allies()
+
+## El Gran Codicia: a mitad de vida (una sola vez), llama a sus ayudantes.
+func _check_summon_allies() -> void:
+	if summon_allies_scene == null or _allies_summoned or is_defeated:
+		return
+	if health > max_health / 2:
+		return
+	_allies_summoned = true
+	var parent := get_parent()
+	if parent == null:
+		return
+	for i in range(summon_allies_count):
+		var side: float = -1.0 if i % 2 == 0 else 1.0
+		var offset := summon_allies_offset * (1 + i / 2) * side
+		var ally: Node2D = summon_allies_scene.instantiate()
+		ally.global_position = global_position + Vector2(offset, 0.0)
+		parent.add_child(ally)
+	AudioDirector.play_event(&"aura_on")
 
 func _build_hp_bar() -> void:
 	_hp_back = ColorRect.new()
@@ -222,3 +285,75 @@ func _update_hp_bar() -> void:
 	if _hp_front == null:
 		return
 	_hp_front.size.x = maxf(hp_bar_width * (float(health) / float(max_health)), 0.0)
+
+## --- B3: mecanica unica de Don Sombra ---
+func _handle_shadow_fade(delta: float) -> void:
+	if not shadow_fade_enabled or _is_shadow_invulnerable:
+		return
+	_shadow_timer += delta
+	if _shadow_timer >= shadow_fade_interval:
+		_shadow_timer = 0.0
+		_start_shadow_fade()
+
+## El aviso previo (el parpadeo oscuro) SIGUE siendo golpeable a proposito --
+## _is_shadow_invulnerable recien se activa despues, en shadow_warning_duration.
+func _start_shadow_fade() -> void:
+	var warn_tween: Tween
+	if sprite != null:
+		warn_tween = create_tween()
+		warn_tween.tween_property(sprite, "modulate", Color(0.2, 0.08, 0.3, 1.0), shadow_warning_duration * 0.5)
+		warn_tween.tween_property(sprite, "modulate", _base_modulate, shadow_warning_duration * 0.5)
+	await get_tree().create_timer(shadow_warning_duration).timeout
+	if not is_instance_valid(self) or is_defeated:
+		return
+	# El tween del aviso puede terminar su ultimo tramo (vuelta a _base_modulate)
+	# justo este mismo frame -- lo matamos explicitamente para que no pise el
+	# alfa semitransparente que marca la invulnerabilidad real.
+	if warn_tween != null and warn_tween.is_valid():
+		warn_tween.kill()
+	_is_shadow_invulnerable = true
+	if sprite != null:
+		sprite.modulate = _base_modulate
+		sprite.modulate.a = 0.35
+	await get_tree().create_timer(shadow_duration * 0.4).timeout
+	if not is_instance_valid(self) or is_defeated:
+		return
+	var target := _get_player()
+	if target != null:
+		var side: float = 1.0 if randf() < 0.5 else -1.0
+		global_position = target.global_position + Vector2(side * randf_range(110.0, 190.0), -40.0)
+		velocity = Vector2.ZERO
+	await get_tree().create_timer(shadow_duration * 0.6).timeout
+	if not is_instance_valid(self) or is_defeated:
+		return
+	if sprite != null:
+		sprite.modulate = _base_modulate
+	_is_shadow_invulnerable = false
+
+## --- B3: mecanica unica de la Bruja del Olvido ---
+func _handle_teleport(delta: float) -> void:
+	if not teleport_enabled or teleport_points.is_empty():
+		return
+	_teleport_timer += delta
+	if _teleport_timer >= teleport_interval:
+		_teleport_timer = 0.0
+		_start_teleport()
+
+func _start_teleport() -> void:
+	var target_pos: Vector2 = teleport_points[randi() % teleport_points.size()]
+	_spawn_smoke(target_pos)
+	await get_tree().create_timer(teleport_warning_duration).timeout
+	if not is_instance_valid(self) or is_defeated:
+		return
+	_spawn_smoke(global_position)
+	global_position = target_pos
+	velocity = Vector2.ZERO
+	_spawn_smoke(global_position)
+
+func _spawn_smoke(at: Vector2) -> void:
+	var parent := get_parent()
+	if parent == null:
+		return
+	var puff: Node2D = SMOKE_PUFF_SCENE.instantiate()
+	puff.global_position = at
+	parent.add_child(puff)

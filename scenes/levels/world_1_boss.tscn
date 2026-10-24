@@ -317,6 +317,10 @@ position = Vector2(180, 850)
 
 [node name="ThiefBoss" parent="." instance=ExtResource("3_boss")]
 position = Vector2(1000, 780)
+shadow_fade_enabled = true
+shadow_fade_interval = 7.0
+shadow_warning_duration = 0.6
+shadow_duration = 2.0
 
 [node name="BoxA" parent="." instance=ExtResource("6_box")]
 position = Vector2(650, 679)
