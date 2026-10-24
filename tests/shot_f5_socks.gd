@@ -21,6 +21,17 @@ const STEPS := [
 func _ready() -> void:
 	get_window().size = Vector2i(420, 420)
 	GameState.socks_equipped = true
+
+	var ground := StaticBody2D.new()
+	ground.collision_layer = 1
+	var cs := CollisionShape2D.new()
+	var rect := RectangleShape2D.new()
+	rect.size = Vector2(2000.0, 80.0)
+	cs.shape = rect
+	ground.add_child(cs)
+	ground.position = Vector2(210.0, 290.0)
+	add_child(ground)
+
 	luke = LUKE_SCENE.instantiate()
 	luke.position = Vector2(210, 240)
 	add_child(luke)
