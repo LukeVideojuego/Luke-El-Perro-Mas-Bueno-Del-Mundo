@@ -1,0 +1,60 @@
+[gd_scene load_steps=7 format=3]
+
+[ext_resource type="Script" path="res://scripts/enemies/shielded_enemy.gd" id="1_script"]
+[ext_resource type="Texture2D" path="res://assets/Enemies/Reference/guardia.png" id="2_texture"]
+[ext_resource type="Texture2D" path="res://assets/Enemies/Reference/guardia_walk.png" id="4_walk"]
+[ext_resource type="Texture2D" path="res://assets/Enemies/Reference/guard_shield.png" id="5_shield"]
+
+[sub_resource type="RectangleShape2D" id="BodyShape"]
+size = Vector2(52, 84)
+
+[sub_resource type="RectangleShape2D" id="DamageShape"]
+size = Vector2(72, 76)
+
+[sub_resource type="RectangleShape2D" id="TopShape"]
+size = Vector2(42, 14)
+
+[node name="ShieldGuard" type="CharacterBody2D"]
+collision_layer = 4
+collision_mask = 1
+script = ExtResource("1_script")
+max_health = 2
+patrol_speed = 65.0
+patrol_distance = 110.0
+walk_texture = ExtResource("4_walk")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("2_texture")
+position = Vector2(0, -39.69)
+scale = Vector2(1.695, 1.695)
+
+[node name="Shield" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("5_shield")
+position = Vector2(26, -14)
+z_index = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 8)
+shape = SubResource("BodyShape")
+
+[node name="DamageArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 1
+monitoring = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DamageArea"]
+shape = SubResource("DamageShape")
+
+[node name="TopHurtbox" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 1
+monitoring = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TopHurtbox"]
+position = Vector2(0, -42)
+shape = SubResource("TopShape")
+
+[connection signal="body_entered" from="DamageArea" to="." method="_on_damage_area_body_entered"]
+[connection signal="body_entered" from="TopHurtbox" to="." method="_on_top_hurtbox_body_entered"]

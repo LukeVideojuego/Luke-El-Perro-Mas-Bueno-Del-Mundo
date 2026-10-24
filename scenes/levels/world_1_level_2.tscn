@@ -1,9 +1,10 @@
-[gd_scene load_steps=49 format=3]
+[gd_scene load_steps=50 format=3]
 [ext_resource type="PackedScene" path="res://scenes/enemies/bird.tscn" id="99_bird"]
 
 [ext_resource type="Script" path="res://scripts/levels/level_base.gd" id="1_level"]
 [ext_resource type="PackedScene" path="res://scenes/player/player.tscn" id="2_luke"]
 [ext_resource type="PackedScene" path="res://scenes/enemies/thief.tscn" id="3_thief"]
+[ext_resource type="PackedScene" path="res://scenes/enemies/skater_thief.tscn" id="97_skater"]
 [ext_resource type="PackedScene" path="res://scenes/objects/checkpoint.tscn" id="4_checkpoint"]
 [ext_resource type="PackedScene" path="res://scenes/objects/level_finish.tscn" id="5_finish"]
 [ext_resource type="PackedScene" path="res://scenes/objects/meat_power_up.tscn" id="6_meat"]
@@ -501,6 +502,9 @@ interaction_text = "Mathi: Hola Luke, los ladrones siguen merodeando el barrio. 
 [node name="Sprite2D" parent="MissionSign"]
 texture = ExtResource("91_kidtex")
 scale = Vector2(0.8342, 0.8342)
+[node name="SkaterThiefOne" parent="." instance=ExtResource("97_skater")]
+position = Vector2(1300, 850)
+
 [node name="ThiefOne" parent="." instance=ExtResource("3_thief")]
 position = Vector2(1005, 850)
 patrol_distance = 90.0
@@ -685,6 +689,9 @@ patrol_distance = 100.0
 [node name="ThiefFive" parent="." instance=ExtResource("3_thief")]
 position = Vector2(6120, 650)
 patrol_distance = 120.0
+[node name="SkaterThiefTwo" parent="." instance=ExtResource("97_skater")]
+position = Vector2(6650, 850)
+
 [node name="ThiefSix" parent="." instance=ExtResource("3_thief")]
 position = Vector2(7440, 850)
 patrol_distance = 170.0

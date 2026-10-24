@@ -1,9 +1,10 @@
-[gd_scene load_steps=41 format=3]
+[gd_scene load_steps=42 format=3]
 [ext_resource type="PackedScene" path="res://scenes/enemies/bird.tscn" id="99_bird"]
 
 [ext_resource type="Script" path="res://scripts/levels/level_base.gd" id="1_level"]
 [ext_resource type="PackedScene" path="res://scenes/player/player.tscn" id="2_luke"]
 [ext_resource type="PackedScene" path="res://scenes/enemies/corrupt_politician.tscn" id="3_thief"]
+[ext_resource type="PackedScene" path="res://scenes/enemies/shield_guard.tscn" id="97_guard"]
 [ext_resource type="PackedScene" path="res://scenes/enemies/corrupt_lackey.tscn" id="29_lackey"]
 [ext_resource type="PackedScene" path="res://scenes/objects/checkpoint.tscn" id="4_checkpoint"]
 [ext_resource type="PackedScene" path="res://scenes/objects/level_finish.tscn" id="5_finish"]
@@ -893,6 +894,9 @@ position = Vector2(3950, 928)
 scale = Vector2(1.5, 1)
 texture = ExtResource("14_spikes")
 
+[node name="ShieldGuardOne" parent="." instance=ExtResource("97_guard")]
+position = Vector2(1330, 850)
+
 [node name="ThiefOne" parent="." instance=ExtResource("3_thief")]
 position = Vector2(1010, 850)
 patrol_distance = 140.0
@@ -1054,6 +1058,9 @@ scale = Vector2(1.5, 1)
 texture = ExtResource("14_spikes")
 [node name="SpikeHazardFive" parent="." instance=ExtResource("8_hazard")]
 position = Vector2(7200, 920)
+
+[node name="ShieldGuardTwo" parent="." instance=ExtResource("97_guard")]
+position = Vector2(5920, 850)
 
 [node name="ThiefFour" parent="." instance=ExtResource("3_thief")]
 position = Vector2(5610, 850)

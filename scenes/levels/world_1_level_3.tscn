@@ -1,9 +1,10 @@
-[gd_scene load_steps=42 format=3]
+[gd_scene load_steps=43 format=3]
 [ext_resource type="PackedScene" path="res://scenes/enemies/bird.tscn" id="99_bird"]
 
 [ext_resource type="Script" path="res://scripts/levels/level_base.gd" id="1_level"]
 [ext_resource type="PackedScene" path="res://scenes/player/player.tscn" id="2_luke"]
 [ext_resource type="PackedScene" path="res://scenes/enemies/thief.tscn" id="3_thief"]
+[ext_resource type="PackedScene" path="res://scenes/enemies/skater_thief.tscn" id="97_skater"]
 [ext_resource type="PackedScene" path="res://scenes/objects/checkpoint.tscn" id="4_checkpoint"]
 [ext_resource type="PackedScene" path="res://scenes/objects/level_finish.tscn" id="5_finish"]
 [ext_resource type="PackedScene" path="res://scenes/objects/meat_power_up.tscn" id="6_meat"]
@@ -874,6 +875,9 @@ position = Vector2(3900, 928)
 scale = Vector2(1.5, 1)
 texture = ExtResource("14_spikes")
 
+[node name="SkaterThiefOne" parent="." instance=ExtResource("97_skater")]
+position = Vector2(1320, 850)
+
 [node name="ThiefOne" parent="." instance=ExtResource("3_thief")]
 position = Vector2(1010, 850)
 patrol_distance = 130.0
@@ -1023,6 +1027,9 @@ position = Vector2(5450, 920)
 [node name="ThiefThree" parent="." instance=ExtResource("3_thief")]
 position = Vector2(5020, 770)
 patrol_distance = 130.0
+[node name="SkaterThiefTwo" parent="." instance=ExtResource("97_skater")]
+position = Vector2(6950, 850)
+
 [node name="ThiefFour" parent="." instance=ExtResource("3_thief")]
 position = Vector2(6700, 850)
 patrol_distance = 150.0
