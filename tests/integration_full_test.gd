@@ -21,8 +21,8 @@ var wait_start := 0
 var stable_frames := 0
 var failures := 0
 
-## La cinemática final ahora tiene 2 paneles con timeout automático de 10s
-## cada uno (hasta ~1200 frames a 60fps) antes de cargar final_screen.
+## A1: las cinemáticas/pantallas ya no avanzan solas -- el test simula los
+## clicks de los botones "SIGUIENTE"/"CONTINUAR" (ver fases 10-12 y 2-3).
 const WATCHDOG_FRAMES := 1300
 const STABLE_FRAMES := 5
 
@@ -125,6 +125,10 @@ func _physics_process(_delta: float) -> void:
 				main.intro_cinematic.get_node("Panel3/Panel3Button").pressed.emit()
 				_phase(1)
 		1:
+			# A1: el cartel de "Mundo 1 superado" ya no avanza solo -- hay que
+			# apretar su botón CONTINUAR (misma mecánica que las cinemáticas).
+			if main.world1_cheer_screen != null:
+				main.world1_cheer_screen.get_node("Panel/ContinueButton").pressed.emit()
 			var target: String = CHAIN[chain_index]
 			if _is_stable(target):
 				var is_last := chain_index == CHAIN.size() - 1

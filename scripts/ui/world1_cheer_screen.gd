@@ -1,17 +1,17 @@
 extends CanvasLayer
 
 ## Pantalla única (solo la primera vez) que se muestra al completar el
-## Mundo 1, antes de pasar al Mundo 2. Mismo patrón de auto-timeout que
-## las cinemáticas (scripts/ui/intro_cinematic.gd).
+## Mundo 1, antes de pasar al Mundo 2.
+## A1: no avanza sola -- requiere el botón "CONTINUAR" visible, o
+## Enter/Espacio (ui_accept) o el botón de acción del juego.
 signal finished
 
+const WATCHED_ACTIONS := ["ui_accept", "interact", "attack"]
+
 var _finished := false
-var _timeout_timer: SceneTreeTimer = null
 
 func _ready() -> void:
 	$Panel/ContinueButton.pressed.connect(_finish)
-	_timeout_timer = get_tree().create_timer(12.0)
-	_timeout_timer.timeout.connect(_finish)
 
 func _finish() -> void:
 	if _finished:
@@ -20,5 +20,7 @@ func _finish() -> void:
 	finished.emit()
 
 func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("ui_accept"):
-		_finish()
+	for action in WATCHED_ACTIONS:
+		if event.is_action_pressed(action):
+			_finish()
+			return

@@ -1,10 +1,10 @@
 extends Node
 
-## Punto 2 (segunda ronda): si el jugador no toca nada durante la
-## cinemática de introducción, el juego arrancaba el Nivel 1 de una sola
-## vez (saltando los paneles 2 y 3) apenas vencía el timeout de 10s del
-## panel 1. Verifica, sin tocar ningún input, que los 3 paneles se
-## muestran EN ORDEN (uno cada ~10s) antes de que finished se emita.
+## A1: las cinemáticas ya NO deben avanzar solas. Este diagnóstico (antes
+## verificaba el viejo auto-avance por timeout) ahora verifica lo opuesto:
+## sin ningún input del jugador los 3 paneles de la intro quedan fijos
+## indefinidamente, y solo avanzan al apretar el botón "SIGUIENTE"
+## (simulado emitiendo pressed, igual que tests/verify_intro_from_menu.gd).
 
 const INTRO := preload("res://scenes/cinematics/intro_cinematic.tscn")
 
@@ -17,31 +17,35 @@ func _check(condition: bool, label: String) -> void:
 		print("FAIL: ", label)
 		fail_count += 1
 
-var intro: Node
-var seen_panel2 := false
-var seen_panel3 := false
-var got_finished := false
-var t := 0.0
-var last_panel := 1
-
 func _ready() -> void:
-	intro = INTRO.instantiate()
+	var intro: Node = INTRO.instantiate()
 	add_child(intro)
-	intro.finished.connect(func(): got_finished = true)
 
-func _process(delta: float) -> void:
-	t += delta
-	var p: int = intro.get_current_panel()
-	if p != last_panel:
-		print("t=%.1f panel cambio %d -> %d" % [t, last_panel, p])
-		last_panel = p
-	if p == 2:
-		seen_panel2 = true
-	if p == 3:
-		seen_panel3 = true
-	if got_finished or t >= 33.0:
-		_check(seen_panel2, "panel 2 se muestra sin tocar nada (no salta directo)")
-		_check(seen_panel3, "panel 3 se muestra sin tocar nada")
-		_check(got_finished, "recien termina (finished) despues de pasar por los 3 paneles, no antes")
-		print("RESULTADO: ", fail_count, " fallos (t=%.1f)" % t)
-		get_tree().quit()
+	# Sin tocar nada durante 15s (más que el viejo timeout de 10s), el panel
+	# tiene que seguir siendo el 1.
+	for i in range(900):
+		await get_tree().process_frame
+	_check(intro.get_current_panel() == 1, "panel sigue en 1 tras 15s sin input (no avanza solo)")
+
+	intro.get_node("Panel1/Panel1Button").pressed.emit()
+	await get_tree().process_frame
+	_check(intro.get_current_panel() == 2, "boton SIGUIENTE del panel 1 avanza a panel 2")
+
+	# De nuevo, sin input el panel 2 tiene que quedar fijo.
+	for i in range(900):
+		await get_tree().process_frame
+	_check(intro.get_current_panel() == 2, "panel sigue en 2 tras 15s sin input (no avanza solo)")
+
+	var got_finished := [false]
+	intro.finished.connect(func(): got_finished[0] = true)
+
+	intro.get_node("Panel2/Panel2Button").pressed.emit()
+	await get_tree().process_frame
+	_check(intro.get_current_panel() == 3, "boton SIGUIENTE del panel 2 avanza a panel 3")
+
+	intro.get_node("Panel3/Panel3Button").pressed.emit()
+	await get_tree().process_frame
+	_check(got_finished[0], "boton JUGAR del panel 3 termina la cinematica")
+
+	print("RESULTADO: ", fail_count, " fallos")
+	get_tree().quit()

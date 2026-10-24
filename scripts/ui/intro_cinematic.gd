@@ -8,8 +8,12 @@ const PANEL_3 = 3
 
 var current_panel := PANEL_1
 var _finished := false
-var _timeout_timer: SceneTreeTimer = null
 var _panel_tween: Tween = null
+
+## A1: las cinemáticas NO avanzan solas -- el jugador tiene que apretar el
+## botón "SIGUIENTE" visible, o cualquiera de estas acciones equivalentes
+## (Enter/Espacio via ui_accept, o el botón de acción del juego).
+const WATCHED_ACTIONS := ["ui_accept", "interact", "attack"]
 
 @onready var panel1: Control = $Panel1
 @onready var panel2: Control = $Panel2
@@ -17,27 +21,9 @@ var _panel_tween: Tween = null
 
 func _ready() -> void:
 	_update_panel(PANEL_1)
-	_start_timeout()
 	$Panel1/Panel1Button.pressed.connect(_on_button_pressed)
 	$Panel2/Panel2Button.pressed.connect(_on_button_pressed)
 	$Panel3/Panel3Button.pressed.connect(_on_button_pressed)
-
-## Cada panel tiene su propio timeout de 10s que lo AVANZA al siguiente
-## (nunca termina toda la cinemática de golpe): si el jugador no toca nada,
-## las 3 pantallas igual se muestran una por una en orden, y recién al
-## vencer el timeout del panel 3 se llama a _finish(). Antes _auto_finish()
-## llamaba a finished.emit() directamente sin importar en qué panel
-## estuviera, así que quedarse quieto en el panel 1 saltaba directo al
-## Nivel 1 sin mostrar los paneles 2 y 3.
-func _start_timeout() -> void:
-	_cancel_timeout()
-	_timeout_timer = get_tree().create_timer(10.0)
-	_timeout_timer.timeout.connect(_auto_finish)
-
-func _auto_finish() -> void:
-	if _finished:
-		return
-	_advance()
 
 func _finish() -> void:
 	if _finished:
@@ -46,8 +32,10 @@ func _finish() -> void:
 	finished.emit()
 
 func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("ui_accept"):
-		_advance()
+	for action in WATCHED_ACTIONS:
+		if event.is_action_pressed(action):
+			_advance()
+			return
 
 func _on_button_pressed() -> void:
 	_advance()
@@ -60,7 +48,6 @@ func _advance() -> void:
 	else:
 		_finish()
 		return
-	_start_timeout()
 
 func _move_to_panel(panel: int) -> void:
 	current_panel = panel
@@ -103,12 +90,6 @@ func _update_panel(panel: int) -> void:
 	await _panel_tween.finished
 	old_panel.visible = false
 	old_panel.modulate.a = 1.0
-
-func _cancel_timeout() -> void:
-	if _timeout_timer != null:
-		if _timeout_timer.timeout.is_connected(_auto_finish):
-			_timeout_timer.timeout.disconnect(_auto_finish)
-		_timeout_timer = null
 
 func get_current_panel() -> int:
 	return current_panel
