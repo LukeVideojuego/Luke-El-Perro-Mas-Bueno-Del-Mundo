@@ -36,15 +36,52 @@ func start(luke_node: Luke) -> void:
 	luke.jumps_used = 0
 	camera.global_position = luke.global_position
 	camera.make_current()
+	_apply_camera_limits()
 
 func _physics_process(_delta: float) -> void:
 	if luke == null or _finished:
 		return
-	# Camara simple: sigue a Luke, sin limites (los niveles bonus son cortos
-	# y van siempre hacia adelante).
+	# B1: la camara sigue a Luke libremente en X (los niveles bonus van
+	# siempre hacia adelante), pero en Y queda limitada al fondo real
+	# (_apply_camera_limits) para que un salto alto o una caida no saquen
+	# a la camara de la zona que el fondo cubre y se vea gris.
 	camera.global_position = camera.global_position.lerp(luke.global_position, 0.12)
 	if wind_force != Vector2.ZERO:
 		luke.velocity += wind_force * _delta
+
+## B1: antes la camara no tenia limites -- un salto alto o una caida
+## dejaban ver mas alla de donde llega el fondo (zona gris). Mismo
+## criterio que level_base.gd._apply_camera_limits(): la camara nunca
+## puede mostrar nada fuera del rectangulo real del fondo.
+func _apply_camera_limits() -> void:
+	var background := _compute_background_rect()
+	if background.size.y <= 0.0:
+		return
+	camera.limit_top = int(background.position.y)
+	camera.limit_bottom = int(background.position.y + background.size.y)
+	camera.limit_left = int(background.position.x)
+	camera.limit_right = int(background.position.x + background.size.x)
+
+func _compute_background_rect() -> Rect2:
+	var tiles: Array[Sprite2D] = []
+	for child in get_children():
+		if child is Sprite2D and String(child.name).begins_with("Background"):
+			tiles.append(child)
+	if tiles.is_empty():
+		return Rect2()
+	var result := Rect2()
+	var first := true
+	for tile in tiles:
+		if tile.texture == null:
+			continue
+		var size: Vector2 = tile.texture.get_size() * tile.global_scale
+		var origin: Vector2 = tile.global_position
+		if tile.centered:
+			origin -= size * 0.5
+		var rect := Rect2(origin, size)
+		result = rect if first else result.merge(rect)
+		first = false
+	return result
 
 func _on_fall(body: Node2D) -> void:
 	if body is Luke and not _finished:

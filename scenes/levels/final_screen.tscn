@@ -56,22 +56,22 @@ script = ExtResource("1_level")
 level_id = "final_screen"
 mission_text = "¡Abrazá a toda la gente que puedas antes de que se acabe el tiempo!"
 
-[node name="BonusBackground1" type="Sprite2D" parent="."]
-position = Vector2(-100.0, 460.0)
+[node name="Background" type="Sprite2D" parent="."]
+position = Vector2(-100.0, 50.0)
 centered = false
 z_index = -10
 texture = ExtResource("40_bonusbg")
 scale = Vector2(2.4, 2.4)
 
-[node name="BonusBackground2" type="Sprite2D" parent="."]
-position = Vector2(1539.2, 460.0)
+[node name="BackgroundTile2" type="Sprite2D" parent="."]
+position = Vector2(1539.2, 50.0)
 centered = false
 z_index = -10
 texture = ExtResource("40_bonusbg")
 scale = Vector2(2.4, 2.4)
 
-[node name="BonusBackground3" type="Sprite2D" parent="."]
-position = Vector2(3178.4, 460.0)
+[node name="BackgroundTile3" type="Sprite2D" parent="."]
+position = Vector2(3178.4, 50.0)
 centered = false
 z_index = -10
 texture = ExtResource("40_bonusbg")
