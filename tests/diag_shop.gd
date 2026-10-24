@@ -184,9 +184,9 @@ func _check_cosmetics_render() -> void:
 	for anim in ["idle", "walk", "jump", "attack"]:
 		luke.animated_sprite.animation = anim
 		luke._update_cosmetics()
-		all_visible = all_visible and luke.hat_sprite.visible and luke.suit_sprite.visible and luke.cape_sprite.visible
+		all_visible = all_visible and luke.hat_sprite.visible and luke.cape_sprite.visible
 		positions[anim] = luke.hat_sprite.position
-	_check(all_visible, "el sombrero, el traje y la capa se dibujan en las 4 animaciones")
+	_check(all_visible, "el sombrero y la capa se dibujan en las 4 animaciones")
 	_check(positions["jump"] != positions["idle"] and positions["attack"] != positions["idle"],
 		"el sombrero acompana la cabeza en cada pose (idle=%s jump=%s attack=%s)" % [
 			positions["idle"], positions["jump"], positions["attack"]])

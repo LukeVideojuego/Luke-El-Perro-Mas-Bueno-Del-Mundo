@@ -20,7 +20,6 @@ extends CharacterBody2D
 @onready var aura_visual: Polygon2D = $AuraVisual
 @onready var hat_sprite: Sprite2D = $Hat
 @onready var cape_sprite: CapeSprite = $Cape
-@onready var suit_sprite: Sprite2D = $Suit
 @onready var socks_sprite: Sprite2D = $Socks
 @onready var collar_sprite: Sprite2D = $Collar
 
@@ -47,7 +46,6 @@ const HAT_TEXTURES := {
 	"hat_tophat": preload("res://assets/items/Shop/hat_tophat.png"),
 	"hat_crown": preload("res://assets/items/Shop/hat_crown.png"),
 }
-const SUIT_BODY := preload("res://assets/items/Shop/suit_body.png")
 ## F5: medias aurinegras. Son un calco exacto (mismo lienzo y pixeles) de
 ## cada textura real de Luke con solo el pelaje claro de las 4 patas
 ## repintado a rayas, asi que alcanza con copiar la posicion/escala/flip del
@@ -70,17 +68,10 @@ const HAT_ANCHOR := {
 	"jump": Vector2(17.2, -50.4),
 	"attack": Vector2(14.1, -27.1),
 }
-## Medido sobre el lomo real de Luke (borde superior opaco de la mitad
-## trasera del sprite en cada pose).
-const SUIT_ANCHOR := {
-	"idle": Vector2(-25.8, 12.0),
-	"walk": Vector2(-27.1, 7.0),
-	"jump": Vector2(-27.7, 14.0),
-	"attack": Vector2(-25.2, 0.0),
-}
 ## B2: ancla de la capa (2 poses fijas, no 4 por animacion -- "reposo"
 ## cubre tanto quieto como caminando, "salto" cubre tanto subir como caer).
-## Medida igual que SUIT_ANCHOR, sobre el lomo/cuello real de Luke.
+## Medida sobre el lomo/cuello real de Luke (borde superior opaco de la
+## mitad trasera del sprite en cada pose), a la altura del cuello.
 const CAPE_ANCHOR_REST := Vector2(-25.8, 12.0)
 const CAPE_ANCHOR_JUMP := Vector2(-27.7, 14.0)
 ## A7: collar dorado, premio EXCLUSIVO de juntar las 36 huellas (no se
@@ -392,11 +383,12 @@ func _update_cosmetics() -> void:
 		hat_sprite.modulate = animated_sprite.modulate
 
 	var wears_suit: bool = GameState.suit_equipped
-	suit_sprite.visible = wears_suit
 	# B2: la capa vuelve a ser 2 sprites fijos (reposo/salto, ver
 	# cape_sprite.gd) con un fade cruzado entre ambos -- "en el aire"
 	# (saltando O cayendo) usa la pose desplegada, en el piso (quieto o
-	# caminando) usa la pose apoyada.
+	# caminando) usa la pose apoyada. A1: ya no hay sprite de "traje" aparte
+	# (era una capa vieja, chica y rigida, que quedaba duplicada debajo de
+	# esta) -- la capa sola, sujeta al cuello, es todo el cosmetico "SUIT".
 	cape_sprite.visible = wears_suit
 	if wears_suit:
 		var deployed: bool = not is_on_floor()
@@ -405,12 +397,6 @@ func _update_cosmetics() -> void:
 		cape_sprite.position = Vector2(cape_anchor.x * facing_direction, cape_anchor.y + bob)
 		cape_sprite.scale = Vector2(facing_direction, 1.0)
 		cape_sprite.set_tint(animated_sprite.modulate)
-
-		var suit_anchor: Vector2 = SUIT_ANCHOR.get(anim, SUIT_ANCHOR["idle"])
-		suit_sprite.texture = SUIT_BODY
-		suit_sprite.position = Vector2(suit_anchor.x * facing_direction, suit_anchor.y + bob)
-		suit_sprite.flip_h = flipped
-		suit_sprite.modulate = animated_sprite.modulate
 
 	var wears_socks: bool = GameState.socks_equipped
 	socks_sprite.visible = wears_socks
