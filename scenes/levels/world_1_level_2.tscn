@@ -435,7 +435,7 @@ texture = ExtResource("22_bush")
 position = Vector2(850, 928)
 [node name="BushB" type="Sprite2D" parent="."]
 texture = ExtResource("22_bush")
-position = Vector2(1600, 928)
+position = Vector2(1830, 928)
 
 [node name="SpikeVisualsOne" type="Node2D" parent="."]
 [node name="SpikeA" type="Sprite2D" parent="SpikeVisualsOne"]
@@ -603,7 +603,7 @@ scale = Vector2(1.4, 1.4)
 z_index = -1
 [node name="TrashCan1" type="Sprite2D" parent="."]
 texture = ExtResource("29_can")
-position = Vector2(1500, 900)
+position = Vector2(1330, 900)
 scale = Vector2(1.3, 1.3)
 [node name="TrashCan2" type="Sprite2D" parent="."]
 texture = ExtResource("29_can")

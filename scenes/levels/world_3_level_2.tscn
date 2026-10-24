@@ -887,7 +887,7 @@ scale = Vector2(1.6874, 1.6874)
 
 [node name="ElderB" type="Sprite2D" parent="."]
 texture_filter = 1
-position = Vector2(2650, 845.99)
+position = Vector2(3100, 845.99)
 texture = ExtResource("17_npc2")
 scale = Vector2(1.7048, 1.7048)
 

@@ -924,7 +924,7 @@ position = Vector2(3924.0, 780.0)
 position = Vector2(2300, 600)
 
 [node name="EdgeBushA" type="Sprite2D" parent="."]
-position = Vector2(184, 918)
+position = Vector2(70, 918)
 scale = Vector2(1.2, 1.2)
 texture = ExtResource("19_bush")
 [node name="EdgeBushB" type="Sprite2D" parent="."]
