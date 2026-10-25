@@ -744,19 +744,16 @@ position = Vector2(3900, 920)
 [node name="SpikeA" type="Sprite2D" parent="SpikeVisualsOne"]
 position = Vector2(1000, 928)
 scale = Vector2(1.5, 1)
-modulate = Color(0.6, 1, 0.6, 1)
 texture = ExtResource("16_spikes")
 
 [node name="SpikeB" type="Sprite2D" parent="SpikeVisualsOne"]
 position = Vector2(1050, 928)
 scale = Vector2(1.5, 1)
-modulate = Color(0.6, 1, 0.6, 1)
 texture = ExtResource("16_spikes")
 
 [node name="SpikeC" type="Sprite2D" parent="SpikeVisualsOne"]
 position = Vector2(1100, 928)
 scale = Vector2(1.5, 1)
-modulate = Color(0.6, 1, 0.6, 1)
 texture = ExtResource("16_spikes")
 
 [node name="SpikeVisualsTwo" type="Node2D" parent="."]
@@ -764,19 +761,16 @@ texture = ExtResource("16_spikes")
 [node name="SpikeA" type="Sprite2D" parent="SpikeVisualsTwo"]
 position = Vector2(3850, 928)
 scale = Vector2(1.5, 1)
-modulate = Color(0.6, 1, 0.6, 1)
 texture = ExtResource("16_spikes")
 
 [node name="SpikeB" type="Sprite2D" parent="SpikeVisualsTwo"]
 position = Vector2(3900, 928)
 scale = Vector2(1.5, 1)
-modulate = Color(0.6, 1, 0.6, 1)
 texture = ExtResource("16_spikes")
 
 [node name="SpikeC" type="Sprite2D" parent="SpikeVisualsTwo"]
 position = Vector2(3950, 928)
 scale = Vector2(1.5, 1)
-modulate = Color(0.6, 1, 0.6, 1)
 texture = ExtResource("16_spikes")
 
 [node name="WormOne" parent="." instance=ExtResource("3_worm")]
@@ -906,17 +900,14 @@ speed = 90.0
 [node name="SpikeA" type="Sprite2D" parent="SpikeVisualsThree"]
 position = Vector2(5400, 928)
 scale = Vector2(1.5, 1)
-modulate = Color(0.6, 1, 0.6, 1)
 texture = ExtResource("16_spikes")
 [node name="SpikeB" type="Sprite2D" parent="SpikeVisualsThree"]
 position = Vector2(5450, 928)
 scale = Vector2(1.5, 1)
-modulate = Color(0.6, 1, 0.6, 1)
 texture = ExtResource("16_spikes")
 [node name="SpikeC" type="Sprite2D" parent="SpikeVisualsThree"]
 position = Vector2(5500, 928)
 scale = Vector2(1.5, 1)
-modulate = Color(0.6, 1, 0.6, 1)
 texture = ExtResource("16_spikes")
 [node name="SpikeHazardThree" parent="." instance=ExtResource("10_hazard")]
 position = Vector2(5450, 920)
@@ -925,17 +916,14 @@ position = Vector2(5450, 920)
 [node name="SpikeA" type="Sprite2D" parent="SpikeVisualsFour"]
 position = Vector2(8250, 928)
 scale = Vector2(1.5, 1)
-modulate = Color(0.6, 1, 0.6, 1)
 texture = ExtResource("16_spikes")
 [node name="SpikeB" type="Sprite2D" parent="SpikeVisualsFour"]
 position = Vector2(8300, 928)
 scale = Vector2(1.5, 1)
-modulate = Color(0.6, 1, 0.6, 1)
 texture = ExtResource("16_spikes")
 [node name="SpikeC" type="Sprite2D" parent="SpikeVisualsFour"]
 position = Vector2(8350, 928)
 scale = Vector2(1.5, 1)
-modulate = Color(0.6, 1, 0.6, 1)
 texture = ExtResource("16_spikes")
 [node name="SpikeHazardFour" parent="." instance=ExtResource("10_hazard")]
 position = Vector2(8300, 920)

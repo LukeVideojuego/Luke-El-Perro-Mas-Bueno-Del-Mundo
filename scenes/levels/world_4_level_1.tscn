@@ -796,19 +796,16 @@ position = Vector2(3900, 920)
 [node name="SpikeA" type="Sprite2D" parent="SpikeVisualsOne"]
 position = Vector2(1000, 928)
 scale = Vector2(1.5, 1)
-modulate = Color(0.6, 1, 0.6, 1)
 texture = ExtResource("17_spikes")
 
 [node name="SpikeB" type="Sprite2D" parent="SpikeVisualsOne"]
 position = Vector2(1050, 928)
 scale = Vector2(1.5, 1)
-modulate = Color(0.6, 1, 0.6, 1)
 texture = ExtResource("17_spikes")
 
 [node name="SpikeC" type="Sprite2D" parent="SpikeVisualsOne"]
 position = Vector2(1100, 928)
 scale = Vector2(1.5, 1)
-modulate = Color(0.6, 1, 0.6, 1)
 texture = ExtResource("17_spikes")
 
 [node name="SpikeVisualsTwo" type="Node2D" parent="."]
@@ -816,19 +813,16 @@ texture = ExtResource("17_spikes")
 [node name="SpikeA" type="Sprite2D" parent="SpikeVisualsTwo"]
 position = Vector2(3850, 928)
 scale = Vector2(1.5, 1)
-modulate = Color(0.6, 1, 0.6, 1)
 texture = ExtResource("17_spikes")
 
 [node name="SpikeB" type="Sprite2D" parent="SpikeVisualsTwo"]
 position = Vector2(3900, 928)
 scale = Vector2(1.5, 1)
-modulate = Color(0.6, 1, 0.6, 1)
 texture = ExtResource("17_spikes")
 
 [node name="SpikeC" type="Sprite2D" parent="SpikeVisualsTwo"]
 position = Vector2(3950, 928)
 scale = Vector2(1.5, 1)
-modulate = Color(0.6, 1, 0.6, 1)
 texture = ExtResource("17_spikes")
 
 [node name="BeeOne" parent="." instance=ExtResource("3_bee")]
@@ -935,17 +929,14 @@ speed = 90.0
 [node name="SpikeA" type="Sprite2D" parent="SpikeVisualsThree"]
 position = Vector2(5400, 928)
 scale = Vector2(1.5, 1)
-modulate = Color(0.6, 1, 0.6, 1)
 texture = ExtResource("17_spikes")
 [node name="SpikeB" type="Sprite2D" parent="SpikeVisualsThree"]
 position = Vector2(5450, 928)
 scale = Vector2(1.5, 1)
-modulate = Color(0.6, 1, 0.6, 1)
 texture = ExtResource("17_spikes")
 [node name="SpikeC" type="Sprite2D" parent="SpikeVisualsThree"]
 position = Vector2(5500, 928)
 scale = Vector2(1.5, 1)
-modulate = Color(0.6, 1, 0.6, 1)
 texture = ExtResource("17_spikes")
 [node name="SpikeHazardThree" parent="." instance=ExtResource("11_hazard")]
 position = Vector2(5450, 920)
@@ -1016,49 +1007,40 @@ shape = SubResource("PlatformSmallShape")
 [node name="SpikeA" type="Sprite2D" parent="PitSpikesVisual/SpikeGroup1"]
 position = Vector2(7420, 928)
 scale = Vector2(1.5, 1)
-modulate = Color(0.6, 1, 0.6, 1)
 texture = ExtResource("17_spikes")
 [node name="SpikeB" type="Sprite2D" parent="PitSpikesVisual/SpikeGroup1"]
 position = Vector2(7470, 928)
 scale = Vector2(1.5, 1)
-modulate = Color(0.6, 1, 0.6, 1)
 texture = ExtResource("17_spikes")
 [node name="SpikeC" type="Sprite2D" parent="PitSpikesVisual/SpikeGroup1"]
 position = Vector2(7520, 928)
 scale = Vector2(1.5, 1)
-modulate = Color(0.6, 1, 0.6, 1)
 texture = ExtResource("17_spikes")
 [node name="SpikeGroup2" type="Node2D" parent="PitSpikesVisual"]
 [node name="SpikeA" type="Sprite2D" parent="PitSpikesVisual/SpikeGroup2"]
 position = Vector2(7890, 928)
 scale = Vector2(1.5, 1)
-modulate = Color(0.6, 1, 0.6, 1)
 texture = ExtResource("17_spikes")
 [node name="SpikeB" type="Sprite2D" parent="PitSpikesVisual/SpikeGroup2"]
 position = Vector2(7940, 928)
 scale = Vector2(1.5, 1)
-modulate = Color(0.6, 1, 0.6, 1)
 texture = ExtResource("17_spikes")
 [node name="SpikeC" type="Sprite2D" parent="PitSpikesVisual/SpikeGroup2"]
 position = Vector2(7990, 928)
 scale = Vector2(1.5, 1)
-modulate = Color(0.6, 1, 0.6, 1)
 texture = ExtResource("17_spikes")
 [node name="SpikeGroup3" type="Node2D" parent="PitSpikesVisual"]
 [node name="SpikeA" type="Sprite2D" parent="PitSpikesVisual/SpikeGroup3"]
 position = Vector2(8360, 928)
 scale = Vector2(1.5, 1)
-modulate = Color(0.6, 1, 0.6, 1)
 texture = ExtResource("17_spikes")
 [node name="SpikeB" type="Sprite2D" parent="PitSpikesVisual/SpikeGroup3"]
 position = Vector2(8410, 928)
 scale = Vector2(1.5, 1)
-modulate = Color(0.6, 1, 0.6, 1)
 texture = ExtResource("17_spikes")
 [node name="SpikeC" type="Sprite2D" parent="PitSpikesVisual/SpikeGroup3"]
 position = Vector2(8460, 928)
 scale = Vector2(1.5, 1)
-modulate = Color(0.6, 1, 0.6, 1)
 texture = ExtResource("17_spikes")
 [node name="PitHazard470" parent="." instance=ExtResource("11_hazard")]
 position = Vector2(7470, 920)
