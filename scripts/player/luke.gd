@@ -13,6 +13,11 @@ extends CharacterBody2D
 @export var double_jump_velocity := -650.0
 @export var max_fall_speed := 1200.0
 
+## B3: pose "gordo" (veterinario malvado). Mismas 4 animaciones
+## (idle/walk/jump/attack) que las normales, con el arte de
+## referencia_visual/luke_gordo.jpg.
+@export var fat_sprite_frames: SpriteFrames
+
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var attack_area: Area2D = $AttackArea
 @onready var attack_shape: CollisionShape2D = $AttackArea/CollisionShape2D
@@ -115,9 +120,18 @@ var has_protective_aura := false
 var can_receive_damage := true
 var has_speed_boost := false
 var has_invincibility := false
+## B3: efecto de la jeringa del veterinario malvado. No quita corazón:
+## durante fat_duration Luke camina fat_speed_divisor veces mas lento (aun
+## con "run" apretado, no puede correr) y se dibuja con fat_sprite_frames.
+var is_fat := false
+@export var fat_duration := 5.0
+@export var fat_speed_divisor := 1.5
 
 var _speed_boost_token := 0
 var _invincibility_token := 0
+var _fat_token := 0
+var _normal_sprite_frames: SpriteFrames
+var _was_fat := false
 var _attack_tap_timer := 0.0
 var _attack_query := PhysicsShapeQueryParameters2D.new()
 var _hit_this_swing: Array[int] = []
@@ -143,6 +157,18 @@ func _ready() -> void:
 	# píxeles por encima del piso (lo normal en casi todos los niveles) se
 	# leía como una caída desde y=0, activando fall_damage_floor.gd de pedo.
 	_air_start_y = global_position.y
+	_normal_sprite_frames = animated_sprite.sprite_frames
+
+## B3: llamada por el proyectil de jeringa del veterinario malvado al
+## impactar. Reinicia el cronometro si ya estaba gordo (no se acumula).
+func apply_fat_effect() -> void:
+	_fat_token += 1
+	var my_token := _fat_token
+	is_fat = true
+	AudioDirector.play_event(&"damage")
+	await get_tree().create_timer(fat_duration).timeout
+	if my_token == _fat_token:
+		is_fat = false
 
 func _physics_process(delta: float) -> void:
 	var was_on_floor := is_on_floor()
@@ -167,9 +193,15 @@ func _apply_gravity(delta: float) -> void:
 
 func _handle_movement(delta: float) -> void:
 	var direction := Input.get_axis("move_left", "move_right")
-	var target_speed := run_speed if Input.is_action_pressed("run") else walk_speed
-	if has_speed_boost:
-		target_speed *= speed_boost_multiplier
+	var target_speed: float
+	if is_fat:
+		# B3: gordo no puede correr (se ignora "run") y camina mas lento
+		# que el paso normal, no solo mas lento que corriendo.
+		target_speed = walk_speed / fat_speed_divisor
+	else:
+		target_speed = run_speed if Input.is_action_pressed("run") else walk_speed
+		if has_speed_boost:
+			target_speed *= speed_boost_multiplier
 	if not is_zero_approx(direction):
 		var acceleration := ground_acceleration if is_on_floor() else air_acceleration
 		velocity.x = move_toward(velocity.x, direction * target_speed, acceleration * delta)
@@ -340,6 +372,14 @@ func respawn(respawn_position: Vector2) -> void:
 	set_physics_process(true)
 
 func _update_animation() -> void:
+	if is_fat != _was_fat:
+		_was_fat = is_fat
+		if fat_sprite_frames != null:
+			var anim := String(animated_sprite.animation)
+			var frame := animated_sprite.frame
+			animated_sprite.sprite_frames = fat_sprite_frames if is_fat else _normal_sprite_frames
+			animated_sprite.play(anim)
+			animated_sprite.frame = frame
 	animated_sprite.flip_h = facing_direction < 0
 	if has_invincibility:
 		var blink: float = sin(Time.get_ticks_msec() / 60.0)

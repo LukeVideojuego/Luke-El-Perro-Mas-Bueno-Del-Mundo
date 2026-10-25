@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3]
+[gd_scene load_steps=17 format=3]
 
 [ext_resource type="Script" path="res://scripts/player/luke.gd" id="1_script"]
 [ext_resource type="Script" path="res://scripts/player/cape_sprite.gd" id="7_cape"]
@@ -7,6 +7,10 @@
 [ext_resource type="Texture2D" path="res://assets/characters/Luke/luke_walk_b.png" id="4_walk_b"]
 [ext_resource type="Texture2D" path="res://assets/characters/Luke/luke_jump.png" id="5_jump"]
 [ext_resource type="Texture2D" path="res://assets/characters/Luke/luke_attack.png" id="6_attack"]
+[ext_resource type="Texture2D" path="res://assets/characters/Luke/luke_fat_idle.png" id="8_fat_idle"]
+[ext_resource type="Texture2D" path="res://assets/characters/Luke/luke_fat_walk.png" id="9_fat_walk"]
+[ext_resource type="Texture2D" path="res://assets/characters/Luke/luke_fat_jump.png" id="10_fat_jump"]
+[ext_resource type="Texture2D" path="res://assets/characters/Luke/luke_fat_attack.png" id="11_fat_attack"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_luke"]
 animations = [{
@@ -31,6 +35,29 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="SpriteFrames" id="SpriteFrames_luke_fat"]
+animations = [{
+"frames": [{"duration": 1.0, "texture": ExtResource("8_fat_idle")}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{"duration": 1.0, "texture": ExtResource("9_fat_walk")}, {"duration": 1.0, "texture": ExtResource("9_fat_walk")}],
+"loop": true,
+"name": &"walk",
+"speed": 8.0
+}, {
+"frames": [{"duration": 1.0, "texture": ExtResource("10_fat_jump")}],
+"loop": true,
+"name": &"jump",
+"speed": 5.0
+}, {
+"frames": [{"duration": 1.0, "texture": ExtResource("11_fat_attack")}],
+"loop": true,
+"name": &"attack",
+"speed": 5.0
+}]
+
 [sub_resource type="RectangleShape2D" id="Shape_luke"]
 size = Vector2(52, 84)
 
@@ -39,6 +66,7 @@ size = Vector2(66, 54)
 
 [node name="Luke" type="CharacterBody2D"]
 script = ExtResource("1_script")
+fat_sprite_frames = SubResource("SpriteFrames_luke_fat")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_luke")

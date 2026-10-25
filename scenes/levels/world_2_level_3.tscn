@@ -1,5 +1,6 @@
-[gd_scene load_steps=47 format=3]
+[gd_scene load_steps=48 format=3]
 [ext_resource type="PackedScene" path="res://scenes/enemies/bird.tscn" id="99_bird"]
+[ext_resource type="PackedScene" path="res://scenes/enemies/veterinario_malvado.tscn" id="vet_scene"]
 [ext_resource type="Texture2D" path="res://assets/Enemies/Birds/loro_idle.png" id="bird_idle_species"]
 [ext_resource type="Texture2D" path="res://assets/Enemies/Birds/loro_flap.png" id="bird_flap_species"]
 [ext_resource type="PackedScene" path="res://scenes/objects/ground_spike_field.tscn" id="gsf_1"]
@@ -747,6 +748,9 @@ shape = SubResource("BoundaryShape")
 
 [node name="SpawnPoint" type="Marker2D" parent="."]
 position = Vector2(180, 850)
+
+[node name="VeterinarioMalvado" parent="." instance=ExtResource("vet_scene")]
+position = Vector2(1680, 850)
 
 [node name="MissionSign" parent="." instance=ExtResource("90_kidnpc")]
 position = Vector2(220, 859.33)
