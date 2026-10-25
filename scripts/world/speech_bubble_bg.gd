@@ -15,6 +15,9 @@ extends Control
 @export var bubble_bottom_y := -185.0
 @export var corner_radius := 18
 @export var border_width := 4
+## A4: marron del pelaje del cuerpo de Luke (sampleado de luke_idle.png),
+## para que el globo deje de ser blanco generico.
+@export var bg_color := Color(0.42, 0.26, 0.18)
 
 var _label: Label
 var _was_visible := false
@@ -61,12 +64,12 @@ func _draw() -> void:
 	var left := Vector2(-tail_half_width, base_y)
 	var right := Vector2(tail_half_width, base_y)
 
-	draw_colored_polygon([left, right, tail_tip], Color.WHITE)
+	draw_colored_polygon([left, right, tail_tip], bg_color)
 	draw_line(left, tail_tip, Color.BLACK, border_width)
 	draw_line(right, tail_tip, Color.BLACK, border_width)
 
 	var style := StyleBoxFlat.new()
-	style.bg_color = Color.WHITE
+	style.bg_color = bg_color
 	style.border_color = Color.BLACK
 	style.set_border_width_all(border_width)
 	style.set_corner_radius_all(corner_radius)
