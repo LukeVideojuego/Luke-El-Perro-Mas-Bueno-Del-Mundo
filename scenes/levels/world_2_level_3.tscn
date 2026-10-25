@@ -1,5 +1,7 @@
-[gd_scene load_steps=45 format=3]
+[gd_scene load_steps=47 format=3]
 [ext_resource type="PackedScene" path="res://scenes/enemies/bird.tscn" id="99_bird"]
+[ext_resource type="Texture2D" path="res://assets/Enemies/Birds/loro_idle.png" id="bird_idle_species"]
+[ext_resource type="Texture2D" path="res://assets/Enemies/Birds/loro_flap.png" id="bird_flap_species"]
 [ext_resource type="PackedScene" path="res://scenes/objects/ground_spike_field.tscn" id="gsf_1"]
 
 [ext_resource type="Script" path="res://scripts/levels/level_base.gd" id="1_level"]
@@ -1061,62 +1063,98 @@ position = Vector2(8524.0, 780.0)
 [node name="Bird1" parent="." instance=ExtResource("99_bird")]
 position = Vector2(591, 460)
 patrol_distance = 220.0
-modulate = Color(0.95, 0.95, 0.98, 1)
+walk_texture = ExtResource("bird_flap_species")
+
+[node name="Sprite2D" parent="Bird1"]
+texture = ExtResource("bird_idle_species")
 
 [node name="Bird2" parent="." instance=ExtResource("99_bird")]
 position = Vector2(1275, 540)
 patrol_distance = 220.0
-modulate = Color(0.95, 0.95, 0.98, 1)
+walk_texture = ExtResource("bird_flap_species")
+
+[node name="Sprite2D" parent="Bird2"]
+texture = ExtResource("bird_idle_species")
 
 [node name="Bird3" parent="." instance=ExtResource("99_bird")]
 position = Vector2(1958, 460)
 patrol_distance = 220.0
-modulate = Color(0.95, 0.95, 0.98, 1)
+walk_texture = ExtResource("bird_flap_species")
+
+[node name="Sprite2D" parent="Bird3"]
+texture = ExtResource("bird_idle_species")
 
 [node name="Bird4" parent="." instance=ExtResource("99_bird")]
 position = Vector2(2641, 540)
 patrol_distance = 220.0
-modulate = Color(0.95, 0.95, 0.98, 1)
+walk_texture = ExtResource("bird_flap_species")
+
+[node name="Sprite2D" parent="Bird4"]
+texture = ExtResource("bird_idle_species")
 
 [node name="Bird5" parent="." instance=ExtResource("99_bird")]
 position = Vector2(3325, 460)
 patrol_distance = 220.0
-modulate = Color(0.95, 0.95, 0.98, 1)
+walk_texture = ExtResource("bird_flap_species")
+
+[node name="Sprite2D" parent="Bird5"]
+texture = ExtResource("bird_idle_species")
 
 [node name="Bird6" parent="." instance=ExtResource("99_bird")]
 position = Vector2(4008, 540)
 patrol_distance = 220.0
-modulate = Color(0.95, 0.95, 0.98, 1)
+walk_texture = ExtResource("bird_flap_species")
+
+[node name="Sprite2D" parent="Bird6"]
+texture = ExtResource("bird_idle_species")
 
 [node name="Bird7" parent="." instance=ExtResource("99_bird")]
 position = Vector2(4691, 460)
 patrol_distance = 220.0
-modulate = Color(0.95, 0.95, 0.98, 1)
+walk_texture = ExtResource("bird_flap_species")
+
+[node name="Sprite2D" parent="Bird7"]
+texture = ExtResource("bird_idle_species")
 
 [node name="Bird8" parent="." instance=ExtResource("99_bird")]
 position = Vector2(5375, 540)
 patrol_distance = 220.0
-modulate = Color(0.95, 0.95, 0.98, 1)
+walk_texture = ExtResource("bird_flap_species")
+
+[node name="Sprite2D" parent="Bird8"]
+texture = ExtResource("bird_idle_species")
 
 [node name="Bird9" parent="." instance=ExtResource("99_bird")]
 position = Vector2(6058, 460)
 patrol_distance = 220.0
-modulate = Color(0.95, 0.95, 0.98, 1)
+walk_texture = ExtResource("bird_flap_species")
+
+[node name="Sprite2D" parent="Bird9"]
+texture = ExtResource("bird_idle_species")
 
 [node name="Bird10" parent="." instance=ExtResource("99_bird")]
 position = Vector2(6741, 540)
 patrol_distance = 220.0
-modulate = Color(0.95, 0.95, 0.98, 1)
+walk_texture = ExtResource("bird_flap_species")
+
+[node name="Sprite2D" parent="Bird10"]
+texture = ExtResource("bird_idle_species")
 
 [node name="Bird11" parent="." instance=ExtResource("99_bird")]
 position = Vector2(7425, 460)
 patrol_distance = 220.0
-modulate = Color(0.95, 0.95, 0.98, 1)
+walk_texture = ExtResource("bird_flap_species")
+
+[node name="Sprite2D" parent="Bird11"]
+texture = ExtResource("bird_idle_species")
 
 [node name="Bird12" parent="." instance=ExtResource("99_bird")]
 position = Vector2(8108, 540)
 patrol_distance = 220.0
-modulate = Color(0.95, 0.95, 0.98, 1)
+walk_texture = ExtResource("bird_flap_species")
+
+[node name="Sprite2D" parent="Bird12"]
+texture = ExtResource("bird_idle_species")
 
 [node name="GroundSpikeField" parent="." instance=ExtResource("gsf_1")]
 

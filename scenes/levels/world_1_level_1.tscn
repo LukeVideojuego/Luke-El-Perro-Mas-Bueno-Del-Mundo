@@ -1,5 +1,7 @@
-[gd_scene load_steps=40 format=3]
+[gd_scene load_steps=42 format=3]
 [ext_resource type="PackedScene" path="res://scenes/enemies/bird.tscn" id="99_bird"]
+[ext_resource type="Texture2D" path="res://assets/Enemies/Birds/halcon_idle.png" id="bird_idle_species"]
+[ext_resource type="Texture2D" path="res://assets/Enemies/Birds/halcon_flap.png" id="bird_flap_species"]
 
 [ext_resource type="Script" path="res://scripts/levels/level_base.gd" id="1_level"]
 [ext_resource type="PackedScene" path="res://scenes/player/player.tscn" id="2_player"]
@@ -520,12 +522,18 @@ text = "¡BARRIO A SALVO!\nNivel completado"
 [node name="Bird1" parent="." instance=ExtResource("99_bird")]
 position = Vector2(1405, 460)
 patrol_distance = 220.0
-modulate = Color(0.28, 0.28, 0.32, 1)
+walk_texture = ExtResource("bird_flap_species")
+
+[node name="Sprite2D" parent="Bird1"]
+texture = ExtResource("bird_idle_species")
 
 [node name="Bird2" parent="." instance=ExtResource("99_bird")]
 position = Vector2(3715, 540)
 patrol_distance = 220.0
-modulate = Color(0.28, 0.28, 0.32, 1)
+walk_texture = ExtResource("bird_flap_species")
+
+[node name="Sprite2D" parent="Bird2"]
+texture = ExtResource("bird_idle_species")
 
 [node name="SecretPlatA" type="StaticBody2D" parent="."]
 position = Vector2(4423, 630)
