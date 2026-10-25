@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3]
+[gd_scene load_steps=10 format=3]
 
 [ext_resource type="Script" path="res://scripts/levels/bonus_level.gd" id="r1"]
 [ext_resource type="Texture2D" path="res://assets/backgrounds/Bonus/bonus_beach.png" id="r2"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" path="res://scenes/objects/moving_platform.tscn" id="r4"]
 [ext_resource type="PackedScene" path="res://scenes/objects/disappearing_bar.tscn" id="r5"]
 [ext_resource type="PackedScene" path="res://scenes/objects/bonus_reward.tscn" id="r6"]
+[ext_resource type="PackedScene" path="res://scenes/objects/extra_life.tscn" id="r7"]
 
 [sub_resource type="RectangleShape2D" id="FallShape"]
 size = Vector2(5050.0, 200.0)
@@ -140,6 +141,16 @@ position = Vector2(2125.0, 1410.0)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="FallBoundary"]
 shape = SubResource("FallShape")
+
+[node name="HeartPlatform" parent="." instance=ExtResource("r4")]
+position = Vector2(3970.0, 800.0)
+scale = Vector2(0.55, 0.55)
+travel = Vector2(210.0, 0.0)
+speed = 70.0
+
+[node name="HeartPickup" parent="." instance=ExtResource("r7")]
+position = Vector2(3970.0, 762.0)
+speed = 0.0
 
 [node name="FinishMarker" type="Area2D" parent="."]
 collision_layer = 0
