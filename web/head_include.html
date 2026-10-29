@@ -156,6 +156,22 @@ body{background-color:#12214d;}
     else { var p = el.play(); if (p && p.catch) p.catch(function () {}); }
   });
 
+  // --- Resolucion ------------------------------------------------------------
+  // Celulares con densidad 3 (iPhone) o 2.6 (muchos Android): el motor
+  // dibujaria 3 millones de pixeles por cuadro. Con un tope de 2 pixeles
+  // reales por pixel CSS dibuja menos de la mitad (la GPU de un celular de
+  // gama media lo nota mucho) y el pixel-art se ve igual de nitido.
+  try {
+    var dprDesc = Object.getOwnPropertyDescriptor(window, "devicePixelRatio") ||
+      Object.getOwnPropertyDescriptor(Window.prototype, "devicePixelRatio");
+    if (dprDesc && dprDesc.get) {
+      Object.defineProperty(window, "devicePixelRatio", {
+        configurable: true,
+        get: function () { return Math.min(2, dprDesc.get.call(window)); }
+      });
+    }
+  } catch (e) {}
+
   // --- Motor comprimido ------------------------------------------------------
   // index.wasm pesa ~40 MB; comprimido (index.wasm.gz, lo arma
   // tools/package_web.py) ~10 MB. Se baja el .gz y se descomprime aca. Si el

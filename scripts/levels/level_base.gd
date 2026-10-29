@@ -13,6 +13,18 @@ signal bonus_requested(bonus_scene_path: String, return_position: Vector2)
 ## dejarlo caer para siempre.
 const FALL_RESET_MARGIN := 450.0
 
+## Carga 3 (rendimiento en celular): los enemigos comunes que estan lejos
+## FUERA de lo que muestra la camara se pausan y salen de la simulacion de
+## fisica; al acercarse Luke se reactivan exactamente donde estaban. El
+## margen (mas alla del borde de la pantalla) es mucho mayor que cualquier
+## distancia de deteccion/ataque de un enemigo comun (<= 420), asi que cerca
+## de Luke todo pasa igual que antes. Los jefes no se tocan.
+## Antes, en los niveles grandes (40 enemigos) cada paso de fisica movia y
+## chocaba a todos, y en un celular lento eso entraba en "espiral" (Godot
+## corre mas pasos de fisica para alcanzar, que tardan mas, y asi).
+const SLEEP_MARGIN := Vector2(900.0, 650.0)
+const SLEEP_CHECK_FRAMES := 10
+
 @export var level_id := ""
 @export_multiline var mission_text := ""
 
@@ -23,6 +35,8 @@ const FALL_RESET_MARGIN := 450.0
 
 var _fall_reset_y := 0.0
 var _game_over := false
+var _sleepers: Array[EnemyBase] = []
+var _sleep_tick := 0
 
 func _ready() -> void:
 	GameState.begin_level(level_id, spawn_point.global_position)
@@ -42,6 +56,9 @@ func _ready() -> void:
 	_fall_reset_y = spawn_point.global_position.y + FALL_RESET_MARGIN
 	_apply_camera_limits()
 	_apply_shop_purchases()
+	for n in find_children("*", "CharacterBody2D", true, false):
+		if n is EnemyBase and not (n is BossBase):
+			_sleepers.append(n)
 
 func _on_dig_bonus_triggered(bonus_scene_path: String, return_position: Vector2) -> void:
 	bonus_requested.emit(bonus_scene_path, return_position)
@@ -160,8 +177,27 @@ func _collect_static_bodies(node: Node) -> Array:
 func _physics_process(_delta: float) -> void:
 	if _game_over:
 		return
+	_sleep_tick -= 1
+	if _sleep_tick <= 0:
+		_sleep_tick = SLEEP_CHECK_FRAMES
+		_update_sleeping_enemies()
 	if luke.global_position.y > _fall_reset_y:
 		_on_luke_defeated()
+
+func _update_sleeping_enemies() -> void:
+	var vp := get_viewport()
+	if vp == null or vp.get_camera_2d() == null:
+		return
+	var view := vp.get_canvas_transform().affine_inverse() * vp.get_visible_rect()
+	var awake_area := view.grow_individual(SLEEP_MARGIN.x, SLEEP_MARGIN.y, SLEEP_MARGIN.x, SLEEP_MARGIN.y)
+	for i in range(_sleepers.size() - 1, -1, -1):
+		var e := _sleepers[i]
+		if not is_instance_valid(e) or e.is_defeated:
+			_sleepers.remove_at(i)
+			continue
+		var mode := Node.PROCESS_MODE_INHERIT if awake_area.has_point(e.global_position) else Node.PROCESS_MODE_DISABLED
+		if e.process_mode != mode:
+			e.process_mode = mode
 
 ## C1: al perder la ULTIMA vida el nivel ya no se reinicia solo con 3 vidas
 ## de la nada. Se congela y se avisa a GameState; main.gd es quien muestra la

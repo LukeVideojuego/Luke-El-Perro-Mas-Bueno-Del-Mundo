@@ -43,7 +43,9 @@ func _ready() -> void:
 			var tap := TapToStart.new()
 			tap.name = "TapToStart"
 			add_child(tap)
-			tap.started.connect(func() -> void: AudioDirector.play_music("menu"))
+			tap.started.connect(func() -> void:
+				AudioDirector.play_music("menu")
+				_start_from_url_password())
 		else:
 			AudioDirector.play_music("menu")
 	else:
@@ -91,6 +93,17 @@ func _on_password_requested(level_id: String) -> void:
 	await show_shop_if_needed(level_id)
 	load_level(level_id)
 	await transition.fade_from_black()
+
+## Web: index.html?nivel=PERRO8 entra directo al nivel de esa contraseña
+## (lo mismo que escribirla en CONTRASEÑA, sin el teclado). Sirve para probar
+## un nivel en el celular y para las mediciones de tests/web_browser_test.mjs.
+func _start_from_url_password() -> void:
+	if not OS.has_feature("web"):
+		return
+	var code: Variant = JavaScriptBridge.eval("new URLSearchParams(location.search).get('nivel') || ''", true)
+	var level_id := LevelProgression.get_level_id_from_password(str(code))
+	if not level_id.is_empty():
+		_on_password_requested(level_id)
 
 ## Muestra el mapa del mundo desde el menú principal (no reemplaza al menú,
 ## solo se superpone; "VOLVER" lo cierra sin perder el menú de fondo).

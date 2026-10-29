@@ -12,6 +12,11 @@
 //              origen (igual que itch.io: allow="autoplay; fullscreen *")
 //   carga   -> 844x390 con la red limitada a ~4G (2.5 MB/s): capturas de la
 //              pantalla de carga mientras baja el juego, y cuanto tarda
+//   fps     -> mide cuadros por segundo DURANTE el juego (Luke corriendo y
+//              saltando 12 s) en un nivel elegido, como celular de gama media:
+//              LUKE_LEVEL=PERRO8 (contraseña), LUKE_DPR=3 (densidad de
+//              pantalla), LUKE_CPU=4 (CPU 4x mas lenta, como Lighthouse),
+//              LUKE_GPU=1 usa la GPU real de la PC en vez de SwiftShader
 //   iphone  -> 844x390 tactil con el user agent de Safari de iPhone: el boton
 //              de pantalla completa NO tiene que aparecer
 // En nueva/itch/celular se aprieta PANTALLA COMPLETA y se mira que el
@@ -49,7 +54,7 @@ if (phase === "itch") await new Promise((r) => itchServer.listen(8061, r));
 
 const chrome = spawn(CHROME, [
   "--headless=new", `--remote-debugging-port=${PORT}`, `--user-data-dir=${profile}`,
-  "--use-angle=swiftshader", "--enable-unsafe-swiftshader", "--ignore-gpu-blocklist",
+  ...(process.env.LUKE_GPU ? ["--use-angle=d3d11", "--enable-gpu", "--ignore-gpu-blocklist"] : ["--use-angle=swiftshader", "--enable-unsafe-swiftshader", "--ignore-gpu-blocklist"]),
   "--window-size=1280,720",
   // itch: el iframe de otro origen en el mismo proceso, para poder evaluar
   // adentro (no cambia permisos ni la regla de pantalla completa).
@@ -147,8 +152,11 @@ await send("Page.addScriptToEvaluateOnNewDocument", { source: `(() => {
   };
 })();` });
 const mobile = phase === "celular" || phase === "iphone" || phase === "carga";
+const fpsPhase = phase === "fps";
 if (phase === "iphone") await send("Emulation.setUserAgentOverride", { userAgent: "Mozilla/5.0 (iPhone; CPU iPhone OS 18_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.0 Mobile/15E148 Safari/604.1" });
-await send("Emulation.setDeviceMetricsOverride", mobile
+await send("Emulation.setDeviceMetricsOverride", fpsPhase
+  ? { width: 844, height: 390, deviceScaleFactor: Number(process.env.LUKE_DPR || 3), mobile: true, screenOrientation: { type: "landscapePrimary", angle: 90 } }
+  : mobile
   ? { width: 844, height: 390, deviceScaleFactor: 1, mobile: true, screenOrientation: { type: "landscapePrimary", angle: 90 } }
   : { width: 1280, height: 720, deviceScaleFactor: 1, mobile: false });
 if (mobile) await send("Emulation.setTouchEmulationEnabled", { enabled: true, maxTouchPoints: 5 });
@@ -157,7 +165,7 @@ if (phase === "carga") {
   await send("Network.emulateNetworkConditions", { offline: false, latency: 60, downloadThroughput: 2.5e6, uploadThroughput: 1e6 });
 }
 const t0 = Date.now();
-await send("Page.navigate", { url: phase === "itch" ? "http://127.0.0.1:8061/" : URL });
+await send("Page.navigate", { url: phase === "itch" ? "http://127.0.0.1:8061/" : fpsPhase ? URL + "?nivel=" + (process.env.LUKE_LEVEL || "PERRO8") : URL });
 if (phase === "carga") {
   for (const ms of [2500, 9000]) {
     await sleep(ms === 2500 ? 2500 : 6500);
@@ -180,7 +188,53 @@ for (let i = 0; i < 240 && !loaded; i++) {
   loaded = await evaluate("(() => { const s = document.getElementById('status'); return !!document.querySelector('canvas') && (!s || s.style.display === 'none' || s.style.visibility === 'hidden' || getComputedStyle(s).display === 'none'); })()");
 }
 console.log("CARGADO", loaded, "en", ((Date.now() - t0) / 1000).toFixed(1), "s | motor comprimido (.wasm.gz):", await evaluate("!!(window.LukeWeb && LukeWeb.wasmGz)"), "| fullscreenEnabled=", await evaluate("document.fullscreenEnabled"));
-if (phase === "carga") {
+if (fpsPhase) {
+  const key = async (type, k, code, vk) => send("Input.dispatchKeyEvent", { type, key: k, code, windowsVirtualKeyCode: vk });
+  console.log("GPU:", await evaluate("(() => { const g = document.createElement('canvas').getContext('webgl2'); const d = g.getExtension('WEBGL_debug_renderer_info'); return d ? g.getParameter(d.UNMASKED_RENDERER_WEBGL) : '?'; })()"),
+    "| canvas:", await evaluate("(() => { const c = document.getElementById('canvas'); return c.width + 'x' + c.height + ' (dpr ' + devicePixelRatio + ')'; })()"));
+  await sleep(3000);
+  await click(422, 195); // TOCA PARA EMPEZAR -> entra al nivel de ?nivel=
+  await sleep(5000);
+  for (let i = 0; i < 2; i++) { await key("keyDown", "Enter", "Enter", 13); await key("keyUp", "Enter", "Enter", 13); await sleep(2500); } // tienda: JUGAR EL NIVEL
+  await sleep(5000);
+  await send("Emulation.setCPUThrottlingRate", { rate: Number(process.env.LUKE_CPU || 4) });
+  await evaluate(`window.__fps = new Promise((res) => {
+    const d = []; let last = performance.now(); const end = last + 12000;
+    const f = (now) => { d.push(now - last); last = now; if (now < end) requestAnimationFrame(f); else {
+      d.sort((a, b) => a - b);
+      res("cuadros=" + d.length + " fps_prom=" + (d.length / 12).toFixed(1) + " ms_mediana=" + d[d.length >> 1].toFixed(1) +
+          " ms_p95=" + d[Math.floor(d.length * 0.95)].toFixed(1) + " tirones(>50ms)=" + d.filter((x) => x > 50).length);
+    } };
+    requestAnimationFrame(f);
+  }); 1`);
+  if (process.env.LUKE_PROFILE) { await send("Profiler.enable"); await send("Profiler.setSamplingInterval", { interval: 500 }); await send("Profiler.start"); }
+  await key("keyDown", "Shift", "ShiftLeft", 16);
+  await key("keyDown", "d", "KeyD", 68);
+  for (let i = 0; i < 14; i++) {
+    await key("keyDown", " ", "Space", 32); await sleep(250); await key("keyUp", " ", "Space", 32); await sleep(600);
+  }
+  await key("keyUp", "d", "KeyD", 68);
+  await key("keyUp", "Shift", "ShiftLeft", 16);
+  if (process.env.LUKE_PROFILE) {
+    // Tiempo propio por funcion (las del motor salen como wasm-function[N]).
+    const prof = (await send("Profiler.stop")).result.profile;
+    const self = new Map();
+    const dt = (prof.endTime - prof.startTime) / prof.samples.length;
+    const byId = new Map(prof.nodes.map((n) => [n.id, n]));
+    for (const id of prof.samples) {
+      const n = byId.get(id); const cf = n.callFrame;
+      const k = (cf.functionName || "(anon)") + " " + (cf.url || "").split("/").pop() + ":" + cf.lineNumber;
+      self.set(k, (self.get(k) || 0) + dt);
+    }
+    const total = [...self.values()].reduce((a, b) => a + b, 0);
+    console.log("PERFIL (tiempo propio):");
+    for (const [k, v] of [...self.entries()].sort((a, b) => b[1] - a[1]).slice(0, 25)) console.log("  " + (100 * v / total).toFixed(1).padStart(5) + "%  " + k);
+  }
+  console.log("FPS", process.env.LUKE_LEVEL || "PERRO8", "dpr", process.env.LUKE_DPR || 3, "cpu x" + (process.env.LUKE_CPU || 4), ":", await evaluate("window.__fps"));
+  await send("Emulation.setCPUThrottlingRate", { rate: 1 });
+  await shot("fps_" + (process.env.LUKE_LEVEL || "PERRO8"));
+}
+if (phase === "carga" || fpsPhase) {
   await send("Browser.close").catch(() => {});
   await sleep(1000);
   chrome.kill();
