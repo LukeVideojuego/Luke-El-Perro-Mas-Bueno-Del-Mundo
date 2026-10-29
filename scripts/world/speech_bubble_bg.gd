@@ -8,7 +8,7 @@ extends Control
 ## globo siempre se ajusta al largo de cada frase en los 12 niveles.
 
 @export var label_path: NodePath
-@export var max_text_width := 560.0
+@export var max_text_width := 640.0
 @export var padding := Vector2(28, 20)
 @export var tail_tip := Vector2(0.0, -95.0)
 @export var tail_half_width := 16.0
