@@ -12,11 +12,22 @@ extends CanvasLayer
 ## chicos, ATACAR cava en el pozo del bonus, etc. TouchScreenButton sigue cada
 ## dedo por separado, asi que se pueden apretar dos a la vez (correr + saltar).
 ##
-## Correr: mantener apretada una flecha mas de RUN_HOLD_TIME activa "run"
-## hasta soltarla (la flecha se tiñe de naranja para que se note).
+## Correr: mantener apretado el boton CORRER (al lado de las flechas), o
+## mantener una flecha mas de RUN_HOLD_TIME, activa "run" hasta soltarlo
+## (las flechas se tiñen de naranja para que se note).
+##
+## Punto 4: las flechas van ARRIBA de donde camina Luke (24%-46% del alto),
+## pegadas al borde izquierdo: con la camara de celular (ScreenFit) Luke
+## parado queda alrededor del 47%-64% del alto y el piso mas abajo, asi que
+## ni Luke ni el piso quedan tapados, ni siquiera al empezar el nivel (Luke
+## pegado a la izquierda). Arriba de las flechas queda el HUD.
 
 const RUN_HOLD_TIME := 0.5
 const MARGIN := 40.0
+## Flechas: separacion del borde izquierdo y altura (fraccion del alto
+## visible) del borde de arriba.
+const ARROW_EDGE := 16.0
+const ARROW_TOP := 0.24
 const IDLE_ALPHA := 0.7
 ## Si Luke (u otra cosa importante) queda detras de un boton, ese boton se
 ## vuelve casi transparente para no taparlo.
@@ -30,6 +41,7 @@ var _right: TouchScreenButton
 var _jump: TouchScreenButton
 var _attack: TouchScreenButton
 var _pause: TouchScreenButton
+var _run: TouchScreenButton
 var _hold_time := 0.0
 var _running := false
 
@@ -43,6 +55,9 @@ func _ready() -> void:
 	_jump = _make_button("jump", "jump", 300.0)
 	_attack = _make_button("attack", "attack", 250.0)
 	_pause = _make_button("pause", "pause", 140.0)
+	# Sin accion propia: _process junta CORRER y "flecha mantenida" en una
+	# sola accion "run" (si no, soltar uno cortaria al otro).
+	_run = _make_button("run", "", 170.0)
 	# Deslizar el dedo de una flecha a la otra cambia de direccion sin
 	# tener que levantarlo.
 	_left.passby_press = true
@@ -70,8 +85,10 @@ func _make_button(tex_name: String, action: String, diameter: float) -> TouchScr
 ## escalado "expand" puede ser mas ancha o mas alta que 1920x1080).
 func _layout() -> void:
 	var s := get_viewport().get_visible_rect().size
-	_place(_left, Vector2(MARGIN, s.y - MARGIN - 240.0))
-	_place(_right, Vector2(MARGIN + 240.0 + 40.0, s.y - MARGIN - 240.0))
+	var arrow_y := s.y * ARROW_TOP
+	_place(_left, Vector2(ARROW_EDGE, arrow_y))
+	_place(_right, Vector2(ARROW_EDGE + 240.0 + 20.0, arrow_y))
+	_place(_run, Vector2(ARROW_EDGE + 2.0 * (240.0 + 20.0), arrow_y + (240.0 - 170.0) * 0.5))
 	_place(_jump, Vector2(s.x - MARGIN - 300.0, s.y - MARGIN - 300.0 - 40.0))
 	_place(_attack, Vector2(s.x - MARGIN - 300.0 - 40.0 - 250.0, s.y - MARGIN - 250.0))
 	_place(_pause, Vector2(s.x - MARGIN - 140.0, MARGIN))
@@ -93,14 +110,16 @@ func _process(delta: float) -> void:
 		return
 	if _left.is_pressed() or _right.is_pressed():
 		_hold_time += delta
-		if not _running and _hold_time >= RUN_HOLD_TIME:
-			_running = true
-			Input.action_press("run")
 	else:
 		_hold_time = 0.0
+	var want_run := _run.is_pressed() or _hold_time >= RUN_HOLD_TIME
+	if want_run and not _running:
+		_running = true
+		Input.action_press("run")
+	elif not want_run:
 		_stop_running()
 	var luke_pos: Variant = _luke_canvas_position()
-	for b in [_left, _right, _jump, _attack, _pause]:
+	for b in [_left, _right, _jump, _attack, _pause, _run]:
 		var tint: Color = RUN_TINT if _running and (b == _left or b == _right) else Color.WHITE
 		tint.a = BEHIND_ALPHA if luke_pos != null and _covers(b, luke_pos) else IDLE_ALPHA
 		b.modulate = tint
@@ -129,7 +148,7 @@ func _stop_running() -> void:
 		Input.action_release("run")
 
 func _set_shown(value: bool) -> void:
-	for b in [_left, _right, _jump, _attack, _pause]:
+	for b in [_left, _right, _jump, _attack, _pause, _run]:
 		b.visible = value
 	if not value:
 		_hold_time = 0.0

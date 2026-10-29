@@ -22,6 +22,11 @@ var shot_taken_shop := false
 func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	get_window().size = Vector2i(1280, 720)
+	# Opcional: -- <ancho> <alto> (p.ej. 844 390, celular apaisado).
+	var args := OS.get_cmdline_user_args()
+	if args.size() >= 2 and args[0].is_valid_int():
+		get_window().size = Vector2i(int(args[0]), int(args[1]))
+		shot_prefix += "_%sx%s" % [args[0], args[1]]
 	TouchControls.touch_mode = true
 	main = MAIN_SCENE.instantiate()
 	add_child(main)
@@ -143,6 +148,28 @@ func _run() -> void:
 	await _frames(3)
 	_check(not Input.is_action_pressed("run") and not Input.is_action_pressed("move_right"), "al soltar se deja de correr")
 	await _frames(60)
+
+	# --- Punto 4: boton CORRER (corre al instante, sin esperar el 0.5s) ---
+	# De vuelta a la zona plana (la prueba anterior lo dejo mas adelante,
+	# cerca de un peligro del nivel).
+	luke.global_position = Vector2(900, luke.global_position.y - 40)
+	luke.velocity = Vector2.ZERO
+	await _frames(40)
+	var run_btn := _center_of_button(_btn("RunButton"))
+	_touch(1, run_btn, true)
+	await _frames(2)
+	_touch(0, right, true)
+	await _frames(12)
+	_check(Input.is_action_pressed("run") and luke.velocity.x > luke.walk_speed + 20.0, "flecha + CORRER corre enseguida (vx=%.0f)" % luke.velocity.x)
+	_touch(1, run_btn, false)
+	await _frames(3)
+	_check(not Input.is_action_pressed("run"), "al soltar CORRER (flecha recien apretada) deja de correr")
+	_touch(0, right, false)
+	await _frames(3)
+	_check(not Input.is_action_pressed("move_right"), "al soltar la flecha se frena")
+	luke.global_position = Vector2(1250, luke.global_position.y - 40)
+	luke.velocity = Vector2.ZERO
+	await _frames(30)
 
 	# --- DOBLE TOQUE EN ATACAR = huesito ---
 	GameState.bone_throw_unlocked = true
