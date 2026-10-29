@@ -31,7 +31,7 @@ import { createServer } from "node:http";
 const [phase, shotDir, profile] = process.argv.slice(2);
 const CHROME = "C:/Program Files/Google/Chrome/Application/chrome.exe";
 const PORT = 9333;
-const URL = "http://localhost:8060/index.html";
+const URL = process.env.LUKE_URL || "http://localhost:8060/index.html";
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 mkdirSync(shotDir, { recursive: true });
 
@@ -179,7 +179,7 @@ for (let i = 0; i < 240 && !loaded; i++) {
   await sleep(500);
   loaded = await evaluate("(() => { const s = document.getElementById('status'); return !!document.querySelector('canvas') && (!s || s.style.display === 'none' || s.style.visibility === 'hidden' || getComputedStyle(s).display === 'none'); })()");
 }
-console.log("CARGADO", loaded, "en", ((Date.now() - t0) / 1000).toFixed(1), "s | fullscreenEnabled=", await evaluate("document.fullscreenEnabled"));
+console.log("CARGADO", loaded, "en", ((Date.now() - t0) / 1000).toFixed(1), "s | motor comprimido (.wasm.gz):", await evaluate("!!(window.LukeWeb && LukeWeb.wasmGz)"), "| fullscreenEnabled=", await evaluate("document.fullscreenEnabled"));
 if (phase === "carga") {
   await send("Browser.close").catch(() => {});
   await sleep(1000);
