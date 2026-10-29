@@ -151,18 +151,30 @@ func _enlarge_for_touch() -> void:
 
 ## Punto 2: boton de pantalla completa (arriba a la derecha). En el navegador
 ## solo aparece si la pagina puede pasar a pantalla completa: en iPhone
-## Safari no existe esa funcion, asi que ahi directamente no se muestra.
+## Safari no existe esa funcion (limitacion de Apple), y si el juego ya esta
+## instalado como app (PWA) ya ocupa toda la pantalla: ahi no se muestra.
+##
+## Punto 3 (web): el navegador solo deja entrar a pantalla completa DENTRO
+## del toque/clic del jugador, y Godot procesa los toques un instante
+## despues (fuera del gesto): por eso antes no andaba, sobre todo dentro del
+## iframe de itch.io y en Android. Ahora este boton solo le avisa a la
+## pagina DONDE esta (LukeWeb.fsRect) y la pagina hace el pedido en el mismo
+## pointerup (web/head_include.html).
 var fullscreen_button: Button
+var _web: JavaScriptObject = null
+var _fs_rect_sent := ""
+var _fs_poll := 0.0
 
 func _fullscreen_available() -> bool:
 	if not OS.has_feature("web"):
 		return true
-	var ok: Variant = JavaScriptBridge.eval(
-			"!!(document.fullscreenEnabled || document.webkitFullscreenEnabled)", true)
+	_web = JavaScriptBridge.get_interface("LukeWeb")
 	# El puente JS devuelve los booleanos como entero (1/0).
-	return ok != null and bool(ok)
+	return _web != null and bool(_web.fsSupported())
 
 func _is_fullscreen() -> bool:
+	if _web != null:
+		return bool(_web.isFullscreen())
 	var mode := DisplayServer.window_get_mode()
 	return mode == DisplayServer.WINDOW_MODE_FULLSCREEN 			or mode == DisplayServer.WINDOW_MODE_EXCLUSIVE_FULLSCREEN
 
@@ -190,12 +202,33 @@ func _update_fullscreen_text() -> void:
 	fullscreen_button.text = "SALIR DE PANTALLA COMPLETA" if _is_fullscreen() else "PANTALLA COMPLETA"
 
 func _on_fullscreen_pressed() -> void:
+	if _web != null:
+		# Ya lo hizo la pagina en el mismo toque; aca solo el texto.
+		return
 	if _is_fullscreen():
 		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
 	else:
 		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
-		if OS.has_feature("web"):
-			# En Android, ya en pantalla completa, se puede trabar en
-			# horizontal. Si el navegador no lo permite no pasa nada.
-			JavaScriptBridge.eval("try { screen.orientation.lock('landscape').catch(function(){}); } catch (e) {}", true)
 	_update_fullscreen_text.call_deferred()
+
+func _process(delta: float) -> void:
+	if _web == null or fullscreen_button == null:
+		return
+	# Donde esta el boton, en fraccion del canvas (null si no se ve: otro
+	# panel abierto, o la pantalla de TOCA PARA EMPEZAR encima).
+	var rect := ""
+	if fullscreen_button.is_visible_in_tree() and get_parent().get_node_or_null("TapToStart") == null:
+		var win := Vector2(get_window().size)
+		var r := get_tree().root.get_final_transform() * fullscreen_button.get_global_rect()
+		rect = "[%.4f,%.4f,%.4f,%.4f]" % [r.position.x / win.x, r.position.y / win.y, r.size.x / win.x, r.size.y / win.y]
+	if rect != _fs_rect_sent:
+		_fs_rect_sent = rect
+		JavaScriptBridge.eval("LukeWeb.fsRect = %s;" % (rect if rect != "" else "null"), true)
+	_fs_poll -= delta
+	if _fs_poll <= 0.0:
+		_fs_poll = 0.25
+		_update_fullscreen_text()
+
+func _exit_tree() -> void:
+	if _web != null:
+		JavaScriptBridge.eval("LukeWeb.fsRect = null;", true)
