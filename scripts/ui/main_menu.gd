@@ -39,6 +39,9 @@ func _ready() -> void:
 	normal_button.pressed.connect(func() -> void: _on_difficulty_chosen("normal"))
 	easy_button.pressed.connect(func() -> void: _on_difficulty_chosen("facil"))
 	difficulty_back.pressed.connect(_on_difficulty_back)
+	if TouchControls.touch_mode:
+		$MenuPanel/Center/Controls.text = "FLECHAS: MOVER (MANTENÉ PARA CORRER)
+SALTAR · ATACAR (DOBLE TOQUE: HUESITO) · PAUSA ARRIBA"
 	new_game_button.grab_focus()
 
 ## A4: "COMENZAR JUEGO" ya no arranca directo -- primero pregunta dificultad,
@@ -66,7 +69,10 @@ func _on_password_menu_pressed() -> void:
 	password_panel.visible = true
 	password_error.visible = false
 	password_input.text = ""
-	password_input.grab_focus()
+	if TouchControls.touch_mode:
+		_show_touch_keyboard()
+	else:
+		password_input.grab_focus()
 
 func _on_password_submit() -> void:
 	var level_id := LevelProgression.get_level_id_from_password(password_input.text)
@@ -79,3 +85,54 @@ func _on_password_back() -> void:
 	password_panel.visible = false
 	menu_panel.visible = true
 	new_game_button.grab_focus()
+
+## Punto 1: en celular/tablet, teclado propio en pantalla para la contraseña
+## (el teclado nativo del navegador no aparece de forma confiable sobre el
+## juego, sobre todo en iPhone). El LineEdit queda de solo-mostrar.
+const KEYBOARD_ROWS := ["1234567890", "QWERTYUIOP", "ASDFGHJKL", "ZXCVBNM<"]
+
+var _touch_keyboard: VBoxContainer
+
+func _show_touch_keyboard() -> void:
+	password_input.virtual_keyboard_enabled = false
+	password_input.editable = false
+	if _touch_keyboard != null:
+		return
+	# El bloque del titulo/campo/botones sube para dejar lugar abajo.
+	var center: Control = $PasswordPanel/Center
+	center.offset_top -= 250.0
+	center.offset_bottom -= 250.0
+	var shade := ColorRect.new()
+	shade.color = Color(0.03, 0.05, 0.1, 0.85)
+	shade.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	password_panel.add_child(shade)
+	password_panel.move_child(shade, 0)
+	shade.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	_touch_keyboard = VBoxContainer.new()
+	_touch_keyboard.name = "TouchKeyboard"
+	_touch_keyboard.add_theme_constant_override("separation", 10)
+	password_panel.add_child(_touch_keyboard)
+	_touch_keyboard.set_anchors_and_offsets_preset(Control.PRESET_CENTER_BOTTOM)
+	for row in KEYBOARD_ROWS:
+		var line := HBoxContainer.new()
+		line.alignment = BoxContainer.ALIGNMENT_CENTER
+		line.add_theme_constant_override("separation", 10)
+		_touch_keyboard.add_child(line)
+		for key in row:
+			var b := Button.new()
+			b.text = "BORRAR" if key == "<" else key
+			b.custom_minimum_size = Vector2(200 if key == "<" else 96, 92)
+			b.focus_mode = Control.FOCUS_NONE
+			b.add_theme_font_size_override("font_size", 38)
+			b.pressed.connect(_on_touch_key.bind(key))
+			line.add_child(b)
+	_touch_keyboard.grow_horizontal = Control.GROW_DIRECTION_BOTH
+	_touch_keyboard.grow_vertical = Control.GROW_DIRECTION_BEGIN
+	_touch_keyboard.offset_bottom = -30.0
+
+func _on_touch_key(key: String) -> void:
+	password_error.visible = false
+	if key == "<":
+		password_input.text = password_input.text.substr(0, maxi(0, password_input.text.length() - 1))
+	elif password_input.text.length() < password_input.max_length:
+		password_input.text += key

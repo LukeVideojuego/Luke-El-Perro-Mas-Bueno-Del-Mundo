@@ -20,6 +20,8 @@ var active_bonus: Node = null
 var _bonus_return_position := Vector2.ZERO
 
 func _ready() -> void:
+	# Punto 1: TouchControls lo busca para saber si hay partida en curso.
+	add_to_group("main_game")
 	hud.visible = false
 	pause_screen.resume_requested.connect(func() -> void: set_paused(false))
 	pause_screen.exit_requested.connect(_on_pause_exit_requested)
