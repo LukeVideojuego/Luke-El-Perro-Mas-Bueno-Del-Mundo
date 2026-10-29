@@ -8,6 +8,12 @@
 //   cargar  -> NUEVO navegador con el mismo perfil (como cerrar la pestaña y
 //              volver): CARGAR PARTIDA tiene que estar activo y cargar el nivel
 //   celular -> 844x390 tactil: menu + empezar a jugar con toques
+// Todas arrancan por "TOCA PARA EMPEZAR" y miden el audio que REALMENTE
+// sale (un AnalyserNode metido antes de la salida de cada AudioContext):
+// antes del toque tiene que estar en silencio/suspendido, despues tiene que
+// sonar la musica, y en el nivel un salto tiene que sonar (efecto).
+// Chrome corre SIN --autoplay-policy=no-user-gesture-required: bloquea el
+// audio hasta el primer gesto, como en un navegador de verdad.
 // El servidor local tiene que estar sirviendo export_web/ en el puerto 8060.
 
 import { spawn } from "node:child_process";
@@ -23,7 +29,7 @@ mkdirSync(shotDir, { recursive: true });
 const chrome = spawn(CHROME, [
   "--headless=new", `--remote-debugging-port=${PORT}`, `--user-data-dir=${profile}`,
   "--use-angle=swiftshader", "--enable-unsafe-swiftshader", "--ignore-gpu-blocklist",
-  "--window-size=1280,720", "--autoplay-policy=no-user-gesture-required",
+  "--window-size=1280,720",
   "--no-first-run", "--no-default-browser-check", "about:blank",
 ], { stdio: "ignore" });
 
@@ -78,6 +84,35 @@ const tap = async (x, y) => {
 
 await send("Page.enable");
 await send("Runtime.enable");
+await send("Page.addScriptToEvaluateOnNewDocument", { source: `(() => {
+  const list = window.__peaks = [];
+  const connect = AudioNode.prototype.connect;
+  AudioNode.prototype.connect = function (dest, ...rest) {
+    if (dest instanceof AudioDestinationNode) {
+      const ctx = this.context;
+      if (!ctx.__an) {
+        ctx.__an = ctx.createAnalyser();
+        ctx.__an.fftSize = 2048;
+        connect.call(ctx.__an, dest);
+        list.push({ ctx, an: ctx.__an, peak: 0 });
+      }
+      return connect.call(this, ctx.__an, ...rest);
+    }
+    return connect.call(this, dest, ...rest);
+  };
+  const buf = new Float32Array(2048);
+  setInterval(() => {
+    for (const p of list) {
+      p.an.getFloatTimeDomainData(buf);
+      for (const v of buf) p.peak = Math.max(p.peak, Math.abs(v));
+    }
+  }, 40);
+  window.__readPeaks = () => {
+    const r = list.map((p, i) => i + ":" + p.ctx.state + ":pico=" + p.peak.toFixed(4)).join("  ");
+    for (const p of list) p.peak = 0;
+    return r || "(ningun AudioContext conectado a la salida)";
+  };
+})();` });
 const mobile = phase === "celular";
 await send("Emulation.setDeviceMetricsOverride", mobile
   ? { width: 844, height: 390, deviceScaleFactor: 1, mobile: true, screenOrientation: { type: "landscapePrimary", angle: 90 } }
@@ -94,6 +129,18 @@ for (let i = 0; i < 240 && !loaded; i++) {
 console.log("CARGADO", loaded, "fullscreenEnabled=", await evaluate("document.fullscreenEnabled"));
 await sleep(6000);
 const press = mobile ? tap : click;
+const audio = async (label) => {
+  console.log("AUDIO", label, await evaluate("window.__readPeaks && window.__readPeaks()"),
+    "| musica:", await evaluate("window.LukeWeb && LukeWeb.musicState()"));
+};
+
+// "TOCA PARA EMPEZAR": nada suena hasta el primer toque/clic.
+await shot(phase + "_toca_para_empezar");
+await sleep(1500);
+await audio("antes del toque");
+await press(mobile ? 422 : 640, mobile ? 195 : 360);
+await sleep(4000);
+await audio("despues del toque (menu)");
 
 if (phase === "nueva" || phase === "celular") {
   const c = mobile
@@ -119,6 +166,19 @@ if (phase === "nueva" || phase === "celular") {
   }
   await sleep(6000);
   await shot(phase + "_nivel");
+  await audio("nivel, quieto (musica del nivel)");
+  await sleep(1000);
+  await evaluate("window.__readPeaks()");
+  if (mobile) {
+    await tap(775, 307);
+  } else {
+    for (const type of ["keyDown", "keyUp"]) {
+      await send("Input.dispatchKeyEvent", { type, key: " ", code: "Space", windowsVirtualKeyCode: 32 });
+      await sleep(150);
+    }
+  }
+  await sleep(300);
+  await audio("nivel, justo despues de SALTAR (efecto)");
   console.log("INDEXEDDB", JSON.stringify(await evaluate("indexedDB.databases().then(d => d.map(x => x.name))")));
 } else if (phase === "cargar") {
   await shot("cargar_menu");

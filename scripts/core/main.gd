@@ -37,7 +37,15 @@ func _ready() -> void:
 		menu.password_requested.connect(_on_password_requested)
 		menu.map_requested.connect(_on_map_requested)
 		menu.album_requested.connect(_on_album_requested)
-		AudioDirector.play_music("menu")
+		if TapToStart.needed():
+			# Punto 1: en el navegador el audio arranca recien con el
+			# primer toque; la musica del menu espera a ese toque.
+			var tap := TapToStart.new()
+			tap.name = "TapToStart"
+			add_child(tap)
+			tap.started.connect(func() -> void: AudioDirector.play_music("menu"))
+		else:
+			AudioDirector.play_music("menu")
 	else:
 		start_game()
 

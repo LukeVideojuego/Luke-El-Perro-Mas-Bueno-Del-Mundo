@@ -95,12 +95,21 @@ var _music_players: Array[AudioStreamPlayer] = []
 var _active_music_index := 0
 var _current_music := ""
 var _music_tween: Tween
+## Punto 1 (web): la musica la toca el navegador con su <audio> nativo
+## (LukeWeb en web/head_include.html). En web Godot reproduce todo en modo
+## "Sample" (el recomendado sin hilos): eso decodifica cada pista ENTERA en
+## memoria (5 min de MP3 = ~100 MB), demasiado para un iPhone, y ademas
+## traba el juego al empezar cada pista. Los efectos (WAV cortitos) siguen
+## por Godot en modo Sample, que es justo para lo que esta pensado.
+var _web: JavaScriptObject = null
 
 @export var sfx_volume_db := -6.0
 @export var music_volume_db := -16.0
 
 func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
+	if OS.has_feature("web"):
+		_web = JavaScriptBridge.get_interface("LukeWeb")
 	for key in SFX_FILES:
 		_sfx_streams[key] = load(SFX_DIR + SFX_FILES[key])
 	for key in MUSIC_FILES:
@@ -147,6 +156,9 @@ func play_music(track_key: String) -> void:
 	if not _music_streams.has(track_key):
 		return
 	_current_music = track_key
+	if _web != null:
+		_play_music_web(track_key)
+		return
 	var old_player: AudioStreamPlayer = _music_players[_active_music_index]
 	var new_index := 1 - _active_music_index
 	var new_player: AudioStreamPlayer = _music_players[new_index]
@@ -168,6 +180,8 @@ func play_music(track_key: String) -> void:
 
 func stop_music() -> void:
 	_current_music = ""
+	if _web != null:
+		_web.musicStop()
 	if _music_tween != null and _music_tween.is_valid():
 		_music_tween.kill()
 	for mp in _music_players:
@@ -176,3 +190,12 @@ func stop_music() -> void:
 func _on_music_finished(player: AudioStreamPlayer) -> void:
 	if player == _music_players[_active_music_index]:
 		player.play()
+
+func _play_music_web(track_key: String) -> void:
+	# El MP3 original va tal cual (AudioStreamMP3.data) a un Blob del
+	# navegador, una sola vez por archivo.
+	var file: String = MUSIC_FILES[track_key]
+	if not bool(_web.musicHas(file)):
+		var stream := _music_streams[track_key] as AudioStreamMP3
+		_web.musicLoad(file, Marshalls.raw_to_base64(stream.data))
+	_web.musicPlay(file, db_to_linear(music_volume_db), MUSIC_CROSSFADE_SEC)

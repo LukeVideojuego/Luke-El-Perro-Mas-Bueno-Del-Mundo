@@ -1,0 +1,192 @@
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Luke">
+<style>html,body,#canvas{touch-action:none;overscroll-behavior:none;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none;}</style>
+<script>
+// Ayudas de la pagina web del juego (se usan desde GDScript con
+// JavaScriptBridge, ver audio_director.gd, main_menu.gd y tap_to_start.gd).
+// Este archivo es la fuente de html/head_include del preset "Web":
+// despues de editarlo correr  python tools/update_head_include.py
+(function () {
+  "use strict";
+  var L = window.LukeWeb = { ctxs: [], unlocked: false, gestures: 0 };
+
+  // --- Audio -----------------------------------------------------------
+  // iPhone: sin esto la llave de silencio del costado apaga TODO el audio
+  // web (Safari 17+). En los demas navegadores no existe y no pasa nada.
+  try { if (navigator.audioSession) navigator.audioSession.type = "playback"; } catch (e) {}
+
+  // Se anota cada AudioContext que cree el motor para poder despertarlo
+  // DENTRO del toque del jugador (iPhone solo deja hacerlo ahi; el motor lo
+  // intenta mas tarde, en su propio ciclo, y Safari lo ignora).
+  ["AudioContext", "webkitAudioContext"].forEach(function (name) {
+    var Base = window[name];
+    if (!Base) return;
+    var Tracked = function (opts) {
+      var c = opts === undefined ? new Base() : new Base(opts);
+      L.ctxs.push(c);
+      return c;
+    };
+    Tracked.prototype = Base.prototype;
+    window[name] = Tracked;
+  });
+
+  var SILENT = "data:audio/wav;base64,UklGRqQAAABXQVZFZm10IBAAAAABAAEAQB8AAIA+AAACABAAZGF0YYAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==";
+
+  // Musica: <audio> nativo del navegador (decodifica el MP3 de a poco, como
+  // un reproductor) pasando por un GainNode para el volumen y el fundido
+  // (en iPhone audio.volume no hace nada). Dos reproductores para el
+  // fundido cruzado entre pistas.
+  var M = { ctx: null, els: [], gains: [], active: 0, urls: {}, cur: "", vol: 0.16, pending: null };
+
+  function setupMusic() {
+    if (M.ctx) return;
+    var AC = window.AudioContext || window.webkitAudioContext;
+    if (!AC) return;
+    M.ctx = new AC();
+    for (var i = 0; i < 2; i++) {
+      var el = new Audio();
+      el.loop = true;
+      el.preload = "auto";
+      el.setAttribute("playsinline", "");
+      var g = M.ctx.createGain();
+      g.gain.value = 0;
+      M.ctx.createMediaElementSource(el).connect(g);
+      g.connect(M.ctx.destination);
+      // Darle "permiso" al reproductor dentro del toque: despues ya puede
+      // arrancar pistas solo, sin otro toque (regla de Safari).
+      el.src = SILENT;
+      (function (e) {
+        var p = e.play();
+        if (p && p.then) p.then(function () { if (e.src === SILENT) e.pause(); }).catch(function () {});
+      })(el);
+      M.els.push(el);
+      M.gains.push(g);
+    }
+    if (M.pending) {
+      var p = M.pending;
+      M.pending = null;
+      L.musicPlay(p[0], p[1], p[2]);
+    }
+  }
+
+  L.unlock = function () {
+    L.gestures++;
+    for (var i = 0; i < L.ctxs.length; i++) {
+      var c = L.ctxs[i];
+      try {
+        if (c.state !== "running" && c.state !== "closed") c.resume();
+        if (!L.unlocked) {
+          // Un sonido mudo de 1 muestra: el "desbloqueo" clasico de iOS.
+          var s = c.createBufferSource();
+          s.buffer = c.createBuffer(1, 1, 22050);
+          s.connect(c.destination);
+          s.start(0);
+        }
+      } catch (e) {}
+    }
+    setupMusic();
+    L.unlocked = true;
+  };
+  // Se deja escuchando siempre: iOS puede volver a dormir el audio (una
+  // llamada, otra app) y el siguiente toque lo despierta.
+  ["pointerdown", "touchstart", "touchend", "mousedown", "keydown", "click"].forEach(function (t) {
+    window.addEventListener(t, L.unlock, true);
+  });
+
+  L.musicHas = function (key) { return !!M.urls[key]; };
+  L.musicLoad = function (key, b64) {
+    if (M.urls[key]) return;
+    var bin = atob(b64);
+    var bytes = new Uint8Array(bin.length);
+    for (var i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i);
+    M.urls[key] = URL.createObjectURL(new Blob([bytes], { type: "audio/mpeg" }));
+  };
+  L.musicPlay = function (key, vol, fade) {
+    M.vol = vol;
+    if (!M.ctx) { M.pending = [key, vol, fade]; return; }
+    if (!M.urls[key]) return;
+    var t = M.ctx.currentTime;
+    var old = M.active;
+    var nw = 1 - old;
+    M.active = nw;
+    M.cur = key;
+    var oe = M.els[old], og = M.gains[old];
+    og.gain.cancelScheduledValues(t);
+    og.gain.setValueAtTime(og.gain.value, t);
+    og.gain.linearRampToValueAtTime(0, t + fade);
+    setTimeout(function () { if (M.active !== old) oe.pause(); }, fade * 1000 + 50);
+    var ne = M.els[nw], ng = M.gains[nw];
+    ne.src = M.urls[key];
+    ne.currentTime = 0;
+    ng.gain.cancelScheduledValues(t);
+    ng.gain.setValueAtTime(0, t);
+    ng.gain.linearRampToValueAtTime(vol, t + fade);
+    var p = ne.play();
+    if (p && p.catch) p.catch(function () {});
+  };
+  L.musicStop = function () {
+    M.pending = null;
+    M.cur = "";
+    for (var i = 0; i < M.els.length; i++) { M.els[i].pause(); M.gains[i].gain.value = 0; }
+  };
+  L.musicState = function () {
+    var el = M.els[M.active];
+    return JSON.stringify({ cur: M.cur, ctx: M.ctx ? M.ctx.state : "none",
+      playing: !!(el && !el.paused && el.src !== SILENT), time: el ? el.currentTime : 0,
+      engine: L.ctxs.length ? L.ctxs[0].state : "none" });
+  };
+  // Pestaña oculta / celular bloqueado: la musica se frena y vuelve sola.
+  document.addEventListener("visibilitychange", function () {
+    var el = M.els[M.active];
+    if (!el || !M.cur) return;
+    if (document.hidden) el.pause();
+    else { var p = el.play(); if (p && p.catch) p.catch(function () {}); }
+  });
+
+  // --- Pantalla completa ---------------------------------------------------
+  // El navegador solo deja entrar a pantalla completa DENTRO del toque o
+  // clic. El motor procesa los toques un instante despues (fuera del gesto),
+  // asi que el boton del menu solo le avisa a esta pagina DONDE esta
+  // (fsRect, en fraccion del canvas) y el pedido se hace aca mismo, en el
+  // pointerup del dedo/mouse sobre ese lugar.
+  L.fsRect = null;
+  function standalone() {
+    try {
+      if (navigator.standalone) return true;
+      return matchMedia("(display-mode: fullscreen)").matches || matchMedia("(display-mode: standalone)").matches;
+    } catch (e) { return false; }
+  }
+  L.fsSupported = function () {
+    // iPhone/iPod: Apple no deja poner una pagina en pantalla completa.
+    if (/iPhone|iPod/.test(navigator.userAgent)) return false;
+    if (standalone()) return false; // ya instalada como app: ya ocupa todo
+    return !!(document.fullscreenEnabled || document.webkitFullscreenEnabled);
+  };
+  L.isFullscreen = function () { return !!(document.fullscreenElement || document.webkitFullscreenElement); };
+  L.toggleFullscreen = function () {
+    try {
+      if (L.isFullscreen()) {
+        (document.exitFullscreen || document.webkitExitFullscreen).call(document);
+        return;
+      }
+      var el = document.documentElement;
+      var req = el.requestFullscreen || el.webkitRequestFullscreen;
+      var p = req.call(el, { navigationUI: "hide" });
+      var lock = function () {
+        try { var o = screen.orientation; if (o && o.lock) o.lock("landscape").catch(function () {}); } catch (e) {}
+      };
+      if (p && p.then) p.then(lock).catch(function () {}); else lock();
+    } catch (e) {}
+  };
+  window.addEventListener("pointerup", function (ev) {
+    var r = L.fsRect;
+    var c = document.getElementById("canvas");
+    if (!r || !c) return;
+    var b = c.getBoundingClientRect();
+    var x = (ev.clientX - b.left) / b.width, y = (ev.clientY - b.top) / b.height;
+    if (x >= r[0] && x <= r[0] + r[2] && y >= r[1] && y <= r[1] + r[3]) L.toggleFullscreen();
+  }, true);
+})();
+</script>
