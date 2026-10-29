@@ -10,6 +10,8 @@
 //   celular -> 844x390 tactil: menu + empezar a jugar con toques
 //   itch    -> como "nueva" pero con el juego ADENTRO de un iframe de otro
 //              origen (igual que itch.io: allow="autoplay; fullscreen *")
+//   carga   -> 844x390 con la red limitada a ~4G (2.5 MB/s): capturas de la
+//              pantalla de carga mientras baja el juego, y cuanto tarda
 //   iphone  -> 844x390 tactil con el user agent de Safari de iPhone: el boton
 //              de pantalla completa NO tiene que aparecer
 // En nueva/itch/celular se aprieta PANTALLA COMPLETA y se mira que el
@@ -144,13 +146,25 @@ await send("Page.addScriptToEvaluateOnNewDocument", { source: `(() => {
     return r || "(ningun AudioContext conectado a la salida)";
   };
 })();` });
-const mobile = phase === "celular" || phase === "iphone";
+const mobile = phase === "celular" || phase === "iphone" || phase === "carga";
 if (phase === "iphone") await send("Emulation.setUserAgentOverride", { userAgent: "Mozilla/5.0 (iPhone; CPU iPhone OS 18_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.0 Mobile/15E148 Safari/604.1" });
 await send("Emulation.setDeviceMetricsOverride", mobile
   ? { width: 844, height: 390, deviceScaleFactor: 1, mobile: true, screenOrientation: { type: "landscapePrimary", angle: 90 } }
   : { width: 1280, height: 720, deviceScaleFactor: 1, mobile: false });
 if (mobile) await send("Emulation.setTouchEmulationEnabled", { enabled: true, maxTouchPoints: 5 });
+if (phase === "carga") {
+  await send("Network.enable");
+  await send("Network.emulateNetworkConditions", { offline: false, latency: 60, downloadThroughput: 2.5e6, uploadThroughput: 1e6 });
+}
+const t0 = Date.now();
 await send("Page.navigate", { url: phase === "itch" ? "http://127.0.0.1:8061/" : URL });
+if (phase === "carga") {
+  for (const ms of [2500, 9000]) {
+    await sleep(ms === 2500 ? 2500 : 6500);
+    await shot("carga_" + ms);
+    console.log("CARGA a los", ms, "ms:", await evaluate("(() => { const l = document.getElementById('luke-loading'); return l ? l.textContent : '(sin texto)'; })()"));
+  }
+}
 if (phase === "itch") {
   await sleep(3000);
   const tree = (await send("Page.getFrameTree")).result.frameTree;
@@ -165,7 +179,13 @@ for (let i = 0; i < 240 && !loaded; i++) {
   await sleep(500);
   loaded = await evaluate("(() => { const s = document.getElementById('status'); return !!document.querySelector('canvas') && (!s || s.style.display === 'none' || s.style.visibility === 'hidden' || getComputedStyle(s).display === 'none'); })()");
 }
-console.log("CARGADO", loaded, "fullscreenEnabled=", await evaluate("document.fullscreenEnabled"));
+console.log("CARGADO", loaded, "en", ((Date.now() - t0) / 1000).toFixed(1), "s | fullscreenEnabled=", await evaluate("document.fullscreenEnabled"));
+if (phase === "carga") {
+  await send("Browser.close").catch(() => {});
+  await sleep(1000);
+  chrome.kill();
+  process.exit(0);
+}
 await sleep(6000);
 const press = mobile ? tap : click;
 const audio = async (label) => {

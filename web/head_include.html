@@ -2,7 +2,18 @@
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Luke">
-<style>html,body,#canvas{touch-action:none;overscroll-behavior:none;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none;}</style>
+<style>html,body,#canvas{touch-action:none;overscroll-behavior:none;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none;}
+/* Pantalla de carga: Luke (index.png = boot splash del proyecto) y una barra
+   dorada con el porcentaje, sobre el azul del juego. */
+body{background-color:#12214d;}
+#status{background-color:#12214d !important;justify-content:center;}
+#status-splash{position:static !important;width:auto !important;height:auto !important;max-width:80vw !important;max-height:62vh !important;margin:0 !important;object-fit:contain;image-rendering:pixelated;}
+#status-progress{position:static !important;-webkit-appearance:none;appearance:none;width:min(60vw,520px) !important;height:22px;margin:3vh auto 0 !important;border:3px solid #fff;border-radius:14px;background:#0a1230;overflow:hidden;}
+#status-progress::-webkit-progress-bar{background:#0a1230;border-radius:14px;}
+#status-progress::-webkit-progress-value{background:linear-gradient(#ffe27a,#f2a81d);border-radius:10px;}
+#status-progress::-moz-progress-bar{background:linear-gradient(#ffe27a,#f2a81d);border-radius:10px;}
+#luke-loading{margin-top:1.5vh;color:#ffdb59;font:bold clamp(16px,3.2vh,28px) Arial,sans-serif;text-shadow:0 2px 0 #000,0 0 6px #000;}
+</style>
 <script>
 // Ayudas de la pagina web del juego (se usan desde GDScript con
 // JavaScriptBridge, ver audio_director.gd, main_menu.gd y tap_to_start.gd).
@@ -143,6 +154,24 @@
     if (!el || !M.cur) return;
     if (document.hidden) el.pause();
     else { var p = el.play(); if (p && p.catch) p.catch(function () {}); }
+  });
+
+  // --- Pantalla de carga ----------------------------------------------------
+  // "Cargando... 37%" debajo de la barra (el motor solo actualiza la barra).
+  document.addEventListener("DOMContentLoaded", function () {
+    var bar = document.getElementById("status-progress");
+    if (!bar) return;
+    var label = document.createElement("div");
+    label.id = "luke-loading";
+    label.textContent = "Cargando...";
+    bar.insertAdjacentElement("afterend", label);
+    var timer = setInterval(function () {
+      if (!document.getElementById("status")) { clearInterval(timer); return; }
+      var max = Number(bar.max) || 0, val = Number(bar.value) || 0;
+      var pct = max > 0 && bar.hasAttribute("value") ? Math.min(100, Math.floor(val * 100 / max)) : -1;
+      label.textContent = pct < 0 ? "Cargando..." : (pct >= 100 ? "¡Ya casi!" : "Cargando... " + pct + "%");
+      label.style.display = bar.style.display === "none" ? "none" : "block";
+    }, 150);
   });
 
   // --- Pantalla completa ---------------------------------------------------
