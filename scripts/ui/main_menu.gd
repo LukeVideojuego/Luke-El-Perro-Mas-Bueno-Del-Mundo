@@ -159,7 +159,8 @@ func _fullscreen_available() -> bool:
 		return true
 	var ok: Variant = JavaScriptBridge.eval(
 			"!!(document.fullscreenEnabled || document.webkitFullscreenEnabled)", true)
-	return ok == true
+	# El puente JS devuelve los booleanos como entero (1/0).
+	return ok != null and bool(ok)
 
 func _is_fullscreen() -> bool:
 	var mode := DisplayServer.window_get_mode()

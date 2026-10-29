@@ -162,7 +162,11 @@ func _run() -> void:
 			kid = n
 	luke.global_position = kid.global_position + Vector2(-60, -30)
 	luke.velocity = Vector2.ZERO
-	await _frames(30)
+	for i in 120:
+		await _frames(1)
+		if kid.nearby_player != null:
+			break
+		luke.global_position = kid.global_position + Vector2(-60, -30)
 	await _tap(_center_of_button(_btn("LeftButton")))
 	await _frames(3)
 	_check(kid.hint_label.visible, "tocar un boton junto al chico abre su globo")

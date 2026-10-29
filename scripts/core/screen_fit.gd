@@ -38,29 +38,53 @@ const FIT_SCENES := [
 var _layers: Array[CanvasLayer] = []
 var _rotate_notice: CanvasLayer
 var _paused_by_notice := false
+var _last_size := Vector2.ZERO
+var _last_window := Vector2i.ZERO
 
 func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	get_tree().node_added.connect(_on_node_added)
 	get_viewport().size_changed.connect(_on_size_changed)
 	_build_rotate_notice()
+	# Al arrancar el juego, la escena principal (con el menu) entra al arbol
+	# ANTES de que este autoload llegue a conectar node_added: se registra
+	# a mano lo que ya este cargado.
+	_register_existing.call_deferred(get_tree().root)
+
+func _register_existing(node: Node) -> void:
+	if node is CanvasLayer and FIT_SCENES.has(node.scene_file_path) and not _layers.has(node):
+		_layers.append(node)
+		node.tree_exiting.connect(func() -> void: _layers.erase(node), CONNECT_ONE_SHOT)
+		if node.is_node_ready():
+			_fit_layer(node)
+		else:
+			node.ready.connect(_fit_layer.bind(node), CONNECT_ONE_SHOT)
+	for child in node.get_children():
+		_register_existing(child)
 
 func visible_size() -> Vector2:
 	return get_viewport().get_visible_rect().size
 
 func _on_node_added(node: Node) -> void:
-	if node is CanvasLayer and FIT_SCENES.has(node.scene_file_path):
+	if node is CanvasLayer and FIT_SCENES.has(node.scene_file_path) and not _layers.has(node):
 		_layers.append(node)
 		node.ready.connect(_fit_layer.bind(node), CONNECT_ONE_SHOT)
 		node.tree_exiting.connect(func() -> void: _layers.erase(node), CONNECT_ONE_SHOT)
 
 func _on_size_changed() -> void:
+	_last_size = visible_size()
+	_last_window = get_window().size
 	for layer in _layers:
 		if is_instance_valid(layer):
 			_fit_layer(layer)
 	_update_rotate_notice()
 
 func _process(_delta: float) -> void:
+	# En el navegador el canvas cambia de tamaño (al cargar, al rotar, al
+	# entrar en pantalla completa) sin que siempre llegue size_changed a
+	# tiempo: se compara contra el ultimo tamaño ajustado.
+	if visible_size() != _last_size or get_window().size != _last_window:
+		_on_size_changed()
 	_fit_camera()
 	if _rotate_notice.visible:
 		# Luke se balancea como si girara el celular.
